@@ -18,6 +18,8 @@
 
 #import "Extension.h"
 
+#import "Masonry.h"
+
 
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width

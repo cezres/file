@@ -32,13 +32,16 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
 @interface ESFileListViewController ()
 <UITableViewDataSource, UITableViewDelegate>
 {
-    NSString *_directoryPath;
-    NSMutableArray<NSNumber *> *_selectedItems;
+//    NSString *_;
+    
 }
+
+@property (strong, nonatomic) NSMutableArray<NSNumber *> *selectedItems;
 
 @property (strong, nonatomic) NSArray<ESFileModel *> *dataSource;
 @property (strong, nonatomic) UITableView   *tableView;
 @property (strong, nonatomic) UIToolbar     *toolbar;
+@property (strong, nonatomic) UIVisualEffectView        *bottomView;
 
 /**
  *  编辑
@@ -53,6 +56,7 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
     if (self = [super init]) {
         _directoryPath = @"";
         self.title = @"文件列表";
+        self.state = ESFileListStateNormal;
     }
     return self;
 }
@@ -61,13 +65,14 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
     if (self = [super init]) {
         _directoryPath = directoryPath;
         self.title = [directoryPath lastPathComponent];
+        self.state = ESFileListStateNormal;
     }
     return self;
 }
 
 - (void)setDataSource:(NSArray<ESFileModel *> *)dataSource; {
     if (_filterType & ESFileListFilterTypeDirectory) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.type == 0"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.type == 1"];
         _dataSource = [dataSource filteredArrayUsingPredicate:predicate];
     }
     else {
@@ -80,12 +85,18 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.view.backgroundColor = [UIColor whiteColor];
     
     [self reloadFileList];
     
     [self.view addSubview:self.tableView];
     
-    [self normalNavigationItem];
+    if (_state == ESFileListStateMove || _state == ESFileListStateCopy) {
+        [self selectDirectoryNavigationItem];
+    }
+    else {
+        [self normalNavigationItem];
+    }
 }
 
 - (void)reloadFileList; {
@@ -94,11 +105,53 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
 
 #pragma mark - 导航栏
 - (void)normalNavigationItem; {
+    UIBarButtonItem *editButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选择" style:UIBarButtonItemStyleDone target:self action:@selector(editNavigationItem)];
+    UIBarButtonItem *newDirectoryButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newDirectory)];
+    
+    self.navigationItem.leftBarButtonItems = @[];
+    self.navigationItem.rightBarButtonItems = @[editButtonItem, newDirectoryButtonItem];
+    
+    self.tabBarController.tabBar.hidden = NO;
+    self.toolbar.transform = CGAffineTransformTranslate(self.toolbar.transform, 0, SSize.height-self.toolbar.y);
+    self.tableView.height = SSize.height-64-44;
+    
     self.editing = NO;
 }
 
 - (void)editNavigationItem; {
+    UIBarButtonItem *normalButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(normalNavigationItem)];
+    UIBarButtonItem *selectAllButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllItem)];
+    
+    self.navigationItem.leftBarButtonItems = @[selectAllButtonItem];
+    self.navigationItem.rightBarButtonItems = @[normalButtonItem];
+    
+    self.tabBarController.tabBar.hidden = YES;
+    self.toolbar.transform = CGAffineTransformTranslate(self.toolbar.transform, 0, SSize.height-40-self.toolbar.y);
+    self.tableView.height = SSize.height-64-40;
+    
+    
     self.editing = YES;
+}
+
+- (void)selectDirectoryNavigationItem; {
+    UIBarButtonItem *closeButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(closeSelectDirectory)];
+    if ([_directoryPath length] == 0) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:NULL action:NULL];
+    }
+    else {
+        self.navigationItem.leftBarButtonItems = @[];
+    }
+    self.navigationItem.rightBarButtonItems = @[closeButtonItem];
+    
+    self.bottomView.transform = CGAffineTransformTranslate(self.bottomView.transform, 0, SSize.height-40-self.bottomView.y);
+    self.tableView.height = SSize.height-64-40;
+}
+
+/**
+ *  取消目录选择
+ */
+- (void)closeSelectDirectory; {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /**
@@ -109,33 +162,12 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
 - (void)setEditing:(BOOL)editing; {
     _editing = editing;
     if (editing) {
-        UIBarButtonItem *normalButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(normalNavigationItem)];
-        UIBarButtonItem *selectAllButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllItem)];
-        
-        self.navigationItem.leftBarButtonItems = @[selectAllButtonItem];
-        self.navigationItem.rightBarButtonItems = @[normalButtonItem];
-        
-        self.tabBarController.tabBar.hidden = YES;
-        self.toolbar.transform = CGAffineTransformTranslate(self.toolbar.transform, 0, SSize.height-40-self.toolbar.y);
-        self.tableView.height = SSize.height-64;
-        
-        
         _selectedItems = [NSMutableArray arrayWithCapacity:_dataSource.count];
         for (NSInteger i=0; i<_dataSource.count; i++) {
             _selectedItems[i] = @(NO);
         }
     }
     else {
-        UIBarButtonItem *editButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选择" style:UIBarButtonItemStyleDone target:self action:@selector(editNavigationItem)];
-        UIBarButtonItem *newDirectoryButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newDirectory)];
-        
-        self.navigationItem.leftBarButtonItems = @[];
-        self.navigationItem.rightBarButtonItems = @[editButtonItem, newDirectoryButtonItem];
-        
-        self.tabBarController.tabBar.hidden = NO;
-        self.toolbar.transform = CGAffineTransformTranslate(self.toolbar.transform, 0, SSize.height-self.toolbar.y);
-        self.tableView.height = SSize.height-64-44;
-        
         _selectedItems = nil;
     }
     [self.tableView reloadData];
@@ -188,7 +220,7 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
             }
         }];
         self.dataSource = [[ESFileManager sharedInstance] contentsOfDirectoryPath:_directoryPath];
-        self.editing = NO;
+        [self normalNavigationItem];
     }];
 }
 
@@ -198,7 +230,60 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
 - (void)moveSelectedItem; {
     ESFileListViewController *filelist = [[ESFileListViewController alloc] init];
     filelist.filterType = ESFileListFilterTypeDirectory;
+    filelist.state = ESFileListStateMove;
     [self.navigationController pushViewController:filelist animated:YES];
+}
+- (void)copySelectedItem; {
+    ESFileListViewController *filelist = [[ESFileListViewController alloc] init];
+    filelist.filterType = ESFileListFilterTypeDirectory;
+    filelist.state = ESFileListStateCopy;
+    [self.navigationController pushViewController:filelist animated:YES];
+}
+
+/**
+ *  点击确定按钮
+ */
+- (void)confirm; {
+    ESFileListViewController *filelist;
+    ESFileListViewController *changefilelist;
+    for (NSInteger i=self.navigationController.viewControllers.count-1; i>=0; i--) {
+        ESFileListViewController *filelistvc = self.navigationController.viewControllers[i];
+        if (filelistvc.state == ESFileListStateNormal) {
+            if (!filelist) {
+                filelist = filelistvc;
+            }
+            if ([filelistvc.directoryPath isEqualToString:_directoryPath]) {
+                changefilelist = filelistvc;
+            }
+        }
+    }
+    
+    if ([filelist.directoryPath isEqualToString:_directoryPath]) {
+        return;
+    }
+    
+    
+    
+    
+    if (_state == ESFileListStateMove) {
+        [filelist.selectedItems enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj boolValue]) {
+                [[ESFileManager sharedInstance] moveFile:filelist.dataSource[idx] toDirectory:_directoryPath];
+            }
+        }];
+        [filelist reloadFileList];
+    }
+    if (_state == ESFileListStateCopy) {
+        [filelist.selectedItems enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj boolValue]) {
+                [[ESFileManager sharedInstance] copyFile:filelist.dataSource[idx] toDirectory:_directoryPath];
+            }
+        }];
+    }
+    
+    [filelist normalNavigationItem];
+    [changefilelist reloadFileList];
+    [self.navigationController popToViewController:filelist animated:YES];
 }
 
 
@@ -214,10 +299,10 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
     [cell setEditing:self.editing animated:NO];
     
     if ([_selectedItems[indexPath.row] boolValue]) {
-        [cell.selectButton setImage:[UIImage imageNamed:@"icon-checkbox-y"] forState:UIControlStateNormal];
+        cell.selectImageView.image = [UIImage imageNamed:@"icon-checkbox-y"];
     }
     else {
-        [cell.selectButton setImage:[UIImage imageNamed:@"icon-checkbox-n"] forState:UIControlStateNormal];
+        cell.selectImageView.image = [UIImage imageNamed:@"icon-checkbox-n"];
     }
 }
 
@@ -257,11 +342,11 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
         ESFileListTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if ([_selectedItems[indexPath.row] boolValue]) {
             [_selectedItems replaceObjectAtIndex:indexPath.row withObject:@(NO)];
-            [cell.selectButton setImage:[UIImage imageNamed:@"icon-checkbox-n"] forState:UIControlStateNormal];
+            cell.selectImageView.image = [UIImage imageNamed:@"icon-checkbox-n"];
         }
         else {
             [_selectedItems replaceObjectAtIndex:indexPath.row withObject:@(YES)];
-            [cell.selectButton setImage:[UIImage imageNamed:@"icon-checkbox-y"] forState:UIControlStateNormal];
+            cell.selectImageView.image = [UIImage imageNamed:@"icon-checkbox-y"];
         }
         [self updateTitle];
         return;
@@ -269,7 +354,10 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
     
     ESFileModel *file = _dataSource[indexPath.row];
     if (file.type == ESFileTypeDirectory) {
-        [self.navigationController pushViewController:[[ESFileListViewController alloc] initWithDirectoryPath:[_directoryPath stringByAppendingFormat:@"/%@", file.name]] animated:YES];
+        ESFileListViewController *filelist = [[ESFileListViewController alloc] initWithDirectoryPath:[_directoryPath stringByAppendingFormat:@"/%@", file.name]];
+        filelist.state = _state;
+        filelist.filterType = _filterType;
+        [self.navigationController pushViewController:filelist animated:YES];
     }
     else if (file.type == ESFileTypeVideo) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
@@ -307,19 +395,15 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
         NSArray *selectedItems = [_selectedItems filteredArrayUsingPredicate:predicate];
         if ([selectedItems count] == 0) {
             self.title = @"选择文件";
-//            self.toolbar.items[1].enabled = NO;
             [self.toolbar.items enumerateObjectsUsingBlock:^(UIBarButtonItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 obj.enabled = NO;
             }];
-//            self.navigationItem.rightBarButtonItems[1].enabled = NO;
         }
         else {
             self.title = [NSString stringWithFormat:@"已选择%ld个文件", [selectedItems count]];
             [self.toolbar.items enumerateObjectsUsingBlock:^(UIBarButtonItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 obj.enabled = YES;
             }];
-//            self.toolbar.items[1].enabled = YES;
-//            self.navigationItem.rightBarButtonItems[1].enabled = YES;
         }
         
         if ([selectedItems count] == [_selectedItems count]) {
@@ -359,18 +443,38 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
         /**
          *  移动、删除、复制、隐藏、取消隐藏
          */
-        
         UIBarButtonItem *deleteButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStyleDone target:self action:@selector(deleteItem)];
         deleteButtonItem.tintColor = ColorRGB(217, 92, 92);
         UIBarButtonItem *moveButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"移动" style:UIBarButtonItemStylePlain target:self action:@selector(moveSelectedItem)];
-        UIBarButtonItem *copyButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"复制" style:UIBarButtonItemStylePlain target:self action:@selector(moveSelectedItem)];
-        
+        UIBarButtonItem *copyButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"复制" style:UIBarButtonItemStylePlain target:self action:@selector(copySelectedItem)];
         
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SSize.height, SSize.width, 40)];
         [_toolbar setItems:@[moveButtonItem, copyButtonItem, deleteButtonItem] animated:NO];
         [self.view addSubview:_toolbar];
     }
     return _toolbar;
+}
+- (UIVisualEffectView *)bottomView; {
+    if (_bottomView == NULL) {
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        _bottomView = [[UIVisualEffectView alloc] initWithEffect:blur];
+        _bottomView.frame = CGRectMake(0, SSize.height, SSize.width, 40);
+        [self.view addSubview:_bottomView];
+        
+        UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [confirmButton setTitle:@"确定" forState:UIControlStateNormal];
+        [confirmButton addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView addSubview:confirmButton];
+//        confirmButton.frame = CGRectMake((_bottomView.width-80)/2, 5, 80, 30);
+        [confirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.offset = 80;
+            make.height.offset = 30;
+            make.centerX.equalTo(_bottomView.mas_centerX);
+            make.centerY.equalTo(_bottomView.mas_centerY);
+        }];
+        
+    }
+    return _bottomView;
 }
 
 @end

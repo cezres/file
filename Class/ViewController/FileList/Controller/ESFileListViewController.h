@@ -8,12 +8,35 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  文件列表状态
+ */
+typedef NS_ENUM(NSInteger, ESFileListState) {
+    /**
+     *  正常
+     */
+    ESFileListStateNormal,
+    /**
+     *  移动
+     */
+    ESFileListStateMove,
+    /**
+     *  拷贝
+     */
+    ESFileListStateCopy
+};
+
 @interface ESFileListViewController : UIViewController
+
+@property (strong, nonatomic) NSString *directoryPath;
 
 /**
  *  默认 ESFileListFilterTypeAll
  */
 @property (assign, nonatomic) NSInteger filterType;
+
+
+@property (assign, nonatomic) NSInteger state;
 
 - (instancetype)init;
 - (instancetype)initWithDirectoryPath:(NSString *)directoryPath;

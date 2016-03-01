@@ -22,7 +22,7 @@
 @property (strong, nonatomic) UILabel       *nameLabel;
 @property (strong, nonatomic) UILabel       *desLabel;
 
-@property (strong, nonatomic) UIButton      *selectButton;
+@property (strong, nonatomic) UIImageView      *selectImageView;
 
 - (void)setMode:(ESFileModel *)model;
 

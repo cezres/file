@@ -68,31 +68,31 @@
     if (editing) {
         if (animated) {
             [UIView animateWithDuration:0.3 animations:^{
-                self.selectButton.transform = CGAffineTransformTranslate(self.selectButton.transform, 10-self.selectButton.x, 0);
+                self.selectImageView.transform = CGAffineTransformTranslate(self.selectImageView.transform, 10-self.selectImageView.x, 0);
                 self.iconView.transform = CGAffineTransformTranslate(self.iconView.transform, 52-self.iconView.x, 0);
                 self.nameLabel.transform = CGAffineTransformTranslate(self.nameLabel.transform, 92-self.nameLabel.x, 0);
                 self.desLabel.transform = CGAffineTransformTranslate(self.desLabel.transform, 92-self.desLabel.x, 0);
             }];
         }
         else {
-            self.selectButton.transform = CGAffineTransformTranslate(self.selectButton.transform, 10-self.selectButton.x, 0);
+            self.selectImageView.transform = CGAffineTransformTranslate(self.selectImageView.transform, 10-self.selectImageView.x, 0);
             self.iconView.transform = CGAffineTransformTranslate(self.iconView.transform, 52-self.iconView.x, 0);
             self.nameLabel.transform = CGAffineTransformTranslate(self.nameLabel.transform, 92-self.nameLabel.x, 0);
             self.desLabel.transform = CGAffineTransformTranslate(self.desLabel.transform, 92-self.desLabel.x, 0);
         }
     }
     else {
-        [self.selectButton setImage:[UIImage imageNamed:@"icon-checkbox-n"] forState:UIControlStateNormal];
+        self.selectImageView.image = [UIImage imageNamed:@"icon-checkbox-n"];
         if (animated) {
             [UIView animateWithDuration:0.3 animations:^{
-                self.selectButton.transform = CGAffineTransformTranslate(self.selectButton.transform, -32-self.selectButton.x, 0);
+                self.selectImageView.transform = CGAffineTransformTranslate(self.selectImageView.transform, -32-self.selectImageView.x, 0);
                 self.iconView.transform = CGAffineTransformTranslate(self.iconView.transform, 10-self.iconView.x, 0);
                 self.nameLabel.transform = CGAffineTransformTranslate(self.nameLabel.transform, 50-self.nameLabel.x, 0);
                 self.desLabel.transform = CGAffineTransformTranslate(self.desLabel.transform, 50-self.desLabel.x, 0);
             }];
         }
         else {
-            self.selectButton.transform = CGAffineTransformTranslate(self.selectButton.transform, -32-self.selectButton.x, 0);
+            self.selectImageView.transform = CGAffineTransformTranslate(self.selectImageView.transform, -32-self.selectImageView.x, 0);
             self.iconView.transform = CGAffineTransformTranslate(self.iconView.transform, 10-self.iconView.x, 0);
             self.nameLabel.transform = CGAffineTransformTranslate(self.nameLabel.transform, 50-self.nameLabel.x, 0);
             self.desLabel.transform = CGAffineTransformTranslate(self.desLabel.transform, 50-self.desLabel.x, 0);
@@ -135,18 +135,18 @@
     return _desLabel;
 }
 
-- (UIButton *)selectButton; {
-    if (_selectButton == NULL) {
-        _selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_selectButton setImage:[UIImage imageNamed:@"icon-checkbox-n"] forState:UIControlStateNormal];
-        _selectButton.frame = CGRectMake(-32, (self.height-32)/2, 32, 32);
-        [self addSubview:_selectButton];
+- (UIImageView *)selectImageView; {
+    if (_selectImageView == NULL) {
+        _selectImageView = [[UIImageView alloc] init];
+        _selectImageView.image = [UIImage imageNamed:@"icon-checkbox-n"];
+        _selectImageView.frame = CGRectMake(-32, (self.height-32)/2, 32, 32);
+        [self addSubview:_selectImageView];
         
         if ([self respondsToSelector:@selector(setLayoutMargins:)]) {
             [self setLayoutMargins:UIEdgeInsetsZero];
         }
     }
-    return _selectButton;
+    return _selectImageView;
 }
 
 @end

@@ -50,6 +50,20 @@
  */
 - (void)createDirectoryWithPath:(NSString *)path;
 
+/**
+ *  移动文件
+ *
+ *  @param file      <#file description#>
+ *  @param directory <#directory description#>
+ */
+- (void)moveFile:(ESFileModel *)file toDirectory:(NSString *)directory;
 
+/**
+ *  复制文件
+ *
+ *  @param file      <#file description#>
+ *  @param directory <#directory description#>
+ */
+- (void)copyFile:(ESFileModel *)file toDirectory:(NSString *)directory;
 
 @end

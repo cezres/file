@@ -174,8 +174,7 @@
         _textField = [[UITextField alloc] initWithFrame:CGRectMake(self.width*0.1, (self.height - 30)/2, self.width*0.8, 30)];
         _textField.layer.borderColor = ColorRGB(230, 230, 230).CGColor;
         _textField.layer.borderWidth = 1;
-        _textField.keyboardType = UIKeyboardTypeAlphabet;
-//        _textField.secureTextEntry = YES;
+//        _textField.keyboardType = UIKeyboardTypeAlphabet;
     }
     return _textField;
 }
@@ -183,7 +182,6 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, self.width, 20)];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.text = @"输入支付密码";
     }
     return _titleLabel;
 }

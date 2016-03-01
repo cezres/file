@@ -55,6 +55,17 @@
 
 - (void)createDirectoryWithPath:(NSString *)path; {
     [self.fileManager createDirectoryAtPath:[self.DocumentsPath stringByAppendingString:path] withIntermediateDirectories:YES attributes:NULL error:NULL];
+    
+}
+
+- (void)moveFile:(ESFileModel *)file toDirectory:(NSString *)directory; {
+    NSString *path = [NSString stringWithFormat:@"%@%@/%@", self.DocumentsPath, directory, [file.path lastPathComponent]];
+    [self.fileManager moveItemAtPath:file.path toPath:path error:NULL];
+}
+
+- (void)copyFile:(ESFileModel *)file toDirectory:(NSString *)directory; {
+    NSString *path = [NSString stringWithFormat:@"%@%@/%@", self.DocumentsPath, directory, [file.path lastPathComponent]];
+    [self.fileManager copyItemAtPath:file.path toPath:path error:NULL];
 }
 
 #pragma mark - Private
