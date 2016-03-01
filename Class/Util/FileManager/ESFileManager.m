@@ -53,6 +53,10 @@
     [[NSFileManager defaultManager] removeItemAtPath:file.path error:NULL];
 }
 
+- (void)createDirectoryWithPath:(NSString *)path; {
+    [self.fileManager createDirectoryAtPath:[self.DocumentsPath stringByAppendingString:path] withIntermediateDirectories:YES attributes:NULL error:NULL];
+}
+
 #pragma mark - Private
 /**
  *  遍历目录
@@ -87,7 +91,7 @@
 #pragma mark - Lazy
 - (NSString *)DocumentsPath; {
     if (_DocumentsPath == NULL) {
-#ifdef TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
         _DocumentsPath = @"/Users/cezr/Documents";
 #else
         _DocumentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
@@ -97,7 +101,7 @@
 }
 - (NSString *)CachesPath; {
     if (_CachesPath == NULL) {
-#ifdef TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
         _CachesPath = @"/Users/cezr/Documents/APP_FILE_CACHES";
 #else
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);

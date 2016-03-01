@@ -11,6 +11,8 @@
 #import "ESDataTransferViewController.h"
 #import "ESSettingViewController.h"
 
+#import "ESVideoPlayerViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -24,12 +26,18 @@
     
 //    NSLog(@"%@", [@"/as/bb/abs.png" lastPathComponent]);
     
+//    NSInteger a = 1 << 4 | 1 << 6;
+//    if (a & 1 << 6) {
+//        NSLog(@"%ld", a);
+//    }
+//    NSLog(@"%ld", a);
+    
     UITabBarController *tabBar = [[UITabBarController alloc] init];
     
     tabBar.viewControllers = @[
                                [[UINavigationController alloc] initWithRootViewController:[[ESFileListViewController alloc] init]],
                                [[UINavigationController alloc] initWithRootViewController:[[ESDataTransferViewController alloc] init]],
-                               [[UINavigationController alloc] initWithRootViewController:[[ESSettingViewController alloc] init]],
+                               [[CustomNavigationController alloc] initWithRootViewController:[[ESSettingViewController alloc] init]],
     ];
     
     

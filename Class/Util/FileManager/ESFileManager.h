@@ -43,4 +43,13 @@
  */
 - (void)removeFile:(ESFileModel *)file;
 
+/**
+ *  新建文件夹
+ *
+ *  @param path 文件夹路径
+ */
+- (void)createDirectoryWithPath:(NSString *)path;
+
+
+
 @end

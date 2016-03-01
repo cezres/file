@@ -50,6 +50,8 @@
 		6E7C2C201C8445AF00F8AF4B /* UIImage+Thumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C2C1F1C8445AF00F8AF4B /* UIImage+Thumbnail.m */; };
 		6E7C2C231C8448E100F8AF4B /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C2C221C8448E100F8AF4B /* NSString+MD5.m */; };
 		6E7C2C261C84670000F8AF4B /* UIAlertView+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C2C251C84670000F8AF4B /* UIAlertView+Block.m */; };
+		6E7C2C2D1C84701300F8AF4B /* ESVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C2C2C1C84701300F8AF4B /* ESVideoPlayerViewController.m */; };
+		6EE15D791C85405D001CCBB1 /* ESTextFieldAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE15D781C85405D001CCBB1 /* ESTextFieldAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +239,10 @@
 		6E7C2C221C8448E100F8AF4B /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		6E7C2C241C84670000F8AF4B /* UIAlertView+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Block.h"; sourceTree = "<group>"; };
 		6E7C2C251C84670000F8AF4B /* UIAlertView+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Block.m"; sourceTree = "<group>"; };
+		6E7C2C2B1C84701300F8AF4B /* ESVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESVideoPlayerViewController.h; sourceTree = "<group>"; };
+		6E7C2C2C1C84701300F8AF4B /* ESVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESVideoPlayerViewController.m; sourceTree = "<group>"; };
+		6EE15D771C85405D001CCBB1 /* ESTextFieldAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTextFieldAlertView.h; sourceTree = "<group>"; };
+		6EE15D781C85405D001CCBB1 /* ESTextFieldAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESTextFieldAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -615,8 +621,8 @@
 		6E773BAD1C816D1200DAF641 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				6E7C2C2A1C84700300F8AF4B /* Video */,
 				6E773BCE1C81755800DAF641 /* FileManager */,
-				6E773BCF1C81755800DAF641 /* Video */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -679,6 +685,8 @@
 		6E773BB41C816D1200DAF641 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6EE15D771C85405D001CCBB1 /* ESTextFieldAlertView.h */,
+				6EE15D781C85405D001CCBB1 /* ESTextFieldAlertView.m */,
 				6E773BCB1C81749C00DAF641 /* ESFileListTableViewCell.h */,
 				6E773BCC1C81749C00DAF641 /* ESFileListTableViewCell.m */,
 			);
@@ -718,9 +726,11 @@
 			path = FileManager;
 			sourceTree = "<group>";
 		};
-		6E773BCF1C81755800DAF641 /* Video */ = {
+		6E7C2C2A1C84700300F8AF4B /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				6E7C2C2B1C84701300F8AF4B /* ESVideoPlayerViewController.h */,
+				6E7C2C2C1C84701300F8AF4B /* ESVideoPlayerViewController.m */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -872,12 +882,14 @@
 				6E773B831C81643B00DAF641 /* KxAudioManager.m in Sources */,
 				6E773BD51C8181CB00DAF641 /* UIViewController+AOP.m in Sources */,
 				6E773BC41C816F5500DAF641 /* ESDataTransferViewController.m in Sources */,
+				6EE15D791C85405D001CCBB1 /* ESTextFieldAlertView.m in Sources */,
 				6E773BDB1C8188AA00DAF641 /* UIView+Frame.m in Sources */,
 				6E773B861C81643B00DAF641 /* KxMovieGLView.m in Sources */,
 				6E773BD21C81756800DAF641 /* ESFileManager.m in Sources */,
 				6E773BC71C81701B00DAF641 /* ESFileModel.m in Sources */,
 				6E773BBE1C816EF800DAF641 /* ESFileListViewController.m in Sources */,
 				6E773BC11C816F4800DAF641 /* ESSettingViewController.m in Sources */,
+				6E7C2C2D1C84701300F8AF4B /* ESVideoPlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

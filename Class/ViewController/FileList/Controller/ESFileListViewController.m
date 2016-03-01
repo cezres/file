@@ -10,22 +10,35 @@
 #import "ESFileManager.h"
 #import "ESFileListTableViewCell.h"
 
+#import "ESVideoPlayerViewController.h"
 #import "KxMovieViewController.h"
+
+#import "ESTextFieldAlertView.h"
+
+/**
+ *  文件列表过滤
+ */
+typedef NS_ENUM(NSInteger, ESFileListFilterType) {
+    /**
+     *  所有
+     */
+    ESFileListFilterTypeAll = 1 << 1,
+    /**
+     *  目录
+     */
+    ESFileListFilterTypeDirectory = 1 << 2,
+};
 
 @interface ESFileListViewController ()
 <UITableViewDataSource, UITableViewDelegate>
-
 {
     NSString *_directoryPath;
-    NSArray<ESFileModel *> *dataSource;
-    
-//    int *selectedItems;
-    
     NSMutableArray<NSNumber *> *_selectedItems;
 }
 
-
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSArray<ESFileModel *> *dataSource;
+@property (strong, nonatomic) UITableView   *tableView;
+@property (strong, nonatomic) UIToolbar     *toolbar;
 
 /**
  *  编辑
@@ -52,6 +65,17 @@
     return self;
 }
 
+- (void)setDataSource:(NSArray<ESFileModel *> *)dataSource; {
+    if (_filterType & ESFileListFilterTypeDirectory) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.type == 0"];
+        _dataSource = [dataSource filteredArrayUsingPredicate:predicate];
+    }
+    else {
+        _dataSource = dataSource;
+    }
+    [_tableView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -61,43 +85,19 @@
     
     [self.view addSubview:self.tableView];
     
-    UIBarButtonItem *editButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选择" style:UIBarButtonItemStyleDone target:self action:@selector(editNavigationItem)];
-    self.navigationItem.rightBarButtonItems = @[editButtonItem];
+    [self normalNavigationItem];
 }
 
-/**
- *  加载文件列表
- */
 - (void)reloadFileList; {
-    dataSource = [[ESFileManager sharedInstance] contentsOfDirectoryPath:_directoryPath];
-    [_tableView reloadData];
+    self.dataSource = [[ESFileManager sharedInstance] contentsOfDirectoryPath:_directoryPath];
 }
 
 #pragma mark - 导航栏
 - (void)normalNavigationItem; {
-    UIBarButtonItem *editButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选择" style:UIBarButtonItemStyleDone target:self action:@selector(editNavigationItem)];
-    self.navigationItem.leftBarButtonItems = @[];
-    self.navigationItem.rightBarButtonItems = @[editButtonItem];
-    
-    self.tabBarController.tabBar.hidden = NO;
-    
-    self.tableView.height = SSize.height-64-44;
-    
     self.editing = NO;
 }
 
 - (void)editNavigationItem; {
-    UIBarButtonItem *normalButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(normalNavigationItem)];
-    UIBarButtonItem *deleteButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStyleDone target:self action:@selector(deleteItem)];
-    deleteButtonItem.tintColor = ColorRGB(217, 92, 92);
-    UIBarButtonItem *selectAllButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllItem)];
-    self.navigationItem.leftBarButtonItems = @[selectAllButtonItem];
-    self.navigationItem.rightBarButtonItems = @[normalButtonItem, deleteButtonItem];
-    
-    self.tabBarController.tabBar.hidden = YES;
-    
-    self.tableView.height = SSize.height-64;
-    
     self.editing = YES;
 }
 
@@ -109,18 +109,47 @@
 - (void)setEditing:(BOOL)editing; {
     _editing = editing;
     if (editing) {
-        _selectedItems = [NSMutableArray arrayWithCapacity:dataSource.count];
-        for (NSInteger i=0; i<dataSource.count; i++) {
+        UIBarButtonItem *normalButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(normalNavigationItem)];
+        UIBarButtonItem *selectAllButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllItem)];
+        
+        self.navigationItem.leftBarButtonItems = @[selectAllButtonItem];
+        self.navigationItem.rightBarButtonItems = @[normalButtonItem];
+        
+        self.tabBarController.tabBar.hidden = YES;
+        self.toolbar.transform = CGAffineTransformTranslate(self.toolbar.transform, 0, SSize.height-40-self.toolbar.y);
+        self.tableView.height = SSize.height-64;
+        
+        
+        _selectedItems = [NSMutableArray arrayWithCapacity:_dataSource.count];
+        for (NSInteger i=0; i<_dataSource.count; i++) {
             _selectedItems[i] = @(NO);
         }
     }
     else {
+        UIBarButtonItem *editButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选择" style:UIBarButtonItemStyleDone target:self action:@selector(editNavigationItem)];
+        UIBarButtonItem *newDirectoryButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newDirectory)];
+        
+        self.navigationItem.leftBarButtonItems = @[];
+        self.navigationItem.rightBarButtonItems = @[editButtonItem, newDirectoryButtonItem];
+        
+        self.tabBarController.tabBar.hidden = NO;
+        self.toolbar.transform = CGAffineTransformTranslate(self.toolbar.transform, 0, SSize.height-self.toolbar.y);
+        self.tableView.height = SSize.height-64-44;
+        
         _selectedItems = nil;
     }
     [self.tableView reloadData];
     [self updateTitle];
 }
-
+/**
+ *  新建目录
+ */
+- (void)newDirectory; {
+    [ESTextFieldAlertView showAlertWithTitle:@"创建文件夹" confirmBlock:^(NSString *text) {
+        [[ESFileManager sharedInstance] createDirectoryWithPath:[_directoryPath stringByAppendingFormat:@"/%@", text]];
+        [self reloadFileList];
+    }];
+}
 /**
  *  全选/取消全选
  */
@@ -129,8 +158,8 @@
     NSArray *selectedItems = [_selectedItems filteredArrayUsingPredicate:predicate];
     if ([selectedItems count] == 0) {
         // 已经全选
-        _selectedItems = [NSMutableArray arrayWithCapacity:dataSource.count];
-        for (NSInteger i=0; i<dataSource.count; i++) {
+        _selectedItems = [NSMutableArray arrayWithCapacity:_dataSource.count];
+        for (NSInteger i=0; i<_dataSource.count; i++) {
             _selectedItems[i] = @(NO);
         }
     }
@@ -144,7 +173,6 @@
         }];
     }
     [self.tableView reloadData];
-    
     [self updateTitle];
 }
 
@@ -153,27 +181,36 @@
  */
 - (void)deleteItem; {
     [UIAlertView showAlertWithMessage:@"是否确定删除文件?" confirmBlock:^{
-        __weak typeof(dataSource) weakDataSource = dataSource;
+        __weak typeof(_dataSource) weakDataSource = _dataSource;
         [_selectedItems enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj boolValue]) {
                 [[ESFileManager sharedInstance] removeFile:weakDataSource[idx]];
             }
         }];
-        [self reloadFileList];
+        self.dataSource = [[ESFileManager sharedInstance] contentsOfDirectoryPath:_directoryPath];
         self.editing = NO;
     }];
+}
+
+/**
+ *  移动选中项
+ */
+- (void)moveSelectedItem; {
+    ESFileListViewController *filelist = [[ESFileListViewController alloc] init];
+    filelist.filterType = ESFileListFilterTypeDirectory;
+    [self.navigationController pushViewController:filelist animated:YES];
 }
 
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section; {
-    return [dataSource count];
+    return [_dataSource count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath; {
     return [tableView dequeueReusableCellWithIdentifier:@"File"];
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ESFileListTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath; {
-    [cell setMode:dataSource[indexPath.row]];
+    [cell setMode:_dataSource[indexPath.row]];
     [cell setEditing:self.editing animated:NO];
     
     if ([_selectedItems[indexPath.row] boolValue]) {
@@ -230,8 +267,8 @@
         return;
     }
     
-    ESFileModel *file = dataSource[indexPath.row];
-    if (dataSource[indexPath.row].type == ESFileTypeDirectory) {
+    ESFileModel *file = _dataSource[indexPath.row];
+    if (file.type == ESFileTypeDirectory) {
         [self.navigationController pushViewController:[[ESFileListViewController alloc] initWithDirectoryPath:[_directoryPath stringByAppendingFormat:@"/%@", file.name]] animated:YES];
     }
     else if (file.type == ESFileTypeVideo) {
@@ -254,6 +291,9 @@
         }
         [self presentViewController:[KxMovieViewController movieViewControllerWithContentPath:file.path parameters:dict] animated:YES completion:NULL];
     }
+    else {
+        [self.navigationController pushViewController:[[ESVideoPlayerViewController alloc] init] animated:YES];
+    }
 }
 
 #pragma mark - Private
@@ -267,11 +307,19 @@
         NSArray *selectedItems = [_selectedItems filteredArrayUsingPredicate:predicate];
         if ([selectedItems count] == 0) {
             self.title = @"选择文件";
-            self.navigationItem.rightBarButtonItems[1].enabled = NO;
+//            self.toolbar.items[1].enabled = NO;
+            [self.toolbar.items enumerateObjectsUsingBlock:^(UIBarButtonItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                obj.enabled = NO;
+            }];
+//            self.navigationItem.rightBarButtonItems[1].enabled = NO;
         }
         else {
             self.title = [NSString stringWithFormat:@"已选择%ld个文件", [selectedItems count]];
-            self.navigationItem.rightBarButtonItems[1].enabled = YES;
+            [self.toolbar.items enumerateObjectsUsingBlock:^(UIBarButtonItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                obj.enabled = YES;
+            }];
+//            self.toolbar.items[1].enabled = YES;
+//            self.navigationItem.rightBarButtonItems[1].enabled = YES;
         }
         
         if ([selectedItems count] == [_selectedItems count]) {
@@ -305,6 +353,24 @@
         [_tableView registerClass:[ESFileListTableViewCell class] forCellReuseIdentifier:@"File"];
     }
     return _tableView;
+}
+- (UIToolbar *)toolbar; {
+    if (_toolbar == NULL) {
+        /**
+         *  移动、删除、复制、隐藏、取消隐藏
+         */
+        
+        UIBarButtonItem *deleteButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStyleDone target:self action:@selector(deleteItem)];
+        deleteButtonItem.tintColor = ColorRGB(217, 92, 92);
+        UIBarButtonItem *moveButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"移动" style:UIBarButtonItemStylePlain target:self action:@selector(moveSelectedItem)];
+        UIBarButtonItem *copyButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"复制" style:UIBarButtonItemStylePlain target:self action:@selector(moveSelectedItem)];
+        
+        
+        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SSize.height, SSize.width, 40)];
+        [_toolbar setItems:@[moveButtonItem, copyButtonItem, deleteButtonItem] animated:NO];
+        [self.view addSubview:_toolbar];
+    }
+    return _toolbar;
 }
 
 @end

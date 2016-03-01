@@ -10,4 +10,12 @@
 
 @interface ESFileListViewController : UIViewController
 
+/**
+ *  默认 ESFileListFilterTypeAll
+ */
+@property (assign, nonatomic) NSInteger filterType;
+
+- (instancetype)init;
+- (instancetype)initWithDirectoryPath:(NSString *)directoryPath;
+
 @end

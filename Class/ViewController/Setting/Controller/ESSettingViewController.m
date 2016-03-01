@@ -24,6 +24,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    /*
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    CGRect frame = [UIScreen mainScreen].applicationFrame;
+    CGPoint center = CGPointMake(frame.origin.x + ceil(frame.size.width/2), frame.origin.y + ceil(frame.size.height/2));
+    
+    self.view.center = center;
+    
+    
+    CGAffineTransform transform;
+    
+    if (orientation == UIInterfaceOrientationLandscapeLeft) {
+        transform = CGAffineTransformMakeRotation(M_PI*1.5);
+    } else if (orientation == UIInterfaceOrientationLandscapeRight) {
+        transform =  CGAffineTransformMakeRotation(M_PI/2);
+    } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
+        transform =  CGAffineTransformMakeRotation(-M_PI);
+    } else {
+        transform =  CGAffineTransformIdentity;
+    }
+    
+    
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIDeviceOrientationLandscapeRight animated:YES];
+    
+    
+    
+    CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:duration];
+    
+    self.view.transform = transform;
+    
+    [UIView commitAnimations];*/
 }
 
 - (void)didReceiveMemoryWarning {
