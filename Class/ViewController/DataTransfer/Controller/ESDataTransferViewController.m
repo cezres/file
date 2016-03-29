@@ -7,6 +7,7 @@
 //
 
 #import "ESDataTransferViewController.h"
+#import "ESNetworkInfo.h"
 
 @interface ESDataTransferViewController ()
 
@@ -24,110 +25,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
-    
+
 }
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-
-{
-    
-    return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-    
-}
-
-- (BOOL)shouldAutorotate
-
-{
-    
-    return NO;
-    
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-
-{
-    
-    return UIInterfaceOrientationMaskPortrait;//只支持这一个方向(正常的方向)
-    
-}
-
 
 
 - (void)viewWillAppear:(BOOL)animated; {
     [super viewWillAppear:animated];
     
-    
-//    static int isFullScreen = 3; //   1 == 全屏  3 == 竖屏
-//    
-//    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
-//        
-//        SEL selector = NSSelectorFromString(@"setOrientation:");
-//        
-//        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
-//        
-//        [invocation setSelector:selector];
-//        
-//        [invocation setTarget:[UIDevice currentDevice]];
-//        
-//        
-//        NSLog(@"-%d-",isFullScreen);
-//        
-//        [invocation setArgument:&isFullScreen atIndex:2];
-//        
-//        [invocation invoke];
-//     
-//    }
+    NSLog(@"\n%@, %@, %@", [ESNetworkInfo WifiName], [ESNetworkInfo WiFiIPAddress], [ESNetworkInfo IPAddress]);
 }
 - (void)viewWillDisappear:(BOOL)animated; {
     [super viewWillDisappear:animated];
     
     
-//    static int isFullScreen = 1; //   1 == 全屏  3 == 竖屏
-//    
-//    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
-//        
-//        SEL selector = NSSelectorFromString(@"setOrientation:");
-//        
-//        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
-//        
-//        [invocation setSelector:selector];
-//        
-//        [invocation setTarget:[UIDevice currentDevice]];
-//        
-//        
-//        NSLog(@"-%d-",isFullScreen);
-//        
-//        [invocation setArgument:&isFullScreen atIndex:2];
-//        
-//        [invocation invoke];
-//        
-//    }
 }
 
-//
-//- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-//    return (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight);
-//}
-//- (NSUInteger)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskLandscapeRight;
-//}
-//
-//- (void)didReceiveMemoryWarning {
-//    [super didReceiveMemoryWarning];
-//    // Dispose of any resources that can be recreated.
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

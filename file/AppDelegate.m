@@ -13,6 +13,10 @@
 
 #import "ESVideoPlayerViewController.h"
 
+#import "ESHTTPServer.h"
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+
 @interface AppDelegate ()
 
 @end
@@ -44,6 +48,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = tabBar;
     [self.window makeKeyAndVisible];
+    
+    
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    
+    [[ESHTTPServer sharedInstance] start];
+    
     
     return YES;
 }
