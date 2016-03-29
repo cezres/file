@@ -2,7 +2,7 @@
 //  PrefixHeader.h
 //  file
 //
-//  Created by 翟泉 on 16/2/27.
+//  Created by 翟泉 on 16/3/10.
 //  Copyright © 2016年 云之彼端. All rights reserved.
 //
 
@@ -11,14 +11,7 @@
 
 #import <UIKit/UIKit.h>
 
-
-#import "APPMacro.h"
-
-#import "UIView+Frame.h"
-
-#import "Extension.h"
-
-#import "Masonry.h"
+#import "file-Swift.h"
 
 
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
@@ -39,6 +32,16 @@
 
 #define YKClientId @"bf5803ceb7daf89c"
 
+
+
+#import "APPMacro.h"
+#import "Extension/Extension.h"
+
+#import "Masonry.h"
+//#import <Masonry/Masonry.h>
+//#import <fi>
+
+#import <KVOController/FBKVOController.h>
 
 
 #endif /* PrefixHeader_h */
