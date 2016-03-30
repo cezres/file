@@ -16,6 +16,10 @@
 		6E05839D1C92A8470091A649 /* UPHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0583921C92A8470091A649 /* UPHTTPClient.m */; };
 		6E05839E1C92A8470091A649 /* UPMultipartBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0583941C92A8470091A649 /* UPMultipartBody.m */; };
 		6E05839F1C92A8470091A649 /* UPMutUploaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0583971C92A8470091A649 /* UPMutUploaderManager.m */; };
+		6E068FA81CAAD28600771FD4 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E068FA31CAAD28600771FD4 /* RECommonFunctions.m */; };
+		6E068FA91CAAD28600771FD4 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E068FA51CAAD28600771FD4 /* RESideMenu.m */; };
+		6E068FAA1CAAD28600771FD4 /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E068FA71CAAD28600771FD4 /* UIViewController+RESideMenu.m */; };
+		6E068FAD1CAAD32D00771FD4 /* ESMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E068FAC1CAAD32D00771FD4 /* ESMenuViewController.swift */; };
 		6E3EDA191C91576B009AD352 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EDA181C91576B009AD352 /* AppDelegate.swift */; };
 		6E3EDA1B1C91576B009AD352 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EDA1A1C91576B009AD352 /* ViewController.swift */; };
 		6E3EDA1E1C91576B009AD352 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3EDA1C1C91576B009AD352 /* Main.storyboard */; };
@@ -114,6 +118,13 @@
 		6E0583941C92A8470091A649 /* UPMultipartBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPMultipartBody.m; sourceTree = "<group>"; };
 		6E0583961C92A8470091A649 /* UPMutUploaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPMutUploaderManager.h; sourceTree = "<group>"; };
 		6E0583971C92A8470091A649 /* UPMutUploaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPMutUploaderManager.m; sourceTree = "<group>"; };
+		6E068FA21CAAD28600771FD4 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
+		6E068FA31CAAD28600771FD4 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
+		6E068FA41CAAD28600771FD4 /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
+		6E068FA51CAAD28600771FD4 /* RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenu.m; sourceTree = "<group>"; };
+		6E068FA61CAAD28600771FD4 /* UIViewController+RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RESideMenu.h"; sourceTree = "<group>"; };
+		6E068FA71CAAD28600771FD4 /* UIViewController+RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RESideMenu.m"; sourceTree = "<group>"; };
+		6E068FAC1CAAD32D00771FD4 /* ESMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESMenuViewController.swift; sourceTree = "<group>"; };
 		6E3EDA151C91576B009AD352 /* File.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = File.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E3EDA181C91576B009AD352 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E3EDA1A1C91576B009AD352 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -445,6 +456,27 @@
 			path = UPMutUpload;
 			sourceTree = "<group>";
 		};
+		6E068FA11CAAD28600771FD4 /* RESideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				6E068FA21CAAD28600771FD4 /* RECommonFunctions.h */,
+				6E068FA31CAAD28600771FD4 /* RECommonFunctions.m */,
+				6E068FA41CAAD28600771FD4 /* RESideMenu.h */,
+				6E068FA51CAAD28600771FD4 /* RESideMenu.m */,
+				6E068FA61CAAD28600771FD4 /* UIViewController+RESideMenu.h */,
+				6E068FA71CAAD28600771FD4 /* UIViewController+RESideMenu.m */,
+			);
+			path = RESideMenu;
+			sourceTree = "<group>";
+		};
+		6E068FAB1CAAD31300771FD4 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				6E068FAC1CAAD32D00771FD4 /* ESMenuViewController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		6E3EDA0C1C91576B009AD352 = {
 			isa = PBXGroup;
 			children = (
@@ -568,6 +600,7 @@
 		6E3EDA6A1C91940F009AD352 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6E068FAB1CAAD31300771FD4 /* Menu */,
 				6E3EDA6B1C91940F009AD352 /* DataTransfer */,
 				6E3EDA761C91940F009AD352 /* FileList */,
 				6E3EDA821C91940F009AD352 /* Setting */,
@@ -663,6 +696,7 @@
 		6E3EDA901C919BEF009AD352 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				6E068FA11CAAD28600771FD4 /* RESideMenu */,
 				6E4ACA921CA17115006C7C51 /* kxmovie */,
 				6E4ACA9E1CA17115006C7C51 /* FFmpeg-iOS */,
 				6E0583841C92A8470091A649 /* UpYunSDK */,
@@ -1148,6 +1182,7 @@
 			files = (
 				6E3EDAD11C919BFF009AD352 /* DDLog.m in Sources */,
 				6E05839A1C92A8470091A649 /* NSData+MD5Digest.m in Sources */,
+				6E068FAD1CAAD32D00771FD4 /* ESMenuViewController.swift in Sources */,
 				6E4ACB101CA17115006C7C51 /* KxMovieViewController.m in Sources */,
 				6E3EDACD1C919BFF009AD352 /* GCDAsyncSocket.m in Sources */,
 				6E3EDA581C9164FB009AD352 /* ESAudioManager.m in Sources */,
@@ -1201,6 +1236,7 @@
 				6E3EDA431C9163D1009AD352 /* NSString+MD5.m in Sources */,
 				6E4FFFBD1C9BA942008DC4AC /* ESAudioViewController.swift in Sources */,
 				6E4ACB0F1CA17115006C7C51 /* KxMovieGLView.m in Sources */,
+				6E068FA81CAAD28600771FD4 /* RECommonFunctions.m in Sources */,
 				6E3EDAD31C919BFF009AD352 /* ContextFilterLogFormatter.m in Sources */,
 				6E05839B1C92A8470091A649 /* NSString+NSHash.m in Sources */,
 				6E3EDA421C9163D1009AD352 /* NSObject+SwizzleMethod.m in Sources */,
@@ -1211,8 +1247,10 @@
 				6E4ACB0C1CA17115006C7C51 /* KxAudioManager.m in Sources */,
 				6E3EDA481C9163D1009AD352 /* UIViewController+AOP.m in Sources */,
 				6E3EDADE1C919BFF009AD352 /* MultipartMessageHeader.m in Sources */,
+				6E068FA91CAAD28600771FD4 /* RESideMenu.m in Sources */,
 				6E0583981C92A8470091A649 /* UpYun.m in Sources */,
 				6E3EDA891C91940F009AD352 /* ESHTTPServer.m in Sources */,
+				6E068FAA1CAAD28600771FD4 /* UIViewController+RESideMenu.m in Sources */,
 				6E3EDB0E1C919D4D009AD352 /* ViewController+MASAdditions.m in Sources */,
 				6E3EDADB1C919BFF009AD352 /* HTTPMessage.m in Sources */,
 				6E3EDA461C9163D1009AD352 /* UIImage+Thumbnail.m in Sources */,

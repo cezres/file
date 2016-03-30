@@ -43,5 +43,10 @@
 
 #import <KVOController/FBKVOController.h>
 
+/**
+ *  侧滑菜单
+ */
+#import "RESideMenu.h"
+
 
 #endif /* PrefixHeader_h */

@@ -10,3 +10,6 @@
 #import "ESFileListViewController.h"
 #import "ESDataTransferViewController.h"
 #import "ESSettingViewController.h"
+
+#import "RESideMenu.h"
+

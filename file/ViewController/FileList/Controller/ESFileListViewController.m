@@ -102,6 +102,11 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
     else {
         [self normalNavigationItem];
     }
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(presentLeftMenuViewController:)];
 }
 
 - (void)reloadFileList; {

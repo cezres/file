@@ -49,16 +49,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let tabbar = UITabBarController()
-        tabbar.viewControllers = [
-            UINavigationController(rootViewController: ESFileListViewController()),
-            UINavigationController(rootViewController: ESDataTransferViewController()),
-            UINavigationController(rootViewController: ESSettingViewController()),
-        ]
-        tabbar.tabBar.tintColor = UIColor.blackColor()
+//        let tabbar = UITabBarController()
+//        tabbar.viewControllers = [
+//            UINavigationController(rootViewController: ESFileListViewController()),
+//            UINavigationController(rootViewController: ESDataTransferViewController()),
+//            UINavigationController(rootViewController: ESSettingViewController()),
+//        ]
+//        tabbar.tabBar.tintColor = UIColor.blackColor()
+        
+        
+        let nav = UINavigationController(rootViewController: ESFileListViewController())
+        
+        
+        let sideMenuViewController = RESideMenu(contentViewController: nav, leftMenuViewController: ESMenuViewController(), rightMenuViewController: nil)
+        sideMenuViewController.backgroundImage = UIImage(named: "MenuBackground")
+        
+        
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.rootViewController = tabbar
+        self.window?.rootViewController = sideMenuViewController
         self.window?.makeKeyAndVisible()
         
         return true

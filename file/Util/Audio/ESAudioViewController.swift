@@ -58,7 +58,7 @@ class ESAudioViewController: UIViewController, AVAudioPlayerDelegate {
             
             player.meteringEnabled = true
             
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "time", userInfo: nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ESAudioViewController.time), userInfo: nil, repeats: true)
             
             
             print(player.settings)
