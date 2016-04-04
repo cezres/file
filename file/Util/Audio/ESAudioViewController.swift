@@ -117,7 +117,7 @@ class ESAudioPlayerInfoView: UIView {
         
         let offset: CGFloat = (rect.width - (2 * 32 + 31 * 2)) / 2;
         
-        for var i=0; i<32; i++ {
+        for i in 0 ..< 32 {
             strokeSegments2.append(CGPointMake(offset + CGFloat(i) * 4, 0))
             strokeSegments2.append(CGPointMake(offset + CGFloat(i) * 4, 20))
         }

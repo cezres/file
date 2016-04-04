@@ -30,33 +30,6 @@
     // Do any additional setup after loading the view.
     
     
-    [UPYUNConfig sharedInstance].DEFAULT_BUCKET = @"d2c-pic";
-    [UPYUNConfig sharedInstance].DEFAULT_PASSCODE = @"5LiKYAotpBipKnLJhV2IC3U2VG4=";
-    
-    
-    uy = [[UpYun alloc] init];
-    
-    uy.successBlocker = ^(NSURLResponse *response, id responseData) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"上传成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
-        NSLog(@"response body %@", responseData);
-    };
-    uy.failBlocker = ^(NSError * error) {
-        NSString *message = [error.userInfo objectForKey:@"message"];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"message" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
-        NSLog(@"error %@", message);
-    };
-    uy.progressBlocker = ^(CGFloat percent, int64_t requestDidSendBytes) {
-        //        [_pv setProgress:percent];
-    };
-    uy.uploadMethod = UPMutUPload;
-    
-    
-    UIImage * im = [UIImage imageWithContentsOfFile:@"/Users/cezr/Documents/fe4b3bcdcadf4501b06053b0ed3a5760.jpg"];
-    [uy uploadFile:im saveKey:@"/app/c/16/03/11/A70239000070D538239A3551BD8C46B4"/*[self getSaveKeyWith:@"jpg"]*/];
-    
-    
 //    ESPhotoViewer *photoViewer = [[ESPhotoViewer alloc] init];
 //    photoViewer.frame = CGRectMake(20, 200, SSize.width-40, 100);
 //    [self.view addSubview:photoViewer];

@@ -32,7 +32,6 @@
 		6E3EDA461C9163D1009AD352 /* UIImage+Thumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EDA3D1C9163D1009AD352 /* UIImage+Thumbnail.m */; };
 		6E3EDA471C9163D1009AD352 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EDA3F1C9163D1009AD352 /* UIView+Frame.m */; };
 		6E3EDA481C9163D1009AD352 /* UIViewController+AOP.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EDA411C9163D1009AD352 /* UIViewController+AOP.m */; };
-		6E3EDA581C9164FB009AD352 /* ESAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EDA4C1C9164FB009AD352 /* ESAudioManager.m */; };
 		6E3EDA591C9164FB009AD352 /* ESFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EDA4F1C9164FB009AD352 /* ESFileManager.m */; };
 		6E3EDA5C1C9164FB009AD352 /* ESVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EDA571C9164FB009AD352 /* ESVideoPlayerViewController.m */; };
 		6E3EDA5F1C9165CC009AD352 /* ESFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EDA5E1C9165CC009AD352 /* ESFileModel.m */; };
@@ -99,6 +98,15 @@
 		6E4ACB1D1CA17167006C7C51 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E4ACB1C1CA17167006C7C51 /* libiconv.tbd */; };
 		6E4FFFBD1C9BA942008DC4AC /* ESAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4FFFBC1C9BA942008DC4AC /* ESAudioViewController.swift */; };
 		6E4FFFBF1C9C2206008DC4AC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E4FFFBE1C9C2205008DC4AC /* Accelerate.framework */; };
+		6E531A781CB0C10400053A6F /* JSONWarehouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E531A711CB0C10400053A6F /* JSONWarehouse.swift */; };
+		6E531A791CB0C10400053A6F /* MemoryWarehouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E531A721CB0C10400053A6F /* MemoryWarehouse.swift */; };
+		6E531A7A1CB0C10400053A6F /* Mirror+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E531A731CB0C10400053A6F /* Mirror+Serialization.swift */; };
+		6E531A7B1CB0C10400053A6F /* Pantry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E531A741CB0C10400053A6F /* Pantry.swift */; };
+		6E531A7C1CB0C10400053A6F /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E531A751CB0C10400053A6F /* Storable.swift */; };
+		6E531A7D1CB0C10400053A6F /* Warehousable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E531A761CB0C10400053A6F /* Warehousable.swift */; };
+		6E531A7E1CB0C10400053A6F /* WarehouseCacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E531A771CB0C10400053A6F /* WarehouseCacheable.swift */; };
+		6E531A801CB0C11800053A6F /* ESAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E531A7F1CB0C11800053A6F /* ESAudioManager.swift */; };
+		6E531A821CB0C16E00053A6F /* ESPlayQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E531A811CB0C16E00053A6F /* ESPlayQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,8 +157,6 @@
 		6E3EDA3F1C9163D1009AD352 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		6E3EDA401C9163D1009AD352 /* UIViewController+AOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AOP.h"; sourceTree = "<group>"; };
 		6E3EDA411C9163D1009AD352 /* UIViewController+AOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AOP.m"; sourceTree = "<group>"; };
-		6E3EDA4B1C9164FB009AD352 /* ESAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESAudioManager.h; sourceTree = "<group>"; };
-		6E3EDA4C1C9164FB009AD352 /* ESAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESAudioManager.m; sourceTree = "<group>"; };
 		6E3EDA4E1C9164FB009AD352 /* ESFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESFileManager.h; sourceTree = "<group>"; };
 		6E3EDA4F1C9164FB009AD352 /* ESFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESFileManager.m; sourceTree = "<group>"; };
 		6E3EDA561C9164FB009AD352 /* ESVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESVideoPlayerViewController.h; sourceTree = "<group>"; };
@@ -372,6 +378,15 @@
 		6E4ACB1C1CA17167006C7C51 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		6E4FFFBC1C9BA942008DC4AC /* ESAudioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESAudioViewController.swift; sourceTree = "<group>"; };
 		6E4FFFBE1C9C2205008DC4AC /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		6E531A711CB0C10400053A6F /* JSONWarehouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONWarehouse.swift; sourceTree = "<group>"; };
+		6E531A721CB0C10400053A6F /* MemoryWarehouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWarehouse.swift; sourceTree = "<group>"; };
+		6E531A731CB0C10400053A6F /* Mirror+Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mirror+Serialization.swift"; sourceTree = "<group>"; };
+		6E531A741CB0C10400053A6F /* Pantry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pantry.swift; sourceTree = "<group>"; };
+		6E531A751CB0C10400053A6F /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		6E531A761CB0C10400053A6F /* Warehousable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warehousable.swift; sourceTree = "<group>"; };
+		6E531A771CB0C10400053A6F /* WarehouseCacheable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarehouseCacheable.swift; sourceTree = "<group>"; };
+		6E531A7F1CB0C11800053A6F /* ESAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESAudioManager.swift; sourceTree = "<group>"; };
+		6E531A811CB0C16E00053A6F /* ESPlayQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESPlayQueue.swift; sourceTree = "<group>"; };
 		CBC4864EA36A4688BD635100 /* Pods_file.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_file.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4172F86DEEC184419CDB033 /* Pods-file.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-file.debug.xcconfig"; path = "Pods/Target Support Files/Pods-file/Pods-file.debug.xcconfig"; sourceTree = "<group>"; };
 		F1AC663920DAFB543731EB17 /* Pods-file.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-file.release.xcconfig"; path = "Pods/Target Support Files/Pods-file/Pods-file.release.xcconfig"; sourceTree = "<group>"; };
@@ -551,9 +566,9 @@
 		6E3EDA4A1C9164FB009AD352 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				6E3EDA4B1C9164FB009AD352 /* ESAudioManager.h */,
-				6E3EDA4C1C9164FB009AD352 /* ESAudioManager.m */,
 				6E4FFFBC1C9BA942008DC4AC /* ESAudioViewController.swift */,
+				6E531A7F1CB0C11800053A6F /* ESAudioManager.swift */,
+				6E531A811CB0C16E00053A6F /* ESPlayQueue.swift */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -600,6 +615,7 @@
 		6E3EDA6A1C91940F009AD352 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6E531A831CB0C59700053A6F /* AudioPlayer */,
 				6E068FAB1CAAD31300771FD4 /* Menu */,
 				6E3EDA6B1C91940F009AD352 /* DataTransfer */,
 				6E3EDA761C91940F009AD352 /* FileList */,
@@ -696,6 +712,7 @@
 		6E3EDA901C919BEF009AD352 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				6E531A701CB0C10400053A6F /* Pantry */,
 				6E068FA11CAAD28600771FD4 /* RESideMenu */,
 				6E4ACA921CA17115006C7C51 /* kxmovie */,
 				6E4ACA9E1CA17115006C7C51 /* FFmpeg-iOS */,
@@ -1043,6 +1060,27 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		6E531A701CB0C10400053A6F /* Pantry */ = {
+			isa = PBXGroup;
+			children = (
+				6E531A711CB0C10400053A6F /* JSONWarehouse.swift */,
+				6E531A721CB0C10400053A6F /* MemoryWarehouse.swift */,
+				6E531A731CB0C10400053A6F /* Mirror+Serialization.swift */,
+				6E531A741CB0C10400053A6F /* Pantry.swift */,
+				6E531A751CB0C10400053A6F /* Storable.swift */,
+				6E531A761CB0C10400053A6F /* Warehousable.swift */,
+				6E531A771CB0C10400053A6F /* WarehouseCacheable.swift */,
+			);
+			path = Pantry;
+			sourceTree = "<group>";
+		};
+		6E531A831CB0C59700053A6F /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
 		D801E074A02D9AD268B0C79F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1185,11 +1223,11 @@
 				6E068FAD1CAAD32D00771FD4 /* ESMenuViewController.swift in Sources */,
 				6E4ACB101CA17115006C7C51 /* KxMovieViewController.m in Sources */,
 				6E3EDACD1C919BFF009AD352 /* GCDAsyncSocket.m in Sources */,
-				6E3EDA581C9164FB009AD352 /* ESAudioManager.m in Sources */,
 				6E0583991C92A8470091A649 /* UPYUNConfig.m in Sources */,
 				6E3EDAD41C919BFF009AD352 /* DispatchQueueLogFormatter.m in Sources */,
 				6E3EDA591C9164FB009AD352 /* ESFileManager.m in Sources */,
 				6E3EDAD61C919BFF009AD352 /* DDData.m in Sources */,
+				6E531A801CB0C11800053A6F /* ESAudioManager.swift in Sources */,
 				6E05839E1C92A8470091A649 /* UPMultipartBody.m in Sources */,
 				6E3EDA8B1C91940F009AD352 /* ESFileListViewController.m in Sources */,
 				6E3EDAE11C919BFF009AD352 /* HTTPDataResponse.m in Sources */,
@@ -1198,14 +1236,19 @@
 				6E3EDADC1C919BFF009AD352 /* HTTPServer.m in Sources */,
 				6E3EDB051C919D4D009AD352 /* MASCompositeConstraint.m in Sources */,
 				6E3EDAE31C919BFF009AD352 /* HTTPErrorResponse.m in Sources */,
+				6E531A821CB0C16E00053A6F /* ESPlayQueue.swift in Sources */,
 				6E3EDAD21C919BFF009AD352 /* DDTTYLogger.m in Sources */,
 				6E3EDA5F1C9165CC009AD352 /* ESFileModel.m in Sources */,
 				6E3EDAD91C919BFF009AD352 /* HTTPAuthenticationRequest.m in Sources */,
+				6E531A7C1CB0C10400053A6F /* Storable.swift in Sources */,
 				6E3EDADD1C919BFF009AD352 /* MultipartFormDataParser.m in Sources */,
 				6E3EDA651C916629009AD352 /* ESPhotoItem.m in Sources */,
 				6E3EDAD01C919BFF009AD352 /* DDFileLogger.m in Sources */,
 				6E3EDA471C9163D1009AD352 /* UIView+Frame.m in Sources */,
+				6E531A791CB0C10400053A6F /* MemoryWarehouse.swift in Sources */,
 				6E3EDA451C9163D1009AD352 /* UIImage+Cut.m in Sources */,
+				6E531A7D1CB0C10400053A6F /* Warehousable.swift in Sources */,
+				6E531A7B1CB0C10400053A6F /* Pantry.swift in Sources */,
 				6E3EDAE01C919BFF009AD352 /* HTTPAsyncFileResponse.m in Sources */,
 				6E3EDA1B1C91576B009AD352 /* ViewController.swift in Sources */,
 				6E3EDB0C1C919D4D009AD352 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -1226,6 +1269,7 @@
 				6E3EDB081C919D4D009AD352 /* MASLayoutConstraint.m in Sources */,
 				6E3EDADF1C919BFF009AD352 /* MultipartMessageHeaderField.m in Sources */,
 				6E3EDB0D1C919D4D009AD352 /* View+MASAdditions.m in Sources */,
+				6E531A7A1CB0C10400053A6F /* Mirror+Serialization.swift in Sources */,
 				6E3EDA441C9163D1009AD352 /* UIAlertView+Block.m in Sources */,
 				6E05839C1C92A8470091A649 /* UPHTTPBodyPart.m in Sources */,
 				6E3EDB061C919D4D009AD352 /* MASConstraint.m in Sources */,
@@ -1239,6 +1283,8 @@
 				6E068FA81CAAD28600771FD4 /* RECommonFunctions.m in Sources */,
 				6E3EDAD31C919BFF009AD352 /* ContextFilterLogFormatter.m in Sources */,
 				6E05839B1C92A8470091A649 /* NSString+NSHash.m in Sources */,
+				6E531A7E1CB0C10400053A6F /* WarehouseCacheable.swift in Sources */,
+				6E531A781CB0C10400053A6F /* JSONWarehouse.swift in Sources */,
 				6E3EDA421C9163D1009AD352 /* NSObject+SwizzleMethod.m in Sources */,
 				6E3EDB071C919D4D009AD352 /* MASConstraintMaker.m in Sources */,
 				6E3EDA881C91940F009AD352 /* ESHTTPConnection.m in Sources */,

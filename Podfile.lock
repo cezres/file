@@ -2,17 +2,18 @@ PODS:
   - KVOController (1.0.3)
   - RxSwift (2.2.0)
   - SnapKit (0.19.1)
+  - SQLite.swift (0.10.1)
 
 DEPENDENCIES:
   - KVOController
   - RxSwift
   - SnapKit
+  - SQLite.swift (~> 0.10.1)
 
 SPEC CHECKSUMS:
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
   RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
+  SQLite.swift: 6a6e4b034efc317ce4e203b6af2d3024fee2b570
 
-PODFILE CHECKSUM: d7f674ca2e71a16cd40011bc946bb547740827c2
-
-COCOAPODS: 1.0.0.beta.4
+COCOAPODS: 0.39.0

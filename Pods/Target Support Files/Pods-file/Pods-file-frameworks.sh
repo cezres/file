@@ -84,12 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$CONFIGURATION_BUILD_DIR/KVOController/KVOController.framework"
-  install_framework "$CONFIGURATION_BUILD_DIR/RxSwift/RxSwift.framework"
-  install_framework "$CONFIGURATION_BUILD_DIR/SnapKit/SnapKit.framework"
+  install_framework "Pods-file/KVOController.framework"
+  install_framework "Pods-file/RxSwift.framework"
+  install_framework "Pods-file/SQLite.framework"
+  install_framework "Pods-file/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$CONFIGURATION_BUILD_DIR/KVOController/KVOController.framework"
-  install_framework "$CONFIGURATION_BUILD_DIR/RxSwift/RxSwift.framework"
-  install_framework "$CONFIGURATION_BUILD_DIR/SnapKit/SnapKit.framework"
+  install_framework "Pods-file/KVOController.framework"
+  install_framework "Pods-file/RxSwift.framework"
+  install_framework "Pods-file/SQLite.framework"
+  install_framework "Pods-file/SnapKit.framework"
 fi

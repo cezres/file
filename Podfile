@@ -16,5 +16,7 @@ target 'file' do
 #    pod 'Masonry'
 
     pod 'KVOController'
+    
+    pod 'SQLite.swift', '~> 0.10.1'
 
 end
