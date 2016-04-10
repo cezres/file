@@ -13,3 +13,6 @@
 
 #import "RESideMenu.h"
 
+
+#import "KxMovieViewController.h"
+

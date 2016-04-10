@@ -15,9 +15,7 @@
 
 #import "ESTextFieldAlertView.h"
 
-//#import <Masonry/Masonry.h>
 
-#import "ESPhotoViewer.h"
 
 
 /**
@@ -370,16 +368,7 @@ typedef NS_ENUM(NSInteger, ESFileListFilterType) {
         [self.navigationController pushViewController:filelist animated:YES];
     }
     else if (file.type == ESFileTypePhoto) {
-        ESPhotoViewer *photoViewer = [[ESPhotoViewer alloc] initWithFrame:self.view.bounds];
-        NSMutableArray<NSURL *> *imageUrls = [[NSMutableArray alloc] init];
-        [_dataSource enumerateObjectsUsingBlock:^(ESFileModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.type == ESFileTypePhoto) {
-                [imageUrls addObject:[NSURL fileURLWithPath:obj.path]];
-            }
-        }];
-        photoViewer.imageUrls = [imageUrls copy];
-        [self.view addSubview:photoViewer];
-        [photoViewer reloadData];
+        
     }
     else if (file.type == ESFileTypeVideo) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];

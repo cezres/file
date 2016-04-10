@@ -9,8 +9,8 @@ target 'file' do
 #    pod 'CocoaAsyncSocket'
 #    pod 'CocoaHTTPServer'
 
-#    pod 'ReactiveCocoa'
-    pod 'RxSwift'
+    pod 'ReactiveCocoa'
+#    pod 'RxSwift'
 
     pod 'SnapKit'
 #    pod 'Masonry'
@@ -18,5 +18,7 @@ target 'file' do
     pod 'KVOController'
     
     pod 'SQLite.swift', '~> 0.10.1'
+    
+    pod 'ESTMusicIndicator'
 
 end

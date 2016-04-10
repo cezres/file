@@ -49,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        /*
         let tabbar = UITabBarController()
         tabbar.viewControllers = [
             UINavigationController(rootViewController: ESFileListViewController()),
@@ -68,7 +69,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.rootViewController = tabbar
-        self.window?.makeKeyAndVisible()
+        self.window?.makeKeyAndVisible()*/
+        
+        
+        let tabbarController = UITabBarController()
+        tabbarController.viewControllers = [
+            UINavigationController(rootViewController: FileListViewController()),
+            UINavigationController(rootViewController: MusicListViewController())
+        ]
+        
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.rootViewController = tabbarController
+        window?.makeKeyAndVisible()
+        
+        
+//        Pantry.pack([PlayerQueueItem](), key: "PlayerQueue")
+        
         
         return true
     }

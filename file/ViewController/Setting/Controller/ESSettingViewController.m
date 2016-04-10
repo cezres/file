@@ -7,7 +7,7 @@
 //
 
 #import "ESSettingViewController.h"
-#import "ESPhotoViewer.h"
+//#import "ESPhotoViewer.h"
 #import "UpYun.h"
 
 @interface ESSettingViewController ()
