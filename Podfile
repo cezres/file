@@ -15,10 +15,20 @@ target 'file' do
     pod 'SnapKit'
 #    pod 'Masonry'
 
-    pod 'KVOController'
+#    pod 'KVOController'
     
-    pod 'SQLite.swift', '~> 0.10.1'
+#    pod 'SQLite.swift', '~> 0.10.1'
     
-    pod 'ESTMusicIndicator'
+#    pod 'ESTMusicIndicator'
+
+    pod 'RESideMenu'
 
 end
+
+#target 'FileHTTPServer' do
+#    
+#    
+#    pod 'CocoaHTTPServer'
+#
+#end
+

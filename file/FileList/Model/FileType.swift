@@ -17,7 +17,7 @@ enum FileType: CustomStringConvertible {
     
     init(ext: String) {
         switch ext {
-        case "png", "jpg", "jpeg":
+        case "png", "jpg", "jpeg", "NEF":
             self = .Photo
         case "flv", "mp4":
             self = .Video

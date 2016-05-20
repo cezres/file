@@ -9,7 +9,6 @@
 import UIKit
 
 
-
 class ThumbnailCache: NSCache, NSCacheDelegate {
     static let sharedInstance = ThumbnailCache()
     
@@ -20,12 +19,16 @@ class ThumbnailCache: NSCache, NSCacheDelegate {
         }
         
         // 因为 Document路径 会在App重新运行的时候发生改变
-        var xdPath = path
-        xdPath.removeRange(path.rangeOfString(DocumentDirectory())!)
+        var relativePath = path
+        
+        guard let range = path.rangeOfString(DocumentDirectory()) else {
+            return
+        }
+        relativePath.removeRange(range)
         
         
         let thumbnailCacheDirectory = CachesDirectory() + "/thumbnail/\(Int(width))"
-        let thumbnailCachePath = thumbnailCacheDirectory + "/\(xdPath.hashValue)"
+        let thumbnailCachePath = thumbnailCacheDirectory + "/\(relativePath.hashValue)"
         
         if let thumbnail = objectForKey(thumbnailCachePath) as? UIImage {
             // 内存
@@ -75,9 +78,12 @@ class ThumbnailCache: NSCache, NSCacheDelegate {
         name       = NSStringFromClass(classForCoder)
         countLimit = 60
         
+        /**
+         内存警告的时候会清理掉缓存
+         */
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: #selector(ESImageCache.didReceiveMemoryWarning),
+            selector: #selector(ThumbnailCache.didReceiveMemoryWarning),
             name: UIApplicationDidReceiveMemoryWarningNotification,
             object: nil
         )

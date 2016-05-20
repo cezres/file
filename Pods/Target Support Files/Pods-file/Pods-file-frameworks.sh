@@ -84,18 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-file/ESTMusicIndicator.framework"
-  install_framework "Pods-file/KVOController.framework"
-  install_framework "Pods-file/ReactiveCocoa.framework"
-  install_framework "Pods-file/Result.framework"
-  install_framework "Pods-file/SQLite.framework"
-  install_framework "Pods-file/SnapKit.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/RESideMenu/RESideMenu.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/ReactiveCocoa/ReactiveCocoa.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/Result/Result.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/SnapKit/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-file/ESTMusicIndicator.framework"
-  install_framework "Pods-file/KVOController.framework"
-  install_framework "Pods-file/ReactiveCocoa.framework"
-  install_framework "Pods-file/Result.framework"
-  install_framework "Pods-file/SQLite.framework"
-  install_framework "Pods-file/SnapKit.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/RESideMenu/RESideMenu.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/ReactiveCocoa/ReactiveCocoa.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/Result/Result.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/SnapKit/SnapKit.framework"
 fi

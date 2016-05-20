@@ -2,90 +2,46 @@
 //  AppDelegate.swift
 //  file
 //
-//  Created by 翟泉 on 16/3/10.
+//  Created by 翟泉 on 16/5/17.
 //  Copyright © 2016年 云之彼端. All rights reserved.
 //
 
 import UIKit
+import RESideMenu
 
-/*
-private var once = UnsafeMutablePointer<dispatch_once_t>.alloc(1)
-
-extension UINavigationController {
-    public override class func initialize() {
-        var i=0
-        dispatch_once(once) { () -> Void in
-            let originalMethod = class_getInstanceMethod(self, "viewDidLoad")
-            let swizzledMethod = class_getInstanceMethod(self, "aop_viewDidLoad")
-            if class_addMethod(self, "viewDidLoad", method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod)) {
-                class_replaceMethod(self, "aop_viewDidLoad", method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod))
-            }
-            else {
-                method_exchangeImplementations(originalMethod, swizzledMethod)
-            }
-        }
-    }
-    func aop_viewDidLoad() {
-        self.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationBar.barTintColor = UIColor.blackColor()
-        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.aop_viewDidLoad()
-    }
-}
-*/
-
-extension UINavigationController {
-    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
-}
+import FileHTTPServer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        /*
-        let tabbar = UITabBarController()
-        tabbar.viewControllers = [
-            UINavigationController(rootViewController: ESFileListViewController()),
-            UINavigationController(rootViewController: ESDataTransferViewController()),
-            UINavigationController(rootViewController: ESSettingViewController()),
-        ]
-        tabbar.tabBar.tintColor = UIColor.blackColor()
+        let contentViewController = UINavigationController(rootViewController: FileListViewController())
+        let leftMenuViewController = LeftMenuViewController()
+        let sideMenu = RESideMenu(contentViewController: contentViewController, leftMenuViewController: leftMenuViewController, rightMenuViewController: nil)
+        sideMenu.backgroundImage = UIImage(named: "MenuBackground")
+        sideMenu.scaleBackgroundImageView = false
+        sideMenu.scaleContentView = false
+        sideMenu.scaleMenuView = false
+        sideMenu.delegate = leftMenuViewController
         
-        
-//        let nav = UINavigationController(rootViewController: ESFileListViewController())
-//        
-//        
-//        let sideMenuViewController = RESideMenu(contentViewController: nav, leftMenuViewController: ESMenuViewController(), rightMenuViewController: nil)
-//        sideMenuViewController.backgroundImage = UIImage(named: "MenuBackground")
-        
-        
-        
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.rootViewController = tabbar
-        self.window?.makeKeyAndVisible()*/
-        
-        
-        let tabbarController = UITabBarController()
-        tabbarController.viewControllers = [
-            UINavigationController(rootViewController: FileListViewController()),
-            UINavigationController(rootViewController: MusicListViewController())
-        ]
-        
+        sideMenu.panMinimumOpenThreshold = 60
+        sideMenu.panFromEdge = false
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = tabbarController
+        window?.rootViewController = sideMenu
         window?.makeKeyAndVisible()
         
+        print(DocumentDirectory())
         
-//        Pantry.pack([PlayerQueueItem](), key: "PlayerQueue")
+//        let server = FileHTTPServer()
+//        server.start()
         
+//        FileHTTPServer.sharedInstance.start()
         
         return true
     }
@@ -98,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        SettingServices.sharedInstance.save()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -111,22 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        print(url.absoluteString)
-        return true
-    }
-    
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        print(url.absoluteString)
-        UIApplication.sharedApplication().openURL(NSURL(string: "fff://aswew/ewqeqw")!)
-        return true
-    }
-    
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        print(url.absoluteString)
-        return true
-    }
+
 
 }
 

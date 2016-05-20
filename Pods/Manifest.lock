@@ -1,6 +1,4 @@
 PODS:
-  - ESTMusicIndicator (0.1.2)
-  - KVOController (1.0.3)
   - ReactiveCocoa (4.1.0):
     - ReactiveCocoa/UI (= 4.1.0)
     - Result (~> 2.0)
@@ -12,23 +10,21 @@ PODS:
   - ReactiveCocoa/UI (4.1.0):
     - ReactiveCocoa/Core
     - Result (~> 2.0)
+  - RESideMenu (4.0.7)
   - Result (2.0.0)
-  - SnapKit (0.19.1)
-  - SQLite.swift (0.10.1)
+  - SnapKit (0.21.0)
 
 DEPENDENCIES:
-  - ESTMusicIndicator
-  - KVOController
   - ReactiveCocoa
+  - RESideMenu
   - SnapKit
-  - SQLite.swift (~> 0.10.1)
 
 SPEC CHECKSUMS:
-  ESTMusicIndicator: 03dd1364d2db1a0a8684fb907406bc329f3700a6
-  KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
+  RESideMenu: f24c508404b49c667344c54aba7e590883533958
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
-  SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
-  SQLite.swift: 6a6e4b034efc317ce4e203b6af2d3024fee2b570
+  SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 10d6f4bfdbc209df95c2e10f73f50be3215adcca
+
+COCOAPODS: 1.0.0.beta.4
