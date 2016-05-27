@@ -203,6 +203,9 @@
 		6E49D0191CF07EB800DFB24A /* Image.html in Resources */ = {isa = PBXBuildFile; fileRef = 6E49D0131CF07EB800DFB24A /* Image.html */; };
 		6E49D01A1CF07F9700DFB24A /* FileHTTPServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E49CF6C1CF0669B00DFB24A /* FileHTTPServer.framework */; };
 		6E49D01B1CF07F9700DFB24A /* FileHTTPServer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E49CF6C1CF0669B00DFB24A /* FileHTTPServer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E4BACFC1CF2D141008B519F /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E4BACFB1CF2D141008B519F /* AudioPlayer.m */; };
+		6E4BAD131CF2D5E4008B519F /* AudioPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBF1A0C1CED97B8005FBB07 /* AudioPlayer.framework */; };
+		6E4BAD141CF2D5E4008B519F /* AudioPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBF1A0C1CED97B8005FBB07 /* AudioPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E5FAA1A1CED5C6D003463D4 /* PhotoViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E5FAA191CED5C6D003463D4 /* PhotoViewer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E5FAA1E1CED5C6D003463D4 /* PhotoViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5FAA171CED5C6D003463D4 /* PhotoViewer.framework */; };
 		6E5FAA1F1CED5C6D003463D4 /* PhotoViewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5FAA171CED5C6D003463D4 /* PhotoViewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -260,6 +263,13 @@
 			remoteGlobalIDString = 6E49CF6B1CF0669B00DFB24A;
 			remoteInfo = FileHTTPServer;
 		};
+		6E4BAD151CF2D5E4008B519F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6EE16D7F1CEB5DD700544588 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EBF1A0B1CED97B8005FBB07;
+			remoteInfo = AudioPlayer;
+		};
 		6E5FAA1C1CED5C6D003463D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6EE16D7F1CEB5DD700544588 /* Project object */;
@@ -283,6 +293,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6E4BAD141CF2D5E4008B519F /* AudioPlayer.framework in Embed Frameworks */,
 				6E49D01B1CF07F9700DFB24A /* FileHTTPServer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -500,6 +511,7 @@
 		6E49D0111CF07EB800DFB24A /* FLVPlayer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FLVPlayer.html; sourceTree = "<group>"; };
 		6E49D0121CF07EB800DFB24A /* Flvplayer.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Flvplayer.swf; sourceTree = "<group>"; };
 		6E49D0131CF07EB800DFB24A /* Image.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Image.html; sourceTree = "<group>"; };
+		6E4BACFB1CF2D141008B519F /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
 		6E5FAA081CED5616003463D4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		6E5FAA0A1CED5620003463D4 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		6E5FAA0C1CED562D003463D4 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
@@ -570,6 +582,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E4BAD131CF2D5E4008B519F /* AudioPlayer.framework in Frameworks */,
 				6E49D01A1CF07F9700DFB24A /* FileHTTPServer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -995,8 +1008,9 @@
 		6EBF1A0D1CED97B9005FBB07 /* AudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				6EBF1A0E1CED97B9005FBB07 /* AudioPlayer.h */,
 				6EBF1A101CED97B9005FBB07 /* Info.plist */,
+				6EBF1A0E1CED97B9005FBB07 /* AudioPlayer.h */,
+				6E4BACFB1CF2D141008B519F /* AudioPlayer.m */,
 			);
 			path = AudioPlayer;
 			sourceTree = "<group>";
@@ -1371,6 +1385,7 @@
 			);
 			dependencies = (
 				6E49D01D1CF07F9700DFB24A /* PBXTargetDependency */,
+				6E4BAD161CF2D5E4008B519F /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -1669,6 +1684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E4BACFC1CF2D141008B519F /* AudioPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1719,6 +1735,11 @@
 			isa = PBXTargetDependency;
 			target = 6E49CF6B1CF0669B00DFB24A /* FileHTTPServer */;
 			targetProxy = 6E49D01C1CF07F9700DFB24A /* PBXContainerItemProxy */;
+		};
+		6E4BAD161CF2D5E4008B519F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6EBF1A0B1CED97B8005FBB07 /* AudioPlayer */;
+			targetProxy = 6E4BAD151CF2D5E4008B519F /* PBXContainerItemProxy */;
 		};
 		6E5FAA1D1CED5C6D003463D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2097,6 +2118,7 @@
 				6E49CF771CF0669B00DFB24A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E49CF8F1CF066F300DFB24A /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
@@ -2105,6 +2127,7 @@
 				6E49CF911CF066F300DFB24A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E5FAA201CED5C6D003463D4 /* Build configuration list for PBXNativeTarget "PhotoViewer" */ = {
 			isa = XCConfigurationList;

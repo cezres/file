@@ -8,7 +8,7 @@
 
 import UIKit
 import FileHTTPServer
-
+import AudioPlayer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         
-        FileHTTPServer.sharedInstance().start()
+//        FileHTTPServer.sharedInstance().start()
+        
+        AudioPlayer.sharedInstance()
         
         return true
     }

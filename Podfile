@@ -22,6 +22,9 @@ target 'file' do
 #    pod 'ESTMusicIndicator'
 
     pod 'RESideMenu'
+    
+    
+    pod 'FDFullscreenPopGesture', '1.1'
 
 end
 
