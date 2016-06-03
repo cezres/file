@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        FileHTTPServer.sharedInstance().start()
         
-        AudioPlayer.sharedInstance()
+//        AudioPlayer.sharedInstance()
         
         return true
     }

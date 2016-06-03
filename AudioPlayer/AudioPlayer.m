@@ -78,7 +78,7 @@
     NSURL *url = [NSURL URLWithString:@"/Users/cezr/Documents/2233.mp3"];
     // AudioFile
     AudioFileID fileID;
-    status = AudioFileOpenURL((CFURLRef)url, kAudioFileReadPermission, kAudioFileMP3Type, &fileID);
+    status = AudioFileOpenURL((__bridge CFURLRef)url, kAudioFileReadPermission, kAudioFileMP3Type, &fileID);
     if (status != noErr) {
         return;
     }
