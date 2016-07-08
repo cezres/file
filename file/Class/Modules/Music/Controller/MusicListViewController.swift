@@ -132,7 +132,7 @@ extension MusicListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = cell as? MusicTableViewCell else {
             return
         }
-        cell.musicTitleLabel.text = model.musicEntitys[indexPath.row].name
+        cell.musicEntity = model.musicEntitys[indexPath.row]
         
         cell.state = .ESTMusicIndicatorViewStateStopped
         if MusicPlayManager.default.state == .Playing && model.musicEntitys[indexPath.row].path == MusicPlayManager.default.currentPlaying?.path {

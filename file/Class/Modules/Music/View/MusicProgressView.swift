@@ -294,11 +294,6 @@ class MusicProgressView: UIView, UIGestureRecognizerDelegate {
         
     }
     
-    private func timeToString(time: TimeInterval) -> String {
-        let iTime = Int(time)
-        let minute = iTime / 60
-        return String(format: "%02d:%02d", minute, iTime - minute*60)
-    }
     
 
 }

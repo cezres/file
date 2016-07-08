@@ -14,11 +14,19 @@ class MusicTableViewCell: UITableViewCell {
     let musicIndicator = ESTMusicIndicatorView()
     let musicTitleLabel = UILabel()
     
+    let durationLabel = UILabel()
     
     
     var state: ESTMusicIndicatorViewState = .ESTMusicIndicatorViewStateStopped {
         didSet {
             musicIndicator.state = state
+        }
+    }
+    
+    var musicEntity: MusicEntity! {
+        didSet {
+            musicTitleLabel.text = musicEntity.name
+            durationLabel.text = timeToString(time: musicEntity.duration)
         }
     }
     
@@ -28,10 +36,16 @@ class MusicTableViewCell: UITableViewCell {
         musicTitleLabel.font = UIFont.systemFont(ofSize: 13)
         musicIndicator.state = .ESTMusicIndicatorViewStateStopped
         
+        durationLabel.font = UIFont.systemFont(ofSize: 11)
+        durationLabel.textAlignment = NSTextAlignment.right
+        
         separatorInset = UIEdgeInsetsZero
         
         contentView.addSubview(musicTitleLabel)
         contentView.addSubview(musicIndicator)
+        contentView.addSubview(durationLabel)
+        
+        
         
         musicIndicator.snp_makeConstraints { (make) in
             make.left.equalTo(0)
@@ -42,9 +56,16 @@ class MusicTableViewCell: UITableViewCell {
         
         musicTitleLabel.snp_makeConstraints { (make) in
             make.left.equalTo(musicIndicator.snp_right)
-            make.right.equalTo(-10)
+            make.right.equalTo(durationLabel.snp_left).offset(-10)
             make.top.equalTo(0)
             make.bottom.equalTo(0)
+        }
+        
+        durationLabel.snp_makeConstraints { (make) in
+            make.centerY.equalTo(contentView)
+            make.right.equalTo(-15)
+            make.width.equalTo(60)
+            make.height.equalTo(15)
         }
         
     }

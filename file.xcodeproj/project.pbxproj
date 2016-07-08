@@ -21,6 +21,7 @@
 		6E312A1D1D2FC8C20045C191 /* 56508748_p0.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E312A1C1D2FC8C20045C191 /* 56508748_p0.png */; };
 		6E312A211D2FC9400045C191 /* 53983444_p0.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E312A201D2FC9400045C191 /* 53983444_p0.png */; };
 		6E312A251D2FC96C0045C191 /* 42826426_p0.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E312A241D2FC96C0045C191 /* 42826426_p0.png */; };
+		6E312A2B1D2FDB820045C191 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E312A2A1D2FDB820045C191 /* Function.swift */; };
 		6E5705A01D2266ED00E7E9D6 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57058C1D2266ED00E7E9D6 /* Macro.swift */; };
 		6E5705A11D2266ED00E7E9D6 /* FileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5705901D2266ED00E7E9D6 /* FileCollectionViewCell.swift */; };
 		6E5705A21D2266ED00E7E9D6 /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5705921D2266ED00E7E9D6 /* FileListViewController.swift */; };
@@ -95,6 +96,7 @@
 		6E312A1C1D2FC8C20045C191 /* 56508748_p0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 56508748_p0.png; sourceTree = "<group>"; };
 		6E312A201D2FC9400045C191 /* 53983444_p0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 53983444_p0.png; sourceTree = "<group>"; };
 		6E312A241D2FC96C0045C191 /* 42826426_p0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 42826426_p0.png; sourceTree = "<group>"; };
+		6E312A2A1D2FDB820045C191 /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		6E57058C1D2266ED00E7E9D6 /* Macro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		6E5705901D2266ED00E7E9D6 /* FileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E5705921D2266ED00E7E9D6 /* FileListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileListViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 		6E57058B1D2266ED00E7E9D6 /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				6E312A2A1D2FDB820045C191 /* Function.swift */,
 				6E57058C1D2266ED00E7E9D6 /* Macro.swift */,
 			);
 			path = Macro;
@@ -596,6 +599,7 @@
 				6E5705B91D22674600E7E9D6 /* ConstraintRelation.swift in Sources */,
 				6E5705A01D2266ED00E7E9D6 /* Macro.swift in Sources */,
 				6E57384D1D229CD300C84B30 /* FileListCollectionView.swift in Sources */,
+				6E312A2B1D2FDB820045C191 /* Function.swift in Sources */,
 				6E64071E1D2E797A00342DBB /* ESTMusicIndicatorContentView.swift in Sources */,
 				6E5705BD1D22674600E7E9D6 /* SnapKit.swift in Sources */,
 				6E6407201D2E797A00342DBB /* MusicTableViewCell.swift in Sources */,
