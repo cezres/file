@@ -1,8 +1,6 @@
-EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$CONFIGURATION_BUILD_DIR/FDFullscreenPopGesture" "$CONFIGURATION_BUILD_DIR/RESideMenu" "$CONFIGURATION_BUILD_DIR/ReactiveCocoa" "$CONFIGURATION_BUILD_DIR/Result" "$CONFIGURATION_BUILD_DIR/SnapKit"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$CONFIGURATION_BUILD_DIR/FDFullscreenPopGesture" "$CONFIGURATION_BUILD_DIR/RESideMenu"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/FDFullscreenPopGesture/FDFullscreenPopGesture.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/RESideMenu/RESideMenu.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/ReactiveCocoa/ReactiveCocoa.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Result/Result.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SnapKit/SnapKit.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "FDFullscreenPopGesture" -framework "RESideMenu" -framework "ReactiveCocoa" -framework "Result" -framework "SnapKit"
-OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/FDFullscreenPopGesture/FDFullscreenPopGesture.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/RESideMenu/RESideMenu.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "FDFullscreenPopGesture" -framework "RESideMenu"
 PODS_ROOT = ${SRCROOT}/Pods

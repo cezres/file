@@ -1,33 +1,15 @@
 PODS:
   - FDFullscreenPopGesture (1.1)
-  - ReactiveCocoa (4.1.0):
-    - ReactiveCocoa/UI (= 4.1.0)
-    - Result (~> 2.0)
-  - ReactiveCocoa/Core (4.1.0):
-    - ReactiveCocoa/no-arc
-    - Result (~> 2.0)
-  - ReactiveCocoa/no-arc (4.1.0):
-    - Result (~> 2.0)
-  - ReactiveCocoa/UI (4.1.0):
-    - ReactiveCocoa/Core
-    - Result (~> 2.0)
   - RESideMenu (4.0.7)
-  - Result (2.0.0)
-  - SnapKit (0.21.0)
 
 DEPENDENCIES:
-  - FDFullscreenPopGesture (= 1.1)
-  - ReactiveCocoa
+  - FDFullscreenPopGesture
   - RESideMenu
-  - SnapKit
 
 SPEC CHECKSUMS:
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
-  Result: 9e75e1111c774c6ac594e14907b15057053a7959
-  SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
 
-PODFILE CHECKSUM: 57ecbf7ec942883e6ab637bd76a4227f9cb75451
+PODFILE CHECKSUM: 7e6e6164430022685d14ef62cd2ce8eb60cde4b6
 
 COCOAPODS: 1.0.0.beta.4

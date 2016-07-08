@@ -9,10 +9,10 @@ target 'file' do
 #    pod 'CocoaAsyncSocket'
 #    pod 'CocoaHTTPServer'
 
-    pod 'ReactiveCocoa'
+#    pod 'ReactiveCocoa'
 #    pod 'RxSwift'
 
-    pod 'SnapKit'
+#    pod 'SnapKit'
 #    pod 'Masonry'
 
 #    pod 'KVOController'
@@ -23,8 +23,7 @@ target 'file' do
 
     pod 'RESideMenu'
     
-    
-    pod 'FDFullscreenPopGesture', '1.1'
+    pod 'FDFullscreenPopGesture'
 
 end
 
