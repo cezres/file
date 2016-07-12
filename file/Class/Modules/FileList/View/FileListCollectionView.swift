@@ -10,12 +10,15 @@ import UIKit
 
 class FileListCollectionView: FileListView, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    weak var delegate: FileListViewDelegate!
+    
     
     var flowLayout: UICollectionViewFlowLayout!
     
     var collectionView: UICollectionView!
     
+    private var editing: Bool = false
+    
+    private var selected = [Bool]()
     
     required init(delegate: FileListViewDelegate) {
         super.init(delegate: delegate)
@@ -36,8 +39,6 @@ class FileListCollectionView: FileListView, UICollectionViewDelegate, UICollecti
         collectionView.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
         }
-        
-        self.delegate = delegate
     }
     
     override func reload() {
@@ -56,6 +57,61 @@ class FileListCollectionView: FileListView, UICollectionViewDelegate, UICollecti
         }
         collectionView.reloadItems(at: indexPaths)
     }
+    
+    override func setEditing(editing: Bool) {
+        self.editing = editing
+        
+        
+        selected.removeAll()
+        if self.editing {
+            for _ in 0..<delegate.count() {
+                selected.append(false)
+            }
+        }
+        else {
+            
+        }
+        
+        collectionView.reloadData()
+    }
+    
+    override func isEditing() -> Bool {
+        return editing
+    }
+    
+    override func selectedItems() -> [Int] {
+        var items = [Int]()
+        for (idx,value) in selected.enumerated() {
+            if value {
+                items.append(idx)
+            }
+        }
+        return items
+    }
+    
+    override func select(idx: Int) {
+        selected[idx] = !selected[idx]
+        collectionView.reloadItems(at: [IndexPath(row: idx, section: 0)])
+    }
+    
+    override func selectAll() {
+        for idx in 0..<selected.count {
+            if !selected[idx] {
+                selected[idx] = true
+            }
+        }
+        collectionView.reloadData()
+    }
+    
+    override func cancelSelectAll() {
+        for idx in 0..<selected.count {
+            if selected[idx] {
+                selected[idx] = false
+            }
+        }
+        collectionView.reloadData()
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -77,10 +133,23 @@ class FileListCollectionView: FileListView, UICollectionViewDelegate, UICollecti
             return
         }
         fileCell.setFileEntity(file: delegate.fileEntity(index: indexPath.row))
+        fileCell.editing = editing
+        if editing {
+            fileCell._selected = selected[indexPath.row]
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate.selectedFile(index: indexPath.row)
+        if editing {
+            selected[indexPath.row] = !selected[indexPath.row]
+            guard let cell = collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell else {
+                return
+            }
+            cell._selected = selected[indexPath.row]
+        }
+        else {
+            delegate.selectedFile(index: indexPath.row)
+        }
     }
     
 }

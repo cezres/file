@@ -9,7 +9,7 @@
 import UIKit
 
 
-private let MenuItemTitles = ["文件管理", "音乐播放器", "数据传输", "设置"]
+private let MenuItemTitles = ["文件管理", "音乐播放器", "设置"]
 
 
 class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -107,7 +107,7 @@ class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             sideMenuViewController.contentViewController = musicListViewController
         }
-        else if indexPath.row == 3 {
+        else if indexPath.row == 2 {
             if sideMenuViewController.contentViewController.classForCoder == SettingViewController.classForCoder() {
                 return
             }

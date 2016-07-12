@@ -12,6 +12,24 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     let imageView = UIImageView()
     let nameLabel = UILabel()
+    let chooseView = UIImageView()
+    
+    var editing: Bool = false {
+        didSet {
+            chooseView.isHidden = !editing
+        }
+    }
+    
+    var _selected: Bool = false {
+        didSet {
+            if _selected {
+                chooseView.image = #imageLiteral(resourceName: "icon_choose_y")
+            }
+            else {
+                chooseView.image = #imageLiteral(resourceName: "icon_choose_n")
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,8 +73,10 @@ class FileCollectionViewCell: UICollectionViewCell {
     }
     
     func loadSubviews() {
+        chooseView.image = #imageLiteral(resourceName: "icon_choose_n")
         contentView.addSubview(imageView)
         contentView.addSubview(nameLabel)
+        contentView.addSubview(chooseView)
         
         nameLabel.font = UIFont.systemFont(ofSize: 12)
         nameLabel.textAlignment = NSTextAlignment.center
@@ -76,6 +96,12 @@ class FileCollectionViewCell: UICollectionViewCell {
             make.right.equalTo(0)
             make.top.equalTo(imageView.snp_bottom).offset(10)
             make.height.equalTo(nameLabel.font.lineHeight*2)
+        }
+        
+        chooseView.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30, height: 30))
+            make.top.equalTo(10)
+            make.right.equalTo(-10)
         }
         
     }

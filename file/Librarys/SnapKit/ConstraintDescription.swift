@@ -65,9 +65,11 @@ public protocol ConstraintDescriptionEditable: ConstraintDescriptionPriortizable
     func multipliedBy(_ amount: Int) -> ConstraintDescriptionEditable
     func multipliedBy(_ amount: UInt) -> ConstraintDescriptionEditable
     
+    @discardableResult
     func dividedBy(_ amount: Float) -> ConstraintDescriptionEditable
     func dividedBy(_ amount: Double) -> ConstraintDescriptionEditable
     func dividedBy(_ amount: CGFloat) -> ConstraintDescriptionEditable
+    @discardableResult
     func dividedBy(_ amount: Int) -> ConstraintDescriptionEditable
     func dividedBy(_ amount: UInt) -> ConstraintDescriptionEditable
 
