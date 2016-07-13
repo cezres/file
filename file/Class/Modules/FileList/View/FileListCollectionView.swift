@@ -64,9 +64,7 @@ class FileListCollectionView: FileListView, UICollectionViewDelegate, UICollecti
         
         selected.removeAll()
         if self.editing {
-            for _ in 0..<delegate.count() {
-                selected.append(false)
-            }
+            selected = Array<Bool>(repeating: false, count: delegate.count())
         }
         else {
             

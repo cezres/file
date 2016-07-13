@@ -24,13 +24,8 @@ target 'file' do
     pod 'RESideMenu'
     
     pod 'FDFullscreenPopGesture'
+    
+    pod 'Zip'
 
 end
-
-#target 'FileHTTPServer' do
-#    
-#    
-#    pod 'CocoaHTTPServer'
-#
-#end
 

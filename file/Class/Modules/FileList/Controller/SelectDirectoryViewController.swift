@@ -57,11 +57,6 @@ class SelectDirectoryViewController: UIViewController, FileListViewDelegate {
             })
         }
         
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-//        let dele = navigationController?.interactivePopGestureRecognizer?.delegate
-//        print(dele)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,11 +72,25 @@ class SelectDirectoryViewController: UIViewController, FileListViewDelegate {
     }
     
     func cancel() {
-        _ = navigationController?.popViewController(animated: true)
+        navigationController?.fd_fullscreenPopGestureRecognizer.isEnabled = true
+        
+        for controller in navigationController!.viewControllers {
+            if (controller as? FileListViewController) != nil {
+                _ = navigationController?.popToViewController(controller, animated: true)
+                return
+            }
+        }
     }
     
     func confim() {
+        defer {
+            cancel()
+        }
         
+        guard let handler = handler else {
+            return
+        }
+        handler(directoryPath: model.directoryPath)
     }
     
     func initSubviews() {
@@ -97,7 +106,6 @@ class SelectDirectoryViewController: UIViewController, FileListViewDelegate {
         cancelButton.backgroundColor = UIColor(white: 0.8, alpha: 1)
         cancelButton.addTarget(self, action: #selector(SelectDirectoryViewController.cancel), for: UIControlEvents.touchUpInside)
         view.addSubview(cancelButton)
-        
         
         
         fileListView.snp_makeConstraints { (make) in

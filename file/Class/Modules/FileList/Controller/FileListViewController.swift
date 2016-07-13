@@ -9,7 +9,6 @@
 import UIKit
 
 
-
 class FileListViewController/*<FileListView: UIView where FileListView: FileListViewProtocol>*/: UIViewController, FileListViewDelegate {
     
     var model: FileListModel!
@@ -147,7 +146,8 @@ class FileListViewController/*<FileListView: UIView where FileListView: FileList
     }
     
     
-    // MARK: - FileListViewDelegate
+    // MARK: FileListViewDelegate
+    
     func count() -> Int {
         return model.files.count
     }
@@ -180,23 +180,106 @@ class FileListViewController/*<FileListView: UIView where FileListView: FileList
         else if fileEntity.type == FileType.Audio {
             MusicPlayManager.default.play(path: fileEntity.absPath)
         }
-        
+        else if fileEntity.type == FileType.Zip {
+            
+            let alert = UIAlertController(title: "解压缩文件", message: "确认解压缩文件?", preferredStyle: UIAlertControllerStyle.alert)
+            let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (_) in
+            }
+            let confimAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.destructive) { (_) in
+                if self.model.unzipFile(idx: index) {
+                    self.fileListView.reload()
+                }
+            }
+            
+            alert.addAction(cancelAction)
+            alert.addAction(confimAction)
+            
+            present(alert, animated: true)
+        }
     }
 
 }
 
 
+// MARK: FileListToolViewDelegate
 extension FileListViewController: FileListToolViewDelegate {
     
     func copyFile() {
+        guard fileListView.selectedItems().count > 0 else {
+            return
+        }
         
-    }
-    
-    func moveFile() {
         sideMenuViewController.panGestureEnabled = false
         unowned let weakself = self
         let selectDirectory = SelectDirectoryViewController { (directoryPath) in
-            weakself.model.moveFiles(idxs: weakself.fileListView.selectedItems(), to: directoryPath)
+            guard directoryPath != weakself.model.directoryPath else {
+                return
+            }
+            let files = weakself.model.copyFiles(idxs: weakself.fileListView.selectedItems(), toDirectoryPath: directoryPath)
+            
+            guard files.count > 0 else {
+                return
+            }
+            
+            weakself.setNormalNavigationItem()
+            
+            guard weakself.model.directoryPath.components(separatedBy: "/").count > directoryPath.components(separatedBy: "/").count else {
+                return
+            }
+            guard let viewControllers = weakself.navigationController?.viewControllers else {
+                return
+            }
+            
+            for controller in viewControllers {
+                guard let fileListController = controller as? FileListViewController else {
+                    continue
+                }
+                if fileListController.model.directoryPath == directoryPath {
+                    fileListController.model.files.append(contentsOf: files)
+                    fileListController.fileListView.reload()
+                    return
+                }
+            }
+        }
+        navigationController?.pushViewController(selectDirectory, animated: true)
+    }
+    
+    func moveFile() {
+        guard fileListView.selectedItems().count > 0 else {
+            return
+        }
+        
+        sideMenuViewController.panGestureEnabled = false
+        unowned let weakself = self
+        let selectDirectory = SelectDirectoryViewController { (directoryPath) in
+            guard directoryPath != weakself.model.directoryPath else {
+                return
+            }
+            let files = weakself.model.moveFiles(idxs: weakself.fileListView.selectedItems(), toDirectoryPath: directoryPath)
+            
+            guard files.count > 0 else {
+                return
+            }
+            
+            weakself.setNormalNavigationItem()
+            
+            guard weakself.model.directoryPath.components(separatedBy: "/").count > directoryPath.components(separatedBy: "/").count else {
+                return
+            }
+            guard let viewControllers = weakself.navigationController?.viewControllers else {
+                return
+            }
+            
+            for controller in viewControllers {
+                guard let fileListController = controller as? FileListViewController else {
+                    continue
+                }
+                if fileListController.model.directoryPath == directoryPath {
+                    fileListController.model.files.append(contentsOf: files)
+                    fileListController.fileListView.reload()
+                    return
+                }
+            }
         }
         navigationController?.pushViewController(selectDirectory, animated: true)
     }
@@ -219,7 +302,11 @@ extension FileListViewController: FileListToolViewDelegate {
     }
     
     func compressFile() {
-        
+        if model.zipFiles(idxs: fileListView.selectedItems()) {
+            setNormalNavigationItem()
+        }
     }
     
 }
+
+

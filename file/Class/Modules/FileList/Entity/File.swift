@@ -13,6 +13,7 @@ enum FileType {
     case Photo
     case Video
     case Audio
+    case Zip
     case Unknown
     
     init(ext: String) {
@@ -23,6 +24,8 @@ enum FileType {
             self = .Video
         case "mp3", "wav":
             self = .Audio
+        case "zip":
+            self = .Zip
         default:
             self = .Unknown
         }
@@ -38,8 +41,10 @@ enum FileType {
             return 2
         case .Audio:
             return 3
-        default:
+        case .Zip:
             return 4
+        default:
+            return 5
         }
     }
     
@@ -65,6 +70,8 @@ extension FileType: CustomStringConvertible {
             return "音频"
         case .Directory:
             return "目录"
+        case .Zip:
+            return "压缩包"
         default:
             return "未知"
         }
@@ -78,14 +85,14 @@ struct FileEntity {
     let name: String
     let type: FileType
     let attributes: [String : AnyObject]
-    
+    let pathExtension: String
     
     init(path: String) {
         absPath = path
         
         let nstr: NSString = NSString(string: absPath)
         name = nstr.lastPathComponent
-        
+        pathExtension = nstr.pathExtension
         
         self.path = nstr.substring(from: nstr.range(of: DocumentDirectory()).length)
         
@@ -96,7 +103,7 @@ struct FileEntity {
             type = FileType.Directory
         }
         else {
-            type = FileType(ext: nstr.pathExtension)
+            type = FileType(ext: pathExtension)
         }
         
         do {

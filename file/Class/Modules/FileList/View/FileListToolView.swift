@@ -20,15 +20,21 @@ protocol FileListToolViewDelegate: NSObjectProtocol {
     
 }
 
-class FileListToolView: UIView {
+class FileListToolView: UIVisualEffectView {
     
     weak var delegate: FileListToolViewDelegate?
     
     init() {
-        super.init(frame: CGRect())
-        backgroundColor = UIColor(white: 0.8, alpha: 1)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        super.init(effect: blurEffect)
         
-        let titles = ["Copy", "Move", "Delete", "Compress"]
+//        super.init(style: UIBlurEffectStyle.dark)
+//        backgroundColor = UIColor(white: 0.8, alpha: 1)
+        
+//        UIBlurEffect(style: UIBlurEffectStyle.dark)
+        
+        
+        let titles = ["复制", "移动", "删除", "压缩"]
         
         var left = snp_left
         for idx in 0..<titles.count {
@@ -36,7 +42,7 @@ class FileListToolView: UIView {
             button.tag = idx
             button.setTitle(titles[idx], for: UIControlState(rawValue: 0))
             button.addTarget(self, action: #selector(FileListToolView.handleEvent(button:)), for: UIControlEvents.touchUpInside)
-            addSubview(button)
+            contentView.addSubview(button)
             button.snp_makeConstraints(closure: { (make) in
                 make.left.equalTo(left)
                 make.top.equalTo(0)

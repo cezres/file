@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         
-        let db = SQLite(filePath: DocumentDirectory() + "/MusicPlayList")
-        db.table(name: "PlayList")
+//        let db = SQLite(filePath: DocumentDirectory() + "/MusicPlayList")
+//        db.table(name: "PlayList")
         
         
         return true

@@ -52,13 +52,15 @@ class FileCollectionViewCell: UICollectionViewCell {
                 }
             })
         case .Directory:
-            imageView.image = UIImage(named: "Directory")
+            imageView.image = UIImage(named: "icon_directory")
         case .Audio:
-            imageView.image = UIImage(named: "Audio")
+            imageView.image = UIImage(named: "icon_audio")
         case .Video:
-            imageView.image = UIImage(named: "Video")
+            imageView.image = UIImage(named: "icon_video")
         case .Unknown:
-            imageView.image = UIImage(named: "Unknown")
+            imageView.image = UIImage(named: "icon_unknown")
+        case .Zip:
+            imageView.image = UIImage(named: "icon_zip")
         }
         
         nameLabel.text = file.name
