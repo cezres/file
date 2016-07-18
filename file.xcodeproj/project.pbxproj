@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		567CE3EAAA4B7092469059EA /* Pods_file.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FCB7E3A7E8CBF7A900ADAC /* Pods_file.framework */; };
 		6E04CA631D23E940003C9909 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E04CA621D23E940003C9909 /* ThumbnailCache.swift */; };
 		6E04CA651D23EEEC003C9909 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E04CA641D23EEEC003C9909 /* UIImage.swift */; };
 		6E0B9E821D225CBB007C12C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B9E811D225CBB007C12C6 /* AppDelegate.swift */; };
-		6E0B9E841D225CBB007C12C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B9E831D225CBB007C12C6 /* ViewController.swift */; };
 		6E0B9E871D225CBC007C12C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B9E851D225CBC007C12C6 /* Main.storyboard */; };
 		6E0B9E891D225CBC007C12C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B9E881D225CBC007C12C6 /* Assets.xcassets */; };
 		6E0B9E8C1D225CBC007C12C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B9E8A1D225CBC007C12C6 /* LaunchScreen.storyboard */; };
@@ -22,6 +22,11 @@
 		6E312A211D2FC9400045C191 /* 53983444_p0.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E312A201D2FC9400045C191 /* 53983444_p0.png */; };
 		6E312A251D2FC96C0045C191 /* 42826426_p0.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E312A241D2FC96C0045C191 /* 42826426_p0.png */; };
 		6E312A2B1D2FDB820045C191 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E312A2A1D2FDB820045C191 /* Function.swift */; };
+		6E4F85961D3CF27A008A8230 /* IJKMediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E4F85911D3CF240008A8230 /* IJKMediaPlayer.framework */; };
+		6E4F85971D3CF27A008A8230 /* IJKMediaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E4F85911D3CF240008A8230 /* IJKMediaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E4F859F1D3CF29B008A8230 /* MediaPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E4F859A1D3CF29B008A8230 /* MediaPlayer.m */; };
+		6E4F85A01D3CF29B008A8230 /* MediaPlayerControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E4F859C1D3CF29B008A8230 /* MediaPlayerControl.m */; };
+		6E4F85A11D3CF29B008A8230 /* MediaPlayerProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E4F859E1D3CF29B008A8230 /* MediaPlayerProgressView.m */; };
 		6E53C43C1D33938F00F1AAAF /* FileListToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53C43B1D33938F00F1AAAF /* FileListToolView.swift */; };
 		6E53C43E1D34DCD500F1AAAF /* NewDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53C43D1D34DCD500F1AAAF /* NewDirectoryView.swift */; };
 		6E53C4401D350BAC00F1AAAF /* SelectDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53C43F1D350BAC00F1AAAF /* SelectDirectoryViewController.swift */; };
@@ -61,21 +66,23 @@
 		6E6407201D2E797A00342DBB /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6407151D2E797A00342DBB /* MusicTableViewCell.swift */; };
 		6E6407221D2E79C100342DBB /* MusicProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6407211D2E79C100342DBB /* MusicProgressView.swift */; };
 		6E75F8441D265BF5004537C3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E75F8431D265BF5004537C3 /* libsqlite3.tbd */; };
+		6E9BE9DD1D377334008663D8 /* AppLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BE9DC1D377334008663D8 /* AppLaunchView.swift */; };
 		6EA26D961D24C3C000ED2828 /* PhotoViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA26D951D24C3C000ED2828 /* PhotoViewer.swift */; };
 		6EA26D9A1D24CBDC00ED2828 /* LoadImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA26D991D24CBDC00ED2828 /* LoadImageManager.swift */; };
 		6ECE7DFC1D25080400896B76 /* PhotoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECE7DFB1D25080400896B76 /* PhotoItem.swift */; };
 		6ECE7DFE1D250A1100896B76 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECE7DFD1D250A1100896B76 /* UIView.swift */; };
 		6ECE7E001D250A3F00896B76 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECE7DFF1D250A3F00896B76 /* UIImageView.swift */; };
-		8898BA48B5997A5A2CD3F1C8 /* Pods_file.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FCB7E3A7E8CBF7A900ADAC /* Pods_file.framework */; };
+		6EDC98AC1D377C12008443C1 /* 36490337_p0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6EDC98AB1D377C12008443C1 /* 36490337_p0.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6E0B9E971D226225007C12C6 /* Embed Frameworks */ = {
+		6E4F85981D3CF27A008A8230 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6E4F85971D3CF27A008A8230 /* IJKMediaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,7 +96,6 @@
 		6E04CA641D23EEEC003C9909 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		6E0B9E7E1D225CBB007C12C6 /* file.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = file.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0B9E811D225CBB007C12C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6E0B9E831D225CBB007C12C6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6E0B9E861D225CBC007C12C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E0B9E881D225CBC007C12C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E0B9E8B1D225CBC007C12C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -102,6 +108,13 @@
 		6E312A201D2FC9400045C191 /* 53983444_p0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 53983444_p0.png; sourceTree = "<group>"; };
 		6E312A241D2FC96C0045C191 /* 42826426_p0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 42826426_p0.png; sourceTree = "<group>"; };
 		6E312A2A1D2FDB820045C191 /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
+		6E4F85911D3CF240008A8230 /* IJKMediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaPlayer.framework; sourceTree = "<group>"; };
+		6E4F85991D3CF29B008A8230 /* MediaPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPlayer.h; sourceTree = "<group>"; };
+		6E4F859A1D3CF29B008A8230 /* MediaPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayer.m; sourceTree = "<group>"; };
+		6E4F859B1D3CF29B008A8230 /* MediaPlayerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPlayerControl.h; sourceTree = "<group>"; };
+		6E4F859C1D3CF29B008A8230 /* MediaPlayerControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayerControl.m; sourceTree = "<group>"; };
+		6E4F859D1D3CF29B008A8230 /* MediaPlayerProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPlayerProgressView.h; sourceTree = "<group>"; };
+		6E4F859E1D3CF29B008A8230 /* MediaPlayerProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayerProgressView.m; sourceTree = "<group>"; };
 		6E53C43B1D33938F00F1AAAF /* FileListToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileListToolView.swift; sourceTree = "<group>"; };
 		6E53C43D1D34DCD500F1AAAF /* NewDirectoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDirectoryView.swift; sourceTree = "<group>"; };
 		6E53C43F1D350BAC00F1AAAF /* SelectDirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDirectoryViewController.swift; sourceTree = "<group>"; };
@@ -142,11 +155,13 @@
 		6E6407211D2E79C100342DBB /* MusicProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicProgressView.swift; sourceTree = "<group>"; };
 		6E75F8401D2652C0004537C3 /* file-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "file-Bridging-Header.h"; sourceTree = "<group>"; };
 		6E75F8431D265BF5004537C3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		6E9BE9DC1D377334008663D8 /* AppLaunchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLaunchView.swift; sourceTree = "<group>"; };
 		6EA26D951D24C3C000ED2828 /* PhotoViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewer.swift; sourceTree = "<group>"; };
 		6EA26D991D24CBDC00ED2828 /* LoadImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadImageManager.swift; sourceTree = "<group>"; };
 		6ECE7DFB1D25080400896B76 /* PhotoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoItem.swift; sourceTree = "<group>"; };
 		6ECE7DFD1D250A1100896B76 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		6ECE7DFF1D250A3F00896B76 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		6EDC98AB1D377C12008443C1 /* 36490337_p0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 36490337_p0.jpg; sourceTree = "<group>"; };
 		A49C5FCE510BCAC996B92A06 /* Pods-file.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-file.debug.xcconfig"; path = "Pods/Target Support Files/Pods-file/Pods-file.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,7 +171,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E75F8441D265BF5004537C3 /* libsqlite3.tbd in Frameworks */,
-				8898BA48B5997A5A2CD3F1C8 /* Pods_file.framework in Frameworks */,
+				6E4F85961D3CF27A008A8230 /* IJKMediaPlayer.framework in Frameworks */,
+				567CE3EAAA4B7092469059EA /* Pods_file.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +204,6 @@
 				6E57059E1D2266ED00E7E9D6 /* Librarys */,
 				6E57059F1D2266ED00E7E9D6 /* Resources */,
 				6E0B9E811D225CBB007C12C6 /* AppDelegate.swift */,
-				6E0B9E831D225CBB007C12C6 /* ViewController.swift */,
 				6E0B9E851D225CBC007C12C6 /* Main.storyboard */,
 				6E0B9E881D225CBC007C12C6 /* Assets.xcassets */,
 				6E0B9E8A1D225CBC007C12C6 /* LaunchScreen.storyboard */,
@@ -196,6 +211,19 @@
 				6E75F8401D2652C0004537C3 /* file-Bridging-Header.h */,
 			);
 			path = file;
+			sourceTree = "<group>";
+		};
+		6E4F85931D3CF263008A8230 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				6E4F85991D3CF29B008A8230 /* MediaPlayer.h */,
+				6E4F859A1D3CF29B008A8230 /* MediaPlayer.m */,
+				6E4F859B1D3CF29B008A8230 /* MediaPlayerControl.h */,
+				6E4F859C1D3CF29B008A8230 /* MediaPlayerControl.m */,
+				6E4F859D1D3CF29B008A8230 /* MediaPlayerProgressView.h */,
+				6E4F859E1D3CF29B008A8230 /* MediaPlayerProgressView.m */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		6E5705881D2266ED00E7E9D6 /* Class */ = {
@@ -222,6 +250,7 @@
 		6E57058A1D2266ED00E7E9D6 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6E9BE9DA1D377323008663D8 /* View */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -238,6 +267,7 @@
 		6E57058D1D2266ED00E7E9D6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6E4F85931D3CF263008A8230 /* Video */,
 				6E5705971D2266ED00E7E9D6 /* Main */,
 				6E57058E1D2266ED00E7E9D6 /* FileList */,
 				6EA26D931D24C31800ED2828 /* Photo */,
@@ -342,6 +372,7 @@
 		6E57059E1D2266ED00E7E9D6 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				6E4F85911D3CF240008A8230 /* IJKMediaPlayer.framework */,
 				6E5705A71D22674600E7E9D6 /* SnapKit */,
 			);
 			path = Librarys;
@@ -350,6 +381,7 @@
 		6E57059F1D2266ED00E7E9D6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6EDC98AB1D377C12008443C1 /* 36490337_p0.jpg */,
 				6E312A241D2FC96C0045C191 /* 42826426_p0.png */,
 				6E312A201D2FC9400045C191 /* 53983444_p0.png */,
 				6E312A1C1D2FC8C20045C191 /* 56508748_p0.png */,
@@ -438,6 +470,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		6E9BE9DA1D377323008663D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6E9BE9DB1D377323008663D8 /* AppLaunchView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6E9BE9DB1D377323008663D8 /* AppLaunchView */ = {
+			isa = PBXGroup;
+			children = (
+				6E9BE9DC1D377334008663D8 /* AppLaunchView.swift */,
+			);
+			path = AppLaunchView;
+			sourceTree = "<group>";
+		};
 		6EA26D931D24C31800ED2828 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,7 +535,7 @@
 				6E0B9E7C1D225CBB007C12C6 /* Resources */,
 				71B1A2AC87DA4735E9822A0C /* [CP] Embed Pods Frameworks */,
 				08461C42798D94FD8F1CB4C6 /* [CP] Copy Pods Resources */,
-				6E0B9E971D226225007C12C6 /* Embed Frameworks */,
+				6E4F85981D3CF27A008A8230 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -510,8 +558,8 @@
 				TargetAttributes = {
 					6E0B9E7D1D225CBB007C12C6 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 2T6WKE788U;
-						DevelopmentTeamName = "泉 翟 (Personal Team)";
+						DevelopmentTeam = 959Q9RL588;
+						DevelopmentTeamName = "Hangzhou Dianchuang Technology Co.,Ltd";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -543,6 +591,7 @@
 				6E312A211D2FC9400045C191 /* 53983444_p0.png in Resources */,
 				6E312A1D1D2FC8C20045C191 /* 56508748_p0.png in Resources */,
 				6E0B9E8C1D225CBC007C12C6 /* LaunchScreen.storyboard in Resources */,
+				6EDC98AC1D377C12008443C1 /* 36490337_p0.jpg in Resources */,
 				6E312A171D2FA89D0045C191 /* 50276332_p0.png in Resources */,
 				6E312A1B1D2FC8890045C191 /* 48269530_p0.png in Resources */,
 				6E0B9E891D225CBC007C12C6 /* Assets.xcassets in Resources */,
@@ -605,7 +654,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E0B9E841D225CBB007C12C6 /* ViewController.swift in Sources */,
 				6E57384B1D22921800C84B30 /* FileListModel.swift in Sources */,
 				6E53C4401D350BAC00F1AAAF /* SelectDirectoryViewController.swift in Sources */,
 				6E5705BE1D22674600E7E9D6 /* View+SnapKit.swift in Sources */,
@@ -618,15 +666,18 @@
 				6E53C4421D350DC600F1AAAF /* FIleListTableView.swift in Sources */,
 				6E53C43C1D33938F00F1AAAF /* FileListToolView.swift in Sources */,
 				6E57384D1D229CD300C84B30 /* FileListCollectionView.swift in Sources */,
+				6E4F85A11D3CF29B008A8230 /* MediaPlayerProgressView.m in Sources */,
 				6E312A2B1D2FDB820045C191 /* Function.swift in Sources */,
 				6E64071E1D2E797A00342DBB /* ESTMusicIndicatorContentView.swift in Sources */,
 				6E5705BD1D22674600E7E9D6 /* SnapKit.swift in Sources */,
 				6E6407201D2E797A00342DBB /* MusicTableViewCell.swift in Sources */,
+				6E4F859F1D3CF29B008A8230 /* MediaPlayer.m in Sources */,
 				6E5705B71D22674600E7E9D6 /* ConstraintItem.swift in Sources */,
 				6E5705A21D2266ED00E7E9D6 /* FileListViewController.swift in Sources */,
 				6ECE7DFE1D250A1100896B76 /* UIView.swift in Sources */,
 				6E6407161D2E797A00342DBB /* AudioPlayer.swift in Sources */,
 				6E64071A1D2E797A00342DBB /* MusicDatabase.swift in Sources */,
+				6E9BE9DD1D377334008663D8 /* AppLaunchView.swift in Sources */,
 				6EA26D9A1D24CBDC00ED2828 /* LoadImageManager.swift in Sources */,
 				6E5705BF1D22674600E7E9D6 /* ViewController+SnapKit.swift in Sources */,
 				6E04CA651D23EEEC003C9909 /* UIImage.swift in Sources */,
@@ -645,6 +696,7 @@
 				6E312A151D2FA2070045C191 /* MusicToolView.swift in Sources */,
 				6E5705A41D2266ED00E7E9D6 /* LeftMenuViewController.swift in Sources */,
 				6E5705B81D22674600E7E9D6 /* ConstraintMaker.swift in Sources */,
+				6E4F85A01D3CF29B008A8230 /* MediaPlayerControl.m in Sources */,
 				6E5705A51D2266ED00E7E9D6 /* RootViewController.swift in Sources */,
 				6E5705B41D22674600E7E9D6 /* Constraint.swift in Sources */,
 				6E6407181D2E797A00342DBB /* MusicViewController.swift in Sources */,
@@ -778,11 +830,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/file",
+					"$(PROJECT_DIR)/file/Librarys",
 				);
 				INFOPLIST_FILE = file/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cezr.file;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d2cmall.file;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "file/file-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -798,11 +851,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/file",
+					"$(PROJECT_DIR)/file/Librarys",
 				);
 				INFOPLIST_FILE = file/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cezr.file;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d2cmall.file;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "file/file-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

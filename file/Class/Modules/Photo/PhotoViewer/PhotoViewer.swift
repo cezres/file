@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoViewer: UIViewController, UIScrollViewDelegate {
+class PhotoViewer: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 
     var scrollView: UIScrollView!
     
@@ -21,6 +21,10 @@ class PhotoViewer: UIViewController, UIScrollViewDelegate {
             didSetCurrentIndex(oldIndex: oldValue)
         }
     }
+    
+    private var interactive = false
+    private let interactionController = UIPercentDrivenInteractiveTransition()
+    
     
     internal init(imagePaths: [String], index: Int = 0) {
         super.init(nibName: nil, bundle: nil)
@@ -43,6 +47,8 @@ class PhotoViewer: UIViewController, UIScrollViewDelegate {
         
         // Do any additional setup after loading the view.
         view.addSubview(UIView())
+        
+        navigationController?.delegate = self
         
         let rect: CGRect
         if view.frame.width < view.frame.height {
@@ -89,14 +95,79 @@ class PhotoViewer: UIViewController, UIScrollViewDelegate {
         addGestureRecognizer()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.delegate = self
+        print(#function)
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.delegate = nil
+        print(#function)
+        super.viewDidDisappear(animated)
+    }
+    
     
     func addGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PhotoViewer.handleTapGesture(tapGesture:)))
         scrollView.addGestureRecognizer(tapGesture)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PhotoViewer.handlePanGesture(panGesture:)))
+        panGesture.delegate = self
+        scrollView.addGestureRecognizer(panGesture)
+        
+//        tapGesture.require(toFail: panGesture)
     }
     
     func handleTapGesture(tapGesture: UITapGestureRecognizer) {
         navigationController?.navigationBar.isHidden = !navigationController!.navigationBar.isHidden
+    }
+    
+    func handlePanGesture(panGesture: UIPanGestureRecognizer) {
+        
+        
+        
+        
+        
+        let translationY = panGesture.translation(in: scrollView).y
+        
+        let progress = -translationY / scrollView.bounds.height
+        
+        switch panGesture.state {
+        case .began:
+            interactive = true
+            _ = navigationController?.popViewController(animated: true)
+        case .changed:
+            interactionController.update(progress)
+        case .cancelled, .ended:
+            if progress > 0.4 {
+                interactionController.finish()
+            }
+            else {
+                interactionController.cancel()
+            }
+            interactive = false
+        default:
+            break
+        }
+        
+    }
+    
+    // MARK: - UIGestureRecognizerDelegate
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
+            return false
+        }
+        let translation = panGesture.translation(in: scrollView)
+        print(translation)
+        print(panGesture.velocity(in: scrollView))
+        if translation.y < 0 && abs(translation.y) > abs(translation.x) {
+            return true
+        }
+        else {
+            return false
+        }
     }
     
     
@@ -193,5 +264,67 @@ class PhotoViewer: UIViewController, UIScrollViewDelegate {
             currentIndex -= 1
         }
     }
+    
+}
+
+
+
+
+extension PhotoViewer: UINavigationControllerDelegate, UIViewControllerAnimatedTransitioning {
+    
+    
+    
+    // MARK: - UINavigationControllerDelegate
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if operation == .pop && interactive {
+            return self
+        }
+        else {
+            return nil
+        }
+        
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactive ? interactionController : nil
+    }
+    
+    // MARK: - UIViewControllerAnimatedTransitioning
+    
+    func transitionDuration(_ transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 1
+    }
+    
+    func animateTransition(_ transitionContext: UIViewControllerContextTransitioning) {
+        
+        let containerView = transitionContext.containerView()
+        guard let fromVC = transitionContext.viewController(forKey: UITransitionContextFromViewControllerKey), let toVC = transitionContext.viewController(forKey: UITransitionContextToViewControllerKey) else{
+            return
+        }
+        
+        
+        guard let fromView = fromVC.view, let toView = toVC.view else {
+            return
+        }
+        
+        containerView.insertSubview(toView, belowSubview: fromView)
+        
+        UIView.animate(withDuration: transitionDuration(transitionContext), animations: { 
+            //
+            fromView.alpha = 0
+            fromView.transform = fromVC.view.transform.translateBy(x: 0, y: -fromVC.view.frame.size.height)
+        }) { (_) in
+            fromView.alpha = 1
+            fromView.transform = CGAffineTransform.identity
+            
+            let isCancelled = transitionContext.transitionWasCancelled()
+            transitionContext.completeTransition(!isCancelled)
+            
+        }
+        
+    }
+    
     
 }

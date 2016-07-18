@@ -10,5 +10,6 @@
 #define file_Bridging_Header_h
 
 #import <sqlite3.h>
+#import "MediaPlayer.h"
 
 #endif /* file_Bridging_Header_h */

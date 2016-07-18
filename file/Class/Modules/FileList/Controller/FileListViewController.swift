@@ -175,7 +175,9 @@ class FileListViewController/*<FileListView: UIView where FileListView: FileList
                 }
             }
             sideMenuViewController.panGestureEnabled = false
-            navigationController?.pushViewController(PhotoViewer(imagePaths: filePaths, index: index), animated: true)
+            let photoViewer = PhotoViewer(imagePaths: filePaths, index: index)
+//            navigationController?.delegate = photoViewer
+            navigationController?.pushViewController(photoViewer, animated: true)
         }
         else if fileEntity.type == FileType.Audio {
             MusicPlayManager.default.play(path: fileEntity.absPath)
@@ -185,7 +187,7 @@ class FileListViewController/*<FileListView: UIView where FileListView: FileList
             let alert = UIAlertController(title: "解压缩文件", message: "确认解压缩文件?", preferredStyle: UIAlertControllerStyle.alert)
             let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (_) in
             }
-            let confimAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.destructive) { (_) in
+            let confimAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.default) { (_) in
                 if self.model.unzipFile(idx: index) {
                     self.fileListView.reload()
                 }
@@ -195,6 +197,12 @@ class FileListViewController/*<FileListView: UIView where FileListView: FileList
             alert.addAction(confimAction)
             
             present(alert, animated: true)
+        }
+        else if fileEntity.type == FileType.Video {
+            
+            let url = URL(fileURLWithPath: fileEntity.absPath)
+            _ = MediaPlayer(url: url, title: url.lastPathComponent!, in: self)
+            
         }
     }
 

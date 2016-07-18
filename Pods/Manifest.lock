@@ -1,18 +1,21 @@
 PODS:
   - FDFullscreenPopGesture (1.1)
+  - Masonry (1.0.1)
   - RESideMenu (4.0.7)
   - Zip (0.4.3)
 
 DEPENDENCIES:
   - FDFullscreenPopGesture
+  - Masonry
   - RESideMenu
   - Zip
 
 SPEC CHECKSUMS:
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
+  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   Zip: 670419a5ba9faaf5f24ed3650c4c38b4136e996b
 
-PODFILE CHECKSUM: 838b528dbea76a57249f0a04a0e01532340c8a07
+PODFILE CHECKSUM: 3a355b36f1752792a063ba06d15c6c304fc7db52
 
 COCOAPODS: 1.0.1

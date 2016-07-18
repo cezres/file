@@ -13,7 +13,7 @@ target 'file' do
 #    pod 'RxSwift'
 
 #    pod 'SnapKit'
-#    pod 'Masonry'
+    pod 'Masonry'
 
 #    pod 'KVOController'
     

@@ -39,40 +39,41 @@ class ThumbnailCache: Cache<NSString, UIImage>, CacheDelegate {
             return
         }
         
-        let cachePath = cacheDirectory + "/\(Int(width * UIScreen.main().scale))_\(path.hashValue)"
-        if let thumbnail = UIImage(contentsOfFile: cachePath) {
-            callback(path: path, thumbnail: thumbnail)
-            setObject(thumbnail, forKey: path)
-        }
-        else {
-            operationQueue.addOperation({
+        let cachePath = cacheDirectory + "/\(Int(width * UIScreen.main().scale))__\(path.hashValue)"
+        operationQueue.addOperation({
+            if let thumbnail = UIImage(contentsOfFile: cachePath) {
+                OperationQueue.main().addOperation({
+                    callback(path: path, thumbnail: thumbnail)
+                })
+                self.setObject(thumbnail, forKey: path)
+            }
+            else {
                 guard let image = UIImage(contentsOfFile: DocumentDirectory() + "/" + path) else {
                     return
                 }
                 
-                let thumbnail = image.scale(newWidth: width * UIScreen.main().scale).square()
-                OperationQueue.main().addOperation({ 
+                let thumbnail = image.scale(newWidth: width * UIScreen.main().scale)//.square()
+                OperationQueue.main().addOperation({
                     callback(path: path, thumbnail: thumbnail)
                 })
                 self.setObject(thumbnail, forKey: path)
                 if let thumbnailData = UIImagePNGRepresentation(thumbnail) {
                     do {
-//                        Data.WritingOptions.atomicWrite
                         try thumbnailData.write(to: URL(fileURLWithPath: cachePath))
                     }
                     catch {
                         
                     }
                 }
-            })
-        }
+            }
+        })
         
     }
     
     
     
     lazy var cacheDirectory: String = {
-        let value = DocumentDirectory() + "/ThumbnailCache"
+        let value = CachesDirectory() + "/ThumbnailCache"
         var isDirectory: ObjCBool = false
         FileManager.default().fileExists(atPath: value, isDirectory: &isDirectory)
         if !isDirectory {

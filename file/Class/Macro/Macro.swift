@@ -19,3 +19,11 @@ func DocumentDirectory() -> String {
 //    }
 }
 
+func CachesDirectory() -> String {
+//    if TARGET_IPHONE_SIMULATOR > 0 {
+//        return "/Users/cezr/Documents/FILECACHES"
+//    }
+//    else {
+        return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+//    }
+}

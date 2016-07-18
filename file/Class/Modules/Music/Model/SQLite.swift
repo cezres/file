@@ -70,7 +70,17 @@ class Table {
     
     var columns = [Column]()
     
+    func insert() {
+        
+    }
     
+    func delete() {
+        
+    }
+    
+    func select() {
+        
+    }
     
 }
 

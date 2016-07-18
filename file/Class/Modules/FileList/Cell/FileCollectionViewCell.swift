@@ -76,6 +76,7 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     func loadSubviews() {
         chooseView.image = #imageLiteral(resourceName: "icon_choose_n")
+        imageView.contentMode = UIViewContentMode.scaleAspectFit
         contentView.addSubview(imageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(chooseView)
