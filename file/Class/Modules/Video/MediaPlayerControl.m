@@ -163,51 +163,51 @@ typedef NS_ENUM(NSInteger, PanGestureHandleMode) {
     CGPoint translation = [panGesture translationInView:self];
     CGPoint location = [panGesture locationInView:self];
     
-    if (translation.x == 0 && translation.y == 0) {
-        return;
-    }
-    
-    if (_panGestureHandleMode == PanGestureHandleModeNone) {
-        CGFloat absTranslationX = translation.x > 0 ? translation.x : -translation.x;
-        CGFloat absTranslationY = translation.y > 0 ? translation.y : -translation.y;
-        
-        if (absTranslationX > absTranslationY) {
-            _panGestureHandleMode = PanGestureHandleModePlayProgress;
-            _tempTime = self.delegatePlayer.currentPlaybackTime;
-        }
-        else {
-            if (location.x > self.bounds.size.width / 2) {
-                _panGestureHandleMode = PanGestureHandleModeVolume;
-            }
-            else {
-                _panGestureHandleMode = PanGestureHandleModeBrightness;
-            }
-        }
-    }
-    
-    switch (panGesture.state) {
-//        case UIGestureRecognizerStateBegan:
-//        {
-//            /**
-//             *  判断手势处理方式
-//             */
-//            CGFloat absTranslationX = translation.x > 0 ? translation.x : -translation.x;
-//            CGFloat absTranslationY = translation.y > 0 ? translation.y : -translation.y;
-//            
-//            if (absTranslationX > absTranslationY || (location.x > 80 && location.x < self.bounds.size.width-80)) {
-//                _panGestureHandleMode = PanGestureHandleModePlayProgress;
-//                _tempTime = self.delegatePlayer.currentPlaybackTime;
+//    if (translation.x == 0 && translation.y == 0) {
+//        return;
+//    }
+//    
+//    if (_panGestureHandleMode == PanGestureHandleModeNone) {
+//        CGFloat absTranslationX = translation.x > 0 ? translation.x : -translation.x;
+//        CGFloat absTranslationY = translation.y > 0 ? translation.y : -translation.y;
+//        
+//        if (absTranslationX > absTranslationY) {
+//            _panGestureHandleMode = PanGestureHandleModePlayProgress;
+//            _tempTime = self.delegatePlayer.currentPlaybackTime;
+//        }
+//        else {
+//            if (location.x > self.bounds.size.width / 2) {
+//                _panGestureHandleMode = PanGestureHandleModeVolume;
 //            }
 //            else {
-//                if (location.x > self.bounds.size.width / 2) {
-//                    _panGestureHandleMode = PanGestureHandleModeVolume;
-//                }
-//                else {
-//                    _panGestureHandleMode = PanGestureHandleModeBrightness;
-//                }
+//                _panGestureHandleMode = PanGestureHandleModeBrightness;
 //            }
-//            break;
 //        }
+//    }
+    
+    switch (panGesture.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            /**
+             *  判断手势处理方式
+             */
+            CGFloat absTranslationX = translation.x > 0 ? translation.x : -translation.x;
+            CGFloat absTranslationY = translation.y > 0 ? translation.y : -translation.y;
+            
+            if (absTranslationX > absTranslationY || (location.x > 120 && location.x < self.bounds.size.width-120)) {
+                _panGestureHandleMode = PanGestureHandleModePlayProgress;
+                _tempTime = self.delegatePlayer.currentPlaybackTime;
+            }
+            else {
+                if (location.x > self.bounds.size.width / 2) {
+                    _panGestureHandleMode = PanGestureHandleModeVolume;
+                }
+                else {
+                    _panGestureHandleMode = PanGestureHandleModeBrightness;
+                }
+            }
+            break;
+        }
         case UIGestureRecognizerStateChanged:
             if (_panGestureHandleMode != PanGestureHandleModePlayProgress) {
                 CGFloat offset = -translation.y / self.bounds.size.height;
