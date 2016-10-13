@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct File {
+class File {
     
     let path: String
     let name: String
@@ -51,6 +51,18 @@ struct File {
     var `extension`: String {
         return path.pathExtension
     }
+    
+    lazy var iconURL: URL? = {
+        if self.type == .Photo {
+            return self.url
+        }
+        else if self.type == .Audio {
+            if let url = Music(url: self.url)?.artworkURL {
+                return url
+            }
+        }
+        return nil
+    }()
     
 }
 

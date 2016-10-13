@@ -47,6 +47,36 @@ class ImageCache: NSObject, FICImageCacheDelegate {
         }
     }
     
+    func fileMusicIcon(file: File, completionBlock: @escaping (_ url: URL, _ image: UIImage) -> Void ) {
+        
+        /*
+        print(file.relativePath)
+        
+        let imageEntity = ImageEntity(identifier: file.relativePath)
+        let result = FICImageCache.shared().retrieveImage(for: imageEntity, withFormatName: FICDPhotoSquareImage32BitBGRAFormatName) { (entity, formatName, image) in
+            if image != nil {
+                completionBlock(file.url, image!)
+            }
+        }
+        
+        if result {
+            return
+        }
+        
+        let cover = MusicModel.cover(for: file.url)
+        
+        if cover != nil {
+//            completionBlock(file.url, cover!)
+            
+            FICImageCache.shared().setImage(cover!, for: imageEntity, withFormatName: FICDPhotoSquareImage32BitBGRAFormatName, completionBlock: { (entity, formatName, image) in
+                if image != nil {
+                    completionBlock(file.url, image!)
+                }
+            })
+        }*/
+        
+    }
+    
 
     // MARK: - FICImageCacheDelegate
     func imageCache(_ imageCache: FICImageCache!, errorDidOccurWithMessage errorMessage: String!) {

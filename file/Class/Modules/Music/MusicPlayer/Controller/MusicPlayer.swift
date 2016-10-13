@@ -41,6 +41,7 @@ class MusicPlayer: NSObject {
         do {
             player = try AVAudioPlayer(contentsOf: url)
             player!.delegate = self
+            
             return play()
         }
         catch {

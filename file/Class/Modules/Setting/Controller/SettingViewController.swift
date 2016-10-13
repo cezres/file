@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SettingViewController: UIViewController {
+class SettingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var groups = [["清理缓存"]]
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -24,6 +26,13 @@ class SettingViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.white
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalTo(view)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,15 +40,45 @@ class SettingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        do {
+            try FileManager.default.removeItem(atPath: CachesDirectory + "/ImageTables")
+        }
+        catch {
+            
+        }
+        
     }
-    */
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return groups.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return groups[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        }
+        
+        cell?.textLabel?.text = groups[indexPath.section][indexPath.row]
+        
+        return cell!
+    }
+    
+    
+
+    var tableView: UITableView = {
+        let tableView = UITableView(frame: CGRect(), style: UITableViewStyle.grouped)
+        tableView.backgroundColor = UIColor.white
+        tableView.rowHeight = 60
+        return tableView
+    }()
 
 }

@@ -12,25 +12,7 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     
     
-    var file: File! {
-        didSet {
-            guard file != oldValue else {
-                return
-            }
-            fileThumbnail(file: file) { (file, image) in
-                guard self.file == file else {
-                    return
-                }
-                self.iconImageView.image = image
-            }
-            nameLabel.text = file.name
-            nameLabel.layoutIfNeeded()
-            nameLabel.snp.updateConstraints { (make) in
-                let height = nameLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: nameLabel.width, height: 90), limitedToNumberOfLines: 2).size.height
-                make.height.equalTo(height)
-            }
-        }
-    }
+    
     
     var isEditing = false {
         didSet {
@@ -76,10 +58,58 @@ class FileCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Data
+    var file: File! {
+        didSet {
+            guard file != oldValue else {
+                return
+            }
+            setup()
+        }
+    }
+    
+    private func setup() {
+        fileThumbnail(file: file) { (file, image) in
+            guard self.file == file else {
+                return
+            }
+            self.iconImageView.image = image
+        }
+        nameLabel.text = file.name
+        nameLabel.layoutIfNeeded()
+        nameLabel.snp.updateConstraints { (make) in
+            let height = nameLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: nameLabel.width, height: 90), limitedToNumberOfLines: 2).size.height
+            make.height.equalTo(height)
+        }
+        
+        switch file.type {
+        case .Directory:
+            iconImageView.image = UIImage(named: "icon_directory")
+        case .Audio:
+            iconImageView.image = UIImage(named: "icon_audio")
+            if let url = file.iconURL {
+                ImageCache.share.fileIcon(url: url, completionBlock: { [weak self](url, image) in
+                    self?.iconImageView.image = image
+                })
+            }
+        case .Video:
+            iconImageView.image = UIImage(named: "icon_video")
+        case .Zip:
+            iconImageView.image = UIImage(named: "icon_zip")
+        case .Photo:
+            ImageCache.share.fileIcon(url: file.url, completionBlock: { [weak self](url, image) in
+                self?.iconImageView.image = image
+            })
+            return
+        case .Unknown:
+            iconImageView.image = UIImage(named: "icon_unknown")
+        }
+        
+    }
     
     // MARK: - Get
     
-    lazy var iconImageView: UIImageView = {
+    private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.isOpaque = true
@@ -93,7 +123,7 @@ class FileCollectionViewCell: UICollectionViewCell {
         }
         return imageView
     }()
-    lazy var nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.isOpaque = true
         label.font = UIFont.systemFont(ofSize: 12)
@@ -110,7 +140,7 @@ class FileCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var chooseView: UIImageView = {
+    private lazy var chooseView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "icon_choose_n")
         self.contentView.addSubview(imageView)

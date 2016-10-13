@@ -11,9 +11,11 @@ import UIKit
 
 // MARK: - Path
 
+let HomeDirectory = NSHomeDirectory()
+
 let DocumentDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
 
-let HomeDirectory = NSHomeDirectory()
+let CachesDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
 
 
 // MARK: - Color

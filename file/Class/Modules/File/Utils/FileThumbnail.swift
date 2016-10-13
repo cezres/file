@@ -174,12 +174,12 @@ func fileThumbnail(file: File, block: @escaping FileThumbnailBlock) {
     case .Directory:
         image = UIImage(named: "icon_directory")
     case .Audio:
-        if let cover = MusicModel.cover(for: file.url) {
-            image = cover
-        }
-        else {
+//        if let cover = MusicModel.cover(for: file.url) {
+//            image = cover
+//        }
+//        else {
             image = UIImage(named: "icon_audio")
-        }
+//        }
     case .Video:
         image = UIImage(named: "icon_video")
     case .Zip:

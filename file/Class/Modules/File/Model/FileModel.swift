@@ -41,11 +41,11 @@ class FileModel {
             files.append(file)
         }
         
-        list = files.sorted { (file1, file2) -> Bool in
+        files = files.sorted { (file1, file2) -> Bool in
             return file1.type < file2.type
         }
-//        list = files
         OperationQueue.main.addOperation {
+            self.list = files
             completeBlock()
         }
     }

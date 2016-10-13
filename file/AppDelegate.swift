@@ -21,10 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(DocumentDirectory)
         
         
+        
         let tabbarController = UITabBarController()
         
         tabbarController.viewControllers = [
-            UINavigationController(rootViewController: FileViewController(directoryPath: HomeDirectory)),    // 文件
+            UINavigationController(rootViewController: FileViewController()),    // 文件
             // 照片
             UINavigationController(rootViewController: MusicListViewController()), // 音乐播放
             // 视频播放

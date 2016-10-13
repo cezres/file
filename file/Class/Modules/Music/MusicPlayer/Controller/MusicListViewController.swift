@@ -10,6 +10,8 @@ import UIKit
 
 class MusicListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var group: MusicGroup!
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         title = "音乐播放"
@@ -30,6 +32,10 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
             make.edges.equalTo(view)
         }
         
+        group = MusicGroup.default()
+        
+        print(group.list())
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,7 +46,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MusicModel.list().count
+        return group.list().count
     }
     
     // MARK: - Cell
@@ -49,7 +55,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
         }
-        let music = MusicModel.list()[indexPath.row]
+        let music = group.list()[indexPath.row]
         cell?.textLabel?.text = music.song
         cell?.detailTextLabel?.text = "播放:\(music.playCount)"
         return cell!
@@ -57,7 +63,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Select
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let music = MusicModel.list()[indexPath.row]
+        let music = group.list()[indexPath.row]
         MusicPlayer.share.play(url: music.url)
     }
     

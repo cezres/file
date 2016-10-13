@@ -21,14 +21,26 @@ class ImageEntity: NSObject, FICEntity {
     }
     
     
-    let url: URL
+    var url: URL!
     
     init(url: URL) {
         self.url = url
     }
     
+    var identifier: String!
+    
+    init(identifier: String) {
+        self.identifier = identifier
+    }
+    
     lazy var _uuid: String = {
-        let imageName = self.url.absoluteString.relativePath
+        let imageName: String
+        if self.url != nil {
+            imageName = self.url.absoluteString.urlDecode.relativePath
+        }
+        else {
+            imageName = self.identifier
+        }
         let UUIDBytes = FICUUIDBytesWithString(imageName)
         return FICStringWithUUIDBytes(UUIDBytes)
     }()

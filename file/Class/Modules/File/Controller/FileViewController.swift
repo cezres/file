@@ -17,7 +17,7 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
     
     private var fileView: FileView!
 
-    init(directoryPath: String) {
+    init(directoryPath: String = DocumentDirectory) {
         super.init(nibName: nil, bundle: nil)
         if directoryPath == DocumentDirectory {
             title = "文件"
@@ -44,6 +44,16 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
             self?.fileView.reloadData()
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tabBarItem.title = title
     }
     
     
@@ -76,7 +86,9 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         else if file.type == .Audio {
             /// 播放音频
             MusicPlayer.share.play(url: file.url)
-            MusicModel.newMusic(url: file.url)
+            if MusicGroup.default().insert(url: file.url) {
+                
+            }
         }
         else {
             /// 测试

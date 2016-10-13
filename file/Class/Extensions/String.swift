@@ -35,6 +35,14 @@ extension String {
         return relativePath
     }
     
+    /// 去掉文件后缀
+    var deletingPathExtension: String {
+        guard let range = range(of: ".", options: String.CompareOptions.backwards, range: nil, locale: nil) else {
+            return self
+        }
+        return substring(to: range.lowerBound)
+    }
+    
     // MARK: - Hash
     
     var md5: String {
