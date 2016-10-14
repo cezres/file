@@ -49,6 +49,10 @@
 		6E2F5C741DB0B839007C41F2 /* CATransition+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F5C711DB0B839007C41F2 /* CATransition+Closure.swift */; };
 		6E2F5C751DB0B839007C41F2 /* SABlurImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F5C721DB0B839007C41F2 /* SABlurImageView.swift */; };
 		6E2F5C761DB0B839007C41F2 /* UIImage+BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F5C731DB0B839007C41F2 /* UIImage+BlurEffect.swift */; };
+		6E32472B1DB11ACF00D9CD19 /* MusicListNavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E32472A1DB11ACF00D9CD19 /* MusicListNavigationTitleView.swift */; };
+		6E32476B1DB12D9200D9CD19 /* MusicGroupMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E32476A1DB12D9200D9CD19 /* MusicGroupMenu.swift */; };
+		6E32476E1DB1329300D9CD19 /* REMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E32476C1DB1328D00D9CD19 /* REMenu.framework */; };
+		6E32476F1DB1329300D9CD19 /* REMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E32476C1DB1328D00D9CD19 /* REMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E39B69F1D952F8E00A72A9A /* FileContentViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39B69E1D952F8E00A72A9A /* FileContentViewProtocol.swift */; };
 		6E39B6A11D961C4D00A72A9A /* FileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39B6A01D961C4D00A72A9A /* FileTableView.swift */; };
 		6E39B6A31D961C5D00A72A9A /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39B6A21D961C5D00A72A9A /* FileTableViewCell.swift */; };
@@ -96,6 +100,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6E32476F1DB1329300D9CD19 /* REMenu.framework in Embed Frameworks */,
 				6EB1007C1DAA01DA00E1A643 /* VideoPlayer.framework in Embed Frameworks */,
 				6E2F5C4D1DAF9DA2007C41F2 /* FMDB.framework in Embed Frameworks */,
 				6E22A5051DACE24700F3354C /* FastImageCache.framework in Embed Frameworks */,
@@ -147,6 +152,9 @@
 		6E2F5C711DB0B839007C41F2 /* CATransition+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATransition+Closure.swift"; sourceTree = "<group>"; };
 		6E2F5C721DB0B839007C41F2 /* SABlurImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SABlurImageView.swift; sourceTree = "<group>"; };
 		6E2F5C731DB0B839007C41F2 /* UIImage+BlurEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+BlurEffect.swift"; sourceTree = "<group>"; };
+		6E32472A1DB11ACF00D9CD19 /* MusicListNavigationTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListNavigationTitleView.swift; sourceTree = "<group>"; };
+		6E32476A1DB12D9200D9CD19 /* MusicGroupMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicGroupMenu.swift; sourceTree = "<group>"; };
+		6E32476C1DB1328D00D9CD19 /* REMenu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = REMenu.framework; sourceTree = "<group>"; };
 		6E39B69E1D952F8E00A72A9A /* FileContentViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileContentViewProtocol.swift; sourceTree = "<group>"; };
 		6E39B6A01D961C4D00A72A9A /* FileTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableView.swift; sourceTree = "<group>"; };
 		6E39B6A21D961C5D00A72A9A /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
@@ -194,6 +202,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E32476E1DB1329300D9CD19 /* REMenu.framework in Frameworks */,
 				6EB1007B1DAA01DA00E1A643 /* VideoPlayer.framework in Frameworks */,
 				6E2F5C4C1DAF9DA2007C41F2 /* FMDB.framework in Frameworks */,
 				6E22A5041DACE24700F3354C /* FastImageCache.framework in Frameworks */,
@@ -246,6 +255,7 @@
 		6E2060941D94CF0400A0B5B2 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				6E32476C1DB1328D00D9CD19 /* REMenu.framework */,
 				6E2F5C701DB0B839007C41F2 /* SABlurImageView */,
 				6E2F5C511DB07E0F007C41F2 /* ESTMusicIndicator */,
 				6E2F5C0D1DAE20AC007C41F2 /* FMDB.framework */,
@@ -445,6 +455,8 @@
 			isa = PBXGroup;
 			children = (
 				6E2F5C611DB0B5D9007C41F2 /* MusicTableViewCell.swift */,
+				6E32472A1DB11ACF00D9CD19 /* MusicListNavigationTitleView.swift */,
+				6E32476A1DB12D9200D9CD19 /* MusicGroupMenu.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -655,6 +667,8 @@
 				6E7CB2181DACCF52009B3A5B /* ConstraintDSL.swift in Sources */,
 				6E2060851D93ACB000A0B5B2 /* ViewController.swift in Sources */,
 				6E7CB21D1DACCF52009B3A5B /* ConstraintLayoutGuideDSL.swift in Sources */,
+				6E32472B1DB11ACF00D9CD19 /* MusicListNavigationTitleView.swift in Sources */,
+				6E32476B1DB12D9200D9CD19 /* MusicGroupMenu.swift in Sources */,
 				6E22A5371DADE4F800F3354C /* URL.swift in Sources */,
 				6E7CB2151DACCF52009B3A5B /* ConstraintConfig.swift in Sources */,
 				6E2F5C6D1DB0B616007C41F2 /* MusicPlayerViewController.swift in Sources */,

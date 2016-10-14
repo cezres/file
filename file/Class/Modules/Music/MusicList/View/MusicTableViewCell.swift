@@ -37,6 +37,7 @@ class MusicTableViewCell: UITableViewCell {
                 self?.artworkImageView.image = image
             })
         }
+        
         songLabel.text = music.song
 //        infoLabel.text = "歌手:\(music.singer) 专辑:\(music.albumName) 播放次数:\(music.playCount)"
         singerLabel.text = "歌手:\(music.singer)"

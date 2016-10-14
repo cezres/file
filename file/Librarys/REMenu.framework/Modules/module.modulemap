@@ -1,0 +1,6 @@
+framework module REMenu {
+  umbrella header "REMenu.h"
+
+  export *
+  module * { export * }
+}

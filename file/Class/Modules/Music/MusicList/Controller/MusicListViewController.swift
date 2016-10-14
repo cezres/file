@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import REMenu
 
 class MusicListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var group: MusicGroup!
+    
+    var menu: REMenu!
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -23,7 +26,34 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+//        navigationItem.titleView = SubButton()
+        
+        let titles = ["播放列表", "测试111", "测试2222", "测试3333", "测试4444", "测试5555"]
+        var items = [REMenuItem]()
+        for (idx, name) in titles.enumerated() {
+            let item = REMenuItem(title: name, subtitle: "子标题", image: nil, backgroundColor: UIColor.orange, highlightedImage: nil, action: { (item) in
+                print("\(titles[item!.tag])")
+            })
+            if item != nil {
+//                item?.backgroundColor = UIColor.white
+//                item?.highlightedBackgroundColor = UIColor.gray
+                item?.tag = idx
+                items.append(item!)
+            }
+        }
+        menu = REMenu(items: items)
+        
+        
+        navigationItem.titleView = MusicListNavigationTitleView(title: "播放列表", touchUpInside: { [weak self] in
+            if self?.menu.isOpen == true {
+                self?.menu.close()
+            }
+            else {
+                self?.menu.show(from: self?.navigationController)
+            }
+        })
+        
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self

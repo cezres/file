@@ -42,7 +42,11 @@ class MusicPlayer: NSObject {
         return player.isPlaying
     }
     
-    var currentMusic: Music?
+    var currentMusic: Music? {
+        didSet {
+            print("DidSet: \(currentMusic)")
+        }
+    }
     
     @discardableResult
     func play(_ music: Music) -> Bool {
