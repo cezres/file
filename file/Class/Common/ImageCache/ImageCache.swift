@@ -10,9 +10,11 @@ import UIKit
 import FastImageCache
 
 let FICDPhotoImageFormatFamily = "FICDPhotoImageFormatFamily"
-let FICDPhotoSquareImage32BitBGRAFormatName = "com.path.FastImageCacheDemo.FICDPhotoSquareImage32BitBGRAFormatName"
 
-let FICDPhotoSquareImageSize = CGSize(width: 100, height: 100)
+
+enum ImageCacheFormat: String {
+    case fileIcon = "com.cezres.file.FIC.fileIcon"
+}
 
 
 class ImageCache: NSObject, FICImageCacheDelegate {
@@ -24,12 +26,9 @@ class ImageCache: NSObject, FICImageCacheDelegate {
         
         var formats = [FICImageFormat]()
         
-        let squareImageFormatMaximumCount = 200
-        let squareImageFormatDevices = FICImageFormatDevices.phone
         
-        let squareImageFormat32BitBGRA = FICImageFormat(name: FICDPhotoSquareImage32BitBGRAFormatName, family: FICDPhotoImageFormatFamily, imageSize: FICDPhotoSquareImageSize, style: FICImageFormatStyle.style32BitBGRA, maximumCount: squareImageFormatMaximumCount, devices: squareImageFormatDevices, protectionMode: FICImageFormatProtectionMode.none)
-        
-        formats.append(squareImageFormat32BitBGRA!)
+        let fileIconImageFormat = FICImageFormat(name: ImageCacheFormat.fileIcon.rawValue, family: FICDPhotoImageFormatFamily, imageSize: CGSize(width: 100, height: 100), style: .style32BitBGRA, maximumCount: 200, devices: .phone, protectionMode: .none)
+        formats.append(fileIconImageFormat!)
 
         
         FICImageCache.shared().delegate = self
@@ -38,14 +37,20 @@ class ImageCache: NSObject, FICImageCacheDelegate {
     }
     
     
-    func fileIcon(url: URL, completionBlock: @escaping (_ url: URL, _ image: UIImage) -> Void ) {
-        let imageEntity = ImageEntity(url: url)
-        FICImageCache.shared().retrieveImage(for: imageEntity, withFormatName: FICDPhotoSquareImage32BitBGRAFormatName) { (entity, formatName, image) in
-            if image != nil {
-                completionBlock(url, image!)
+    func retrieveImage(url: URL, format: ImageCacheFormat, completionBlock: @escaping (_ url: URL, _ image: UIImage) -> Void) -> Bool {
+        let entity = ImageEntity(url: url)
+        let result = FICImageCache.shared().retrieveImage(for: entity, withFormatName: format.rawValue) { (_, _, image) in
+            if let image = image {
+                completionBlock(url, image)
             }
         }
+        return result
     }
+    
+    @discardableResult class func retrieveImage(url: URL, format: ImageCacheFormat, completionBlock: @escaping (_ url: URL, _ image: UIImage) -> Void) -> Bool {
+        return ImageCache.share.retrieveImage(url: url, format: format, completionBlock: completionBlock)
+    }
+    
     
 
     // MARK: - FICImageCacheDelegate

@@ -34,8 +34,11 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         
         group = MusicGroup.default()
         
-        print(group.list())
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,8 +58,8 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         let music = group.list()[indexPath.row]
         cell.setup(music: music, number: indexPath.row)
         
-        if MusicPlayer.share.currentMusic?.id == music.id {
-            if MusicPlayer.share.isPlaying {
+        if MusicPlayer.shared.currentMusic?.id == music.id {
+            if MusicPlayer.shared.isPlaying {
                 cell.state = .playing
             }
             else {
@@ -73,7 +76,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let music = group.list()[indexPath.row]
-        MusicPlayer.share.play(music)
+        MusicPlayer.shared.play(music)
         
         var idxPaths = [IndexPath]()
         for cell in tableView.visibleCells {
@@ -82,6 +85,10 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         tableView.reloadRows(at: idxPaths, with: .none)
+        
+        
+        let controller = MusicPlayerViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     var tableView: UITableView = {

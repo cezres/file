@@ -9,20 +9,31 @@
 import UIKit
 import AVFoundation
 
+
+enum MusicPlayerState {
+    case playing
+    case paused
+    case stopped
+}
+
+class MusicPlayerNotification {
+    static let stateDidChange = NSNotification.Name(rawValue: "MusicPlayer_Notification_StateDidChange")
+}
+
 /// 音乐播放器
 class MusicPlayer: NSObject {
     
-    static var share = MusicPlayer()
     
-    private var player: AVAudioPlayer?
-    
-    private var timer: Timer?
-    
-    private override init() {
-        super.init()
-        try! AVAudioSession.sharedInstance().setActive(true)
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+    var state: MusicPlayerState = .stopped {
+        didSet {
+            guard state != oldValue else {
+                return
+            }
+            NotificationCenter.default.post(name: MusicPlayerNotification.stateDidChange, object: self, userInfo: nil)
+        }
     }
+    
+    static var shared = MusicPlayer()
     
     var isPlaying: Bool {
         guard let player = player else {
@@ -61,6 +72,7 @@ class MusicPlayer: NSObject {
         guard player != nil else {
             return false
         }
+        state = .playing
         return player!.play()
     }
     
@@ -69,6 +81,7 @@ class MusicPlayer: NSObject {
             return
         }
         player!.pause()
+        state = .paused
     }
     
     func stop() {
@@ -77,8 +90,20 @@ class MusicPlayer: NSObject {
         }
         player!.stop()
         player = nil
+        state = .stopped
     }
     
+    
+    
+    private var player: AVAudioPlayer?
+    
+    private var timer: Timer?
+    
+    private override init() {
+        super.init()
+        try! AVAudioSession.sharedInstance().setActive(true)
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+    }
     
 }
 
@@ -102,5 +127,6 @@ extension MusicPlayer: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         print(#function)
         currentMusic = nil
+        state = .stopped
     }
 }

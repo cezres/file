@@ -20,8 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print(DocumentDirectory)
         
-        
-        
         let tabbarController = UITabBarController()
         
         tabbarController.viewControllers = [

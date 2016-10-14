@@ -33,7 +33,7 @@ class MusicTableViewCell: UITableViewCell {
         numberLabel.text = "\(number)"
         artworkImageView.image = UIImage(named: "icon_audio")
         if let url = music.artworkURL {
-            ImageCache.share.fileIcon(url: url, completionBlock: { [weak self](url, image) in
+            ImageCache.retrieveImage(url: url, format: .fileIcon, completionBlock: { [weak self](url, image) in
                 self?.artworkImageView.image = image
             })
         }

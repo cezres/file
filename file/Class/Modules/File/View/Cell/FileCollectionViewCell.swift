@@ -88,7 +88,7 @@ class FileCollectionViewCell: UICollectionViewCell {
         case .Audio:
             iconImageView.image = UIImage(named: "icon_audio")
             if let url = file.iconURL {
-                ImageCache.share.fileIcon(url: url, completionBlock: { [weak self](url, image) in
+                ImageCache.retrieveImage(url: url, format: .fileIcon, completionBlock: { [weak self](url, image) in
                     self?.iconImageView.image = image
                 })
             }
@@ -97,7 +97,7 @@ class FileCollectionViewCell: UICollectionViewCell {
         case .Zip:
             iconImageView.image = UIImage(named: "icon_zip")
         case .Photo:
-            ImageCache.share.fileIcon(url: file.url, completionBlock: { [weak self](url, image) in
+            ImageCache.retrieveImage(url: file.url, format: .fileIcon, completionBlock: { [weak self](url, image) in
                 self?.iconImageView.image = image
             })
             return

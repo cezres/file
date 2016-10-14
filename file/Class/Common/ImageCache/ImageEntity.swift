@@ -65,21 +65,22 @@ class ImageEntity: NSObject, FICEntity {
             guard let context = context else {
                 return
             }
+           
             
             var contextBounds = CGRect()
             contextBounds.size = contextSize
             context.clear(contextBounds)
-            
-            if formatName == FICDPhotoSquareImage32BitBGRAFormatName {
-                context.setFillColor(UIColor.white.cgColor)
-                context.fill(contextBounds)
-            }
+            context.setFillColor(UIColor.white.cgColor)
+            context.fill(contextBounds)
             
             UIGraphicsPushContext(context)
-            image.square().draw(in: contextBounds)
+            if formatName == ImageCacheFormat.fileIcon.rawValue {
+                image.square().draw(in: contextBounds)
+            }
+            else {
+                image.draw(in: contextBounds)
+            }
             UIGraphicsPopContext()
-            
-            
         }
     }
     

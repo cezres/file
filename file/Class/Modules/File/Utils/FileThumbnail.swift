@@ -186,7 +186,7 @@ func fileThumbnail(file: File, block: @escaping FileThumbnailBlock) {
         image = UIImage(named: "icon_zip")
     case .Photo:
 //        image = UIImage(contentsOfFile: file.path)?.decode()
-        ImageCache.share.fileIcon(url: file.url, completionBlock: { (url, image) in
+        ImageCache.retrieveImage(url: file.url, format: .fileIcon, completionBlock: { (_, image) in
             block(file, image)
         })
         return
