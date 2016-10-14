@@ -18,17 +18,24 @@ class MusicPlayer: NSObject {
     
     private var timer: Timer?
     
-    
     private override init() {
         super.init()
         try! AVAudioSession.sharedInstance().setActive(true)
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
     }
     
+    var isPlaying: Bool {
+        guard let player = player else {
+            return false
+        }
+        return player.isPlaying
+    }
+    
+    var currentMusic: Music?
     
     @discardableResult
-    func play(url: URL) -> Bool {
-        guard url != player?.url else {
+    func play(_ music: Music) -> Bool {
+        guard music.url != player?.url else {
             if player!.isPlaying {
                 pause()
             }
@@ -39,9 +46,9 @@ class MusicPlayer: NSObject {
         }
         stop()
         do {
-            player = try AVAudioPlayer(contentsOf: url)
+            player = try AVAudioPlayer(contentsOf: music.url)
             player!.delegate = self
-            
+            currentMusic = music
             return play()
         }
         catch {
@@ -94,5 +101,6 @@ extension MusicPlayer: AVAudioPlayerDelegate {
     }
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         print(#function)
+        currentMusic = nil
     }
 }

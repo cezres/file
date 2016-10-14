@@ -54,6 +54,7 @@ class MusicGroup: NSObject {
             if db.lastErrorCode() != 1 {
                 assertionFailure(db.lastErrorMessage())
             }
+            db.commit()
             return false
         }
     }
@@ -63,7 +64,7 @@ class MusicGroup: NSObject {
         self.name = name
         
         do {
-            let sql = "select Music.*, \(self.name).date from \(self.name) inner join Music on \(self.name).id = Music.id"
+            let sql = "SELECT Music.*, \(self.name).date FROM \(self.name) INNER JOIN Music ON \(self.name).id = Music.id ORDER BY date DESC"
             let result: FMResultSet = try MusicDB.executeQuery(sql, values: nil)
             while result.next() {
                 let ms = Music(result: result)

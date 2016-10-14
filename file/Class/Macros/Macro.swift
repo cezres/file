@@ -19,8 +19,6 @@ let CachesDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPath
 
 
 // MARK: - Color
-
-
 func ColorWhite(white: CGFloat)  -> UIColor {
     return ColorWhiteAlpha(white: white, alpha: 1.0)
 }
@@ -37,4 +35,8 @@ func ColorRGBA(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
     return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
 }
 
+// MARK: - Font
+func Font(_ size: CGFloat) -> UIFont {
+    return UIFont(name: "ArialMT", size: size)!
+}
 

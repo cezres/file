@@ -29,6 +29,10 @@ class Music: NSObject {
         }
     }
     
+//    lazy var durationText: String = {
+//        return String(format: "%02d:%02d", Int(self.duration/60), Int(self.duration) % 60)
+//    }()
+    
     var date: Date? // 添加入歌单的日期
     
     lazy var artworkURL: URL? = {
@@ -137,7 +141,7 @@ class Music: NSObject {
         duration = result.double(forColumn: "duration")
         playCount = result.int(forColumn: "playCount")
         
-        url = URL(fileURLWithPath: path)
+        url = URL(fileURLWithPath: HomeDirectory + path)
     }
     
     func insert() throws {

@@ -37,6 +37,9 @@
 		6E2F5C4B1DAF9699007C41F2 /* MusicGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F5C4A1DAF9699007C41F2 /* MusicGroup.swift */; };
 		6E2F5C4C1DAF9DA2007C41F2 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2F5C0D1DAE20AC007C41F2 /* FMDB.framework */; };
 		6E2F5C4D1DAF9DA2007C41F2 /* FMDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2F5C0D1DAE20AC007C41F2 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E2F5C501DB06F72007C41F2 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F5C4F1DB06F72007C41F2 /* MusicTableViewCell.swift */; };
+		6E2F5C541DB07E21007C41F2 /* ESTMusicIndicatorContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F5C521DB07E21007C41F2 /* ESTMusicIndicatorContentView.swift */; };
+		6E2F5C551DB07E21007C41F2 /* ESTMusicIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F5C531DB07E21007C41F2 /* ESTMusicIndicatorView.swift */; };
 		6E39B69F1D952F8E00A72A9A /* FileContentViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39B69E1D952F8E00A72A9A /* FileContentViewProtocol.swift */; };
 		6E39B6A11D961C4D00A72A9A /* FileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39B6A01D961C4D00A72A9A /* FileTableView.swift */; };
 		6E39B6A31D961C5D00A72A9A /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39B6A21D961C5D00A72A9A /* FileTableViewCell.swift */; };
@@ -126,6 +129,9 @@
 		6E2F5C0D1DAE20AC007C41F2 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FMDB.framework; sourceTree = "<group>"; };
 		6E2F5C481DAF968A007C41F2 /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		6E2F5C4A1DAF9699007C41F2 /* MusicGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicGroup.swift; sourceTree = "<group>"; };
+		6E2F5C4F1DB06F72007C41F2 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
+		6E2F5C521DB07E21007C41F2 /* ESTMusicIndicatorContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTMusicIndicatorContentView.swift; sourceTree = "<group>"; };
+		6E2F5C531DB07E21007C41F2 /* ESTMusicIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTMusicIndicatorView.swift; sourceTree = "<group>"; };
 		6E39B69E1D952F8E00A72A9A /* FileContentViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileContentViewProtocol.swift; sourceTree = "<group>"; };
 		6E39B6A01D961C4D00A72A9A /* FileTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableView.swift; sourceTree = "<group>"; };
 		6E39B6A21D961C5D00A72A9A /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
@@ -228,6 +234,7 @@
 		6E2060941D94CF0400A0B5B2 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				6E2F5C511DB07E0F007C41F2 /* ESTMusicIndicator */,
 				6E2F5C0D1DAE20AC007C41F2 /* FMDB.framework */,
 				6EB100721DA9F51700E1A643 /* VideoPlayer.framework */,
 				6E7CB2331DACDADA009B3A5B /* FastImageCache.framework */,
@@ -395,6 +402,23 @@
 			path = ImageCache;
 			sourceTree = "<group>";
 		};
+		6E2F5C4E1DB06F5B007C41F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6E2F5C4F1DB06F72007C41F2 /* MusicTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6E2F5C511DB07E0F007C41F2 /* ESTMusicIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				6E2F5C521DB07E21007C41F2 /* ESTMusicIndicatorContentView.swift */,
+				6E2F5C531DB07E21007C41F2 /* ESTMusicIndicatorView.swift */,
+			);
+			path = ESTMusicIndicator;
+			sourceTree = "<group>";
+		};
 		6E7CB1F11DACCF51009B3A5B /* SnapKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,17 +462,9 @@
 		6EB100BC1DAA272200E1A643 /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				6EB100BD1DAA272200E1A643 /* MusicList */,
 				6EB100BE1DAA272200E1A643 /* MusicPlayer */,
 			);
 			path = Music;
-			sourceTree = "<group>";
-		};
-		6EB100BD1DAA272200E1A643 /* MusicList */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MusicList;
 			sourceTree = "<group>";
 		};
 		6EB100BE1DAA272200E1A643 /* MusicPlayer */ = {
@@ -456,6 +472,7 @@
 			children = (
 				6EB100C01DAA272200E1A643 /* Entity */,
 				6EB100C11DAA272200E1A643 /* Model */,
+				6E2F5C4E1DB06F5B007C41F2 /* View */,
 				6EB100BF1DAA272200E1A643 /* Controller */,
 			);
 			path = MusicPlayer;
@@ -576,6 +593,7 @@
 				6E7CB21E1DACCF52009B3A5B /* ConstraintLayoutSupport.swift in Sources */,
 				6E7CB2251DACCF52009B3A5B /* ConstraintMakerRelatable.swift in Sources */,
 				6E7CB2321DACCF52009B3A5B /* UILayoutSupport+Extensions.swift in Sources */,
+				6E2F5C501DB06F72007C41F2 /* MusicTableViewCell.swift in Sources */,
 				6E2060FA1D94CFBC00A0B5B2 /* File.swift in Sources */,
 				6E7CB2261DACCF52009B3A5B /* ConstraintMultiplierTarget.swift in Sources */,
 				6E7CB2221DACCF52009B3A5B /* ConstraintMakerExtendable.swift in Sources */,
@@ -589,6 +607,7 @@
 				6EB9FBBD1DACDED1003EAC98 /* String.swift in Sources */,
 				6E22A50B1DACE89900F3354C /* ImageCache.swift in Sources */,
 				6E7CB22D1DACCF52009B3A5B /* ConstraintViewDSL.swift in Sources */,
+				6E2F5C551DB07E21007C41F2 /* ESTMusicIndicatorView.swift in Sources */,
 				6E7CB22E1DACCF52009B3A5B /* Debugging.swift in Sources */,
 				6E7CB2311DACCF52009B3A5B /* UILayoutGuide+Extensions.swift in Sources */,
 				6E2060F81D94CFBC00A0B5B2 /* UIView+Frame.swift in Sources */,
@@ -606,6 +625,7 @@
 				6EB100C71DAA279800E1A643 /* MusicPlayer.swift in Sources */,
 				6E2060831D93ACB000A0B5B2 /* AppDelegate.swift in Sources */,
 				6E2060F91D94CFBC00A0B5B2 /* FileViewController.swift in Sources */,
+				6E2F5C541DB07E21007C41F2 /* ESTMusicIndicatorContentView.swift in Sources */,
 				6E22A5091DACE53700F3354C /* ImageEntity.swift in Sources */,
 				6E2061021D94CFBC00A0B5B2 /* FileView.swift in Sources */,
 				6E7CB22B1DACCF52009B3A5B /* ConstraintView+Extensions.swift in Sources */,

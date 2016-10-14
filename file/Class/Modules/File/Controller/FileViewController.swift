@@ -85,9 +85,9 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         }
         else if file.type == .Audio {
             /// 播放音频
-            MusicPlayer.share.play(url: file.url)
-            if MusicGroup.default().insert(url: file.url) {
-                
+            if let music = Music(url: file.url) {
+                MusicPlayer.share.play(music)
+                MusicGroup.default().insert(music: music)
             }
         }
         else {

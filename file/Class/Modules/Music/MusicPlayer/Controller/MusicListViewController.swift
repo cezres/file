@@ -51,27 +51,44 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Music") as! MusicTableViewCell
         let music = group.list()[indexPath.row]
-        cell?.textLabel?.text = music.song
-        cell?.detailTextLabel?.text = "播放:\(music.playCount)"
-        return cell!
+        cell.setup(music: music, number: indexPath.row)
+        
+        if MusicPlayer.share.currentMusic?.id == music.id {
+            if MusicPlayer.share.isPlaying {
+                cell.state = .playing
+            }
+            else {
+                cell.state = .paused
+            }
+        }
+        else {
+            cell.state = .stopped
+        }
+        
+        return cell
     }
     // MARK: - Select
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let music = group.list()[indexPath.row]
-        MusicPlayer.share.play(url: music.url)
+        MusicPlayer.share.play(music)
+        
+        var idxPaths = [IndexPath]()
+        for cell in tableView.visibleCells {
+            if let idx = tableView.indexPath(for: cell) {
+                idxPaths.append(idx)
+            }
+        }
+        tableView.reloadRows(at: idxPaths, with: .none)
     }
     
-
     var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(), style: UITableViewStyle.plain)
         tableView.backgroundColor = UIColor.white
         tableView.rowHeight = 60
+        tableView.register(MusicTableViewCell.classForCoder(), forCellReuseIdentifier: "Music")
         return tableView
     }()
     
