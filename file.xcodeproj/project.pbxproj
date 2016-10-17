@@ -56,6 +56,16 @@
 		6E39B69F1D952F8E00A72A9A /* FileContentViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39B69E1D952F8E00A72A9A /* FileContentViewProtocol.swift */; };
 		6E39B6A11D961C4D00A72A9A /* FileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39B6A01D961C4D00A72A9A /* FileTableView.swift */; };
 		6E39B6A31D961C5D00A72A9A /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39B6A21D961C5D00A72A9A /* FileTableViewCell.swift */; };
+		6E63DF111DB4F35400662CFA /* MusicGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF101DB4F35400662CFA /* MusicGroupTableViewCell.swift */; };
+		6E63DF1F1DB4F36400662CFA /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF141DB4F36400662CFA /* NSMutableArray+SWUtilityButtons.m */; };
+		6E63DF201DB4F36400662CFA /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF161DB4F36400662CFA /* SWCellScrollView.m */; };
+		6E63DF211DB4F36400662CFA /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF181DB4F36400662CFA /* SWLongPressGestureRecognizer.m */; };
+		6E63DF221DB4F36400662CFA /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF1A1DB4F36400662CFA /* SWTableViewCell.m */; };
+		6E63DF231DB4F36400662CFA /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF1C1DB4F36400662CFA /* SWUtilityButtonTapGestureRecognizer.m */; };
+		6E63DF241DB4F36400662CFA /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF1E1DB4F36400662CFA /* SWUtilityButtonView.m */; };
+		6E63DF291DB4F98F00662CFA /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF281DB4F98F00662CFA /* ButtonCollectionViewCell.swift */; };
+		6E63DF2C1DB4FDD100662CFA /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF2B1DB4FDD100662CFA /* Menu.swift */; };
+		6E63DF2E1DB4FDED00662CFA /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E63DF2D1DB4FDED00662CFA /* MenuItemView.swift */; };
 		6E7CB2131DACCF52009B3A5B /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7CB1F21DACCF51009B3A5B /* Constraint.swift */; };
 		6E7CB2141DACCF52009B3A5B /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7CB1F31DACCF51009B3A5B /* ConstraintAttributes.swift */; };
 		6E7CB2151DACCF52009B3A5B /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7CB1F41DACCF51009B3A5B /* ConstraintConfig.swift */; };
@@ -158,6 +168,22 @@
 		6E39B69E1D952F8E00A72A9A /* FileContentViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileContentViewProtocol.swift; sourceTree = "<group>"; };
 		6E39B6A01D961C4D00A72A9A /* FileTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableView.swift; sourceTree = "<group>"; };
 		6E39B6A21D961C5D00A72A9A /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
+		6E63DF101DB4F35400662CFA /* MusicGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicGroupTableViewCell.swift; sourceTree = "<group>"; };
+		6E63DF131DB4F36400662CFA /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		6E63DF141DB4F36400662CFA /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		6E63DF151DB4F36400662CFA /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
+		6E63DF161DB4F36400662CFA /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
+		6E63DF171DB4F36400662CFA /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		6E63DF181DB4F36400662CFA /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		6E63DF191DB4F36400662CFA /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		6E63DF1A1DB4F36400662CFA /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
+		6E63DF1B1DB4F36400662CFA /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		6E63DF1C1DB4F36400662CFA /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		6E63DF1D1DB4F36400662CFA /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
+		6E63DF1E1DB4F36400662CFA /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
+		6E63DF281DB4F98F00662CFA /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		6E63DF2B1DB4FDD100662CFA /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		6E63DF2D1DB4FDED00662CFA /* MenuItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		6E7CB1F21DACCF51009B3A5B /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		6E7CB1F31DACCF51009B3A5B /* ConstraintAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintAttributes.swift; sourceTree = "<group>"; };
 		6E7CB1F41DACCF51009B3A5B /* ConstraintConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintConfig.swift; sourceTree = "<group>"; };
@@ -255,6 +281,7 @@
 		6E2060941D94CF0400A0B5B2 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				6E63DF121DB4F36400662CFA /* SWTableViewCell */,
 				6E32476C1DB1328D00D9CD19 /* REMenu.framework */,
 				6E2F5C701DB0B839007C41F2 /* SABlurImageView */,
 				6E2F5C511DB07E0F007C41F2 /* ESTMusicIndicator */,
@@ -411,6 +438,8 @@
 		6E22A5061DACE51100F3354C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6E63DF2A1DB4FDB900662CFA /* Menu */,
+				6E63DF271DB4F98100662CFA /* ButtonCollectionViewCell */,
 				6E22A5071DACE51100F3354C /* ImageCache */,
 			);
 			path = Common;
@@ -457,6 +486,7 @@
 				6E2F5C611DB0B5D9007C41F2 /* MusicTableViewCell.swift */,
 				6E32472A1DB11ACF00D9CD19 /* MusicListNavigationTitleView.swift */,
 				6E32476A1DB12D9200D9CD19 /* MusicGroupMenu.swift */,
+				6E63DF101DB4F35400662CFA /* MusicGroupTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -496,6 +526,42 @@
 				6E2F5C731DB0B839007C41F2 /* UIImage+BlurEffect.swift */,
 			);
 			path = SABlurImageView;
+			sourceTree = "<group>";
+		};
+		6E63DF121DB4F36400662CFA /* SWTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6E63DF131DB4F36400662CFA /* NSMutableArray+SWUtilityButtons.h */,
+				6E63DF141DB4F36400662CFA /* NSMutableArray+SWUtilityButtons.m */,
+				6E63DF151DB4F36400662CFA /* SWCellScrollView.h */,
+				6E63DF161DB4F36400662CFA /* SWCellScrollView.m */,
+				6E63DF171DB4F36400662CFA /* SWLongPressGestureRecognizer.h */,
+				6E63DF181DB4F36400662CFA /* SWLongPressGestureRecognizer.m */,
+				6E63DF191DB4F36400662CFA /* SWTableViewCell.h */,
+				6E63DF1A1DB4F36400662CFA /* SWTableViewCell.m */,
+				6E63DF1B1DB4F36400662CFA /* SWUtilityButtonTapGestureRecognizer.h */,
+				6E63DF1C1DB4F36400662CFA /* SWUtilityButtonTapGestureRecognizer.m */,
+				6E63DF1D1DB4F36400662CFA /* SWUtilityButtonView.h */,
+				6E63DF1E1DB4F36400662CFA /* SWUtilityButtonView.m */,
+			);
+			path = SWTableViewCell;
+			sourceTree = "<group>";
+		};
+		6E63DF271DB4F98100662CFA /* ButtonCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6E63DF281DB4F98F00662CFA /* ButtonCollectionViewCell.swift */,
+			);
+			path = ButtonCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		6E63DF2A1DB4FDB900662CFA /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				6E63DF2B1DB4FDD100662CFA /* Menu.swift */,
+				6E63DF2D1DB4FDED00662CFA /* MenuItemView.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		6E7CB1F11DACCF51009B3A5B /* SnapKit */ = {
@@ -637,15 +703,19 @@
 				6E2060FC1D94CFBC00A0B5B2 /* FileType.swift in Sources */,
 				6E2061011D94CFBC00A0B5B2 /* FileCollectionView.swift in Sources */,
 				6E2427F11DB0E27500EE8069 /* MusicPlayerInfoView.swift in Sources */,
+				6E63DF211DB4F36400662CFA /* SWLongPressGestureRecognizer.m in Sources */,
 				6E39B6A11D961C4D00A72A9A /* FileTableView.swift in Sources */,
+				6E63DF111DB4F35400662CFA /* MusicGroupTableViewCell.swift in Sources */,
 				6E7CB21E1DACCF52009B3A5B /* ConstraintLayoutSupport.swift in Sources */,
 				6E7CB2251DACCF52009B3A5B /* ConstraintMakerRelatable.swift in Sources */,
+				6E63DF2C1DB4FDD100662CFA /* Menu.swift in Sources */,
 				6E7CB2321DACCF52009B3A5B /* UILayoutSupport+Extensions.swift in Sources */,
 				6E2060FA1D94CFBC00A0B5B2 /* File.swift in Sources */,
 				6E7CB2261DACCF52009B3A5B /* ConstraintMultiplierTarget.swift in Sources */,
 				6E2F5C6F1DB0B7B4007C41F2 /* MusicPlayerBackgroudView.swift in Sources */,
 				6E2F5C761DB0B839007C41F2 /* UIImage+BlurEffect.swift in Sources */,
 				6E7CB2221DACCF52009B3A5B /* ConstraintMakerExtendable.swift in Sources */,
+				6E63DF241DB4F36400662CFA /* SWUtilityButtonView.m in Sources */,
 				6E7CB2241DACCF52009B3A5B /* ConstraintMakerPriortizable.swift in Sources */,
 				6E7CB2271DACCF52009B3A5B /* ConstraintOffsetTarget.swift in Sources */,
 				6E39B69F1D952F8E00A72A9A /* FileContentViewProtocol.swift in Sources */,
@@ -655,6 +725,7 @@
 				6EB9FBBD1DACDED1003EAC98 /* String.swift in Sources */,
 				6E22A50B1DACE89900F3354C /* ImageCache.swift in Sources */,
 				6E7CB22D1DACCF52009B3A5B /* ConstraintViewDSL.swift in Sources */,
+				6E63DF1F1DB4F36400662CFA /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				6E2F5C551DB07E21007C41F2 /* ESTMusicIndicatorView.swift in Sources */,
 				6E2F5C6B1DB0B5D9007C41F2 /* MusicPlayer.swift in Sources */,
 				6E7CB22E1DACCF52009B3A5B /* Debugging.swift in Sources */,
@@ -676,10 +747,12 @@
 				6E2F5C681DB0B5D9007C41F2 /* MusicListViewController.swift in Sources */,
 				6E2060831D93ACB000A0B5B2 /* AppDelegate.swift in Sources */,
 				6E2060F91D94CFBC00A0B5B2 /* FileViewController.swift in Sources */,
+				6E63DF221DB4F36400662CFA /* SWTableViewCell.m in Sources */,
 				6E2F5C541DB07E21007C41F2 /* ESTMusicIndicatorContentView.swift in Sources */,
 				6E22A5091DACE53700F3354C /* ImageEntity.swift in Sources */,
 				6E2427EF1DB0E05F00EE8069 /* MusicPlayerToolView.swift in Sources */,
 				6E2061021D94CFBC00A0B5B2 /* FileView.swift in Sources */,
+				6E63DF231DB4F36400662CFA /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				6E7CB22B1DACCF52009B3A5B /* ConstraintView+Extensions.swift in Sources */,
 				6E7CB2131DACCF52009B3A5B /* Constraint.swift in Sources */,
 				6E2061031D94CFBC00A0B5B2 /* SettingViewController.swift in Sources */,
@@ -689,13 +762,16 @@
 				6E2F5C741DB0B839007C41F2 /* CATransition+Closure.swift in Sources */,
 				6E7CB2231DACCF52009B3A5B /* ConstraintMakerFinalizable.swift in Sources */,
 				6E2F5C6A1DB0B5D9007C41F2 /* MusicTableViewCell.swift in Sources */,
+				6E63DF291DB4F98F00662CFA /* ButtonCollectionViewCell.swift in Sources */,
 				6E2060FD1D94CFBC00A0B5B2 /* FileModel.swift in Sources */,
 				6E2060F71D94CFBC00A0B5B2 /* UIImage.swift in Sources */,
 				6E2F5C671DB0B5D9007C41F2 /* MusicGroup.swift in Sources */,
 				6E7CB21F1DACCF52009B3A5B /* ConstraintLayoutSupportDSL.swift in Sources */,
 				6E2060FB1D94CFBC00A0B5B2 /* FileAttributes.swift in Sources */,
+				6E63DF2E1DB4FDED00662CFA /* MenuItemView.swift in Sources */,
 				6E2060FE1D94CFBC00A0B5B2 /* FileThumbnail.swift in Sources */,
 				6E7CB2191DACCF52009B3A5B /* ConstraintInsets.swift in Sources */,
+				6E63DF201DB4F36400662CFA /* SWCellScrollView.m in Sources */,
 				6E7CB22A1DACCF52009B3A5B /* ConstraintRelation.swift in Sources */,
 				6E7CB2171DACCF52009B3A5B /* ConstraintDescription.swift in Sources */,
 			);

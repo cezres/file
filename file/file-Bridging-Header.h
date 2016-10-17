@@ -3,3 +3,6 @@
 //
 
 #import <CommonCrypto/CommonDigest.h>
+
+
+#import "SWTableViewCell.h"

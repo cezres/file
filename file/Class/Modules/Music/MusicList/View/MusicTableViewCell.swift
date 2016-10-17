@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MusicTableViewCell: UITableViewCell {
+class MusicTableViewCell: SWTableViewCell {
     
     private var numberLabel: UILabel!
     private var artworkImageView: UIImageView!
@@ -27,10 +27,13 @@ class MusicTableViewCell: UITableViewCell {
         }
     }
     
-    private var number: Int = -1
+    var number: Int = -1 {
+        didSet {
+            numberLabel.text = "\(number)"
+        }
+    }
     
-    func setup(music: Music, number: Int) {
-        numberLabel.text = "\(number)"
+    func setup(_ music: Music) {
         artworkImageView.image = UIImage(named: "icon_audio")
         if let url = music.artworkURL {
             ImageCache.retrieveImage(url: url, format: .fileIcon, completionBlock: { [weak self](url, image) in
@@ -47,6 +50,13 @@ class MusicTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        let rightButtons = NSMutableArray(capacity: 1)
+        rightButtons.sw_addUtilityButton(with: ColorRGB(253, 85, 98), title: "删除")
+        var _rightButtons = [Any]()
+        _rightButtons.append(rightButtons.lastObject!)
+        setRightUtilityButtons(_rightButtons, withButtonWidth: 80)
+        
         
         musicIndicator = ESTMusicIndicatorView(frame: CGRect())
         contentView.addSubview(musicIndicator)

@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+
+let SSize = UIScreen.main.bounds.size
+
 // MARK: - Path
 
 let HomeDirectory = NSHomeDirectory()
@@ -27,7 +30,7 @@ func ColorWhiteAlpha(white: CGFloat, alpha: CGFloat) -> UIColor {
     return UIColor(white: white/255.0, alpha: alpha)
 }
 
-func ColorRGB(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
+func ColorRGB(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> UIColor {
     return ColorRGBA(r: r, g: g, b: b, a: 1.0)
 }
 

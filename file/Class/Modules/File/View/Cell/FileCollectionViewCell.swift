@@ -47,10 +47,10 @@ class FileCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundView = UIView()
-        self.backgroundView?.backgroundColor = UIColor.white
-        self.selectedBackgroundView = UIView()
-        self.selectedBackgroundView?.backgroundColor = ColorWhite(white: 220)
+        backgroundView = UIView()
+        backgroundView?.backgroundColor = UIColor.white
+        selectedBackgroundView = UIView()
+        selectedBackgroundView?.backgroundColor = ColorWhite(white: 220)
         
     }
     

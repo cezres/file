@@ -38,13 +38,13 @@ class MusicPlayerViewController: UIViewController {
         backgrounView.url = MusicPlayer.shared.currentMusic?.artworkURL
         
         
-//        view.addSubview(toolView)
-//        toolView.snp.makeConstraints { (make) in
-//            make.left.equalTo(0)
-//            make.right.equalTo(0)
-//            make.bottom.equalTo(0)
-//            make.height.equalTo(100)
-//        }
+        view.addSubview(toolView)
+        toolView.snp.makeConstraints { (make) in
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.bottom.equalTo(0)
+            make.height.equalTo(100)
+        }
         
     }
     
