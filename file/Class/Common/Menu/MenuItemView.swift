@@ -20,6 +20,8 @@ class MenuItemView: ButtonTableViewCell {
             textLabel?.textColor = item.textColor
             
             separatorView.isHidden = item.isHiddenSeparatorView
+            
+            setRightButtons(item.rightButtons, withButtonWidth: 80)
         }
     }
     
@@ -36,12 +38,12 @@ class MenuItemView: ButtonTableViewCell {
             make.bottom.equalTo(0)
             make.height.equalTo(0.5)
         }
-        
+        /*
         let button = UIButton(type: .system)
         button.setTitle("删除", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = ColorRGB(253, 85, 98)
-        setRightButtons([button], withButtonWidth: 80)
+        setRightButtons([button], withButtonWidth: 80)*/
     }
     
     required init?(coder aDecoder: NSCoder) {

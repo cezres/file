@@ -10,6 +10,7 @@ import UIKit
 
 protocol MenuDelegate: NSObjectProtocol {
     func menu(_ menu: Menu, didSelectRowAt index: Int)
+    func menu(_ menu: Menu, itemIndex: Int, onClickRightButtonAt buttonIndex: Int)
 }
 
 class Menu: NSObject {
@@ -96,7 +97,7 @@ class Menu: NSObject {
         close()
     }
     
-    private var tableView: UITableView!
+    fileprivate var tableView: UITableView!
     private var wrapperView: UIView!
     private var containerView: UIButton!
     
@@ -148,7 +149,7 @@ class Menu: NSObject {
 }
 
 
-extension Menu: UITableViewDataSource, UITableViewDelegate {
+extension Menu: UITableViewDataSource, UITableViewDelegate, ButtonTableViewCellDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
@@ -163,6 +164,7 @@ extension Menu: UITableViewDataSource, UITableViewDelegate {
         guard let item = cell as? MenuItemView else {
             return
         }
+        item.delegate = self
         item.item = items[indexPath.row]
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -170,4 +172,11 @@ extension Menu: UITableViewDataSource, UITableViewDelegate {
         delegate?.menu(self, didSelectRowAt: indexPath.row)
     }
     
+    
+    func buttonCell(_ buttonCell: ButtonTableViewCell, onClickRightButtonAt index: Int) {
+        guard let indexPath = tableView.indexPath(for: buttonCell) else { return }
+        delegate?.menu(self, itemIndex: indexPath.row, onClickRightButtonAt: index)
+    }
+    
 }
+

@@ -57,9 +57,25 @@ class MusicGroup: NSObject {
             return false
         }
     }
+    @discardableResult class func delete(name: String) -> Bool {
+        MusicDB.beginTransaction()
+        defer {
+            MusicDB.commit()
+        }
+        do {
+            try MusicDB.executeUpdate("DROP TABLE \(name);", values: nil)
+            try MusicDB.executeUpdate("", values: nil)
+            return true
+        }
+        catch {
+            return false
+        }
+    }
+    
     
     /// 初始化
     init(name: String) {
+        
         self.name = name
         
         do {

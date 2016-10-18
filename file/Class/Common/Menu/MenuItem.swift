@@ -20,7 +20,7 @@ class MenuItem {
     
     var isHiddenSeparatorView = false
     
-    var rightButton: [UIButton]?
+    var rightButtons = [UIButton]()
     
     
 }

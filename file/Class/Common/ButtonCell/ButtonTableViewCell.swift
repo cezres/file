@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ButtonTableViewCellDelegate: NSObjectProtocol {
+    func buttonCell(_ buttonCell: ButtonTableViewCell, onClickRightButtonAt index: Int)
+}
+
 class ButtonTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
@@ -21,6 +25,11 @@ class ButtonTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    weak var delegate: ButtonTableViewCellDelegate?
+    
+    func onClickButton(_ button: UIButton) {
+        delegate?.buttonCell(self, onClickRightButtonAt: button.tag)
+    }
     
     func setRightButtons(_ buttons: [UIButton], withButtonWidth width: CGFloat) {
         initSubViews()
@@ -30,6 +39,8 @@ class ButtonTableViewCell: UITableViewCell {
         }
         
         for (idx, button)in buttons.enumerated() {
+            button.tag = idx
+            button.addTarget(self, action: #selector(ButtonTableViewCell.onClickButton(_:)), for: .touchUpInside)
             rightView.addSubview(button)
             button.snp.makeConstraints({ (make) in
                 make.right.equalTo(CGFloat(idx) * width)

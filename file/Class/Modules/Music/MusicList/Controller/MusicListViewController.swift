@@ -45,8 +45,14 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         
         var items = [MenuItem]()
         for name in MusicGroup.groupNames() {
+            let button = UIButton(type: .system)
+            button.setTitle("删除", for: .normal)
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.backgroundColor = ColorRGB(253, 85, 98)
+            
             let item = MenuItem()
             item.title = name
+            item.rightButtons = [button]
             items.append(item)
         }
         
@@ -127,6 +133,11 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
             menu.close()
         }
     }
+    func menu(_ menu: Menu, itemIndex: Int, onClickRightButtonAt buttonIndex: Int) {
+        print(menu.items[itemIndex].title!)
+        
+    }
+    
     
     // MARK: - Number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
