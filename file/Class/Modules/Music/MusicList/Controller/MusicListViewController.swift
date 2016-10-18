@@ -9,13 +9,13 @@
 import UIKit
 import REMenu
 
-class MusicListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MusicListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MenuDelegate {
     
-    var group: MusicGroup!
-    
-    var menu: REMenu!
-    
-    private var musicIndicator: ESTMusicIndicatorView!
+    var group: MusicGroup! {
+        didSet {
+            titleView.setTitle(group.name, for: .normal)
+        }
+    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -27,44 +27,42 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     
-    var testView = Menu()
+    
+    var menu = Menu()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "排序:日期", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MusicListViewController.sort))
-        musicIndicator = ESTMusicIndicatorView(frame: CGRect(x: 0, y: 0, width: 18, height: 18))
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: musicIndicator)
         
+        menu.navigationBarOffset = 64
+        menu.delegate = self
         
-        musicIndicator.state = .paused
-        
-        
-        
-        testView.navigationBarOffset = 64
-        
-        
-        let titles = ["播放列表", "测试1111", "测试2222", "测试3333", "测试4444"]
-        testView.dataSource = titles
+        group = MusicGroup.default()
+        navigationItem.title = group.name
         
         
-        let button = UIButton(type: .system)
-        button.setTitle("播放列表", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.addTarget(self, action: #selector(MusicListViewController.toggleMenu), for: .touchUpInside)
-        navigationItem.titleView = button
+        var items = [MenuItem]()
+        for name in MusicGroup.groupNames() {
+            let item = MenuItem()
+            item.title = name
+            items.append(item)
+        }
+        
+        let newItem = MenuItem()
+        newItem.title = "创建分组"
+        newItem.textColor = UIColor.white
+        newItem.backgroundColor = ColorRGB(61, 168, 68)
+        newItem.isHiddenSeparatorView = true
+        
+        items.append(newItem)
+        
+        menu.items = items
         
         
-        /*
-        navigationItem.titleView = MusicListNavigationTitleView(title: "播放列表", touchUpInside: { [weak self] in
-            if self?.menu.isOpen == true {
-                self?.menu.close()
-            }
-            else {
-                self?.menu.show(from: self?.navigationController)
-            }
-        })*/
+        
+        
         
         // Do any additional setup after loading the view.
         tableView.delegate = self
@@ -72,46 +70,6 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
-        }
-        
-        group = MusicGroup.default()
-        
-        
-        
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = UIColor.orange
-        scrollView.isPagingEnabled = true
-//        scrollView.contentSize = CGSize(width: 300 + 100, height: 150)
-        
-        let view1 = UIView()
-        view1.backgroundColor = UIColor.red
-        
-        let view2 = UIView()
-        view2.backgroundColor = UIColor.green
-        
-        scrollView.addSubview(view1)
-        scrollView.addSubview(view2)
-        view.addSubview(scrollView)
-        
-        scrollView.snp.makeConstraints { (make) in
-            make.width.equalTo(300)
-            make.height.equalTo(150)
-            make.center.equalTo(view)
-        }
-        view1.snp.makeConstraints { (make) in
-            make.left.equalTo(scrollView)
-            make.top.equalTo(scrollView)
-            make.width.equalTo(scrollView.snp.width)
-            make.height.equalTo(scrollView.snp.height)
-        }
-        view2.snp.makeConstraints { (make) in
-            make.left.equalTo(view1.snp.right)
-            make.top.equalTo(scrollView)
-            make.width.equalTo(100)
-            make.height.equalTo(scrollView.snp.height)
-        }
-        scrollView.snp.makeConstraints { (make) in
-            make.right.equalTo(view2.snp.right)
         }
         
         
@@ -132,17 +90,43 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Event
     func toggleMenu() {
-        if testView.isOpen {
-            testView.close()
+        if menu.isOpen {
+            menu.close()
         }
         else {
-            testView.show(view: view)
+            menu.show(view: view)
         }
     }
     func sort() {
         
     }
+    func tapMusicIndicator() {
+        let controller = MusicPlayerViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
     
+    // MARK: - MenuDelegate
+    func menu(_ menu: Menu, didSelectRowAt index: Int) {
+        if index == menu.items.count - 1 {
+            TextFieldAlertView.show(title: "创建播放列表", block: { (name) in
+                print(name)
+                if MusicGroup.create(name: name) {
+                    let item = MenuItem()
+                    item.title = name
+                    menu.insertItem(item, at: menu.items.count-1)
+                }
+                else {
+                    print("创建表失败")
+                }
+            })
+        }
+        else {
+            let item = menu.items[index]
+            group = MusicGroup(name: item.title!)
+            tableView.reloadData()
+            menu.close()
+        }
+    }
     
     // MARK: - Number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -184,17 +168,34 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         }
         tableView.reloadRows(at: idxPaths, with: .none)
         
-        
         let controller = MusicPlayerViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(), style: UITableViewStyle.plain)
         tableView.backgroundColor = UIColor.white
         tableView.rowHeight = 60
         tableView.register(MusicTableViewCell.classForCoder(), forCellReuseIdentifier: "Music")
         return tableView
+    }()
+    
+    
+    private lazy var musicIndicator: ESTMusicIndicatorView = {
+        let musicIndicator = ESTMusicIndicatorView(frame: CGRect(x: 0, y: 0, width: 18, height: 18))
+        musicIndicator.state = .paused
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MusicListViewController.tapMusicIndicator))
+        musicIndicator.addGestureRecognizer(tap)
+        return musicIndicator
+    }()
+    
+    private lazy var titleView: UIButton = {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 200, height: 44)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.addTarget(self, action: #selector(MusicListViewController.toggleMenu), for: .touchUpInside)
+        self.navigationItem.titleView = button
+        return button
     }()
     
 }

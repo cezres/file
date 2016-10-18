@@ -8,21 +8,47 @@
 
 import UIKit
 
+protocol MenuDelegate: NSObjectProtocol {
+    func menu(_ menu: Menu, didSelectRowAt index: Int)
+}
+
 class Menu: NSObject {
     
     var navigationBarOffset: CGFloat = 0
-    var itemHeight: CGFloat = 44
-    var menuHeight: CGFloat = 0
     
-    var dataSource = [String]() {
-        didSet {
-            menuHeight = itemHeight * CGFloat(dataSource.count)
-        }
-    }
+    var items = [MenuItem]()
+    
+    weak var delegate: MenuDelegate?
     
     
     var isAnimating = false
     var isOpen = false
+    
+    
+    func removeItem(idx: Int) {
+        let item = items.remove(at: idx)
+        
+        tableView.deleteRows(at: [IndexPath(row: idx, section: 0)], with: .right)
+        
+        UIView.animate(withDuration: 1) {
+            self.wrapperView.snp.updateConstraints { (make) in
+                make.height.equalTo(self.wrapperView.height - item.height)
+            }
+        }
+    }
+    func insertItem(_ item: MenuItem, at idx: Int) {
+        items.insert(item, at: idx)
+        
+        tableView.insertRows(at: [IndexPath(row: idx, section: 0)], with: .left)
+        
+        UIView.animate(withDuration: 1) {
+            self.wrapperView.snp.updateConstraints { (make) in
+                make.height.equalTo(self.wrapperView.height + item.height)
+            }
+        }
+    }
+    
+    
     
     func show(view: UIView) {
         guard !isAnimating else {
@@ -35,8 +61,9 @@ class Menu: NSObject {
         
         let value = UIViewAnimationOptions.beginFromCurrentState.rawValue | UIViewAnimationOptions.curveEaseInOut.rawValue
         let options = UIViewAnimationOptions(rawValue: value)
+        wrapperView.layoutIfNeeded()
         UIView.animate(withDuration: 0.3 + 0.2, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 4, options: options, animations: {
-            self.wrapperView.transform = CGAffineTransform(translationX: 0, y: self.menuHeight + self.navigationBarOffset)
+            self.wrapperView.transform = CGAffineTransform(translationX: 0, y: self.wrapperView.height + self.navigationBarOffset)
         }, completion: { (_) in
             self.isAnimating = false
         })
@@ -55,10 +82,10 @@ class Menu: NSObject {
             self.wrapperView.transform = CGAffineTransform.identity
         }, completion: { (_) in
             self.isAnimating = false
-            self.collectionView.removeFromSuperview()
+            self.tableView.removeFromSuperview()
             self.wrapperView.removeFromSuperview()
             self.containerView.removeFromSuperview()
-            self.collectionView = nil
+            self.tableView = nil
             self.wrapperView = nil
             self.containerView = nil
         })
@@ -69,15 +96,19 @@ class Menu: NSObject {
         close()
     }
     
-    private var collectionView: UICollectionView!
+    private var tableView: UITableView!
     private var wrapperView: UIView!
-    private var containerView: UIView!
+    private var containerView: UIButton!
     
     
     func initViews(view: UIView) {
-        containerView = UIView()
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(Menu.tapcCntainerView))
-//        containerView.addGestureRecognizer(tap)
+        var menuHeight: CGFloat = 0
+        for item in items {
+            menuHeight += item.height
+        }
+        
+        containerView = UIButton(type: .custom)
+        containerView.addTarget(self, action: #selector(Menu.tapcCntainerView), for: .touchUpInside)
         
         wrapperView = UIView()
         wrapperView.layer.shadowColor = UIColor.black.cgColor
@@ -85,31 +116,27 @@ class Menu: NSObject {
         wrapperView.layer.shadowOpacity = 0.8
         wrapperView.layer.shadowRadius = 4
         
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: view.width, height: itemHeight)
-        flowLayout.sectionInset = UIEdgeInsets()
-        flowLayout.minimumLineSpacing = 0
-        flowLayout.minimumInteritemSpacing = 0
-        collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: flowLayout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.bounces = false
-        collectionView.register(MenuItemView.classForCoder(), forCellWithReuseIdentifier: "MenuItem")
-        collectionView.backgroundColor = UIColor.white
+        tableView = UITableView(frame: CGRect(), style: .plain)
+        tableView.bounces = false
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(MenuItemView.classForCoder(), forCellReuseIdentifier: "MenuItem")
+        tableView.separatorStyle = .none
         
         
-        wrapperView.addSubview(collectionView)
+        wrapperView.addSubview(tableView)
         containerView.addSubview(wrapperView)
         view.addSubview(containerView)
         
-        collectionView.snp.makeConstraints { (make) in
+        tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(wrapperView)
         }
         wrapperView.snp.makeConstraints { (make) in
             make.left.equalTo(0)
             make.right.equalTo(0)
-            make.bottom.equalTo(containerView.snp.top)
+//            make.bottom.equalTo(containerView.snp.top)
             make.height.equalTo(menuHeight)
+            make.top.equalTo(containerView.snp.top).offset(-menuHeight)
         }
         containerView.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
@@ -121,24 +148,26 @@ class Menu: NSObject {
 }
 
 
-
-extension Menu: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension Menu: UITableViewDataSource, UITableViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return items.count
     }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "MenuItem", for: indexPath)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return items[indexPath.row].height
     }
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: "MenuItem")!
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let item = cell as? MenuItemView else {
             return
         }
-        item.textLabel.text = dataSource[indexPath.row]
+        item.item = items[indexPath.row]
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.menu(self, didSelectRowAt: indexPath.row)
     }
     
 }

@@ -50,7 +50,7 @@ class FileCollectionViewCell: UICollectionViewCell {
         backgroundView = UIView()
         backgroundView?.backgroundColor = UIColor.white
         selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = ColorWhite(white: 220)
+        selectedBackgroundView?.backgroundColor = ColorWhite(220)
         
     }
     

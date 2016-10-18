@@ -14,7 +14,7 @@ class SubButton: UIButton {
     init() {
         super.init(frame: CGRect())
         setTitle("播放列表", for: .normal)
-        setTitleColor(ColorWhite(white: 46), for: .normal)
+        setTitleColor(ColorWhite(46), for: .normal)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,13 +35,13 @@ class MusicListNavigationTitleView: UIControl {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
         
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        titleLabel.textColor = ColorWhite(white: 46)
+        titleLabel.textColor = ColorWhite(46)
         titleLabel.text = title
         addSubview(titleLabel)
         
         let image = #imageLiteral(resourceName: "icon_arrow_down")
         imageView.image = image.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = ColorWhite(white: 46)
+        imageView.tintColor = ColorWhite(46)
         addSubview(imageView)
         
         
@@ -75,16 +75,16 @@ class MusicListNavigationTitleView: UIControl {
     }
     
     func touchDown() {
-        titleLabel.textColor = ColorWhite(white: 146)
-        imageView.tintColor = ColorWhite(white: 146)
+        titleLabel.textColor = ColorWhite(146)
+        imageView.tintColor = ColorWhite(146)
     }
     func touchUpOutside() {
-        titleLabel.textColor = ColorWhite(white: 46)
-        imageView.tintColor = ColorWhite(white: 46)
+        titleLabel.textColor = ColorWhite(46)
+        imageView.tintColor = ColorWhite(46)
     }
     func touchUpInside() {
-        titleLabel.textColor = ColorWhite(white: 46)
-        imageView.tintColor = ColorWhite(white: 46)
+        titleLabel.textColor = ColorWhite(46)
+        imageView.tintColor = ColorWhite(46)
         block()
     }
     

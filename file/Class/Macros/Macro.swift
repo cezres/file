@@ -22,11 +22,11 @@ let CachesDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPath
 
 
 // MARK: - Color
-func ColorWhite(white: CGFloat)  -> UIColor {
-    return ColorWhiteAlpha(white: white, alpha: 1.0)
+func ColorWhite(_ white: CGFloat)  -> UIColor {
+    return ColorWhiteAlpha(white, 1.0)
 }
 
-func ColorWhiteAlpha(white: CGFloat, alpha: CGFloat) -> UIColor {
+func ColorWhiteAlpha(_ white: CGFloat, _ alpha: CGFloat) -> UIColor {
     return UIColor(white: white/255.0, alpha: alpha)
 }
 

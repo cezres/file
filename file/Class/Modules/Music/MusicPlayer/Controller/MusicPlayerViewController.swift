@@ -46,6 +46,15 @@ class MusicPlayerViewController: UIViewController {
             make.height.equalTo(100)
         }
         
+        let panGestureRecognizer = UIPanGestureRecognizer()
+        panGestureRecognizer.maximumNumberOfTouches = 1
+        view.addGestureRecognizer(panGestureRecognizer)
+        
+        guard let internalTargets = self.navigationController?.interactivePopGestureRecognizer?.value(forKey: "targets") as? NSArray else { return }
+        guard let internalTarget = internalTargets.lastObject as? NSObject else { return }
+        guard let target = internalTarget.value(forKey: "target") else { return }
+        let action = NSSelectorFromString("handleNavigationTransition:")
+        panGestureRecognizer.addTarget(target, action: action)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MusicTableViewCell: SWTableViewCell {
+class MusicTableViewCell: ButtonTableViewCell {
     
     private var numberLabel: UILabel!
     private var artworkImageView: UIImageView!
@@ -51,12 +51,23 @@ class MusicTableViewCell: SWTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        backgroundView = UIView()
+        backgroundView?.backgroundColor = UIColor.white
+        selectedBackgroundView = UIView()
+        selectedBackgroundView?.backgroundColor = ColorWhite(220)
+        
+        /*
         let rightButtons = NSMutableArray(capacity: 1)
         rightButtons.sw_addUtilityButton(with: ColorRGB(253, 85, 98), title: "删除")
         var _rightButtons = [Any]()
         _rightButtons.append(rightButtons.lastObject!)
         setRightUtilityButtons(_rightButtons, withButtonWidth: 80)
-        
+        */
+        let button = UIButton(type: .system)
+        button.setTitle("删除", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = ColorRGB(253, 85, 98)
+        setRightButtons([button], withButtonWidth: 80)
         
         musicIndicator = ESTMusicIndicatorView(frame: CGRect())
         contentView.addSubview(musicIndicator)
@@ -65,7 +76,7 @@ class MusicTableViewCell: SWTableViewCell {
         numberLabel = UILabel()
         numberLabel.font = Font(14)
         numberLabel.textAlignment = .center
-        numberLabel.textColor = ColorWhite(white: 146)
+        numberLabel.textColor = ColorWhite(146)
         contentView.addSubview(numberLabel)
         
         artworkImageView = UIImageView()
@@ -76,7 +87,7 @@ class MusicTableViewCell: SWTableViewCell {
         songLabel = UILabel()
         songLabel.font = Font(16)
         songLabel.textAlignment = .left
-        songLabel.textColor = ColorWhite(white: 86)
+        songLabel.textColor = ColorWhite(86)
         contentView.addSubview(songLabel)
         
 //        infoLabel = UILabel()
@@ -88,18 +99,18 @@ class MusicTableViewCell: SWTableViewCell {
         singerLabel = UILabel()
         singerLabel.font = Font(11)
         singerLabel.textAlignment = .left
-        singerLabel.textColor = ColorWhite(white: 146)
+        singerLabel.textColor = ColorWhite(146)
         contentView.addSubview(singerLabel)
         albumNameLabel = UILabel()
         albumNameLabel.font = Font(11)
         albumNameLabel.textAlignment = .left
-        albumNameLabel.textColor = ColorWhite(white: 146)
+        albumNameLabel.textColor = ColorWhite(146)
         contentView.addSubview(albumNameLabel)
         
         durationLabel = UILabel()
         durationLabel.font = Font(13)
         durationLabel.textAlignment = .right
-        durationLabel.textColor = ColorWhite(white: 146)
+        durationLabel.textColor = ColorWhite(146)
         contentView.addSubview(durationLabel)
         
         
@@ -172,6 +183,7 @@ class MusicTableViewCell: SWTableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
     }
 
 }

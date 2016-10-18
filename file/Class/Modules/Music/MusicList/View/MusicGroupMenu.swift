@@ -98,7 +98,7 @@ class MusicGroupMenu: NSObject/*, UITableViewDataSource, UITableViewDelegate*/ {
         }
         else {
             cell.textLabel?.text = groupNames[indexPath.row]
-            cell.textLabel?.textColor = ColorWhite(white: 34)
+            cell.textLabel?.textColor = ColorWhite(34)
         }
         return cell
     }

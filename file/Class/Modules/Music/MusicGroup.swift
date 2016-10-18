@@ -9,7 +9,7 @@
 import Foundation
 import FMDB
 
-private let DefaultGroupName = "MusicGroup_Default"
+private let DefaultGroupName = "默认分组"
 
 
 func ==(lhs: MusicGroup, rhs: MusicGroup) -> Bool {
@@ -34,8 +34,8 @@ class MusicGroup: NSObject {
     }
     
     /// 获取歌单列表
-    class func groups() -> [MusicGroup] {
-        return _groups
+    class func groupNames() -> [String] {
+        return _groupNames
     }
     
     /// 创建组
@@ -46,8 +46,7 @@ class MusicGroup: NSObject {
             try db.executeUpdate("CREATE TABLE \(name) (id INTEGER PRIMARY KEY, date DOUBLE)", values: nil)
             try db.executeUpdate("INSERT INTO MusicGroup (name) VALUES (?)", values: [name])
             db.commit()
-            let group = MusicGroup(name: name)
-            _groups.append(group)
+            _groupNames.append(name)
             return true
         }
         catch {
@@ -111,7 +110,7 @@ class MusicGroup: NSObject {
     
     fileprivate static var db: FMDatabase = FMDatabase(path: DocumentDirectory + "/Music.db")
     
-    private static var _groups = [MusicGroup]()
+    private static var _groupNames = [String]()
     
     private static var _default: MusicGroup?
     
@@ -129,14 +128,13 @@ class MusicGroup: NSObject {
             
         }
         
-        /*
+        
         let result = try! MusicDB.executeQuery("select name from MusicGroup", values: nil)
         while result.next() {
             if let name = result.string(forColumn: "name") {
-                let group = MusicGroup(name: name)
-                _groups.append(group)
+                _groupNames.append(name)
             }
-        }*/
+        }
     }
     
     

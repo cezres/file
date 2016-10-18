@@ -26,7 +26,7 @@ class FileToolBar: UIToolbar {
     init(delegate: FileToolBarDelegate) {
         super.init(frame: CGRect())
         fileDelegate = delegate
-        backgroundColor = ColorWhite(white: 247)
+        backgroundColor = ColorWhite(247)
         let deleteBarButton = UIBarButtonItem(title: "    删除    ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FileToolBar.deleteItems))
         let moveBarButton = UIBarButtonItem(title: "    移动    ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FileToolBar.moveItems))
         let copyBarButton = UIBarButtonItem(title: "    复制    ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FileToolBar.copyItems))

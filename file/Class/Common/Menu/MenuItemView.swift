@@ -8,35 +8,28 @@
 
 import UIKit
 
-class MenuItemView: ButtonCollectionViewCell {
+class MenuItemView: ButtonTableViewCell {
     
-    var textLabel: UILabel!
     var separatorView: UIView!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        backgroundColor = UIColor.white
-        
-        backgroundView = UIView()
-        backgroundView?.backgroundColor = UIColor.white
-        selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = ColorWhite(white: 220)
-        
-        textLabel = UILabel()
-        textLabel.font = Font(16)
-        textLabel.textAlignment = .center
-        textLabel.textColor = ColorWhite(white: 34)
-        contentView.addSubview(textLabel)
-        
-        textLabel.snp.makeConstraints { (make) in
-            make.edges.equalTo(contentView)
+    var item: MenuItem! {
+        didSet {
+            backgroundColor = item.backgroundColor
+            
+            textLabel?.text = item.title
+            textLabel?.textColor = item.textColor
+            
+            separatorView.isHidden = item.isHiddenSeparatorView
         }
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        textLabel?.textAlignment = .center
         
         separatorView = UIView()
-        separatorView.backgroundColor = ColorWhite(white: 220)
+        separatorView.backgroundColor = ColorWhite(220)
         addSubview(separatorView)
-        
         separatorView.snp.makeConstraints { (make) in
             make.left.equalTo(0)
             make.right.equalTo(0)
@@ -48,9 +41,7 @@ class MenuItemView: ButtonCollectionViewCell {
         button.setTitle("删除", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = ColorRGB(253, 85, 98)
-        
-        rightButtons = [button]
-        
+        setRightButtons([button], withButtonWidth: 80)
     }
     
     required init?(coder aDecoder: NSCoder) {
