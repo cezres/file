@@ -20,6 +20,8 @@ class MusicPlayerNotification {
     static let stateDidChange = NSNotification.Name(rawValue: "MusicPlayer_Notification_StateDidChange")
 }
 
+
+
 /// 音乐播放器
 class MusicPlayer: NSObject {
     

@@ -9,7 +9,7 @@
 import UIKit
 import REMenu
 
-class MusicListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MenuDelegate {
+class MusicListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MenuDelegate, MusicGroupDelegate, ButtonTableViewCellDelegate {
     
     var group: MusicGroup! {
         didSet {
@@ -117,8 +117,14 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
             TextFieldAlertView.show(title: "创建播放列表", block: { (name) in
                 print(name)
                 if MusicGroup.create(name: name) {
+                    let button = UIButton(type: .system)
+                    button.setTitle("删除", for: .normal)
+                    button.setTitleColor(UIColor.white, for: .normal)
+                    button.backgroundColor = ColorRGB(253, 85, 98)
+                    
                     let item = MenuItem()
                     item.title = name
+                    item.rightButtons = [button]
                     menu.insertItem(item, at: menu.items.count-1)
                 }
                 else {
@@ -135,9 +141,31 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     func menu(_ menu: Menu, itemIndex: Int, onClickRightButtonAt buttonIndex: Int) {
         print(menu.items[itemIndex].title!)
+        if MusicGroup.delete(name: menu.items[itemIndex].title!) {
+            menu.removeItem(idx: itemIndex)
+        }
+        else {
+            print("删除表失败")
+        }
+    }
+    
+    // MARK: - MusicGroupDelegate
+    func musicGroup(group: MusicGroup, insertMusicAt index: Int) {
+        tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .none)
+    }
+    func musicGroup(group: MusicGroup, deleteMusicAt index: Int) {
         
     }
     
+    // MARK: - ButtonTableViewCellDelegate
+    func buttonCell(_ buttonCell: ButtonTableViewCell, onClickRightButtonAt index: Int) {
+        if group.delete(idx: index) {
+            
+        }
+        else {
+            print("")
+        }
+    }
     
     // MARK: - Number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

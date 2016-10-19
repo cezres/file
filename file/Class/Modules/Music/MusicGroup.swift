@@ -18,10 +18,18 @@ func ==(lhs: MusicGroup, rhs: MusicGroup) -> Bool {
 
 let MusicDB: FMDatabase = MusicGroup.db
 
+
+protocol MusicGroupDelegate: NSObjectProtocol {
+    func musicGroup(group: MusicGroup, insertMusicAt index: Int)
+    func musicGroup(group: MusicGroup, deleteMusicAt index: Int)
+}
+
 /// 歌单
 class MusicGroup: NSObject {
     
     let name: String
+    
+    weak var delegate: MusicGroupDelegate?
     
     /// 默认歌单
     class func `default`() -> MusicGroup {
@@ -53,21 +61,20 @@ class MusicGroup: NSObject {
             if db.lastErrorCode() != 1 {
                 assertionFailure(db.lastErrorMessage())
             }
-            db.commit()
+            db.rollback()
             return false
         }
     }
     @discardableResult class func delete(name: String) -> Bool {
-        MusicDB.beginTransaction()
-        defer {
-            MusicDB.commit()
-        }
         do {
+            MusicDB.beginTransaction()
             try MusicDB.executeUpdate("DROP TABLE \(name);", values: nil)
-            try MusicDB.executeUpdate("", values: nil)
+            try MusicDB.executeUpdate("DELETE FROM MusicGroup WHERE name = \'\(name)\'", values: nil)
+            MusicDB.commit()
             return true
         }
         catch {
+            MusicDB.rollback()
             return false
         }
     }
@@ -94,14 +101,13 @@ class MusicGroup: NSObject {
         
     }
     
-    /// 添加音乐
+    /// 添加音乐至分组
     @discardableResult func insert(url: URL) -> Bool {
         guard let music = Music(url: url) else {
             return false
         }
         return insert(music: music)
     }
-    /// 添加音乐
     @discardableResult func insert(music: Music) -> Bool {
         do {
             let date = Date()
@@ -109,6 +115,22 @@ class MusicGroup: NSObject {
             music.date = date
             musicList.insert(music, at: 0)
             debugPrint("【\(music.song)】成功添加至歌单【\(name)】")
+            delegate?.musicGroup(group: self, insertMusicAt: 0)
+            return true
+        }
+        catch {
+            return false
+        }
+    }
+    
+    /// 从分组中删除音乐
+    @discardableResult func delete(idx: Int) -> Bool {
+        return delete(music: musicList[idx])
+    }
+    @discardableResult func delete(music: Music) -> Bool {
+        do {
+            try MusicDB.executeUpdate("DELETE FROM MusicGroup WHERE id=\(music.id)", values: nil)
+            delegate?.musicGroup(group: self, deleteMusicAt: 0)
             return true
         }
         catch {
@@ -126,9 +148,9 @@ class MusicGroup: NSObject {
     
     fileprivate static var db: FMDatabase = FMDatabase(path: DocumentDirectory + "/Music.db")
     
-    private static var _groupNames = [String]()
+    fileprivate static var _groupNames = [String]()
     
-    private static var _default: MusicGroup?
+    fileprivate static var _default: MusicGroup?
     
     open override class func initialize() {
         guard db.open() else {

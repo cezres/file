@@ -21,13 +21,15 @@ class TextFieldAlertView: UIView {
         let alertView = TextFieldAlertView()
         alertView.titleLabel.text = title
         alertView.block = block
+        alertView.textField.becomeFirstResponder()
         
         superView.addSubview(alertView.backgroundButton)
         superView.addSubview(alertView)
         
         alertView.snp.makeConstraints { (make) in
             make.width.equalTo(260)
-            make.center.equalTo(0)
+            make.centerX.equalTo(0)
+            make.top.equalTo(64 + 150)
             make.bottom.equalTo(alertView.cancelButton.snp.bottom)
         }
         
@@ -69,6 +71,7 @@ class TextFieldAlertView: UIView {
     func cancel() {
         removeFromSuperview()
         backgroundButton.removeFromSuperview()
+        textField.resignFirstResponder()
     }
     
     

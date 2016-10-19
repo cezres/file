@@ -76,7 +76,6 @@ class Music: NSObject {
         let asset = AVURLAsset(url: url)
         duration = TimeInterval(asset.duration.value) / TimeInterval(asset.duration.timescale)
         if duration <= 0 {
-            //            fatalError("无效的URL")
             return nil
         }
         var _song: String = path.lastPathComponent.deletingPathExtension
@@ -145,7 +144,7 @@ class Music: NSObject {
     }
     
     func insert() throws {
-        let sql = "insert into Music (id, path, song, singer, artwork, albumName, duration) values (?, ?, ?, ?, ?, ?, ?)"
+        let sql = "INSERT INTO Music (id, path, song, singer, artwork, albumName, duration) VALUES (?, ?, ?, ?, ?, ?, ?)"
         try MusicDB.executeUpdate(sql, values: [path.hash, path, song, singer, artwork, albumName, duration])
     }
     
