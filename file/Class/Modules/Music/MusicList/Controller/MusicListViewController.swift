@@ -13,6 +13,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     
     var group: MusicGroup! {
         didSet {
+            group.delegate = self
             titleView.setTitle(group.name, for: .normal)
         }
     }
@@ -26,9 +27,9 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         fatalError("init(coder:) has not been implemented")
     }
     
+//    var menu = Menu()
     
-    
-    var menu = Menu()
+    var menu: MusicGroupMenu?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +37,18 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "排序:日期", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MusicListViewController.sort))
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: musicIndicator)
         
-        menu.navigationBarOffset = 64
-        menu.delegate = self
+//        menu.navigationBarOffset = 64
+//        menu.delegate = self
         
         group = MusicGroup.default()
-        navigationItem.title = group.name
         
         
+        menu = MusicGroupMenu(newGroupBlock: { 
+            
+        })
+        
+        
+        /*
         var items = [MenuItem]()
         for name in MusicGroup.groupNames() {
             let button = UIButton(type: .system)
@@ -64,10 +70,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         
         items.append(newItem)
         
-        menu.items = items
-        
-        
-        
+        menu.items = items*/
         
         
         // Do any additional setup after loading the view.
@@ -79,7 +82,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(MusicListViewController.handlePlayStateChangedNotification), name: MusicPlayerNotification.stateDidChange, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,6 +114,17 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    // MARK: - Notification
+    func handlePlayStateChangedNotification() {
+        if MusicPlayer.shared.state == .playing {
+            musicIndicator.state = .playing
+        }
+        else {
+            musicIndicator.state = .paused
+        }
+    }
+    
+    /*
     // MARK: - MenuDelegate
     func menu(_ menu: Menu, didSelectRowAt index: Int) {
         if index == menu.items.count - 1 {
@@ -148,22 +162,20 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
             print("删除表失败")
         }
     }
+    */
     
     // MARK: - MusicGroupDelegate
     func musicGroup(group: MusicGroup, insertMusicAt index: Int) {
         tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .none)
     }
     func musicGroup(group: MusicGroup, deleteMusicAt index: Int) {
-        
+        tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .right)
     }
     
     // MARK: - ButtonTableViewCellDelegate
     func buttonCell(_ buttonCell: ButtonTableViewCell, onClickRightButtonAt index: Int) {
-        if group.delete(idx: index) {
-            
-        }
-        else {
-            print("")
+        if !group.delete(idx: index) {
+            print("Error")
         }
     }
     
@@ -178,6 +190,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         let music = group.list()[indexPath.row]
         cell.setup(music)
         cell.number = indexPath.row
+        cell.delegate = self
         
         if MusicPlayer.shared.currentMusic?.id == music.id {
             if MusicPlayer.shared.isPlaying {
@@ -206,9 +219,6 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         tableView.reloadRows(at: idxPaths, with: .none)
-        
-        let controller = MusicPlayerViewController()
-        navigationController?.pushViewController(controller, animated: true)
     }
     
     lazy var tableView: UITableView = {

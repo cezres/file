@@ -16,6 +16,12 @@ enum MusicPlayerState {
     case stopped
 }
 
+enum MusicPlayMode {
+    case loopAll    // 列表循环
+    case loopSingle // 单曲循环
+    case random     // 随机
+}
+
 class MusicPlayerNotification {
     static let stateDidChange = NSNotification.Name(rawValue: "MusicPlayer_Notification_StateDidChange")
 }
@@ -24,6 +30,9 @@ class MusicPlayerNotification {
 
 /// 音乐播放器
 class MusicPlayer: NSObject {
+    
+    
+    private var list = [Music]()
     
     
     var state: MusicPlayerState = .stopped {
@@ -35,6 +44,8 @@ class MusicPlayer: NSObject {
         }
     }
     
+    var mode: MusicPlayMode = .loopAll
+    
     static var shared = MusicPlayer()
     
     var isPlaying: Bool {
@@ -42,6 +53,21 @@ class MusicPlayer: NSObject {
             return false
         }
         return player.isPlaying
+    }
+    
+    var currentTime: TimeInterval {
+        get {
+            guard let player = player else { return 0 }
+            return player.currentTime
+        }
+        set {
+            guard let player = player else { return }
+            player.currentTime = newValue
+        }
+    }
+    var duration: TimeInterval {
+        guard let player = player else { return 0 }
+        return player.duration
     }
     
     var currentMusic: Music? {
@@ -103,8 +129,6 @@ class MusicPlayer: NSObject {
     
     private var player: AVAudioPlayer?
     
-    private var timer: Timer?
-    
     private override init() {
         super.init()
         try! AVAudioSession.sharedInstance().setActive(true)
@@ -132,7 +156,7 @@ extension MusicPlayer: AVAudioPlayerDelegate {
     }
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         print(#function)
-        currentMusic = nil
         state = .stopped
+        currentMusic?.playCount += 1
     }
 }

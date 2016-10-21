@@ -25,13 +25,14 @@ class Music: NSObject {
     // 播放次数
     var playCount: Int32 = 0 {
         didSet {
-            update()
+            do {
+                try MusicDB.executeUpdate("update Music set playCount=\(playCount) where id=\(id)", values: nil)
+            }
+            catch {
+                
+            }
         }
     }
-    
-//    lazy var durationText: String = {
-//        return String(format: "%02d:%02d", Int(self.duration/60), Int(self.duration) % 60)
-//    }()
     
     var date: Date? // 添加入歌单的日期
     
@@ -148,11 +149,6 @@ class Music: NSObject {
         try MusicDB.executeUpdate(sql, values: [path.hash, path, song, singer, artwork, albumName, duration])
     }
     
-    func update() {
-        try! MusicDB.executeUpdate("update Music set playCount=\(playCount) where id=\(id)", values: nil)
-    }
-    
-    
     // MARK: - -----
     open override class func initialize() {
         guard MusicDB.open() else {
@@ -180,7 +176,13 @@ class Music: NSObject {
         return "ID: \(id) \n歌曲名: \(song) \n歌手: \(singer) \n专辑名: \(albumName) \n时长: \(Int(duration)) \n播放次数: \(playCount) \n日期: \(date) \n"
     }
     
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let music = object as? Music else {
+            return false
+        }
+        return id == music.id
+    }
+    
 }
-
 
 

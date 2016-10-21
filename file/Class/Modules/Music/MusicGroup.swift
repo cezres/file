@@ -128,9 +128,13 @@ class MusicGroup: NSObject {
         return delete(music: musicList[idx])
     }
     @discardableResult func delete(music: Music) -> Bool {
+        guard let index = musicList.index(of: music) else {
+            return false
+        }
         do {
-            try MusicDB.executeUpdate("DELETE FROM MusicGroup WHERE id=\(music.id)", values: nil)
-            delegate?.musicGroup(group: self, deleteMusicAt: 0)
+            try MusicDB.executeUpdate("DELETE FROM \(name) WHERE id=\(music.id)", values: nil)
+            musicList.remove(at: index)
+            delegate?.musicGroup(group: self, deleteMusicAt: index)
             return true
         }
         catch {
@@ -165,7 +169,6 @@ class MusicGroup: NSObject {
         catch {
             
         }
-        
         
         let result = try! MusicDB.executeQuery("select name from MusicGroup", values: nil)
         while result.next() {

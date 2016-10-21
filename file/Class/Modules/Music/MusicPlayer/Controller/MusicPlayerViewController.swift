@@ -12,6 +12,7 @@ class MusicPlayerViewController: UIViewController {
     
     
     let toolView = MusicPlayerToolView()
+    let infoView = MusicPlayerInfoView()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -22,11 +23,18 @@ class MusicPlayerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.white
+        
+        
+        
         
         
         
@@ -37,6 +45,20 @@ class MusicPlayerViewController: UIViewController {
         }
         backgrounView.url = MusicPlayer.shared.currentMusic?.artworkURL
         
+        let imageView = UIImageView()
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderWidth = 2
+        imageView.layer.cornerRadius = 6
+        imageView.layer.masksToBounds = true
+        imageView.image = backgrounView.image
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints { (make) in
+            make.width.equalTo(200)
+            make.height.equalTo(200)
+            make.centerX.equalTo(0)
+            make.top.equalTo(150)
+        }
+        
         
         view.addSubview(toolView)
         toolView.snp.makeConstraints { (make) in
@@ -45,6 +67,17 @@ class MusicPlayerViewController: UIViewController {
             make.bottom.equalTo(0)
             make.height.equalTo(100)
         }
+        
+        view.addSubview(infoView)
+        infoView.snp.makeConstraints { (make) in
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+            make.top.equalTo(imageView.snp.bottom).offset(60)
+            make.height.equalTo(150)
+        }
+        
+        
+        
         
         let panGestureRecognizer = UIPanGestureRecognizer()
         panGestureRecognizer.maximumNumberOfTouches = 1
@@ -55,6 +88,10 @@ class MusicPlayerViewController: UIViewController {
         guard let target = internalTarget.value(forKey: "target") else { return }
         let action = NSSelectorFromString("handleNavigationTransition:")
         panGestureRecognizer.addTarget(target, action: action)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(MusicPlayerViewController.handlePlayStateChangedNotification), name: MusicPlayerNotification.stateDidChange, object: nil)
+        handlePlayStateChangedNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,8 +108,17 @@ class MusicPlayerViewController: UIViewController {
         return .lightContent
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        _ = navigationController?.popViewController(animated: true)
+    func handlePlayStateChangedNotification() {
+        let state = MusicPlayer.shared.state
+        if state == .playing {
+            infoView.start()
+        }
+        else if state == .paused {
+            infoView.pause()
+        }
+        else if state == .stopped {
+            infoView.stop()
+        }
     }
 
 }

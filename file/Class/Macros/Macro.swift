@@ -31,10 +31,10 @@ func ColorWhiteAlpha(_ white: CGFloat, _ alpha: CGFloat) -> UIColor {
 }
 
 func ColorRGB(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> UIColor {
-    return ColorRGBA(r: r, g: g, b: b, a: 1.0)
+    return ColorRGBA(r, g, b, 1.0)
 }
 
-func ColorRGBA(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
+func ColorRGBA(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) -> UIColor {
     return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
 }
 

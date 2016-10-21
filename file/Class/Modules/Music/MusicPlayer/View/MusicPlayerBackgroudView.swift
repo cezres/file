@@ -27,33 +27,12 @@ class MusicPlayerBackgroudView: UIImageView {
         clipsToBounds = true
         contentMode = .scaleAspectFill
         
-        let blurEffect = UIBlurEffect(style: .extraLight)
+        let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         addSubview(blurEffectView)
         blurEffectView.snp.makeConstraints { (make) in
             make.edges.equalTo(snp.edges)
         }
-        
-        
-        
-//        let blurEffectView2 = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-//        addSubview(blurEffectView2)
-//        blurEffectView2.snp.makeConstraints { (make) in
-//            make.left.equalTo(0)
-//            make.right.equalTo(0)
-//            make.top.equalTo(0)
-//            make.height.equalTo(snp.height).multipliedBy(0.5)
-//        }
-//        
-//        let blurEffectView3 = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-//        addSubview(blurEffectView3)
-//        blurEffectView3.snp.makeConstraints { (make) in
-//            make.left.equalTo(0)
-//            make.right.equalTo(0)
-//            make.top.equalTo(blurEffectView2.snp.bottom)
-//            make.bottom.equalTo(snp.bottom).offset(0)
-//        }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
