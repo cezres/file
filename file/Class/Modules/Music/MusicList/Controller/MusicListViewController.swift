@@ -9,7 +9,7 @@
 import UIKit
 import REMenu
 
-class MusicListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MenuDelegate, MusicGroupDelegate, ButtonTableViewCellDelegate {
+class MusicListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MusicGroupDelegate, ButtonTableViewCellDelegate {
     
     var group: MusicGroup! {
         didSet {
@@ -99,11 +99,11 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Event
     func toggleMenu() {
-        if menu.isOpen {
-            menu.close()
+        if menu!.isOpen {
+            menu!.close()
         }
         else {
-            menu.show(view: view)
+            menu!.show(view: view)
         }
     }
     func sort() {
