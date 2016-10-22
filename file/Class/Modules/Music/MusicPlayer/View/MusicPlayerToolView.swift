@@ -22,7 +22,7 @@ class MusicPlayerToolView: UIView {
         backgroundColor = UIColor(white: 0.4, alpha: 0.4)
         initSubviews()
         handlePlayStateChangedNotification()
-        NotificationCenter.default.addObserver(self, selector: #selector(MusicPlayerToolView.handlePlayStateChangedNotification), name: MusicPlayerNotification.stateDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MusicPlayerToolView.handlePlayStateChangedNotification), name: MusicPlayerNotification.stateChanged, object: nil)
     }
     
     deinit {
@@ -43,11 +43,11 @@ class MusicPlayerToolView: UIView {
     }
     
     func clickNext() {
-        //        MusicPlayer.shared.next()
+        MusicPlayer.shared.next()
     }
     
     func clickPrev() {
-        //        MusicPlayer.shared.prev()
+        MusicPlayer.shared.prev()
     }
     
     func handlePlayStateChangedNotification() {

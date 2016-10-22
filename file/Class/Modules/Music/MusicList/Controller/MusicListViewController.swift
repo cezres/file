@@ -27,8 +27,6 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         fatalError("init(coder:) has not been implemented")
     }
     
-//    var menu = Menu()
-    
     var menu: MusicGroupMenu?
 
     override func viewDidLoad() {
@@ -37,40 +35,13 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "排序:日期", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MusicListViewController.sort))
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: musicIndicator)
         
-//        menu.navigationBarOffset = 64
-//        menu.delegate = self
-        
         group = MusicGroup.default()
         
         
-        menu = MusicGroupMenu(newGroupBlock: { 
-            
+        menu = MusicGroupMenu(selectedGroupBlock: { [weak self](group) in
+            self?.group = group
+            self?.tableView.reloadData()
         })
-        
-        
-        /*
-        var items = [MenuItem]()
-        for name in MusicGroup.groupNames() {
-            let button = UIButton(type: .system)
-            button.setTitle("删除", for: .normal)
-            button.setTitleColor(UIColor.white, for: .normal)
-            button.backgroundColor = ColorRGB(253, 85, 98)
-            
-            let item = MenuItem()
-            item.title = name
-            item.rightButtons = [button]
-            items.append(item)
-        }
-        
-        let newItem = MenuItem()
-        newItem.title = "创建分组"
-        newItem.textColor = UIColor.white
-        newItem.backgroundColor = ColorRGB(61, 168, 68)
-        newItem.isHiddenSeparatorView = true
-        
-        items.append(newItem)
-        
-        menu.items = items*/
         
         
         // Do any additional setup after loading the view.
@@ -82,7 +53,8 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(MusicListViewController.handlePlayStateChangedNotification), name: MusicPlayerNotification.stateDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MusicListViewController.handlePlayerStateChangedNotification), name: MusicPlayerNotification.stateChanged, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,7 +87,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - Notification
-    func handlePlayStateChangedNotification() {
+    func handlePlayerStateChangedNotification() {
         if MusicPlayer.shared.state == .playing {
             musicIndicator.state = .playing
         }
@@ -124,45 +96,6 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    /*
-    // MARK: - MenuDelegate
-    func menu(_ menu: Menu, didSelectRowAt index: Int) {
-        if index == menu.items.count - 1 {
-            TextFieldAlertView.show(title: "创建播放列表", block: { (name) in
-                print(name)
-                if MusicGroup.create(name: name) {
-                    let button = UIButton(type: .system)
-                    button.setTitle("删除", for: .normal)
-                    button.setTitleColor(UIColor.white, for: .normal)
-                    button.backgroundColor = ColorRGB(253, 85, 98)
-                    
-                    let item = MenuItem()
-                    item.title = name
-                    item.rightButtons = [button]
-                    menu.insertItem(item, at: menu.items.count-1)
-                }
-                else {
-                    print("创建表失败")
-                }
-            })
-        }
-        else {
-            let item = menu.items[index]
-            group = MusicGroup(name: item.title!)
-            tableView.reloadData()
-            menu.close()
-        }
-    }
-    func menu(_ menu: Menu, itemIndex: Int, onClickRightButtonAt buttonIndex: Int) {
-        print(menu.items[itemIndex].title!)
-        if MusicGroup.delete(name: menu.items[itemIndex].title!) {
-            menu.removeItem(idx: itemIndex)
-        }
-        else {
-            print("删除表失败")
-        }
-    }
-    */
     
     // MARK: - MusicGroupDelegate
     func musicGroup(group: MusicGroup, insertMusicAt index: Int) {
@@ -209,8 +142,10 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Select
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let music = group.list()[indexPath.row]
-        MusicPlayer.shared.play(music)
+//        let music = group.list()[indexPath.row]
+//        MusicPlayer.shared.play(music)
+        
+        MusicPlayer.shared.play(list: group.list(), idx: indexPath.row)
         
         var idxPaths = [IndexPath]()
         for cell in tableView.visibleCells {

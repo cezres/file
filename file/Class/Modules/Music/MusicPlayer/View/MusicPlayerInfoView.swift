@@ -55,12 +55,7 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
         if timer == nil {
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(MusicPlayerInfoView.handleTimer), userInfo: nil, repeats: true)
         }
-        
-        songLabel.text = MusicPlayer.shared.currentMusic?.song
-        singerLabel.text = MusicPlayer.shared.currentMusic?.singer
-        
-        currentTime = MusicPlayer.shared.currentTime
-        duration = MusicPlayer.shared.duration
+        setNeedsDisplay()
     }
     
     func pause() {

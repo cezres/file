@@ -10,12 +10,12 @@ import UIKit
 
 class MusicGroupMenu: Menu, MenuDelegate {
     
-    var newGroupBlock: ( () -> Void )?
+    var selectedGroupBlock: ( (_ group: MusicGroup) -> Void )?
     
-    init(newGroupBlock: @escaping () -> Void) {
+    init(selectedGroupBlock: @escaping (_ group: MusicGroup) -> Void) {
         super.init()
         
-        self.newGroupBlock = newGroupBlock
+        self.selectedGroupBlock = selectedGroupBlock
         
         delegate = self
         
@@ -70,10 +70,13 @@ class MusicGroupMenu: Menu, MenuDelegate {
             })
         }
         else {
-            newGroupBlock?()
+            let name = items[index].title!
+            let group = MusicGroup(name: name)
+            selectedGroupBlock?(group)
             menu.close()
         }
     }
+    
     func menu(_ menu: Menu, itemIndex: Int, onClickRightButtonAt buttonIndex: Int) {
         print(menu.items[itemIndex].title!)
         if MusicGroup.delete(name: menu.items[itemIndex].title!) {

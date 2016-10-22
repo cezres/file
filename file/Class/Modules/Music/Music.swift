@@ -64,8 +64,6 @@ class Music: NSObject {
                 duration = result.double(forColumn: "duration")
                 playCount = result.int(forColumn: "playCount")
                 result.close()
-                
-                debugPrint("SQLite->Music")
                 return
             }
         }
@@ -123,7 +121,6 @@ class Music: NSObject {
             let sql = "insert into Music (id, path, song, singer, artwork, albumName, duration) values (?, ?, ?, ?, ?, ?, ?)"
             let values = [path.hash, path, song, singer, artwork, albumName, duration] as [Any]
             try MusicDB.executeUpdate(sql, values: values)
-            debugPrint("INSERT->Music")
         }
         catch {
             fatalError("Music INSERT ERROR: \(url)")

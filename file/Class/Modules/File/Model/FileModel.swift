@@ -9,18 +9,10 @@
 import Foundation
 
 
-//protocol FileModelDelegate: NSObjectProtocol {
-//    
-//    func fileLoadingComplete(files: [File])
-//    
-//}
-
-
 class FileModel {
     
     let directoryPath: String
-    
-//    weak var delegate: FileModelDelegate?
+
     
     var list = [File]()
     

@@ -97,6 +97,7 @@ class FileCollectionViewCell: UICollectionViewCell {
         case .Zip:
             iconImageView.image = UIImage(named: "icon_zip")
         case .Photo:
+            iconImageView.image = nil
             ImageCache.retrieveImage(url: file.url, format: .fileIcon, completionBlock: { [weak self](url, image) in
                 self?.iconImageView.image = image
             })
