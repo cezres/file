@@ -61,6 +61,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         tableView.reloadData()
+        handlePlayerStateChangedNotification()
     }
 
     override func didReceiveMemoryWarning() {

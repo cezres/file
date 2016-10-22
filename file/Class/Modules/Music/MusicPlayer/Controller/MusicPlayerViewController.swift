@@ -10,9 +10,6 @@ import UIKit
 
 class MusicPlayerViewController: UIViewController {
     
-    
-    
-    
     init() {
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
@@ -32,10 +29,6 @@ class MusicPlayerViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.white
         
-//        backgrounView
-//        artworkView
-//        infoView
-//        toolView
         view.addSubview(backgrounView)
         view.addSubview(artworkView)
         view.addSubview(infoView)
@@ -51,6 +44,9 @@ class MusicPlayerViewController: UIViewController {
         let action = NSSelectorFromString("handleNavigationTransition:")
         panGestureRecognizer.addTarget(target, action: action)
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MusicPlayerViewController.popController))
+        view.addGestureRecognizer(tapGestureRecognizer)
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(MusicPlayerViewController.handlePlayerStateChangedNotification), name: MusicPlayerNotification.stateChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MusicPlayerViewController.handlePlayerMusicChangedNotification), name: MusicPlayerNotification.musicChanged, object: nil)
@@ -65,14 +61,15 @@ class MusicPlayerViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    func popController() {
+        _ = navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Notification
