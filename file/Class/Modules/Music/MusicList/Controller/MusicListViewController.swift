@@ -9,7 +9,7 @@
 import UIKit
 import REMenu
 
-class MusicListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MusicGroupDelegate, ButtonTableViewCellDelegate {
+class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTableViewCellDelegate {
     
     var group: MusicGroup! {
         didSet {
@@ -45,8 +45,7 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         
         
         // Do any additional setup after loading the view.
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.list = group.list()
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
@@ -60,7 +59,6 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        tableView.reloadData()
         handlePlayerStateChangedNotification()
     }
 
@@ -95,11 +93,13 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         else {
             musicIndicator.state = .paused
         }
+        tableView.list = group.list()
     }
     
     
     // MARK: - MusicGroupDelegate
     func musicGroup(group: MusicGroup, insertMusicAt index: Int) {
+        
         tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .none)
     }
     func musicGroup(group: MusicGroup, deleteMusicAt index: Int) {
@@ -113,55 +113,9 @@ class MusicListViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    // MARK: - Number
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return group.list().count
-    }
-    
-    // MARK: - Cell
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Music") as! MusicTableViewCell
-        let music = group.list()[indexPath.row]
-        cell.setup(music)
-        cell.number = indexPath.row
-        cell.delegate = self
-        
-        if MusicPlayer.shared.currentMusic?.id == music.id {
-            if MusicPlayer.shared.isPlaying {
-                cell.state = .playing
-            }
-            else {
-                cell.state = .paused
-            }
-        }
-        else {
-            cell.state = .stopped
-        }
-        
-        return cell
-    }
-    // MARK: - Select
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-//        let music = group.list()[indexPath.row]
-//        MusicPlayer.shared.play(music)
-        
-        MusicPlayer.shared.play(list: group.list(), idx: indexPath.row)
-        
-        var idxPaths = [IndexPath]()
-        for cell in tableView.visibleCells {
-            if let idx = tableView.indexPath(for: cell) {
-                idxPaths.append(idx)
-            }
-        }
-        tableView.reloadRows(at: idxPaths, with: .none)
-    }
-    
-    lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(), style: UITableViewStyle.plain)
-        tableView.backgroundColor = UIColor.white
-        tableView.rowHeight = 60
-        tableView.register(MusicTableViewCell.classForCoder(), forCellReuseIdentifier: "Music")
+    lazy var tableView: MusicListTableView = {
+        let tableView = MusicListTableView()
+        tableView.cellDelegate = self
         return tableView
     }()
     

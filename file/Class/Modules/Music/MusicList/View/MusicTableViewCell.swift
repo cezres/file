@@ -33,7 +33,14 @@ class MusicTableViewCell: ButtonTableViewCell {
         }
     }
     
+    private var id: Int64 = 0
+    
     func setup(_ music: Music) {
+        guard id != music.id else {
+            return
+        }
+        id = music.id
+        
         artworkImageView.image = UIImage(named: "icon_audio")
         if let url = music.artworkURL {
             ImageCache.retrieveImage(url: url, format: .fileIcon, completionBlock: { [weak self](url, image) in

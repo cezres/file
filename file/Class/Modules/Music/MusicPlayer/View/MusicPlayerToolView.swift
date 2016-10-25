@@ -47,7 +47,7 @@ class MusicPlayerToolView: UIView {
     }
     
     func clickPrev() {
-        MusicPlayer.shared.prev()
+        MusicPlayer.shared.previous()
     }
     
     func handlePlayStateChangedNotification() {

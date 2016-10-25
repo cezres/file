@@ -40,6 +40,7 @@ class MusicPlayer: NSObject {
             guard state != oldValue else {
                 return
             }
+            configNowPlayingInfoCenter()
             NotificationCenter.default.post(name: MusicPlayerNotification.stateChanged, object: self, userInfo: nil)
         }
     }
@@ -61,6 +62,7 @@ class MusicPlayer: NSObject {
     }
     var duration: TimeInterval {
         guard let player = player else { return 0 }
+        configNowPlayingInfoCenter()
         return player.duration
     }
     var currentMusic: Music? {
@@ -70,7 +72,7 @@ class MusicPlayer: NSObject {
         }
     }
     
-    // MARK: - Play
+    // MARK: Playback
     @discardableResult func play(list: [Music], idx: Int) -> Bool {
         self.list = list
         return play(idx: idx)
@@ -87,6 +89,9 @@ class MusicPlayer: NSObject {
         }
         stop()
         do {
+            try! AVAudioSession.sharedInstance().setActive(true)
+            try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            UIApplication.shared.beginReceivingRemoteControlEvents()
             player = try AVAudioPlayer(contentsOf: music.url)
             player!.delegate = self
             currentMusic = music
@@ -105,8 +110,11 @@ class MusicPlayer: NSObject {
         guard player != nil else {
             return false
         }
+        guard player!.play() else {
+            return false
+        }
         state = .playing
-        return player!.play()
+        return true
     }
     func pause() {
         guard player != nil else {
@@ -124,7 +132,9 @@ class MusicPlayer: NSObject {
         state = .stopped
     }
     
-    // MARK: - Mode
+    
+    
+    // MARK: - Previous/Next
     var mode: MusicPlayMode = .loopAll
     func next() {
         guard list.count > 0 else { return }
@@ -137,11 +147,12 @@ class MusicPlayer: NSObject {
             play(idx: idx)
         }
     }
-    func prev() {
+    func previous() {
         guard list.count > 0 else { return }
         let idx = index == 0 ? list.count-1 : index - 1
         play(idx: idx)
     }
+    
     
     // MARK: - Private
     private var player: AVAudioPlayer?
@@ -149,8 +160,7 @@ class MusicPlayer: NSObject {
     private var index = 0
     private override init() {
         super.init()
-        try! AVAudioSession.sharedInstance().setActive(true)
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        configRemoteComtrol()
     }
     
 }
