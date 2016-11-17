@@ -12,7 +12,7 @@ class MusicListTableView: UITableView, UITableViewDataSource, UITableViewDelegat
     
     var list = [Music]() {
         didSet {
-            reloadData()
+//            reloadData()
         }
     }
     
@@ -30,7 +30,7 @@ class MusicListTableView: UITableView, UITableViewDataSource, UITableViewDelegat
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count

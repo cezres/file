@@ -44,8 +44,6 @@ class Music: NSObject {
     }()
     
     
-    
-    
     /// 初始化音乐对象
     init?(url: URL) {
         
@@ -141,10 +139,21 @@ class Music: NSObject {
         url = URL(fileURLWithPath: HomeDirectory + path)
     }
     
-    func insert() throws {
-        let sql = "INSERT INTO Music (id, path, song, singer, artwork, albumName, duration) VALUES (?, ?, ?, ?, ?, ?, ?)"
-        try MusicDB.executeUpdate(sql, values: [path.hash, path, song, singer, artwork, albumName, duration])
+//    func insert() throws {
+//        let sql = "INSERT INTO Music (id, path, song, singer, artwork, albumName, duration) VALUES (?, ?, ?, ?, ?, ?, ?)"
+//        try MusicDB.executeUpdate(sql, values: [path.hash, path, song, singer, artwork, albumName, duration])
+//    }
+    
+    func delete() {
+        do {
+            try MusicDB.executeUpdate("DELETE FROM Music WHERE id=\(id)", values: nil)
+        }
+        catch {
+            
+        }
     }
+    // http://music.163.com/weapi/search/suggest/web?csrf_token=a114ec208ef0d27171b4c34118902c41
+    // http://s1.music.126.net/download/osx/NeteaseMusic_1.4.5_488_web.dmg
     
     // MARK: - -----
     open override class func initialize() {
@@ -166,7 +175,6 @@ class Music: NSObject {
         catch {
             
         }
-        
     }
     
     override var description: String {

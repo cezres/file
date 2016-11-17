@@ -132,8 +132,6 @@ class MusicPlayer: NSObject {
         state = .stopped
     }
     
-    
-    
     // MARK: - Previous/Next
     var mode: MusicPlayMode = .loopAll
     func next() {
@@ -147,6 +145,7 @@ class MusicPlayer: NSObject {
             play(idx: idx)
         }
     }
+    
     func previous() {
         guard list.count > 0 else { return }
         let idx = index == 0 ? list.count-1 : index - 1

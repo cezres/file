@@ -40,7 +40,7 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
         
         menu = MusicGroupMenu(selectedGroupBlock: { [weak self](group) in
             self?.group = group
-            self?.tableView.reloadData()
+            self?.tableView.list = group.list()
         })
         
         
@@ -94,15 +94,17 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
             musicIndicator.state = .paused
         }
         tableView.list = group.list()
+        tableView.reloadData()
     }
     
     
     // MARK: - MusicGroupDelegate
     func musicGroup(group: MusicGroup, insertMusicAt index: Int) {
-        
-        tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .none)
+        tableView.list = group.list()
+        tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .left)
     }
     func musicGroup(group: MusicGroup, deleteMusicAt index: Int) {
+        tableView.list.remove(at: index)
         tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .right)
     }
     

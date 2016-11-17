@@ -13,7 +13,6 @@ class MusicTableViewCell: ButtonTableViewCell {
     private var numberLabel: UILabel!
     private var artworkImageView: UIImageView!
     private var songLabel: UILabel!
-//    private var infoLabel: UILabel!
     private var singerLabel: UILabel!
     private var albumNameLabel: UILabel!
     private var durationLabel: UILabel!
@@ -49,7 +48,6 @@ class MusicTableViewCell: ButtonTableViewCell {
         }
         
         songLabel.text = music.song
-//        infoLabel.text = "歌手:\(music.singer) 专辑:\(music.albumName) 播放次数:\(music.playCount)"
         singerLabel.text = "歌手:\(music.singer)"
         albumNameLabel.text = "专辑:\(music.albumName)"
         durationLabel.text = String(format: "%02d:%02d", Int(music.duration/60), Int(music.duration) % 60)
@@ -63,13 +61,6 @@ class MusicTableViewCell: ButtonTableViewCell {
         selectedBackgroundView = UIView()
         selectedBackgroundView?.backgroundColor = ColorWhite(220)
         
-        /*
-        let rightButtons = NSMutableArray(capacity: 1)
-        rightButtons.sw_addUtilityButton(with: ColorRGB(253, 85, 98), title: "删除")
-        var _rightButtons = [Any]()
-        _rightButtons.append(rightButtons.lastObject!)
-        setRightUtilityButtons(_rightButtons, withButtonWidth: 80)
-        */
         let button = UIButton(type: .system)
         button.setTitle("删除", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
@@ -97,17 +88,12 @@ class MusicTableViewCell: ButtonTableViewCell {
         songLabel.textColor = ColorWhite(86)
         contentView.addSubview(songLabel)
         
-//        infoLabel = UILabel()
-//        infoLabel.font = Font(12)
-//        infoLabel.textAlignment = .left
-//        infoLabel.textColor = ColorWhite(white: 146)
-//        contentView.addSubview(infoLabel)
-        
         singerLabel = UILabel()
         singerLabel.font = Font(11)
         singerLabel.textAlignment = .left
         singerLabel.textColor = ColorWhite(146)
         contentView.addSubview(singerLabel)
+        
         albumNameLabel = UILabel()
         albumNameLabel.font = Font(11)
         albumNameLabel.textAlignment = .left
@@ -126,8 +112,6 @@ class MusicTableViewCell: ButtonTableViewCell {
             make.width.equalTo(40)
             make.height.equalTo(40)
             make.centerY.equalTo(0)
-//            make.top.equalTo(0)
-//            make.bottom.equalTo(0)
         }
         numberLabel.snp.makeConstraints { (make) in
             make.left.equalTo(0)
@@ -147,13 +131,6 @@ class MusicTableViewCell: ButtonTableViewCell {
             make.height.equalTo(songLabel.font.lineHeight)
             make.bottom.equalTo(snp.centerY).offset(-3)
         }
-        
-//        infoLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(songLabel)
-//            make.right.equalTo(songLabel)
-//            make.height.equalTo(infoLabel.font.lineHeight)
-//            make.top.equalTo(snp.centerY).offset(3)
-//        }
         singerLabel.snp.makeConstraints { (make) in
             make.left.equalTo(songLabel)
             make.right.equalTo(songLabel)

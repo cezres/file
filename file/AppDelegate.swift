@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabbarController.viewControllers = [
             UINavigationController(rootViewController: FileViewController()),    // 文件
             // 照片
-            UINavigationController(rootViewController: MusicListViewController()), // 音乐播放
+            UINavigationController(rootViewController: MyMusicViewController()), // 音乐播放
             // 视频播放
             UINavigationController(rootViewController: SettingViewController()) // 设置   // 数据传输
         ]
