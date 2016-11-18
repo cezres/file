@@ -41,6 +41,8 @@ class MyMusicViewController: UIViewController, UITableViewDataSource, UITableVie
             make.edges.equalTo(view)
         }
         
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,14 +51,14 @@ class MyMusicViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     
     func onClickMoreItem() {
         
     }
-    func onClickCancelItem() {
-        
-    }
-    
     
     // MARK: - UITableView Protocol
     /// Number
