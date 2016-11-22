@@ -9,6 +9,7 @@ target 'file' do
     pod 'REMenu'
     pod 'SABlurImageView'
     pod 'SWTableViewCell'
+    pod 'SnapKit'
     
 end
 

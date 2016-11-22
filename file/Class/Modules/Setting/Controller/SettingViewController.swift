@@ -27,6 +27,7 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.white
         
+        tableView.bounces = false
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)

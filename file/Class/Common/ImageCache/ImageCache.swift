@@ -27,7 +27,7 @@ class ImageCache: NSObject, FICImageCacheDelegate {
         var formats = [FICImageFormat]()
         
         
-        let fileIconImageFormat = FICImageFormat(name: ImageCacheFormat.fileIcon.rawValue, family: FICDPhotoImageFormatFamily, imageSize: CGSize(width: 100, height: 100), style: .style32BitBGRA, maximumCount: 200, devices: .phone, protectionMode: .none)
+        let fileIconImageFormat = FICImageFormat(name: ImageCacheFormat.fileIcon.rawValue, family: FICDPhotoImageFormatFamily, imageSize: CGSize(width: 64, height: 64), style: .style32BitBGRA, maximumCount: 200, devices: .phone, protectionMode: .none)
         formats.append(fileIconImageFormat!)
 
         

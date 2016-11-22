@@ -16,6 +16,7 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
     private var model: FileModel!
     
     private var fileView: FileView!
+    private var toolBar: FileToolBar!
 
     init(directoryPath: String = DocumentDirectory) {
         super.init(nibName: nil, bundle: nil)
@@ -109,6 +110,10 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         
         tabBarController?.tabBar.isHidden = false
         fileView.setEditing(editing: false)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.toolBar.transform.ty = 0
+        }
     }
     /// 编辑状态的导航栏
     func editNavigationItem() {
@@ -117,6 +122,9 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         
         tabBarController?.tabBar.isHidden = true
         fileView.setEditing(editing: true)
+        UIView.animate(withDuration: 0.3) {
+            self.toolBar.transform.ty = -49
+        }
     }
     
     /// 初始化子视图
@@ -128,12 +136,12 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
             make.edges.equalTo(view)
         }
         
-        let toolBar = FileToolBar(delegate: self)
+        toolBar = FileToolBar(delegate: self)
         view.addSubview(toolBar)
         toolBar.snp.makeConstraints { (make) in
             make.left.equalTo(0)
             make.right.equalTo(0)
-            make.bottom.equalTo(0)
+            make.top.equalTo(view.snp.bottom)
             make.height.equalTo(49)
         }
         

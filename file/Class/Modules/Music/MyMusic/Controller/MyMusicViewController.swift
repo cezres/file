@@ -92,7 +92,7 @@ class MyMusicViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(), style: .plain)
+        let tableView = UITableView(frame: CGRect(), style: .grouped)
         tableView.backgroundColor = UIColor.white
         tableView.delegate = self
         tableView.dataSource = self

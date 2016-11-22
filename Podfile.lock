@@ -2,20 +2,23 @@ PODS:
   - REMenu (1.10)
   - RESideMenu (4.0.7)
   - SABlurImageView (3.0.0)
+  - SnapKit (3.0.2)
   - SWTableViewCell (0.3.7)
 
 DEPENDENCIES:
   - REMenu
   - RESideMenu
   - SABlurImageView
+  - SnapKit
   - SWTableViewCell
 
 SPEC CHECKSUMS:
   REMenu: 30dad195930adf6c5eeb8041e3257aa60bf9fa49
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SABlurImageView: 7003ca28ded502c984846374a117f88a287d9faf
+  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: 67acc9dee1ea6ca87ba7e590aa6edcdba921d86b
+PODFILE CHECKSUM: 98436df73942a2bff4a894a96608ac8190607306
 
 COCOAPODS: 1.1.1

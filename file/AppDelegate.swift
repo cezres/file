@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RESideMenu
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,22 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        print(HomeDirectory)
+        let contentViewController = UINavigationController(rootViewController: FileViewController())
+        let leftMenuViewController = LeftMenuViewController()
         
-        print(DocumentDirectory)
+        let sideMenuViewController = RESideMenu(contentViewController: contentViewController, leftMenuViewController: leftMenuViewController, rightMenuViewController: nil)!
+        sideMenuViewController.backgroundImage = UIImage(named: "MenuBackground")
+        sideMenuViewController.menuPreferredStatusBarStyle = UIStatusBarStyle.lightContent
+//        sideMenuViewController.delegate = self
+        sideMenuViewController.contentViewShadowColor = UIColor.black
+        sideMenuViewController.contentViewShadowOffset = CGSize(width: 0, height: 0)
+        sideMenuViewController.contentViewShadowOpacity = 0.6
+        sideMenuViewController.contentViewShadowRadius = 12
+        sideMenuViewController.contentViewShadowEnabled = true
+        //sideMenuViewController.scaleContentView = false
+        sideMenuViewController.contentViewInPortraitOffsetCenterX = UIScreen.main.bounds.size.width / 2 - 120;
+        sideMenuViewController.panFromEdge = false
+        sideMenuViewController.contentViewScaleValue = 0.8
         
-        let tabbarController = UITabBarController()
-        
-        tabbarController.viewControllers = [
-            UINavigationController(rootViewController: FileViewController()),    // 文件
-            // 照片
-            UINavigationController(rootViewController: MyMusicViewController()), // 音乐播放
-            // 视频播放
-            UINavigationController(rootViewController: SettingViewController()) // 设置   // 数据传输
-        ]
-        tabbarController.view.backgroundColor = UIColor.white
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = tabbarController
+        self.window?.rootViewController = sideMenuViewController
         self.window?.makeKeyAndVisible()
         return true
     }
