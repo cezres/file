@@ -6,3 +6,6 @@
 
 
 //#import "SWTableViewCell.h"
+
+#import "PhotoMemoryCache.h"
+#import "NSString+MD5.h"

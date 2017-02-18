@@ -10,6 +10,9 @@ target 'file' do
     pod 'SABlurImageView'
     pod 'SWTableViewCell'
     pod 'SnapKit'
+    pod 'AsyncDisplayKit'
+    pod 'FastImageCache'
+    pod 'FMDB'
     
 end
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import RESideMenu
+import FastImageCache
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,11 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        
+        
+        OperationQueue().addOperation { 
+            FICImageCache.shared().reset()
+        }
+        
+        
         let contentViewController = UINavigationController(rootViewController: FileViewController())
         let leftMenuViewController = LeftMenuViewController()
         
         let sideMenuViewController = RESideMenu(contentViewController: contentViewController, leftMenuViewController: leftMenuViewController, rightMenuViewController: nil)!
-        sideMenuViewController.backgroundImage = UIImage(named: "MenuBackground")
+        sideMenuViewController.backgroundImage = UIImage(named: "SideMenuBackground")
         sideMenuViewController.menuPreferredStatusBarStyle = UIStatusBarStyle.lightContent
 //        sideMenuViewController.delegate = self
         sideMenuViewController.contentViewShadowColor = UIColor.black
@@ -30,9 +38,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sideMenuViewController.contentViewShadowRadius = 12
         sideMenuViewController.contentViewShadowEnabled = true
         //sideMenuViewController.scaleContentView = false
-        sideMenuViewController.contentViewInPortraitOffsetCenterX = UIScreen.main.bounds.size.width / 2 - 120;
+        sideMenuViewController.contentViewInPortraitOffsetCenterX = 0;
         sideMenuViewController.panFromEdge = false
-        sideMenuViewController.contentViewScaleValue = 0.8
+        
+//        sideMenuViewController.contentViewScaleValue = 0.9
+        sideMenuViewController.scaleContentView = false
+        
+        sideMenuViewController.scaleMenuView = false
+        
+        sideMenuViewController.scaleBackgroundImageView = true
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = sideMenuViewController
