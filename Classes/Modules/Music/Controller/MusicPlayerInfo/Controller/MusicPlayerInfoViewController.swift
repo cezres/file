@@ -1,15 +1,15 @@
 //
-//  MusicPlayerViewController.swift
+//  MusicPlayerInfoViewController.swift
 //  file
 //
-//  Created by 翟泉 on 2016/10/14.
-//  Copyright © 2016年 云之彼端. All rights reserved.
+//  Created by 翟泉 on 2017/2/18.
+//  Copyright © 2017年 云之彼端. All rights reserved.
 //
 
 import UIKit
 
-class MusicPlayerViewController: UIViewController {
-    
+class MusicPlayerInfoViewController: UIViewController {
+
     init() {
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
@@ -21,6 +21,7 @@ class MusicPlayerViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        infoView.stop()
     }
     
     override func viewDidLoad() {
@@ -40,12 +41,12 @@ class MusicPlayerViewController: UIViewController {
         let action = NSSelectorFromString("handleNavigationTransition:")
         panGestureRecognizer.addTarget(target, action: action)
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MusicPlayerViewController.popController))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MusicPlayerInfoViewController.popController))
         view.addGestureRecognizer(tapGestureRecognizer)
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(MusicPlayerViewController.handlePlayerStateChangedNotification), name: MusicPlayerNotification.stateChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MusicPlayerViewController.handlePlayerMusicChangedNotification), name: MusicPlayerNotification.musicChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MusicPlayerInfoViewController.handlePlayerStateChangedNotification), name: MusicPlayerNotification.stateChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MusicPlayerInfoViewController.handlePlayerMusicChangedNotification), name: MusicPlayerNotification.musicChanged, object: nil)
         
         handlePlayerMusicChangedNotification()
         handlePlayerStateChangedNotification()
@@ -87,7 +88,7 @@ class MusicPlayerViewController: UIViewController {
         }
     }
     func handlePlayerMusicChangedNotification() {
-        backgrounView.url = MusicPlayer.shared.currentMusic?.artworkURL
+        backgrounView.image = MusicPlayer.shared.currentMusic?.artwork
         artworkView.image = backgrounView.image
         
         infoView.songLabel.text = MusicPlayer.shared.currentMusic?.song

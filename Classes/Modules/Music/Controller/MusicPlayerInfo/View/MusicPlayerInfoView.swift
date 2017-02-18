@@ -11,8 +11,16 @@ import SnapKit
 
 class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
     
-    var currentTime: TimeInterval = 0
-    var duration: TimeInterval = 0
+    var currentTime: TimeInterval = 0 {
+        didSet {
+            handleTimer()
+        }
+    }
+    var duration: TimeInterval = 0 {
+        didSet {
+            handleTimer()
+        }
+    }
     
     
     var displayLink: CADisplayLink?

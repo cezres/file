@@ -92,13 +92,11 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
             if let music = Music(url: file.url) {
                 if MusicPlayer.shared.play(music) {
                     MusicGroup.default().insert(music: music)
-                    let controller = MusicPlayerViewController()
-                    navigationController?.pushViewController(controller, animated: true)
+                    navigationController?.pushViewController(MusicPlayerInfoViewController(), animated: true)
                 }
             }
         }
         else if file.type == .Photo {
-            
             let photos = model.photos()
             let idx = photos.index(of: file) ?? 0
             let urls: [URL] = photos.map({ (file) -> URL in

@@ -16,17 +16,12 @@ extension MusicPlayer {
         defer {
             MPNowPlayingInfoCenter.default().nowPlayingInfo = info
         }
-        
         guard let music = currentMusic else { return }
-        
         info[MPMediaItemPropertyTitle] = music.song
         info[MPMediaItemPropertyArtist] = music.singer
         info[MPMediaItemPropertyAlbumTitle] = music.albumName
         info[MPMediaItemPropertyPlaybackDuration] = NSNumber(value: music.duration)
         info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = NSNumber(value: currentTime)
-        
-        
-        
         if let artworkImage = music.artwork {
             let artwork = MPMediaItemArtwork(image: artworkImage)
             info[MPMediaItemPropertyArtwork] = artwork

@@ -68,8 +68,7 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
     }
     
     func tapMusicIndicator() {
-        let controller = MusicPlayerViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        navigationController?.pushViewController(MusicPlayerInfoViewController(), animated: true)
     }
     
     // MARK: - Notification
