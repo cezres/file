@@ -157,6 +157,7 @@ class MusicGroup: NSObject {
     fileprivate static var _default: MusicGroup?
     
     open override class func initialize() {
+        db.logsErrors = false
         guard db.open() else {
             fatalError(db.lastErrorMessage())
         }

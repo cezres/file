@@ -47,6 +47,10 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        debugPrint(#function)
+    }
+    
     func start() {
         if displayLink == nil {
             displayLink = CADisplayLink(target: self, selector: #selector(MusicPlayerInfoView.handleDisplayLink))

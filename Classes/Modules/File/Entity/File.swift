@@ -19,10 +19,7 @@ class File {
     
     /**
      初始化
-     
      - parameter path: 文件路径
-     
-     - returns: <#return value description#>
      */
     init(path: String) {
         self.path = path
@@ -51,18 +48,6 @@ class File {
     var `extension`: String {
         return path.pathExtension
     }
-    
-    lazy var iconURL: URL? = {
-        if self.type == .Photo {
-            return self.url
-        }
-        else if self.type == .Audio {
-            if let url = Music(url: self.url)?.artworkURL {
-                return url
-            }
-        }
-        return nil
-    }()
     
 }
 

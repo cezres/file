@@ -57,12 +57,7 @@ class FileIconEntity: NSObject, FICEntity {
         case .Directory:
             image = UIImage(named: "icon_directory")
         case .Audio:
-            if let url = file.iconURL {
-                image = UIImage(contentsOfFile: url.path)
-            }
-            else {
-                image = UIImage(named: "icon_audio")
-            }
+            image = Music.artwork(url: file.url) ?? UIImage(named: "icon_audio")
         case .Video:
             image = ESMediaPlayerView.thumbnailImage(with: file.url, atTime: 2) ?? UIImage(named: "icon_video")
         case .Photo:

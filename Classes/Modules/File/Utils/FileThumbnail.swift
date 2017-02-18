@@ -19,7 +19,7 @@ private let FileIconCacheFormatName = "FileIconCacheFormatName"
 
 
 
-
+typealias FileThumbnailBlock = (_ file: File, _ image: UIImage) -> Void
 
 class FileThumbnail: NSObject, FICImageCacheDelegate {
     
@@ -70,7 +70,7 @@ class FileThumbnail: NSObject, FICImageCacheDelegate {
             }
         }
         
-        if imageCache.imageExists(for: fileIconEntity, withFormatName: FileIconCacheFormatName) || file.type == .Audio {
+        if imageCache.imageExists(for: fileIconEntity, withFormatName: FileIconCacheFormatName) {
             imageCache.retrieveImage(for: fileIconEntity, withFormatName: FileIconCacheFormatName, completionBlock: completionBlock)
         }
         else {
@@ -127,7 +127,17 @@ class FileThumbnail: NSObject, FICImageCacheDelegate {
 
 
 
-typealias FileThumbnailBlock = (_ file: File, _ image: UIImage) -> Void
+
+
+
+
+
+
+
+
+
+
+
 
 
 

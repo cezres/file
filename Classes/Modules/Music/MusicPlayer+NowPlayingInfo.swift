@@ -25,15 +25,11 @@ extension MusicPlayer {
         info[MPMediaItemPropertyPlaybackDuration] = NSNumber(value: music.duration)
         info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = NSNumber(value: currentTime)
         
-        guard let artworkURL = music.artworkURL else { return }
-        do {
-            let imageData = try Data(contentsOf: artworkURL)
-            guard let artworkImage = UIImage(data: imageData) else { return }
+        
+        
+        if let artworkImage = music.artwork {
             let artwork = MPMediaItemArtwork(image: artworkImage)
             info[MPMediaItemPropertyArtwork] = artwork
-        }
-        catch {
-            
         }
     }
     

@@ -19,7 +19,6 @@ class Music: NSObject {
     let path: String    // 路径  相对Home的路径
     let song: String    // 歌曲名
     let singer: String  // 歌手
-    let artwork: String // 封面
     let albumName: String   // 专辑名
     let duration: Double    // 时长
     // 播放次数
@@ -33,17 +32,14 @@ class Music: NSObject {
             }
         }
     }
+    // 封面
+    lazy var artwork: UIImage? = {
+        return Music.artwork(url: self.url)
+    }()
     
     var date: Date? // 添加入歌单的日期
     
-    lazy var artworkURL: URL? = {
-        guard self.artwork != "" else {
-            return nil
-        }
-        return URL(fileURLWithPath: CachesDirectory + "/Music_artwork/" + self.artwork)
-    }()
-    
-    
+
     /// 初始化音乐对象
     init?(url: URL) {
         
@@ -57,7 +53,7 @@ class Music: NSObject {
             if result.next() {
                 song = result.string(forColumn: "song") ?? ""
                 singer = result.string(forColumn: "singer") ?? ""
-                artwork = result.string(forColumn: "artwork") ?? ""
+//                artwork = result.string(forColumn: "artwork") ?? ""
                 albumName = result.string(forColumn: "albumName") ?? ""
                 duration = result.double(forColumn: "duration")
                 playCount = result.int(forColumn: "playCount")
@@ -78,7 +74,6 @@ class Music: NSObject {
         var _song: String = path.lastPathComponent.deletingPathExtension
         var _singer: String?
         var _albumName: String?
-        var _artwork: String?
         for format in asset.availableMetadataFormats {
             for metadataItem in asset.metadata(forFormat: format) {
                 if metadataItem.commonKey == "title" {
@@ -92,32 +87,15 @@ class Music: NSObject {
                 else if metadataItem.commonKey == "albumName" {
                     _albumName = metadataItem.value as? String
                 }
-                else if metadataItem.commonKey == "artwork" {
-                    if let data = metadataItem.value as? Data {
-                        do {
-                            let url = URL(fileURLWithPath: CachesDirectory + "/Music_artwork/" + path.md5)
-                            try data.write(to: url)
-                            _artwork = path.md5
-                        }
-                        catch {
-                            
-                        }
-                        continue
-                    }
-                    else {
-                        debugPrint("xxxxx")
-                    }
-                }
             }
         }
         song = _song
         singer = _singer ?? ""
-        artwork = _artwork ?? ""
         albumName = _albumName ?? ""
         
         do {
-            let sql = "insert into Music (id, path, song, singer, artwork, albumName, duration) values (?, ?, ?, ?, ?, ?, ?)"
-            let values = [path.hash, path, song, singer, artwork, albumName, duration] as [Any]
+            let sql = "insert into Music (id, path, song, singer, albumName, duration) values (?, ?, ?, ?, ?, ?)"
+            let values = [path.hash, path, song, singer, albumName, duration] as [Any]
             try MusicDB.executeUpdate(sql, values: values)
         }
         catch {
@@ -126,12 +104,32 @@ class Music: NSObject {
         
     }
     
+    
+    class func artwork(url: URL) -> UIImage? {
+        var isDirectory: ObjCBool = false
+        guard FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory) && !isDirectory.boolValue else {
+            return nil
+        }
+        var result: UIImage?
+        let asset = AVURLAsset(url: url)
+        for format in asset.availableMetadataFormats {
+            for metadataItem in asset.metadata(forFormat: format) {
+                if metadataItem.commonKey == "artwork" {
+                    if let data = metadataItem.value as? Data {
+                        result = UIImage(data: data)
+                    }
+                    break
+                }
+            }
+        }
+        return result
+    }
+    
     init(result: FMResultSet) {
         id = result.longLongInt(forColumn: "id")
         path = result.string(forColumn: "path")
         song = result.string(forColumn: "song") ?? ""
         singer = result.string(forColumn: "singer") ?? ""
-        artwork = result.string(forColumn: "artwork") ?? ""
         albumName = result.string(forColumn: "albumName") ?? ""
         duration = result.double(forColumn: "duration")
         playCount = result.int(forColumn: "playCount")
@@ -165,13 +163,6 @@ class Music: NSObject {
         do {
             /// 创建音乐数据库表
             try MusicDB.executeUpdate("CREATE TABLE Music (id INTEGER PRIMARY KEY, path STRING NOT NULL UNIQUE, song TEXT, singer STRING, artwork STRING, albumName STRING, duration DOUBLE DEFAULT (0), playCount INTEGER DEFAULT (0))", values: nil)
-        }
-        catch {
-            
-        }
-        
-        do {
-            try FileManager.default.createDirectory(atPath: CachesDirectory + "/Music_artwork", withIntermediateDirectories: true, attributes: nil)
         }
         catch {
             
