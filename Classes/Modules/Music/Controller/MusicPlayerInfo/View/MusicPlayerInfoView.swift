@@ -11,19 +11,11 @@ import SnapKit
 
 class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
     
-    var currentTime: TimeInterval = 0 {
-        didSet {
-            handleTimer()
-        }
-    }
-    var duration: TimeInterval = 0 {
-        didSet {
-            handleTimer()
-        }
-    }
-    
-    
     var displayLink: CADisplayLink?
+    var timer: Timer?
+    
+    var currentTime: TimeInterval = 0
+    var duration: TimeInterval = 0
     
     var phase: CGFloat = 0
     var diameter: CGFloat = 26
@@ -32,11 +24,9 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
     
     var elapsedTimeLabel = UILabel()
     var remainedTimeLabel = UILabel()
-    var timer: Timer!
     
     var songLabel = UILabel()
     var singerLabel = UILabel()
-    
     
     
     init() {
@@ -55,10 +45,6 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        debugPrint(#function)
-    }
-    
     func start() {
         if displayLink == nil {
             displayLink = CADisplayLink(target: self, selector: #selector(MusicPlayerInfoView.handleDisplayLink))
@@ -68,12 +54,22 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
         if timer == nil {
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(MusicPlayerInfoView.handleTimer), userInfo: nil, repeats: true)
         }
+        
+        songLabel.text = MusicPlayer.shared.currentMusic?.song
+        singerLabel.text = MusicPlayer.shared.currentMusic?.singer
+        currentTime = MusicPlayer.shared.currentTime
+        duration = MusicPlayer.shared.duration
+        
         setNeedsDisplay()
+        handleTimer()
+        handleDisplayLink()
     }
     
     func pause() {
         displayLink?.invalidate()
         displayLink = nil
+        timer?.invalidate()
+        timer = nil
         setNeedsDisplay()
     }
     
@@ -83,7 +79,7 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
             displayLink = nil
         }
         if timer != nil {
-            timer.invalidate()
+            timer?.invalidate()
             timer = nil
             elapsedTimeLabel.text = "--:--"
             remainedTimeLabel.text = "--:--"
@@ -103,10 +99,8 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
     func handlePan(panGesture: UIPanGestureRecognizer) {
         let location = panGesture.location(in: self)
         let time = duration * TimeInterval((location.x-10) / (bounds.width-20))
-        print(time)
         
         currentTime = time < 0 ? 0 : time > duration ? duration : time
-        
         
         switch panGesture.state {
         case .began:
@@ -118,6 +112,7 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
         default:
             break
         }
+        handleTimer()
         setNeedsDisplay()
     }
     
@@ -307,7 +302,6 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
     }
     
 }
-
 
 
 func timeToString(time: TimeInterval) -> String {

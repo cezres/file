@@ -50,8 +50,6 @@ class MusicPlayerInfoViewController: UIViewController {
         
         handlePlayerMusicChangedNotification()
         handlePlayerStateChangedNotification()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,11 +88,6 @@ class MusicPlayerInfoViewController: UIViewController {
     func handlePlayerMusicChangedNotification() {
         backgrounView.image = MusicPlayer.shared.currentMusic?.artwork
         artworkView.image = backgrounView.image
-        
-        infoView.songLabel.text = MusicPlayer.shared.currentMusic?.song
-        infoView.singerLabel.text = MusicPlayer.shared.currentMusic?.singer
-        infoView.currentTime = MusicPlayer.shared.currentTime
-        infoView.duration = MusicPlayer.shared.duration
     }
     
     
