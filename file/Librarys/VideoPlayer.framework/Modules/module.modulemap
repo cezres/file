@@ -1,6 +1,0 @@
-framework module VideoPlayer {
-  umbrella header "VideoPlayer.h"
-
-  export *
-  module * { export * }
-}
