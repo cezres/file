@@ -22,6 +22,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>需要相册访问权限</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

@@ -11,14 +11,14 @@ import UIKit
 
 class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var tableView: UITableView!
+    private var tableView: UITableView!
+    private var dataSource = ["文件", "音乐", "视频", "照片", "设置"]
     
-    var dataSource = ["文件", "音乐", "视频", "照片", "设置"]
-    
-    lazy var fileController = UINavigationController(rootViewController: FileViewController(directoryPath: DocumentDirectory))
-    lazy var musicController = UINavigationController(rootViewController: MyMusicViewController())
-//    lazy var musicController = UINavigationController(rootViewController: MusicListViewController())
-    lazy var settingController = UINavigationController(rootViewController: SettingViewController())
+    private lazy var fileController = UINavigationController(rootViewController: FileViewController(directoryPath: DocumentDirectory))
+    private lazy var musicController = UINavigationController(rootViewController: MyMusicViewController())
+//    private lazy var musicController = UINavigationController(rootViewController: MusicListViewController())
+    private lazy var photoController = UINavigationController(rootViewController: PhotoListViewController())
+    private lazy var settingController = UINavigationController(rootViewController: SettingViewController())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +43,8 @@ class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableVi
             make.centerY.equalTo(view.snp.centerY)
         }
         
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -64,6 +63,10 @@ class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableVi
             sideMenuViewController.setContentViewController(musicController, animated: true)
             sideMenuViewController.hideViewController()
         }
+        else if indexPath.row == 3 {
+            sideMenuViewController.setContentViewController(photoController, animated: true)
+            sideMenuViewController.hideViewController()
+        }
         else if indexPath.row == 4 {
             sideMenuViewController.setContentViewController(settingController, animated: true)
             sideMenuViewController.hideViewController()
@@ -73,6 +76,7 @@ class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
@@ -83,12 +87,11 @@ class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableVi
             cell?.textLabel?.highlightedTextColor = UIColor.lightGray
             cell?.selectedBackgroundView = UIView()
         }
-        
         cell!.textLabel?.text = dataSource[indexPath.row]
-        
         return cell!
-        
     }
+    
+    
     
 
 }

@@ -51,13 +51,6 @@ class MusicTableViewCell: UITableViewCell {
             }
         })
         
-        /*
-        if let url = music.artworkURL {
-            ImageCache.retrieveImage(url: url, format: .icon, completionBlock: { [weak self](url, image) in
-                self?.artworkImageView.image = image
-            })
-        }*/
-        
         songLabel.text = music.song
         singerLabel.text = "歌手:\(music.singer)"
         albumNameLabel.text = "专辑:\(music.albumName)"

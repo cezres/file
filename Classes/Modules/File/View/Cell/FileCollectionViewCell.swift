@@ -91,36 +91,6 @@ class FileCollectionViewCell: UICollectionViewCell {
                 self?.iconImageView.image = image
             }
         }
-        
-        /*
-        switch file.type {
-        case .Directory:
-            iconImageView.image = UIImage(named: "icon_directory")
-        case .Audio:
-            iconImageView.image = UIImage(named: "icon_audio")
-            if let url = file.iconURL {
-                ImageCache.retrieveImage(url: url, format: .icon, completionBlock: { [weak self](url, image) in
-                    self?.iconImageView.image = image
-                })
-            }
-        case .Video:
-            iconImageView.image = UIImage(named: "icon_video")
-            
-            
-        case .Zip:
-            iconImageView.image = UIImage(named: "icon_zip")
-        case .Photo:
-            iconImageView.image = nil
-            ImageCache.retrieveImage(url: file.url, format: .icon, completionBlock: { [weak self](url, image) in
-                if url == self?.file.url {
-                    self?.iconImageView.image = image
-                }
-            })
-            return
-        case .Unknown:
-            iconImageView.image = UIImage(named: "icon_unknown")
-        }
-        */
     }
     
     // MARK: - Get

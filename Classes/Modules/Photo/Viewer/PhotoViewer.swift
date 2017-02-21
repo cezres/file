@@ -9,7 +9,7 @@
 import UIKit
 import AsyncDisplayKit
 
-class PhotoViewer: UIViewController, ASCollectionDataSource, ASCollectionDelegate, ASCollectionViewLayoutInspecting {
+class PhotoViewer: UIViewController/*, ASCollectionDataSource, ASCollectionDelegate, ASCollectionViewLayoutInspecting*/ {
     
     var _urls: [URL]!
     var _collectionNode: ASCollectionNode!
@@ -71,6 +71,8 @@ class PhotoViewer: UIViewController, ASCollectionDataSource, ASCollectionDelegat
         // Dispose of any resources that can be recreated.
     }
     
+    
+    /*
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
         return PhotoCellNode(url: _urls[indexPath.row])
     }
@@ -85,7 +87,7 @@ class PhotoViewer: UIViewController, ASCollectionDataSource, ASCollectionDelegat
     
     func collectionView(_ collectionView: ASCollectionView, constrainedSizeForNodeAt indexPath: IndexPath) -> ASSizeRange {
         return ASSizeRange(min: CGSize.zero, max: collectionView.bounds.size)
-    }
+    }*/
 
 }
 
