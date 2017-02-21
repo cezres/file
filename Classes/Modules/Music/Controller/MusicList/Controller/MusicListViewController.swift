@@ -15,12 +15,17 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        group = MusicGroup.default()
+        group = MusicGroup.default
     }
     
     init(musicGroup: MusicGroup) {
         super.init(nibName: nil, bundle: nil)
         group = musicGroup
+    }
+    
+    init(groupName: String) {
+        super.init(nibName: nil, bundle: nil)
+        group = MusicGroup(name: groupName)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,13 +44,14 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
         
         
         // Do any additional setup after loading the view.
-        tableView.list = group.list()
+        group.list { [weak self](list, error) in
+            self?.tableView.list = list
+            self?.tableView.reloadData()
+        }
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
         }
-        
-        
         NotificationCenter.default.addObserver(self, selector: #selector(MusicListViewController.handlePlayerStateChangedNotification), name: MusicPlayerNotification.stateChanged, object: nil)
         
     }
@@ -79,16 +85,20 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
         else {
             musicIndicator.state = .paused
         }
-        tableView.list = group.list()
-        tableView.reloadData()
+        
+        group.list { [weak self](list, error) in
+//            self?.tableView.list = list
+            self?.tableView.reloadData()
+        }
     }
     
     
     // MARK: - MusicGroupDelegate
-    func musicGroup(group: MusicGroup, insertMusicAt index: Int) {
-        tableView.list = group.list()
+    func musicGroup(group: MusicGroup, newMusic music: Music, insertMusicAt index: Int) {
+        tableView.list.insert(music, at: index)
         tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .left)
     }
+    
     func musicGroup(group: MusicGroup, deleteMusicAt index: Int) {
         tableView.list.remove(at: index)
         tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .right)
@@ -96,8 +106,10 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
     
     // MARK: - ButtonTableViewCellDelegate
     func buttonCell(_ buttonCell: ButtonTableViewCell, onClickRightButtonAt index: Int) {
-        if !group.delete(idx: index) {
-            print("Error")
+        group.delete(idx: index) { (error) in
+            if error != nil {
+                print(error.debugDescription)
+            }
         }
     }
     

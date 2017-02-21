@@ -22,12 +22,20 @@ class PhotoListViewController: UIViewController {
         // Do any additional setup after loading the view.
         title = "照片列表"
         view.backgroundColor = UIColor.white
+        automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
+//        print(navigationController?.navigationBar.frame)
+        
         guard collectionView != nil else {
             return
+        }
+        let frame = navigationController?.navigationBar.frame
+        collectionView.snp.updateConstraints { (make) in
+            make.top.equalTo(frame!.maxY)
         }
         collectionView.frame = view.bounds
     }
@@ -84,6 +92,12 @@ class PhotoListViewController: UIViewController {
         collectionView.backgroundColor = UIColor.white
         collectionView.register(PhotoCell.classForCoder(), forCellWithReuseIdentifier: "Photo")
         view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.top.equalTo(64)
+            make.bottom.equalTo(0)
+        }
     }
 
 }

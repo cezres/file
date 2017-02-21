@@ -11,6 +11,8 @@ import UIKit
 import ESMediaPlayer
 
 
+
+
 /// 文件管理
 class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegate, UIActionSheetDelegate {
     
@@ -89,12 +91,23 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         }
         else if file.type == .Audio {
             /// 播放音频
+            Music.music(url: file.url, complete: { [weak self](music, error) in
+                guard let music = music else {
+                    print(error!)
+                    return
+                }
+                if MusicPlayer.shared.play(music) {
+                    MusicGroup.default.insert(music: music)
+                    self?.navigationController?.pushViewController(MusicPlayerInfoViewController(), animated: true)
+                }
+            })
+            /*
             if let music = Music(url: file.url) {
                 if MusicPlayer.shared.play(music) {
-                    MusicGroup.default().insert(music: music)
+                    MusicGroup.default.insert(music: music)
                     navigationController?.pushViewController(MusicPlayerInfoViewController(), animated: true)
                 }
-            }
+            }*/
         }
         else if file.type == .Photo {
             let photos = model.photos()

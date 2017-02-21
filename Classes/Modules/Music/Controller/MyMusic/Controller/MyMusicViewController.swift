@@ -35,7 +35,7 @@ class MyMusicViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let userGroup = MyMusicGroupEntity()
         userGroup.title = "我创建的歌单"
-        userGroup.contents = MusicGroup.groupNames()
+        userGroup.contents = []
         groups = [defaultGroup, userGroup]
         
         
@@ -60,8 +60,10 @@ class MyMusicViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        groups[1].contents = MusicGroup.groupNames()
-        tableView.reloadSections(IndexSet(integersIn: 1...1), with: .automatic)
+        MusicGroup.groupNames { [weak self](names) in
+            self?.groups[1].contents = names
+            self?.tableView.reloadSections(IndexSet(integersIn: 1...1), with: .automatic)
+        }
     }
     
     

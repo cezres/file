@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AsyncDisplayKit
 
 class FileCollectionViewCell: UICollectionViewCell {
     
@@ -58,7 +59,6 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Data
     var file: File! {
-        
         didSet {
             guard file != oldValue else {
                 return
@@ -69,15 +69,6 @@ class FileCollectionViewCell: UICollectionViewCell {
     }
     
     private func setup() {
-        
-//        fileThumbnail(file: file) { (file, image) in
-//            guard self.file == file else {
-//                return
-//            }
-//            self.iconImageView.image = image
-//        }
-        
-        
         nameLabel.text = file.name
         nameLabel.layoutIfNeeded()
         nameLabel.snp.updateConstraints { (make) in
@@ -95,8 +86,8 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Get
     
-    private lazy var iconImageView: UIImageView = {
-        let imageView = UIImageView()
+    private lazy var iconImageView: ASImageView = {
+        let imageView = ASImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.isOpaque = true
         imageView.clipsToBounds = true

@@ -46,3 +46,4 @@ func Font(_ size: CGFloat) -> UIFont {
     return UIFont(name: "ArialMT", size: size)!
 }
 
+typealias ErrorBlock = (_ error: Error?) -> Void

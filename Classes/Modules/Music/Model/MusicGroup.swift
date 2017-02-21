@@ -16,22 +16,29 @@ func ==(lhs: MusicGroup, rhs: MusicGroup) -> Bool {
     return lhs.name == rhs.name
 }
 
-let MusicDB: FMDatabase = MusicGroup.db
+//let MusicDB: FMDatabaseQueue = MusicGroup.db
+
+let MusicDB: FMDatabaseQueue = FMDatabaseQueue(path: DocumentDirectory + "/Music.db")
 
 
 protocol MusicGroupDelegate: NSObjectProtocol {
-    func musicGroup(group: MusicGroup, insertMusicAt index: Int)
+    func musicGroup(group: MusicGroup, newMusic music: Music, insertMusicAt index: Int)
     func musicGroup(group: MusicGroup, deleteMusicAt index: Int)
 }
 
+typealias MusicGroupBlock = (_ group: MusicGroup?, _ error: Error?) -> Void
+typealias MusicListBlock = (_ list: [Music], _ error: Error?) -> Void
+
 /// 歌单
-class MusicGroup: NSObject {
+class MusicGroup {
     
     let name: String
     
     weak var delegate: MusicGroupDelegate?
     
     /// 默认歌单
+    static let `default` = MusicGroup(name: DefaultGroupName)
+    /*
     class func `default`() -> MusicGroup {
         guard _default == nil else {
             return _default!
@@ -39,154 +46,253 @@ class MusicGroup: NSObject {
         create(name: DefaultGroupName)
         _default = MusicGroup(name: DefaultGroupName)
         return _default!
-    }
+    }*/
     
-    /// 获取歌单列表
-    class func groupNames() -> [String] {
-        return _groupNames
-    }
+    /// 回调操作队列
+    static let operation = OperationQueue.main
     
     /// 创建组
-    @discardableResult class func create(name: String) -> Bool {
-        let db = MusicDB
-        do {
-            db.beginTransaction()
-            try db.executeUpdate("CREATE TABLE \(name) (id INTEGER PRIMARY KEY, date DOUBLE)", values: nil)
-            try db.executeUpdate("INSERT INTO MusicGroup (name) VALUES (?)", values: [name])
-            db.commit()
-            _groupNames.append(name)
-            return true
-        }
-        catch {
-            if db.lastErrorCode() != 1 {
-                assertionFailure(db.lastErrorMessage())
+    class func create(name: String, complete: MusicGroupBlock? = nil) {
+        MusicDB.inTransaction { (db, rollback) in
+            guard let database = db else { return }
+            do {
+                try database.executeUpdate("CREATE TABLE \(name) (id INTEGER PRIMARY KEY, date DOUBLE)", values: nil)
+                try database.executeUpdate("INSERT INTO MusicGroup (name) VALUES (?)", values: [name])
+                _groupNames.append(name)
+                if complete != nil {
+                    operation.addOperation {
+                        complete?(MusicGroup(name: name), nil)
+                    }
+                }
             }
-            db.rollback()
-            return false
+            catch {
+                if complete != nil {
+                    operation.addOperation {
+                        complete?(nil, database.lastError())
+                    }
+                }
+                rollback?.initialize(to: true)
+            }
         }
     }
-    @discardableResult class func delete(name: String) -> Bool {
-        do {
-            MusicDB.beginTransaction()
-            try MusicDB.executeUpdate("DROP TABLE \(name);", values: nil)
-            try MusicDB.executeUpdate("DELETE FROM MusicGroup WHERE name = \'\(name)\'", values: nil)
-            MusicDB.commit()
-            return true
-        }
-        catch {
-            MusicDB.rollback()
-            return false
+    
+    class func delete(name: String, complete: ErrorBlock? = nil) {
+        MusicDB.inTransaction { (db, rollback) in
+            guard let database = db else { return }
+            do {
+                try database.executeUpdate("DROP TABLE \(name);", values: nil)
+                try database.executeUpdate("DELETE FROM MusicGroup WHERE name = \'\(name)\'", values: nil)
+                if complete != nil {
+                    operation.addOperation {
+                        complete?(nil)
+                    }
+                }
+            }
+            catch {
+                if complete != nil {
+                    operation.addOperation {
+                        complete?(database.lastError())
+                    }
+                }
+                rollback?.initialize(to: true)
+            }
         }
     }
+    
+    
+    
     
     
     /// 初始化
     init(name: String) {
-        
         self.name = name
-        
-        do {
-            let sql = "SELECT Music.*, \(self.name).date FROM \(self.name) INNER JOIN Music ON \(self.name).id = Music.id ORDER BY date DESC"
-            let result: FMResultSet = try MusicDB.executeQuery(sql, values: nil)
-            while result.next() {
-                let ms = Music(result: result)
-                ms.date = Date(timeIntervalSince1970: result.double(forColumn: "date"))
-                musicList.append(ms)
-            }
-            result.close()
-        }
-        catch {
-            
-        }
-        
     }
     
-    /// 添加音乐至分组
-    @discardableResult func insert(url: URL) -> Bool {
-        guard let music = Music(url: url) else {
-            return false
+    
+    /// 获取音乐列表
+    func list(complete: @escaping MusicListBlock) {
+        guard musicList == nil else {
+            complete(musicList, nil)
+            return
         }
-        return insert(music: music)
+        
+        guard !Thread.isMainThread else {
+            OperationQueue().addOperation {
+                self.list(complete: complete)
+            }
+            return
+        }
+        
+        MusicDB.inDatabase({ [weak self](db) in
+            guard let database = db else { return }
+            guard let weakself = self else { return }
+            do {
+                let sql = "SELECT Music.*, \(weakself.name).date FROM \(weakself.name) INNER JOIN Music ON \(weakself.name).id = Music.id ORDER BY date DESC"
+                let result: FMResultSet = try database.executeQuery(sql, values: nil)
+                var list = [Music]()
+                while result.next() {
+                    let ms = Music(result: result)
+                    ms.date = Date(timeIntervalSince1970: result.double(forColumn: "date"))
+                    list.append(ms)
+                }
+                result.close()
+                weakself.musicList = list
+                MusicGroup.operation.addOperation {
+                    complete(list, nil)
+                }
+            }
+            catch {
+                MusicGroup.operation.addOperation {
+                    complete([], database.lastError())
+                }
+            }
+        })
     }
-    @discardableResult func insert(music: Music) -> Bool {
-        do {
-            let date = Date()
-            try MusicDB.executeUpdate("INSERT INTO \(name) (id, date) VALUES (?, ?)", values: [music.id, date.timeIntervalSince1970])
-            music.date = date
-            musicList.insert(music, at: 0)
-            debugPrint("【\(music.song)】成功添加至歌单【\(name)】")
-            delegate?.musicGroup(group: self, insertMusicAt: 0)
-            return true
-        }
-        catch {
-            return false
+    
+    
+    /// 添加音乐至分组
+    
+//    func insert(url: URL, complete: ErrorBlock? = nil) {
+//        guard let music = Music(url: url) else {
+//            complete?(NSError(domain: "音乐对象初始化失败", code: -1, userInfo: nil))
+//            return
+//        }
+//        insert(music: music, complete: complete)
+//    }
+    
+    func insert(music: Music, complete: ErrorBlock? = nil) {
+        MusicDB.inDatabase { [weak self](db) in
+            guard let database = db else { return }
+            guard let weakself = self else { return }
+            do {
+                let date = Date()
+                try database.executeUpdate("INSERT INTO \(weakself.name) (id, date) VALUES (?, ?)", values: [music.id, date.timeIntervalSince1970])
+                music.date = date
+                weakself.musicList.insert(music, at: 0)
+                debugPrint("【\(music.song)】成功添加至歌单【\(weakself.name)】")
+                weakself.delegate?.musicGroup(group: weakself, newMusic: music, insertMusicAt: 0)
+                if complete != nil {
+                    MusicGroup.operation.addOperation {
+                        complete?(nil)
+                    }
+                }
+            }
+            catch {
+                if complete != nil {
+                    MusicGroup.operation.addOperation {
+                        complete?(database.lastError())
+                    }
+                }
+            }
         }
     }
     
     /// 从分组中删除音乐
-    @discardableResult func delete(idx: Int) -> Bool {
-        return delete(music: musicList[idx])
+    func delete(idx: Int, complete: ErrorBlock? = nil) {
+        delete(music: musicList[idx], complete: complete)
     }
-    @discardableResult func delete(music: Music) -> Bool {
+    func delete(music: Music, complete: ErrorBlock? = nil) {
         guard let index = musicList.index(of: music) else {
-            return false
+            if complete != nil {
+                MusicGroup.operation.addOperation {
+                    complete?(NSError(domain: "音乐不存在", code: -1, userInfo: nil))
+                }
+            }
+            return
         }
-        do {
-            try MusicDB.executeUpdate("DELETE FROM \(name) WHERE id=\(music.id)", values: nil)
-            musicList.remove(at: index)
-            delegate?.musicGroup(group: self, deleteMusicAt: index)
-            return true
-        }
-        catch {
-            return false
-        }
-    }
-    
-    /// 获取音乐列表
-    func list() -> [Music] {
-        return musicList
-    }
-    
-    
-    // MARK: - ----
-    
-    fileprivate static var db: FMDatabase = FMDatabase(path: DocumentDirectory + "/Music.db")
-    
-    fileprivate static var _groupNames = [String]()
-    
-    fileprivate static var _default: MusicGroup?
-    
-    open override class func initialize() {
-        db.logsErrors = false
-        guard db.open() else {
-            fatalError(db.lastErrorMessage())
-        }
-        db.setShouldCacheStatements(true)
-        
-        ///
-        do {
-            try MusicDB.executeUpdate("CREATE TABLE MusicGroup (name STRING PRIMARY KEY)", values: nil)
-        }
-        catch {
-            
-        }
-        
-        let result = try! MusicDB.executeQuery("select name from MusicGroup", values: nil)
-        while result.next() {
-            if let name = result.string(forColumn: "name") {
-                _groupNames.append(name)
+        MusicDB.inDatabase { [weak self](db) in
+            guard let database = db else { return }
+            guard let weakself = self else { return }
+            do {
+                try database.executeUpdate("DELETE FROM \(weakself.name) WHERE id=\(music.id)", values: nil)
+                weakself.musicList.remove(at: index)
+                weakself.delegate?.musicGroup(group: weakself, deleteMusicAt: index)
+                if complete != nil {
+                    MusicGroup.operation.addOperation {
+                        complete?(nil)
+                    }
+                }
+            }
+            catch {
+                if complete != nil {
+                    MusicGroup.operation.addOperation {
+                        complete?(database.lastError())
+                    }
+                }
             }
         }
     }
     
     
-    private var musicList = [Music]()
     
     
-    override var description: String {
-        return "歌单: \(name)"
+    // MARK: - ----
+    
+    fileprivate static var db: FMDatabaseQueue = FMDatabaseQueue(path: DocumentDirectory + "/Music.db")
+    
+    fileprivate static var _groupNames: [String]!
+    
+    fileprivate static var _default: MusicGroup?
+    
+    class func initialize() {
+        
+        
+        
+//        db.logsErrors = false
+        /*
+        guard db.open() else {
+            fatalError(db.lastErrorMessage())
+        }
+        db.setShouldCacheStatements(true)
+        */
+        
+        
+        db.inDatabase { (db) in
+            guard let database = db else { return }
+            do {
+                try database.executeUpdate("CREATE TABLE MusicGroup (name STRING PRIMARY KEY)", values: nil)
+            }
+            catch {
+                
+            }
+        }
+        /// 创建默认分组
+        create(name: DefaultGroupName)
+    }
+    
+    /// 获取歌单列表
+    class func groupNames(complete: @escaping (_ names: [String]) -> Void) {
+        guard _groupNames == nil else {
+            operation.addOperation {
+                complete(_groupNames)
+            }
+            return
+        }
+        db.inDatabase { (db) in
+            guard let database = db else { return }
+            let result = try! database.executeQuery("select name from MusicGroup", values: nil)
+            var names = [String]()
+            while result.next() {
+                if let name = result.string(forColumn: "name") {
+                    names.append(name)
+                }
+            }
+            _groupNames = names
+            operation.addOperation {
+                complete(names)
+            }
+        }
     }
     
     
+    private var musicList: [Music]!
+    
+    
+}
+
+extension MusicGroup: CustomStringConvertible {
+    var description: String {
+        return "歌单: \(name)"
+    }
 }
 

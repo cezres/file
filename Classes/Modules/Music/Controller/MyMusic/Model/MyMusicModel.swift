@@ -21,7 +21,7 @@ class MyMusicModel {
         
         let userGroup = MyMusicGroupEntity()
         userGroup.title = "我创建的歌单"
-        userGroup.contents = MusicGroup.groupNames()
+//        userGroup.contents = MusicGroup.groupNames()
         
         
         groups = [defaultGroup, userGroup]
