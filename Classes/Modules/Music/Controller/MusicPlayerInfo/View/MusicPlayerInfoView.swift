@@ -88,9 +88,6 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
         duration = 0
         diameter = 26
         setNeedsDisplay()
-        
-        songLabel.text = ""
-        singerLabel.text = ""
     }
     
     
