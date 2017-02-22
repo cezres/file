@@ -2,18 +2,18 @@
 //  FileTableView.swift
 //  file
 //
-//  Created by 翟泉 on 2016/9/24.
-//  Copyright © 2016年 云之彼端. All rights reserved.
+//  Created by 翟泉 on 2017/2/22.
+//  Copyright © 2017年 云之彼端. All rights reserved.
 //
 
 import UIKit
 
-class FileTableView: UITableView {
+class FileTableView: UITableView, FileContentViewProtocol {
     
     weak var fileDataSource: FileContentViewDataSource!
     weak var fileDelegate: FileContentViewDelegate!
-
-    init(fileDataSource: FileContentViewDataSource, fileDelegate: FileContentViewDelegate) {
+    
+    required init(fileDataSource: FileContentViewDataSource, fileDelegate: FileContentViewDelegate) {
         super.init(frame: CGRect(), style: UITableViewStyle.plain)
         self.fileDataSource = fileDataSource
         self.fileDelegate = fileDelegate
@@ -32,8 +32,26 @@ class FileTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func reload() {
+        reloadData()
+    }
     
-
+    func reloadItem(index: Int) {
+        
+    }
+    
+    func reloadItems(indexs: [Int]) {
+        
+    }
+    
+    func deleteItems(indexs: [Int]) {
+        
+    }
+    
+    func reloadAllItems() {
+        
+    }
+    
 }
 
 
@@ -47,7 +65,6 @@ extension FileTableView: UITableViewDataSource, UITableViewDelegate {
     // MARK: - Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let fileCell = tableView.dequeueReusableCell(withIdentifier: "File")!
-        
         return fileCell
     }
     
@@ -56,9 +73,12 @@ extension FileTableView: UITableViewDataSource, UITableViewDelegate {
         guard let fileCell = cell as? FileTableViewCell else {
             return
         }
-        
         fileCell.file = fileDataSource.list()[indexPath.row]
-        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        fileDelegate.fileView(fileView: self, didSelectIndex: indexPath.row)
     }
     
 }

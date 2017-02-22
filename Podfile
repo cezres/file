@@ -13,6 +13,7 @@ target 'file' do
     pod 'AsyncDisplayKit'
     pod 'FastImageCache'
     pod 'FMDB'
+    pod 'MBProgressHUD'
     
 end
 

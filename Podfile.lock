@@ -10,6 +10,7 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
+  - MBProgressHUD (1.0.0)
   - PINCache (3.0.1-beta.2):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.2)
     - PINCache/Core (= 3.0.1-beta.2)
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - AsyncDisplayKit
   - FastImageCache
   - FMDB
+  - MBProgressHUD
   - REMenu
   - RESideMenu
   - SABlurImageView
@@ -42,6 +44,7 @@ SPEC CHECKSUMS:
   AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
   FastImageCache: 2e7a6f677b15336eb3d1a4092a494676256c891d
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
   PINRemoteImage: ff63baf185088530db6cfa41cb665e2b5126b5c3
   REMenu: 30dad195930adf6c5eeb8041e3257aa60bf9fa49
@@ -50,6 +53,6 @@ SPEC CHECKSUMS:
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: 35bef3ed763a7989014934f56e852480ab1ffdc6
+PODFILE CHECKSUM: 03a21f0394ded533408dde242033a8d632603036
 
 COCOAPODS: 1.1.1

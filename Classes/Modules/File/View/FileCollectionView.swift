@@ -126,8 +126,8 @@ extension FileCollectionView: UICollectionViewDataSource, UICollectionViewDelega
             return
         }
         fileCell.file = fileDataSource.list()[indexPath.row]
-        fileCell.isEditing = fileDataSource.isEditing()
-        if fileDataSource.isEditing() {
+        fileCell.isEditing = fileDataSource.isEditing
+        if fileDataSource.isEditing {
             fileCell.isSelect = fileDataSource.isSelected(index: indexPath.row)
         }
     }

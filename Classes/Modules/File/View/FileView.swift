@@ -66,14 +66,15 @@ class FileView: UIView, FileContentViewDataSource, FileContentViewDelegate {
         return isSelecteds[index]
     }
     
-    func isEditing() -> Bool {
-        return _isEditing
+    var isEditing: Bool {
+        get {
+            return _isEditing
+        }
     }
-    
     
     // MARK: - FileViewDelegate
     func fileView(fileView: FileContentViewProtocol, didSelectIndex index: Int) {
-        if isEditing() {
+        if isEditing {
             isSelecteds[index] = !isSelecteds[index]
             contentView.reloadItem(index: index)
         }
@@ -95,11 +96,6 @@ class FileView: UIView, FileContentViewDataSource, FileContentViewDelegate {
     }
     
     func reloadData() {
-//        OperationQueue().addOperation { 
-//            OperationQueue.main.addOperation({ 
-//                self.contentView.reload()
-//            })
-//        }
         contentView.reload()
     }
     

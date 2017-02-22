@@ -12,7 +12,11 @@ class MusicPlayerInfoViewController: UIViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        hidesBottomBarWhenPushed = true
+    }
+    
+    init(url: URL) {
+        super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

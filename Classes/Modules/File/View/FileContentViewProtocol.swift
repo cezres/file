@@ -15,11 +15,25 @@ protocol FileContentViewDataSource: NSObjectProtocol {
     func list() -> [File]
     
     /// 是否在编辑状态
-    func isEditing() -> Bool
+//    func isEditing() -> Bool
+    var isEditing: Bool {get}
     
     /// 是否是选中状态
     func isSelected(index: Int) -> Bool
     
+    
+    
+}
+
+extension FileContentViewDataSource {
+    var isEditing: Bool {
+        get {
+            return false
+        }
+    }
+    func isSelected(index: Int) -> Bool {
+        return false
+    }
 }
 
 protocol FileContentViewDelegate: NSObjectProtocol {

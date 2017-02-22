@@ -68,11 +68,15 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
     }
     
     func moveItems() {
-        
+        FileSelectViewController.selectDirectory(in: self) { (directoryPath) in
+            
+        }
     }
     
     func copyItems() {
-        
+        FileSelectViewController.selectDirectory(in: self) { (directoryPath) in
+            
+        }
     }
     
     // MARK: - FileViewDelegate
@@ -101,13 +105,6 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
                     self?.navigationController?.pushViewController(MusicPlayerInfoViewController(), animated: true)
                 }
             })
-            /*
-            if let music = Music(url: file.url) {
-                if MusicPlayer.shared.play(music) {
-                    MusicGroup.default.insert(music: music)
-                    navigationController?.pushViewController(MusicPlayerInfoViewController(), animated: true)
-                }
-            }*/
         }
         else if file.type == .Photo {
             let photos = model.photos()

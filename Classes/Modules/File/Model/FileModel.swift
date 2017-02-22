@@ -28,22 +28,38 @@ class FileModel {
         })
     }
     
+    typealias FileFilter = (_ file: File) -> Bool
+    
+    var filters = [FileFilter]()
+    
     /// 加载文件列表
     func loadFileList(completeBlock: @escaping () -> Void) {
         guard !Thread.isMainThread else {
-            OperationQueue().addOperation({
+            DispatchQueue.global().async {
                 self.loadFileList(completeBlock: completeBlock)
-            })
+            }
             return
         }
+        
         var files = [File]()
+        
+        let filters = self.filters
         traverseDirectory(directoryPath: directoryPath) { (file) in
+            guard filters.count > 0 else {
+                files.append(file)
+                return
+            }
+            for filter in filters {
+                if !filter(file) {
+                    return
+                }
+            }
             files.append(file)
         }
-        
         files = files.sorted { (file1, file2) -> Bool in
             return file1.type < file2.type
         }
+        
         OperationQueue.main.addOperation {
             self.list = files
             completeBlock()
@@ -59,10 +75,8 @@ class FileModel {
         guard idxs.count != 0 else {
             return []
         }
-        
         /// 删除成功的文件
         var successIndexs = [Int]()
-        
         var flag = 0
         for idx in idxs {
             do {
@@ -76,7 +90,6 @@ class FileModel {
                 
             }
         }
-        
         return successIndexs
     }
     
