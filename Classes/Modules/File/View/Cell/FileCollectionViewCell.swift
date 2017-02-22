@@ -122,9 +122,9 @@ class FileCollectionViewCell: UICollectionViewCell {
         imageView.image = #imageLiteral(resourceName: "icon_choose_n")
         self.contentView.addSubview(imageView)
         imageView.snp.makeConstraints({ (make) in
-            make.size.equalTo(CGSize(width: 30, height: 30))
-            make.top.equalTo(10)
-            make.right.equalTo(-10)
+            make.size.equalTo(CGSize(width: 32, height: 32))
+            make.top.equalTo(0)
+            make.right.equalTo(0)
         })
         return imageView
     }()
