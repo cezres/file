@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         DispatchQueue.global().async {
-            Music.initialize()
-            MusicGroup.initialize()
+            
         }
-        
+        Music.initialize()
+        MusicGroup.initialize()
         
         
         let contentViewController = UINavigationController(rootViewController: FileViewController())

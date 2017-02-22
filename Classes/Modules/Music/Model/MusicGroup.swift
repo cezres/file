@@ -228,26 +228,14 @@ class MusicGroup {
     
     // MARK: - ----
     
-    fileprivate static var db: FMDatabaseQueue = FMDatabaseQueue(path: DocumentDirectory + "/Music.db")
-    
     fileprivate static var _groupNames: [String]!
-    
     fileprivate static var _default: MusicGroup?
     
     class func initialize() {
-        
-        
-        
-//        db.logsErrors = false
-        /*
-        guard db.open() else {
-            fatalError(db.lastErrorMessage())
-        }
-        db.setShouldCacheStatements(true)
-        */
-        
-        
-        db.inDatabase { (db) in
+        guard let database = MusicDB.database() else { return }
+        database.logsErrors = false
+        database.setShouldCacheStatements(false)
+        MusicDB.inDatabase { (db) in
             guard let database = db else { return }
             do {
                 try database.executeUpdate("CREATE TABLE MusicGroup (name STRING PRIMARY KEY)", values: nil)
@@ -268,7 +256,7 @@ class MusicGroup {
             }
             return
         }
-        db.inDatabase { (db) in
+        MusicDB.inDatabase { (db) in
             guard let database = db else { return }
             let result = try! database.executeQuery("select name from MusicGroup", values: nil)
             var names = [String]()

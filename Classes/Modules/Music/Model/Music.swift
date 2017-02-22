@@ -136,6 +136,10 @@ class Music {
         albumName = _albumName ?? "未知"
     }
     
+    deinit {
+        
+    }
+    
     /*
     /// 初始化音乐对象
     init?(url: URL) {
@@ -281,13 +285,17 @@ class Music {
     
     class func initialize() {
         /// 创建音乐数据库表
+        guard let database = MusicDB.database() else { return }
+        database.logsErrors = false
+        database.setShouldCacheStatements(false)
+        
         MusicDB.inDatabase { (db) in
             guard let database = db else { return }
             do {
                 try database.executeUpdate("CREATE TABLE Music (id INTEGER PRIMARY KEY, path STRING NOT NULL UNIQUE, song TEXT, singer STRING, artwork STRING, albumName STRING, duration DOUBLE DEFAULT (0), playCount INTEGER DEFAULT (0))", values: nil)
             }
             catch {
-                debugPrint(database.lastErrorMessage())
+//                debugPrint(database.lastErrorMessage())
             }
         }
     }
