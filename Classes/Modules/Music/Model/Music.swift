@@ -43,6 +43,12 @@ class Music {
     
     var date: Date? // 添加入歌单的日期
     
+    
+    /// 初始化音乐对象
+    ///
+    /// - Parameters:
+    ///   - url: 音频文件路径
+    ///   - complete: 完成后回调
     class func music(url: URL, complete: @escaping MusicBlock) {
         
         let operation = OperationQueue.current!
@@ -63,7 +69,6 @@ class Music {
             }
             catch {
                 fatalError(database.lastErrorMessage())
-//                debugPrint(database.lastErrorMessage())
             }
             
             /// 新建对象，添加至数据库
@@ -140,70 +145,8 @@ class Music {
         
     }
     
-    /*
-    /// 初始化音乐对象
-    init?(url: URL) {
-        
-        self.url = url
-        path = url.absoluteString.relativePath.urlDecode
-        id = Int64(path.hash)
-        
-        /// 从数据库中查找
-        do {
-            let result = try MusicDB.executeQuery("select * from Music where id=\(path.hash)", values: nil)
-            if result.next() {
-                song = result.string(forColumn: "song") ?? ""
-                singer = result.string(forColumn: "singer") ?? ""
-//                artwork = result.string(forColumn: "artwork") ?? ""
-                albumName = result.string(forColumn: "albumName") ?? ""
-                duration = result.double(forColumn: "duration")
-                playCount = result.int(forColumn: "playCount")
-                result.close()
-                return
-            }
-        }
-        catch {
-            fatalError(MusicDB.lastErrorMessage())
-        }
-        
-        /// 新建对象，添加至数据库
-        let asset = AVURLAsset(url: url)
-        duration = TimeInterval(asset.duration.value) / TimeInterval(asset.duration.timescale)
-        if duration <= 0 {
-            return nil
-        }
-        var _song: String = path.lastPathComponent.deletingPathExtension
-        var _singer: String?
-        var _albumName: String?
-        for format in asset.availableMetadataFormats {
-            for metadataItem in asset.metadata(forFormat: format) {
-                if metadataItem.commonKey == "title" {
-                    if let string = metadataItem.value as? String {
-                        _song = string
-                    }
-                }
-                else if metadataItem.commonKey == "artist" {
-                    _singer = metadataItem.value as? String
-                }
-                else if metadataItem.commonKey == "albumName" {
-                    _albumName = metadataItem.value as? String
-                }
-            }
-        }
-        song = _song
-        singer = _singer ?? ""
-        albumName = _albumName ?? ""
-        
-        do {
-            let sql = "insert into Music (id, path, song, singer, albumName, duration) values (?, ?, ?, ?, ?, ?)"
-            let values = [path.hash, path, song, singer, albumName, duration] as [Any]
-            try MusicDB.executeUpdate(sql, values: values)
-        }
-        catch {
-            fatalError("Music INSERT ERROR: \(url)")
-        }
-        
-    }*/
+    
+    
     
     
     class func artwork(url: URL) -> UIImage? {
@@ -258,30 +201,6 @@ class Music {
     // http://s1.music.126.net/download/osx/NeteaseMusic_1.4.5_488_web.dmg
     
     // MARK: - -----
-    
-    /*
-    open override class func initialize() {
-        /*
-        MusicDB.logsErrors = false
-        guard MusicDB.open() else {
-            fatalError(MusicDB.lastErrorMessage())
-        }
-        MusicDB.setShouldCacheStatements(true)*/
-        
-        
-        /// 创建音乐数据库表
-        MusicDB.inDatabase { (db) in
-            guard let database = db else { return }
-            do {
-                try database.executeUpdate("CREATE TABLE Music (id INTEGER PRIMARY KEY, path STRING NOT NULL UNIQUE, song TEXT, singer STRING, artwork STRING, albumName STRING, duration DOUBLE DEFAULT (0), playCount INTEGER DEFAULT (0))", values: nil)
-            }
-            catch {
-                debugPrint(database.lastErrorMessage())
-            }
-        }
-        
-        
-    }*/
     
     class func initialize() {
         /// 创建音乐数据库表

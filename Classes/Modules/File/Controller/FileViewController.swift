@@ -95,16 +95,23 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         }
         else if file.type == .Audio {
             /// 播放音频
+            guard MusicPlayer.shared.currentMusic?.path != file.path else {
+                MusicPlayer.shared.pause()
+                return
+            }
+            navigationController?.pushViewController(MusicPlayerInfoViewController(url: file.url), animated: true)
+            /*
+            UIApplication.shared.beginIgnoringInteractionEvents()
             Music.music(url: file.url, complete: { [weak self](music, error) in
+                UIApplication.shared.endIgnoringInteractionEvents()
                 guard let music = music else {
                     print(error!)
                     return
                 }
-                if MusicPlayer.shared.play(music) {
-                    MusicGroup.default.insert(music: music)
-                    self?.navigationController?.pushViewController(MusicPlayerInfoViewController(), animated: true)
-                }
-            })
+                MusicPlayer.shared.play(music)
+                MusicGroup.default.insert(music: music)
+                self?.navigationController?.pushViewController(MusicPlayerInfoViewController(), animated: true)
+            })*/
         }
         else if file.type == .Photo {
             let photos = model.photos()
@@ -114,11 +121,6 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
             })
             let controller = PhotoViewer(urls: urls, idx: idx)
             navigationController?.pushViewController(controller, animated: true)
-        }
-        else {
-            /// 测试
-            let url = URL(fileURLWithPath: DocumentDirectory + "/PV(1).flv")
-            ESMediaPlayerViewController.player(with: url, title: "PV(1)", in: self)
         }
     }
     

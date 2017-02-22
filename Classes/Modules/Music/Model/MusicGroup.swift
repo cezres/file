@@ -38,18 +38,6 @@ class MusicGroup {
     
     /// 默认歌单
     static let `default` = MusicGroup(name: DefaultGroupName)
-    /*
-    class func `default`() -> MusicGroup {
-        guard _default == nil else {
-            return _default!
-        }
-        create(name: DefaultGroupName)
-        _default = MusicGroup(name: DefaultGroupName)
-        return _default!
-    }*/
-    
-    /// 回调操作队列
-    static let operation = OperationQueue.main
     
     /// 创建组
     class func create(name: String, complete: MusicGroupBlock? = nil) {
@@ -60,14 +48,14 @@ class MusicGroup {
                 try database.executeUpdate("INSERT INTO MusicGroup (name) VALUES (?)", values: [name])
                 _groupNames.append(name)
                 if complete != nil {
-                    operation.addOperation {
+                    DispatchQueue.main.async {
                         complete?(MusicGroup(name: name), nil)
                     }
                 }
             }
             catch {
                 if complete != nil {
-                    operation.addOperation {
+                    DispatchQueue.main.async {
                         complete?(nil, database.lastError())
                     }
                 }
@@ -83,14 +71,14 @@ class MusicGroup {
                 try database.executeUpdate("DROP TABLE \(name);", values: nil)
                 try database.executeUpdate("DELETE FROM MusicGroup WHERE name = \'\(name)\'", values: nil)
                 if complete != nil {
-                    operation.addOperation {
+                    DispatchQueue.main.async {
                         complete?(nil)
                     }
                 }
             }
             catch {
                 if complete != nil {
-                    operation.addOperation {
+                    DispatchQueue.main.async {
                         complete?(database.lastError())
                     }
                 }
@@ -137,12 +125,12 @@ class MusicGroup {
                 }
                 result.close()
                 weakself.musicList = list
-                MusicGroup.operation.addOperation {
+                DispatchQueue.main.async {
                     complete(list, nil)
                 }
             }
             catch {
-                MusicGroup.operation.addOperation {
+                DispatchQueue.main.async {
                     complete([], database.lastError())
                 }
             }
@@ -150,17 +138,14 @@ class MusicGroup {
     }
     
     
-    /// 添加音乐至分组
-    
-//    func insert(url: URL, complete: ErrorBlock? = nil) {
-//        guard let music = Music(url: url) else {
-//            complete?(NSError(domain: "音乐对象初始化失败", code: -1, userInfo: nil))
-//            return
-//        }
-//        insert(music: music, complete: complete)
-//    }
-    
+    /// 添加音乐至歌单
     func insert(music: Music, complete: ErrorBlock? = nil) {
+        guard Thread.isMainThread else {
+            DispatchQueue.global().async {
+                self.insert(music: music, complete: complete)
+            }
+            return
+        }
         MusicDB.inDatabase { [weak self](db) in
             guard let database = db else { return }
             guard let weakself = self else { return }
@@ -172,14 +157,14 @@ class MusicGroup {
                 debugPrint("【\(music.song)】成功添加至歌单【\(weakself.name)】")
                 weakself.delegate?.musicGroup(group: weakself, newMusic: music, insertMusicAt: 0)
                 if complete != nil {
-                    MusicGroup.operation.addOperation {
+                    DispatchQueue.main.async {
                         complete?(nil)
                     }
                 }
             }
             catch {
                 if complete != nil {
-                    MusicGroup.operation.addOperation {
+                    DispatchQueue.main.async {
                         complete?(database.lastError())
                     }
                 }
@@ -194,7 +179,7 @@ class MusicGroup {
     func delete(music: Music, complete: ErrorBlock? = nil) {
         guard let index = musicList.index(of: music) else {
             if complete != nil {
-                MusicGroup.operation.addOperation {
+                DispatchQueue.main.async {
                     complete?(NSError(domain: "音乐不存在", code: -1, userInfo: nil))
                 }
             }
@@ -208,14 +193,14 @@ class MusicGroup {
                 weakself.musicList.remove(at: index)
                 weakself.delegate?.musicGroup(group: weakself, deleteMusicAt: index)
                 if complete != nil {
-                    MusicGroup.operation.addOperation {
+                    DispatchQueue.main.async {
                         complete?(nil)
                     }
                 }
             }
             catch {
                 if complete != nil {
-                    MusicGroup.operation.addOperation {
+                    DispatchQueue.main.async {
                         complete?(database.lastError())
                     }
                 }
@@ -251,7 +236,7 @@ class MusicGroup {
     /// 获取歌单列表
     class func groupNames(complete: @escaping (_ names: [String]) -> Void) {
         guard _groupNames == nil else {
-            operation.addOperation {
+            DispatchQueue.main.async {
                 complete(_groupNames)
             }
             return
@@ -266,7 +251,7 @@ class MusicGroup {
                 }
             }
             _groupNames = names
-            operation.addOperation {
+            DispatchQueue.main.async {
                 complete(names)
             }
         }
