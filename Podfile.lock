@@ -23,8 +23,11 @@ PODS:
   - PINRemoteImage/PINCache (3.0.0-beta.7):
     - PINCache (= 3.0.1-beta.2)
     - PINRemoteImage/Core
+  - ReactiveSwift (1.0.1):
+    - Result (~> 3.1)
   - REMenu (1.10)
   - RESideMenu (4.0.7)
+  - Result (3.1.0)
   - SABlurImageView (3.0.0)
   - SnapKit (3.0.2)
   - SWTableViewCell (0.3.7)
@@ -34,6 +37,7 @@ DEPENDENCIES:
   - FastImageCache
   - FMDB
   - MBProgressHUD
+  - ReactiveSwift
   - REMenu
   - RESideMenu
   - SABlurImageView
@@ -47,12 +51,14 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
   PINRemoteImage: ff63baf185088530db6cfa41cb665e2b5126b5c3
+  ReactiveSwift: b1453c8885ebfb9b09b6d60bc5bc3303f56dc72c
   REMenu: 30dad195930adf6c5eeb8041e3257aa60bf9fa49
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
+  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
   SABlurImageView: 7003ca28ded502c984846374a117f88a287d9faf
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: 03a21f0394ded533408dde242033a8d632603036
+PODFILE CHECKSUM: e43b9020a320f26d2e90c64e7f97d6b395c478eb
 
 COCOAPODS: 1.1.1

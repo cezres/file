@@ -51,8 +51,6 @@ class Music {
     ///   - complete: 完成后回调
     class func music(url: URL, complete: @escaping MusicBlock) {
         
-        let operation = OperationQueue.current!
-        
         MusicDB.inDatabase { (db) in
             guard let database = db else { return }
             do {
@@ -61,7 +59,7 @@ class Music {
                 let id = Int64(path.hash)
                 let result = try database.executeQuery("select * from Music where id=\(id)", values: nil)
                 if result.next() {
-                    operation.addOperation {
+                    DispatchQueue.main.async {
                         complete(Music(url: url, result: result), nil)
                     }
                     return
@@ -74,7 +72,7 @@ class Music {
             /// 新建对象，添加至数据库
             var error: Error?
             guard let music = Music(url: url, error: &error) else {
-                operation.addOperation {
+                DispatchQueue.main.async {
                     complete(nil, error)
                 }
                 return
@@ -83,10 +81,13 @@ class Music {
                 let sql = "insert into Music (id, path, song, singer, albumName, duration) values (?, ?, ?, ?, ?, ?)"
                 let values = [music.id, music.path, music.song, music.singer, music.albumName, music.duration] as [Any]
                 try database.executeUpdate(sql, values: values)
+                DispatchQueue.main.async {
+                    complete(music, nil)
+                }
             }
             catch {
                 debugPrint(database.lastErrorMessage())
-                operation.addOperation {
+                DispatchQueue.main.async {
                     complete(nil, database.lastError())
                 }
             }
@@ -149,6 +150,7 @@ class Music {
     
     
     
+    /// 获取音频文件插图
     class func artwork(url: URL) -> UIImage? {
         var isDirectory: ObjCBool = false
         guard FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory) && !isDirectory.boolValue else {

@@ -15,13 +15,10 @@ protocol FileContentViewDataSource: NSObjectProtocol {
     func list() -> [File]
     
     /// 是否在编辑状态
-//    func isEditing() -> Bool
     var isEditing: Bool {get}
     
     /// 是否是选中状态
     func isSelected(index: Int) -> Bool
-    
-    
     
 }
 
@@ -47,17 +44,19 @@ protocol FileContentViewProtocol {
     
     init(fileDataSource: FileContentViewDataSource, fileDelegate: FileContentViewDelegate)
     
-    func reload()
+    func change(for change: ListChange)
     
-    func reloadItem(index: Int)
+//    func reload()
+//
+//    func reloadItem(index: Int)
+//    
+//    func reloadItems(indexs: [Int])
+//    
+//    func deleteItems(indexs: [Int])
+//    
+//    func reloadAllItems()
     
-    func reloadItems(indexs: [Int])
-    
-    func deleteItems(indexs: [Int])
-    
-    func reloadAllItems()
-    
-    //    func setEditing(editing: Bool)
+//    func setEditing(editing: Bool)
     
 }
 

@@ -54,15 +54,10 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
         if timer == nil {
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(MusicPlayerInfoView.handleTimer), userInfo: nil, repeats: true)
         }
-        
-        songLabel.text = MusicPlayer.shared.currentMusic?.song
-        singerLabel.text = MusicPlayer.shared.currentMusic?.singer
-        currentTime = MusicPlayer.shared.currentTime
-        duration = MusicPlayer.shared.duration
-        
         setNeedsDisplay()
         handleTimer()
         handleDisplayLink()
+        setup()
     }
     
     func pause() {
@@ -71,6 +66,8 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
         timer?.invalidate()
         timer = nil
         setNeedsDisplay()
+        setup()
+        handleTimer()
     }
     
     func stop() {
@@ -88,6 +85,13 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
         duration = 0
         diameter = 26
         setNeedsDisplay()
+    }
+    
+    func setup() {
+        songLabel.text = MusicPlayer.shared.currentMusic?.song
+        singerLabel.text = MusicPlayer.shared.currentMusic?.singer
+        currentTime = MusicPlayer.shared.currentTime
+        duration = MusicPlayer.shared.duration
     }
     
     
@@ -114,7 +118,6 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
     }
     
     func handleDisplayLink() {
-        
         phase -= 0.4
         if phase == 0 {
             phase = CGFloat(M_PI * 12)
@@ -127,9 +130,7 @@ class MusicPlayerInfoView: UIView, UIGestureRecognizerDelegate {
             diameterOffset = -0.2
         }
         diameter += diameterOffset
-        
         currentTime = MusicPlayer.shared.currentTime
-        
         setNeedsDisplay()
     }
     

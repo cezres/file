@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import MBProgressHUD
+import ReactiveSwift
 
 class FileSelectViewController: UIViewController, FileContentViewDataSource, FileContentViewDelegate {
     
     
-    class func selectDirectory(in controller: UIViewController, complete: (String) -> Void ) {
+    class func selectDirectory(in controller: UIViewController, complete: @escaping (String) -> Void ) {
         let selectController = FileSelectViewController(directoryPath: DocumentDirectory)
         selectController.title = "选择文件夹"
+        selectController.confirmBlock = complete
         let navigationController = UINavigationController(rootViewController: selectController)
         controller.present(navigationController, animated: true) { 
             //
@@ -21,11 +24,9 @@ class FileSelectViewController: UIViewController, FileContentViewDataSource, Fil
     }
     
     private var model: FileModel!
-    
     private var tableView: FileTableView!
     private var selectedInfoLabel: UILabel!
-    
-    private var confirmBlock: ( (String, UnsafeMutablePointer<ObjCBool>) -> Void )?
+    private var confirmBlock: ( (String) -> Void )?
     
     
     private init(directoryPath: String) {
@@ -40,6 +41,10 @@ class FileSelectViewController: UIViewController, FileContentViewDataSource, Fil
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print(#function)
     }
 
     override func viewDidLoad() {
@@ -58,9 +63,12 @@ class FileSelectViewController: UIViewController, FileContentViewDataSource, Fil
         
         initSubviews()
         
-        model.loadFileList { [weak self] in
+        
+        model.changeSignal.observe { [weak self](event) in
             self?.tableView.reload()
         }
+        
+        model.loadFileList()
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,7 +92,14 @@ class FileSelectViewController: UIViewController, FileContentViewDataSource, Fil
     
     func confirm() {
         guard let controller = navigationController?.viewControllers.last as? FileSelectViewController else { return }
-        print(controller.model.directoryPath)
+        MBProgressHUD.showAdded(to: view, animated: true)
+        DispatchQueue.global().async {
+            self.confirmBlock?(controller.model.directoryPath)
+            DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.close()
+            }
+        }
     }
     
     func newDir() {
@@ -96,7 +111,11 @@ class FileSelectViewController: UIViewController, FileContentViewDataSource, Fil
     }
     
     func cancel() {
-        navigationController?.dismiss(animated: true, completion: { 
+        close()
+    }
+    
+    func close() {
+        navigationController?.dismiss(animated: true, completion: {
             
         })
     }

@@ -43,6 +43,10 @@ extension String {
         return substring(to: range.lowerBound)
     }
     
+    var deletingLastPathComponent: String {
+        return (self as NSString).deletingLastPathComponent
+    }
+    
     // MARK: - Hash
     
     var md5: String {

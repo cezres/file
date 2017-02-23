@@ -36,8 +36,42 @@ class FileCollectionView: UICollectionView, FileContentViewProtocol {
         register(FileCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "File")
     }
     
+    func change(for change: ListChange) {
+        switch change.type {
+        case .reloadAll:
+            reloadData()
+        case .insert:
+            insertItems(at: IndexPath.indexs(for: change.indexs))
+        case .delete:
+            deleteItems(at: IndexPath.indexs(for: change.indexs))
+        case .reload:
+            reloadItems(at: IndexPath.indexs(for: change.indexs))
+        case .move:
+            for moveIndex in change.moveIndexs {
+                let indexPath = IndexPath(row: moveIndex.index, section: 0)
+                let newIndexPath = IndexPath(row: moveIndex.newIndex, section: 0)
+                moveItem(at: indexPath, to: newIndexPath)
+            }
+        case .reloadVisible:
+            for cell in visibleCells {
+                if let indexPath = indexPath(for: cell) {
+                    collectionView(self, willDisplay: cell, forItemAt: indexPath)
+                }
+            }
+        }
+    }
+    
+    /*
     func reload() {
         reloadData()
+    }
+    
+    func indexPaths(for indexs: [Int]) -> [IndexPath] {
+        var indexPaths = [IndexPath]()
+        for idx in indexs {
+            indexPaths.append(IndexPath(row: idx, section: 0))
+        }
+        return indexPaths
     }
     
     func reloadItem(index: Int) {
@@ -68,7 +102,7 @@ class FileCollectionView: UICollectionView, FileContentViewProtocol {
             indexPaths.append(indexPath)
         }
         deleteItems(at: indexPaths)
-    }
+    }*/
     
 
     var flowLayout = UICollectionViewFlowLayout()

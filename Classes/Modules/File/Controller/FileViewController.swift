@@ -9,7 +9,7 @@
 import UIKit
 //import VideoPlayer
 import ESMediaPlayer
-
+import MBProgressHUD
 
 
 
@@ -44,9 +44,22 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         
         initSubviews()
         
-        model.loadFileList { [weak self]() in
-            self?.fileView.reloadData()
+        
+        model.changeSignal.observe { [weak self](event) in
+            guard event.error == nil else {
+                HUDFailure(message: event.error!.domain)
+                return
+            }
+            self?.fileView.change(for: event.value!)
+            /*
+            if event.value!.type == .reloadAll {
+                self?.fileView.reloadData()
+            }
+            else if event.value!.type == .insert {
+                self?.fileView.reloadData()
+            }*/
         }
+        model.loadFileList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,14 +75,21 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
     
     // MARK: - FileToolBarDelegate
     func deleteItems() {
-        let successIndexs = model.deleteIndexs(idxs: fileView.selectedIndexs())
-        fileView.deleteItems(idxs: successIndexs)
+        let indexs = fileView.selectedIndexs()
+        guard indexs.count > 0 else {
+            return
+        }
+        model.deleteIndexs(idxs: indexs)
         normalNavigationItem()
     }
     
     func moveItems() {
+        let indexs = fileView.selectedIndexs()
+        guard indexs.count > 0 else {
+            return
+        }
         FileSelectViewController.selectDirectory(in: self) { (directoryPath) in
-            
+//            self.model.moveFiles(for: indexs, to: directoryPath)
         }
     }
     
@@ -95,11 +115,12 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         }
         else if file.type == .Audio {
             /// 播放音频
-            guard MusicPlayer.shared.currentMusic?.path != file.path else {
+            if MusicPlayer.shared.currentMusic?.url.path == file.path && MusicPlayer.shared.isPlaying {
                 MusicPlayer.shared.pause()
-                return
             }
-            navigationController?.pushViewController(MusicPlayerInfoViewController(url: file.url), animated: true)
+            else {
+                navigationController?.pushViewController(MusicPlayerInfoViewController(url: file.url), animated: true)
+            }
             /*
             UIApplication.shared.beginIgnoringInteractionEvents()
             Music.music(url: file.url, complete: { [weak self](music, error) in
@@ -133,6 +154,7 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         if buttonIndex == 1 {
             TextFieldAlertView.show(title: "新建文件夹", block: { (text) in
                 print(text)
+                self.model.createDirectory(directoryName: text)
             })
         }
         else if buttonIndex == 2 {

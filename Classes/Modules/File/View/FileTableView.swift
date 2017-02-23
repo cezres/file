@@ -25,12 +25,39 @@ class FileTableView: UITableView, FileContentViewProtocol {
         rowHeight = 60
         
         register(FileTableViewCell.classForCoder(), forCellReuseIdentifier: "File")
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func change(for change: ListChange) {
+        switch change.type {
+        case .reloadAll:
+            reloadData()
+        case .insert:
+            insertRows(at: IndexPath.indexs(for: change.indexs), with: .left)
+        case .delete:
+            deleteRows(at: IndexPath.indexs(for: change.indexs), with: .right)
+        case .reload:
+            reloadRows(at: IndexPath.indexs(for: change.indexs), with: .automatic)
+        case .move:
+            beginUpdates()
+            for moveIndex in change.moveIndexs {
+                let indexPath = IndexPath(row: moveIndex.index, section: 0)
+                let newIndexPath = IndexPath(row: moveIndex.newIndex, section: 0)
+                moveRow(at: indexPath, to: newIndexPath)
+            }
+            endUpdates()
+        case .reloadVisible:
+            for cell in visibleCells {
+                if let indexPath = indexPath(for: cell) {
+                    tableView(self, willDisplay: cell, forRowAt: indexPath)
+                }
+            }
+        }
+    }
+    
     
     func reload() {
         reloadData()

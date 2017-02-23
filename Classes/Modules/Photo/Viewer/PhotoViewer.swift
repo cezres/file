@@ -53,7 +53,7 @@ class PhotoViewer: UIViewController/*, ASCollectionDataSource, ASCollectionDeleg
         _collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         _collectionView.dataSource = self
         _collectionView.delegate = self
-        _collectionView.backgroundColor = UIColor.gray
+        _collectionView.backgroundColor = UIColor.white
         _collectionView.isScrollEnabled = true
         _collectionView.isPagingEnabled = true
         _collectionView.register(PhotoCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "Photo")

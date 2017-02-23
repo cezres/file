@@ -16,8 +16,6 @@ func ==(lhs: MusicGroup, rhs: MusicGroup) -> Bool {
     return lhs.name == rhs.name
 }
 
-//let MusicDB: FMDatabaseQueue = MusicGroup.db
-
 let MusicDB: FMDatabaseQueue = FMDatabaseQueue(path: DocumentDirectory + "/Music.db")
 
 

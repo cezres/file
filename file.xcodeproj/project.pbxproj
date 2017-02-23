@@ -34,6 +34,10 @@
 		6EA63CCA1E5DD54500607E39 /* FileToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CBA1E5DD54500607E39 /* FileToolBar.swift */; };
 		6EA63CCB1E5DD54500607E39 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CBB1E5DD54500607E39 /* FileView.swift */; };
 		6EA8A0D61E5D306200C274DD /* FMDatabaseQueue+File.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8A0D51E5D306200C274DD /* FMDatabaseQueue+File.m */; };
+		6EAA86F81E5EE0BC00B6CC5C /* ListChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86F71E5EE0BC00B6CC5C /* ListChange.swift */; };
+		6EAA86FB1E5EEE1C00B6CC5C /* HUDFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86FA1E5EEE1C00B6CC5C /* HUDFunctions.swift */; };
+		6EAA86FD1E5EF43400B6CC5C /* IndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86FC1E5EF43400B6CC5C /* IndexPath.swift */; };
+		6EAA86FF1E5EF8CA00B6CC5C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86FE1E5EF8CA00B6CC5C /* Array.swift */; };
 		6EAAFC571E569A4C00A36665 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFBF91E569A4C00A36665 /* ButtonTableViewCell.swift */; };
 		6EAAFC581E569A4C00A36665 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFBFC1E569A4C00A36665 /* NSString+MD5.m */; };
 		6EAAFC591E569A4C00A36665 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFBFE1E569A4C00A36665 /* ImageCache.swift */; };
@@ -130,6 +134,10 @@
 		6EA63CBB1E5DD54500607E39 /* FileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
 		6EA8A0D41E5D306200C274DD /* FMDatabaseQueue+File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabaseQueue+File.h"; sourceTree = "<group>"; };
 		6EA8A0D51E5D306200C274DD /* FMDatabaseQueue+File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabaseQueue+File.m"; sourceTree = "<group>"; };
+		6EAA86F71E5EE0BC00B6CC5C /* ListChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListChange.swift; sourceTree = "<group>"; };
+		6EAA86FA1E5EEE1C00B6CC5C /* HUDFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDFunctions.swift; sourceTree = "<group>"; };
+		6EAA86FC1E5EF43400B6CC5C /* IndexPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPath.swift; sourceTree = "<group>"; };
+		6EAA86FE1E5EF8CA00B6CC5C /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		6EAAFBF91E569A4C00A36665 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		6EAAFBFB1E569A4C00A36665 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		6EAAFBFC1E569A4C00A36665 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
@@ -263,6 +271,7 @@
 				6EA63CAA1E5DD54500607E39 /* File.swift */,
 				6EA63CAB1E5DD54500607E39 /* FileAttributes.swift */,
 				6EA63CAC1E5DD54500607E39 /* FileType.swift */,
+				6EAA86F71E5EE0BC00B6CC5C /* ListChange.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -314,6 +323,13 @@
 				6EA8A0D51E5D306200C274DD /* FMDatabaseQueue+File.m */,
 			);
 			path = FMDB;
+			sourceTree = "<group>";
+		};
+		6EAA86F91E5EEDF900B6CC5C /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		6EAAFBF61E569A4C00A36665 /* Classes */ = {
@@ -393,6 +409,8 @@
 				6EAAFC0A1E569A4C00A36665 /* UIView+Frame.swift */,
 				6EAAFC0B1E569A4C00A36665 /* UIViewController.swift */,
 				6EAAFC0C1E569A4C00A36665 /* URL.swift */,
+				6EAA86FC1E5EF43400B6CC5C /* IndexPath.swift */,
+				6EAA86FE1E5EF8CA00B6CC5C /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -402,6 +420,7 @@
 			children = (
 				6EAAFC0E1E569A4C00A36665 /* Macro.swift */,
 				6EFC04731E5C6B3800FF12C0 /* FileFunctions.swift */,
+				6EAA86FA1E5EEE1C00B6CC5C /* HUDFunctions.swift */,
 			);
 			path = Macros;
 			sourceTree = "<group>";
@@ -468,6 +487,7 @@
 		6EAAFC921E569A6700A36665 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				6EAA86F91E5EEDF900B6CC5C /* MBProgressHUD */,
 				6EA8A0D31E5D304600C274DD /* FMDB */,
 				6EAAFC931E569A6700A36665 /* ESTMusicIndicator */,
 			);
@@ -851,6 +871,7 @@
 				6EB29B551E5845DF00B19406 /* PhotoMemoryCache.m in Sources */,
 				6EB29B341E583E2F00B19406 /* MusicSearchHistoryView.swift in Sources */,
 				6EA63CCB1E5DD54500607E39 /* FileView.swift in Sources */,
+				6EAA86F81E5EE0BC00B6CC5C /* ListChange.swift in Sources */,
 				6EB29B261E583E2F00B19406 /* MusicListViewController.swift in Sources */,
 				6EA63CC41E5DD54500607E39 /* FileUtils.swift in Sources */,
 				6EA63CC91E5DD54500607E39 /* FileTableView.swift in Sources */,
@@ -865,14 +886,17 @@
 				6EB29B301E583E2F00B19406 /* MyMusicGroupEntity.swift in Sources */,
 				6EB29B371E583E2F00B19406 /* Music.swift in Sources */,
 				6EAAFC5D1E569A4C00A36665 /* MenuItemView.swift in Sources */,
+				6EAA86FF1E5EF8CA00B6CC5C /* Array.swift in Sources */,
 				6EA63CC01E5DD54500607E39 /* FileType.swift in Sources */,
 				6EA63CC71E5DD54500607E39 /* FileCollectionView.swift in Sources */,
 				6EB29B351E583E2F00B19406 /* MusicSearchControl.swift in Sources */,
+				6EAA86FB1E5EEE1C00B6CC5C /* HUDFunctions.swift in Sources */,
 				6EB29B3A1E583E2F00B19406 /* MusicPlayer+RemoteComtrol.swift in Sources */,
 				6EA63CC51E5DD54500607E39 /* FileCollectionViewCell.swift in Sources */,
 				6EB29B291E583E2F00B19406 /* MusicListTableView.swift in Sources */,
 				6EA63CBF1E5DD54500607E39 /* FileAttributes.swift in Sources */,
 				6E2060831D93ACB000A0B5B2 /* AppDelegate.swift in Sources */,
+				6EAA86FD1E5EF43400B6CC5C /* IndexPath.swift in Sources */,
 				6EAAFC641E569A4C00A36665 /* URL.swift in Sources */,
 				6EAAFC971E569A6700A36665 /* ESTMusicIndicatorContentView.swift in Sources */,
 				6EB29B2D1E583E2F00B19406 /* MusicPlayerInfoView.swift in Sources */,

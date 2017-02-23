@@ -12,7 +12,7 @@ import UIKit
 class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     private var tableView: UITableView!
-    private var dataSource = ["文件", "音乐", "视频", "照片", "设置"]
+    private var dataSource = ["文件", "音乐", "视频", "照片", "数据传输", "设置"]
     
     private lazy var fileController = UINavigationController(rootViewController: FileViewController(directoryPath: DocumentDirectory))
     private lazy var musicController = UINavigationController(rootViewController: MyMusicViewController())

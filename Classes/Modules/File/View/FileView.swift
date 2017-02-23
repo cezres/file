@@ -36,11 +36,11 @@ class FileView: UIView, FileContentViewDataSource, FileContentViewDelegate {
         else {
             isSelecteds = []
         }
-        contentView.reloadAllItems()
+        contentView.change(for: ListChange.reloadVisible)
     }
     
     func deleteItems(idxs: [Int]) {
-        contentView.deleteItems(indexs: idxs)
+        contentView.change(for: ListChange.delete(indexs: idxs))
     }
     
     var isSelecteds = [Bool]()
@@ -76,7 +76,7 @@ class FileView: UIView, FileContentViewDataSource, FileContentViewDelegate {
     func fileView(fileView: FileContentViewProtocol, didSelectIndex index: Int) {
         if isEditing {
             isSelecteds[index] = !isSelecteds[index]
-            contentView.reloadItem(index: index)
+            contentView.change(for: ListChange.reload(indexs: [index]))
         }
         else {
             delegate?.fileView(fileView: self, didSelectedFile: delegate.list()[index])
@@ -96,7 +96,11 @@ class FileView: UIView, FileContentViewDataSource, FileContentViewDelegate {
     }
     
     func reloadData() {
-        contentView.reload()
+        contentView.change(for: ListChange.reloadAll)
+    }
+    
+    func change(for change: ListChange) {
+        contentView.change(for: change)
     }
     
     func initSubviews() {
@@ -108,7 +112,6 @@ class FileView: UIView, FileContentViewDataSource, FileContentViewDelegate {
         collectionView.selectFile = { [weak self](file) in
             self?.delegate?.fileView(fileView: self!, didSelectedFile: file)
         }
-        
         contentView = collectionView
     }
     

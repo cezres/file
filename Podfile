@@ -15,5 +15,7 @@ target 'file' do
     pod 'FMDB'
     pod 'MBProgressHUD'
     
+    pod 'ReactiveSwift'
+    
 end
 
