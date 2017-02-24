@@ -18,12 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        DispatchQueue.global().async {
-            
-        }
+        
         Music.initialize()
         MusicGroup.initialize()
-        
         
         let contentViewController = UINavigationController(rootViewController: FileViewController())
         let leftMenuViewController = LeftMenuViewController()
@@ -31,21 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sideMenuViewController = RESideMenu(contentViewController: contentViewController, leftMenuViewController: leftMenuViewController, rightMenuViewController: nil)!
         sideMenuViewController.backgroundImage = UIImage(named: "SideMenuBackground")
         sideMenuViewController.menuPreferredStatusBarStyle = UIStatusBarStyle.lightContent
-//        sideMenuViewController.delegate = self
         sideMenuViewController.contentViewShadowColor = UIColor.black
         sideMenuViewController.contentViewShadowOffset = CGSize(width: 0, height: 0)
         sideMenuViewController.contentViewShadowOpacity = 0.6
         sideMenuViewController.contentViewShadowRadius = 12
         sideMenuViewController.contentViewShadowEnabled = true
-        //sideMenuViewController.scaleContentView = false
         sideMenuViewController.contentViewInPortraitOffsetCenterX = 0;
         sideMenuViewController.panFromEdge = false
         
 //        sideMenuViewController.contentViewScaleValue = 0.9
         sideMenuViewController.scaleContentView = false
-        
         sideMenuViewController.scaleMenuView = false
-        
         sideMenuViewController.scaleBackgroundImageView = true
         
         self.window = UIWindow(frame: UIScreen.main.bounds)

@@ -20,6 +20,9 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
     
     private var fileView: FileView!
     private var toolBar: FileToolBar!
+    
+    
+    
 
     init(directoryPath: String = DocumentDirectory) {
         super.init(nibName: nil, bundle: nil)
@@ -44,21 +47,19 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         
         initSubviews()
         
-        
         model.changeSignal.observe { [weak self](event) in
-            guard event.error == nil else {
-                HUDFailure(message: event.error!.domain)
+            guard event.value != nil else {
                 return
             }
             self?.fileView.change(for: event.value!)
-            /*
-            if event.value!.type == .reloadAll {
-                self?.fileView.reloadData()
-            }
-            else if event.value!.type == .insert {
-                self?.fileView.reloadData()
-            }*/
         }
+        model.errorSignal.observe { (event) in
+            guard event.value != nil else {
+                return
+            }
+            HUDFailure(message: event.value!.domain)
+        }
+        
         model.loadFileList()
     }
     
@@ -88,14 +89,44 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         guard indexs.count > 0 else {
             return
         }
-        FileSelectViewController.selectDirectory(in: self) { (directoryPath) in
-//            self.model.moveFiles(for: indexs, to: directoryPath)
+        
+        FileSelectViewController.selectDirectory(in: self) { (directoryPath) -> Bool in
+            let currentDirectoryPath = self.model.directoryPath
+            if currentDirectoryPath == directoryPath {
+                return false
+            }
+            self.model.moveFiles(for: indexs, to: directoryPath)
+            if directoryPath.lengthOfBytes(using: .utf8) < currentDirectoryPath.lengthOfBytes(using: .utf8) &&
+                currentDirectoryPath.hasPrefix(directoryPath) {
+                self.reloadController(forDirectoryPath: directoryPath)
+            }
+            DispatchQueue.main.async {
+                self.normalNavigationItem()
+            }
+            return true
         }
     }
     
     func copyItems() {
-        FileSelectViewController.selectDirectory(in: self) { (directoryPath) in
-            
+        let indexs = fileView.selectedIndexs()
+        guard indexs.count > 0 else {
+            return
+        }
+        
+        FileSelectViewController.selectDirectory(in: self) { (directoryPath) -> Bool in
+            let currentDirectoryPath = self.model.directoryPath
+            if currentDirectoryPath == directoryPath {
+                return false
+            }
+            self.model.copyFiles(for: indexs, to: directoryPath)
+            if directoryPath.lengthOfBytes(using: .utf8) < currentDirectoryPath.lengthOfBytes(using: .utf8) &&
+                currentDirectoryPath.hasPrefix(directoryPath) {
+                self.reloadController(forDirectoryPath: directoryPath)
+            }
+            DispatchQueue.main.async {
+                self.normalNavigationItem()
+            }
+            return true
         }
     }
     
@@ -111,7 +142,7 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
             if MusicPlayer.shared.state == .playing {
                 MusicPlayer.shared.pause()
             }
-            ESMediaPlayerViewController.player(with: file.url, title: file.name, in: self)
+            ESMediaPlayerViewController.player(with: file.url, title: file.name, in: self).closeOnComplete = true
         }
         else if file.type == .Audio {
             /// 播放音频
@@ -254,6 +285,24 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         fileView.addGestureRecognizer(panGestureRecognizer)
         panGestureRecognizer.addTarget(target, action: action)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+    
+    
+    // MARK: Utils
+    
+    /// 刷新数据
+    ///
+    /// - Parameter directoryPath: <#directoryPath description#>
+    func reloadController(forDirectoryPath directoryPath: String) {
+        let controllers = navigationController?.viewControllers ?? []
+        for ctrl in controllers {
+            if let file = ctrl as? FileViewController {
+                if file.model.directoryPath == directoryPath {
+                    file.model.loadFileList()
+                    break
+                }
+            }
+        }
     }
     
 }

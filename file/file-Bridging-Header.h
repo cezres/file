@@ -10,3 +10,4 @@
 #import "PhotoMemoryCache.h"
 #import "NSString+MD5.h"
 #import "FMDatabaseQueue+File.h"
+#import "DirectoryWatcher.h"

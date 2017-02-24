@@ -13,7 +13,12 @@ import ReactiveSwift
 class FileSelectViewController: UIViewController, FileContentViewDataSource, FileContentViewDelegate {
     
     
-    class func selectDirectory(in controller: UIViewController, complete: @escaping (String) -> Void ) {
+    /// 选择文件夹
+    ///
+    /// - Parameters:
+    ///   - controller: <#controller description#>
+    ///   - complete: 选择完成后回调，需要返回是否关闭文件选择控制器
+    class func selectDirectory(in controller: UIViewController, complete: @escaping (String) -> Bool ) {
         let selectController = FileSelectViewController(directoryPath: DocumentDirectory)
         selectController.title = "选择文件夹"
         selectController.confirmBlock = complete
@@ -26,7 +31,7 @@ class FileSelectViewController: UIViewController, FileContentViewDataSource, Fil
     private var model: FileModel!
     private var tableView: FileTableView!
     private var selectedInfoLabel: UILabel!
-    private var confirmBlock: ( (String) -> Void )?
+    private var confirmBlock: ( (String) -> Bool )?
     
     
     private init(directoryPath: String) {
@@ -94,10 +99,12 @@ class FileSelectViewController: UIViewController, FileContentViewDataSource, Fil
         guard let controller = navigationController?.viewControllers.last as? FileSelectViewController else { return }
         MBProgressHUD.showAdded(to: view, animated: true)
         DispatchQueue.global().async {
-            self.confirmBlock?(controller.model.directoryPath)
+            let result = self.confirmBlock!(controller.model.directoryPath)
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)
-                self.close()
+                if result {
+                    self.close()
+                }
             }
         }
     }

@@ -33,7 +33,7 @@ func HUDLoadingHidden(for view: UIView) {
     }
     
     let hud = MBProgressHUD(view: inView)
-    hud.detailsLabel.text = message
+    hud.label.text = message
     hud.removeFromSuperViewOnHide = true
     inView.addSubview(hud)
     hud.mode = .text

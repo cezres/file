@@ -21,11 +21,14 @@ class FileModel {
         return _list
     }
     
-    // 文件列表变更信号
+    // 文件列表变更
     let changeSignal: Signal<ListChange, NSError>
+    // 错误
+    let errorSignal: Signal<NSError, NSError>
     
     private var _list = [File]()
     private let changeObserver: Observer<ListChange, NSError>
+    private let errorObserver: Observer<NSError, NSError>
     
     // 过滤
     typealias FileFilter = (_ file: File) -> Bool
@@ -40,6 +43,7 @@ class FileModel {
     init(directoryPath: String) {
         self.directoryPath = directoryPath
         (changeSignal, changeObserver) = Signal<ListChange, NSError>.pipe()
+        (errorSignal, errorObserver) = Signal<NSError, NSError>.pipe()
         sort = { (file1, file2) -> Bool in
             return file1.type < file2.type
         }
@@ -71,27 +75,31 @@ class FileModel {
             files = files.sorted(by: sort!)
         }
         
-        DispatchQueue.main.async {
+        sendChange(change: ListChange.reloadAll) { 
             self._list = files
-            self.changeObserver.send(value: ListChange.reloadAll)
         }
     }
     
     
+    /// 创建文件夹
+    ///
+    /// - Parameter directoryName: 文件夹名称
     func createDirectory(directoryName: String) {
         let path = directoryPath + "/" + directoryName
+        var isDirectoryL: ObjCBool = false
+        if FileManager.default.fileExists(atPath: path, isDirectory: &isDirectoryL) && isDirectoryL.boolValue {
+            sendError(error: NSError(domain: "已存在文件夹", code: -1, userInfo: nil))
+            return
+        }
         do {
             try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
             let file = File(path: path)
-            DispatchQueue.main.async {
+            sendChange(change: ListChange.insert(indexs: [0])) {
                 self._list.insert(file, at: 0)
-                self.changeObserver.send(value: ListChange.insert(indexs: [0]))
             }
         }
         catch {
-            DispatchQueue.main.async {
-                self.changeObserver.send(error: error as NSError)
-            }
+            sendError(error: error as NSError)
         }
     }
     
@@ -112,13 +120,37 @@ class FileModel {
             let toPath = createFilePath(targetDirectory: directoryPath, lastPathComponent: file.path.lastPathComponent)
             do {
                 try FileManager.default.moveItem(atPath: file.path, toPath: toPath)
-                successIndexs.append(idx)
+                successIndexs.append(indexs[idx])
             }
             catch {
                 
             }
         }
-        remove(indexs: successIndexs)
+        sendChange(change: ListChange.delete(indexs: successIndexs)) {
+            self.remove(indexs: successIndexs)
+        }
+    }
+    
+    /// 拷贝文件
+    ///
+    /// - Parameters:
+    ///   - indexs: <#indexs description#>
+    ///   - directoryPath: <#directoryPath description#>
+    func copyFiles(for indexs: [Int], to directoryPath: String) {
+        var isDirectory: ObjCBool = false
+        guard FileManager.default.fileExists(atPath: directoryPath, isDirectory: &isDirectory) && isDirectory.boolValue else {
+            return
+        }
+        let files = self.files(for: indexs)
+        for file in files {
+            let toPath = createFilePath(targetDirectory: directoryPath, lastPathComponent: file.path.lastPathComponent)
+            do {
+                try FileManager.default.copyItem(atPath: file.path, toPath: toPath)
+            }
+            catch {
+                
+            }
+        }
     }
     
     /// 删除文件
@@ -140,8 +172,10 @@ class FileModel {
         guard successIndexs.count > 0 else {
             return
         }
-        remove(indexs: successIndexs)
-        changeObserver.send(value: ListChange.delete(indexs: successIndexs))
+        
+        sendChange(change: ListChange.delete(indexs: successIndexs)) {
+            self.remove(indexs: successIndexs)
+        }
     }
     
     
@@ -217,6 +251,30 @@ class FileModel {
         for idx in idxs {
             _list.remove(at: idx - flag)
             flag += 1
+        }
+    }
+    
+    private func sendChange(change: ListChange, changeBlock: (() -> Void)? = nil) {
+        if Thread.isMainThread {
+            changeBlock?()
+            changeObserver.send(value: change)
+        }
+        else {
+            DispatchQueue.main.async {
+                changeBlock?()
+                self.changeObserver.send(value: change)
+            }
+        }
+    }
+    
+    private func sendError(error: NSError) {
+        if Thread.isMainThread {
+            errorObserver.send(value: error)
+        }
+        else {
+            DispatchQueue.main.async {
+                self.errorObserver.send(value: error)
+            }
         }
     }
     

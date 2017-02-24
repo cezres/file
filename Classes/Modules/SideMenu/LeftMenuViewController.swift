@@ -67,7 +67,7 @@ class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableVi
             sideMenuViewController.setContentViewController(photoController, animated: true)
             sideMenuViewController.hideViewController()
         }
-        else if indexPath.row == 4 {
+        else if indexPath.row == 5 {
             sideMenuViewController.setContentViewController(settingController, animated: true)
             sideMenuViewController.hideViewController()
         }

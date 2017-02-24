@@ -17,6 +17,8 @@
 		6E8B12431E485C8400B9AD24 /* IJKMediaFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B123D1E485C6500B9AD24 /* IJKMediaFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E9D23921E5ACD6E008C747E /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D23911E5ACD6E008C747E /* PhotoCell.swift */; };
 		6E9D23941E5AF9D1008C747E /* PhotoFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D23931E5AF9D1008C747E /* PhotoFlowLayout.swift */; };
+		6EA51DB81E5FC7D900DF88EC /* DirectoryWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA51DB71E5FC7D900DF88EC /* DirectoryWatcher.swift */; };
+		6EA51DBB1E5FE22E00DF88EC /* DirectoryWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA51DBA1E5FE22E00DF88EC /* DirectoryWatcher.m */; };
 		6EA63CBC1E5DD54500607E39 /* FileSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CA71E5DD54500607E39 /* FileSelectViewController.swift */; };
 		6EA63CBD1E5DD54500607E39 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CA81E5DD54500607E39 /* FileViewController.swift */; };
 		6EA63CBE1E5DD54500607E39 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CAA1E5DD54500607E39 /* File.swift */; };
@@ -55,7 +57,6 @@
 		6EAAFC651E569A4C00A36665 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC0E1E569A4C00A36665 /* Macro.swift */; };
 		6EAAFC8F1E569A4C00A36665 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC531E569A4C00A36665 /* SettingViewController.swift */; };
 		6EAAFC901E569A4C00A36665 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC551E569A4C00A36665 /* LeftMenuViewController.swift */; };
-		6EAAFC911E569A4C00A36665 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC561E569A4C00A36665 /* SideMenuViewController.swift */; };
 		6EAAFC971E569A6700A36665 /* ESTMusicIndicatorContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC941E569A6700A36665 /* ESTMusicIndicatorContentView.swift */; };
 		6EAAFC981E569A6700A36665 /* ESTMusicIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC951E569A6700A36665 /* ESTMusicIndicatorView.swift */; };
 		6EB29B261E583E2F00B19406 /* MusicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B011E583E2E00B19406 /* MusicListViewController.swift */; };
@@ -116,6 +117,9 @@
 		6E8B123D1E485C6500B9AD24 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IJKMediaFramework.framework; path = Frameworks/IJKMediaFramework.framework; sourceTree = "<group>"; };
 		6E9D23911E5ACD6E008C747E /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		6E9D23931E5AF9D1008C747E /* PhotoFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoFlowLayout.swift; sourceTree = "<group>"; };
+		6EA51DB71E5FC7D900DF88EC /* DirectoryWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryWatcher.swift; sourceTree = "<group>"; };
+		6EA51DB91E5FE22E00DF88EC /* DirectoryWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryWatcher.h; sourceTree = "<group>"; };
+		6EA51DBA1E5FE22E00DF88EC /* DirectoryWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryWatcher.m; sourceTree = "<group>"; };
 		6EA63CA71E5DD54500607E39 /* FileSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSelectViewController.swift; sourceTree = "<group>"; };
 		6EA63CA81E5DD54500607E39 /* FileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		6EA63CAA1E5DD54500607E39 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -156,7 +160,6 @@
 		6EAAFC0E1E569A4C00A36665 /* Macro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		6EAAFC531E569A4C00A36665 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		6EAAFC551E569A4C00A36665 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
-		6EAAFC561E569A4C00A36665 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		6EAAFC941E569A6700A36665 /* ESTMusicIndicatorContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTMusicIndicatorContentView.swift; sourceTree = "<group>"; };
 		6EAAFC951E569A6700A36665 /* ESTMusicIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTMusicIndicatorView.swift; sourceTree = "<group>"; };
 		6EB29B011E583E2E00B19406 /* MusicListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +293,9 @@
 				6EA63CB01E5DD54500607E39 /* FileIconEntity.swift */,
 				6EA63CB11E5DD54500607E39 /* FileThumbnail.swift */,
 				6EA63CB21E5DD54500607E39 /* FileUtils.swift */,
+				6EA51DB71E5FC7D900DF88EC /* DirectoryWatcher.swift */,
+				6EA51DB91E5FE22E00DF88EC /* DirectoryWatcher.h */,
+				6EA51DBA1E5FE22E00DF88EC /* DirectoryWatcher.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -479,7 +485,6 @@
 			isa = PBXGroup;
 			children = (
 				6EAAFC551E569A4C00A36665 /* LeftMenuViewController.swift */,
-				6EAAFC561E569A4C00A36665 /* SideMenuViewController.swift */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -896,6 +901,7 @@
 				6EB29B291E583E2F00B19406 /* MusicListTableView.swift in Sources */,
 				6EA63CBF1E5DD54500607E39 /* FileAttributes.swift in Sources */,
 				6E2060831D93ACB000A0B5B2 /* AppDelegate.swift in Sources */,
+				6EA51DBB1E5FE22E00DF88EC /* DirectoryWatcher.m in Sources */,
 				6EAA86FD1E5EF43400B6CC5C /* IndexPath.swift in Sources */,
 				6EAAFC641E569A4C00A36665 /* URL.swift in Sources */,
 				6EAAFC971E569A6700A36665 /* ESTMusicIndicatorContentView.swift in Sources */,
@@ -907,7 +913,6 @@
 				6EB29B311E583E2F00B19406 /* MyMusicModel.swift in Sources */,
 				6EB29B271E583E2F00B19406 /* MusicGroupMenu.swift in Sources */,
 				6EB29B2E1E583E2F00B19406 /* MusicPlayerToolView.swift in Sources */,
-				6EAAFC911E569A4C00A36665 /* SideMenuViewController.swift in Sources */,
 				6EAAFC8F1E569A4C00A36665 /* SettingViewController.swift in Sources */,
 				6EB29B541E5845DF00B19406 /* PhotoCollectionViewCell.swift in Sources */,
 				6EAAFC581E569A4C00A36665 /* NSString+MD5.m in Sources */,
@@ -929,6 +934,7 @@
 				6EA63CC61E5DD54500607E39 /* FileTableViewCell.swift in Sources */,
 				6EA63CC11E5DD54500607E39 /* FileModel.swift in Sources */,
 				6EA63CBC1E5DD54500607E39 /* FileSelectViewController.swift in Sources */,
+				6EA51DB81E5FC7D900DF88EC /* DirectoryWatcher.swift in Sources */,
 				6EB29B331E583E2F00B19406 /* MyMusicTableViewCell.swift in Sources */,
 				6EAAFC981E569A6700A36665 /* ESTMusicIndicatorView.swift in Sources */,
 				6EAAFC611E569A4C00A36665 /* UIImage.swift in Sources */,
