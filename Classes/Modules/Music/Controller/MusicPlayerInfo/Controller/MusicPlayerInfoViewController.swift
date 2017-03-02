@@ -16,14 +16,16 @@ class MusicPlayerInfoViewController: UIViewController {
     
     init(url: URL) {
         super.init(nibName: nil, bundle: nil)
-        Music.music(url: url, complete: { (music, error) in
-            guard let music = music else {
-                print(error!)
+        
+        DispatchQueue.global().async {
+            guard let music = Music(url: url) else {
                 return
             }
-            MusicPlayer.shared.play(music)
             MusicGroup.default.insert(music: music)
-        })
+            DispatchQueue.main.async {
+                MusicPlayer.shared.play(music)
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -11,9 +11,6 @@ import AVFoundation
 import MobileCoreServices
 
 func MIMEType(pathExtension: String) -> String? {
-//    guard FileManager.default.fileExists(atPath: url.path) else {
-//        return nil
-//    }
     guard let UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeUnretainedValue() else {
         return nil
     }

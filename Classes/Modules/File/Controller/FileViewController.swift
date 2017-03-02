@@ -68,11 +68,6 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tabBarItem.title = title
-    }
-    
     
     // MARK: - FileToolBarDelegate
     func deleteItems() {

@@ -58,27 +58,6 @@ class FileTableView: UITableView, FileContentViewProtocol {
         }
     }
     
-    
-    func reload() {
-        reloadData()
-    }
-    
-    func reloadItem(index: Int) {
-        
-    }
-    
-    func reloadItems(indexs: [Int]) {
-        
-    }
-    
-    func deleteItems(indexs: [Int]) {
-        
-    }
-    
-    func reloadAllItems() {
-        
-    }
-    
 }
 
 

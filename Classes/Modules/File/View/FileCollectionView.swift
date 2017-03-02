@@ -60,50 +60,6 @@ class FileCollectionView: UICollectionView, FileContentViewProtocol {
             }
         }
     }
-    
-    /*
-    func reload() {
-        reloadData()
-    }
-    
-    func indexPaths(for indexs: [Int]) -> [IndexPath] {
-        var indexPaths = [IndexPath]()
-        for idx in indexs {
-            indexPaths.append(IndexPath(row: idx, section: 0))
-        }
-        return indexPaths
-    }
-    
-    func reloadItem(index: Int) {
-        let indexPath = IndexPath(row: index, section: 0)
-        if let cell = cellForItem(at: indexPath) {
-            collectionView(self, willDisplay: cell, forItemAt: indexPath)
-        }
-    }
-    
-    func reloadItems(indexs: [Int]) {
-        for idx in indexs {
-            reloadItem(index: idx)
-        }
-    }
-    
-    func reloadAllItems() {
-        for cell in visibleCells {
-            if let indexPath = indexPath(for: cell) {
-                collectionView(self, willDisplay: cell, forItemAt: indexPath)
-            }
-        }
-    }
-    
-    func deleteItems(indexs: [Int]) {
-        var indexPaths = [IndexPath]()
-        for idx in indexs {
-            let indexPath = IndexPath(row: idx, section: 0)
-            indexPaths.append(indexPath)
-        }
-        deleteItems(at: indexPaths)
-    }*/
-    
 
     var flowLayout = UICollectionViewFlowLayout()
     

@@ -7,10 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E15F86C1E5CA0A7004B0F93 /* ASImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E15F86B1E5CA0A7004B0F93 /* ASImageView.swift */; };
 		6E2060831D93ACB000A0B5B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2060821D93ACB000A0B5B2 /* AppDelegate.swift */; };
 		6E20608A1D93ACB000A0B5B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E2060891D93ACB000A0B5B2 /* Assets.xcassets */; };
 		6E20608D1D93ACB000A0B5B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E20608B1D93ACB000A0B5B2 /* LaunchScreen.storyboard */; };
+		6E89AB261E68192700C9505D /* FileIconEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB251E68192700C9505D /* FileIconEntity.swift */; };
+		6E89AB361E681FC300C9505D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB291E681FC300C9505D /* ImageCache.swift */; };
+		6E89AB371E681FC300C9505D /* ImageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB2A1E681FC300C9505D /* ImageEntity.swift */; };
+		6E89AB381E681FC300C9505D /* ASImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB2D1E681FC300C9505D /* ASImageView.swift */; };
+		6E89AB391E681FC300C9505D /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB2F1E681FC300C9505D /* ButtonTableViewCell.swift */; };
+		6E89AB3A1E681FC300C9505D /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB311E681FC300C9505D /* Menu.swift */; };
+		6E89AB3B1E681FC300C9505D /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB321E681FC300C9505D /* MenuItem.swift */; };
+		6E89AB3C1E681FC300C9505D /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB331E681FC300C9505D /* MenuItemView.swift */; };
+		6E89AB3D1E681FC300C9505D /* TextFieldAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB351E681FC300C9505D /* TextFieldAlertView.swift */; };
+		6E89AB401E681FD100C9505D /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB3F1E681FD100C9505D /* NSString+MD5.m */; };
 		6E8B12401E485C8400B9AD24 /* ESMediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B123C1E485C6500B9AD24 /* ESMediaPlayer.framework */; };
 		6E8B12411E485C8400B9AD24 /* ESMediaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B123C1E485C6500B9AD24 /* ESMediaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E8B12421E485C8400B9AD24 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B123D1E485C6500B9AD24 /* IJKMediaFramework.framework */; };
@@ -25,7 +34,6 @@
 		6EA63CBF1E5DD54500607E39 /* FileAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CAB1E5DD54500607E39 /* FileAttributes.swift */; };
 		6EA63CC01E5DD54500607E39 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CAC1E5DD54500607E39 /* FileType.swift */; };
 		6EA63CC11E5DD54500607E39 /* FileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CAE1E5DD54500607E39 /* FileModel.swift */; };
-		6EA63CC21E5DD54500607E39 /* FileIconEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CB01E5DD54500607E39 /* FileIconEntity.swift */; };
 		6EA63CC31E5DD54500607E39 /* FileThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CB11E5DD54500607E39 /* FileThumbnail.swift */; };
 		6EA63CC41E5DD54500607E39 /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CB21E5DD54500607E39 /* FileUtils.swift */; };
 		6EA63CC51E5DD54500607E39 /* FileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CB51E5DD54500607E39 /* FileCollectionViewCell.swift */; };
@@ -40,14 +48,6 @@
 		6EAA86FB1E5EEE1C00B6CC5C /* HUDFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86FA1E5EEE1C00B6CC5C /* HUDFunctions.swift */; };
 		6EAA86FD1E5EF43400B6CC5C /* IndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86FC1E5EF43400B6CC5C /* IndexPath.swift */; };
 		6EAA86FF1E5EF8CA00B6CC5C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86FE1E5EF8CA00B6CC5C /* Array.swift */; };
-		6EAAFC571E569A4C00A36665 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFBF91E569A4C00A36665 /* ButtonTableViewCell.swift */; };
-		6EAAFC581E569A4C00A36665 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFBFC1E569A4C00A36665 /* NSString+MD5.m */; };
-		6EAAFC591E569A4C00A36665 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFBFE1E569A4C00A36665 /* ImageCache.swift */; };
-		6EAAFC5A1E569A4C00A36665 /* ImageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFBFF1E569A4C00A36665 /* ImageEntity.swift */; };
-		6EAAFC5B1E569A4C00A36665 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC011E569A4C00A36665 /* Menu.swift */; };
-		6EAAFC5C1E569A4C00A36665 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC021E569A4C00A36665 /* MenuItem.swift */; };
-		6EAAFC5D1E569A4C00A36665 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC031E569A4C00A36665 /* MenuItemView.swift */; };
-		6EAAFC5E1E569A4C00A36665 /* TextFieldAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC051E569A4C00A36665 /* TextFieldAlertView.swift */; };
 		6EAAFC5F1E569A4C00A36665 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC071E569A4C00A36665 /* Equatable.swift */; };
 		6EAAFC601E569A4C00A36665 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC081E569A4C00A36665 /* String.swift */; };
 		6EAAFC611E569A4C00A36665 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC091E569A4C00A36665 /* UIImage.swift */; };
@@ -107,12 +107,22 @@
 
 /* Begin PBXFileReference section */
 		408C2F590B39937EC438C9CE /* Pods-file.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-file.release.xcconfig"; path = "Pods/Target Support Files/Pods-file/Pods-file.release.xcconfig"; sourceTree = "<group>"; };
-		6E15F86B1E5CA0A7004B0F93 /* ASImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASImageView.swift; sourceTree = "<group>"; };
 		6E20607F1D93ACB000A0B5B2 /* file.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = file.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E2060821D93ACB000A0B5B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E2060891D93ACB000A0B5B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E20608C1D93ACB000A0B5B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E20608E1D93ACB000A0B5B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E89AB251E68192700C9505D /* FileIconEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileIconEntity.swift; sourceTree = "<group>"; };
+		6E89AB291E681FC300C9505D /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		6E89AB2A1E681FC300C9505D /* ImageEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEntity.swift; sourceTree = "<group>"; };
+		6E89AB2D1E681FC300C9505D /* ASImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASImageView.swift; sourceTree = "<group>"; };
+		6E89AB2F1E681FC300C9505D /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		6E89AB311E681FC300C9505D /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		6E89AB321E681FC300C9505D /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		6E89AB331E681FC300C9505D /* MenuItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
+		6E89AB351E681FC300C9505D /* TextFieldAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldAlertView.swift; sourceTree = "<group>"; };
+		6E89AB3E1E681FD100C9505D /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		6E89AB3F1E681FD100C9505D /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		6E8B123C1E485C6500B9AD24 /* ESMediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ESMediaPlayer.framework; path = Frameworks/ESMediaPlayer.framework; sourceTree = "<group>"; };
 		6E8B123D1E485C6500B9AD24 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IJKMediaFramework.framework; path = Frameworks/IJKMediaFramework.framework; sourceTree = "<group>"; };
 		6E9D23911E5ACD6E008C747E /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
@@ -126,7 +136,6 @@
 		6EA63CAB1E5DD54500607E39 /* FileAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAttributes.swift; sourceTree = "<group>"; };
 		6EA63CAC1E5DD54500607E39 /* FileType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
 		6EA63CAE1E5DD54500607E39 /* FileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileModel.swift; sourceTree = "<group>"; };
-		6EA63CB01E5DD54500607E39 /* FileIconEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileIconEntity.swift; sourceTree = "<group>"; };
 		6EA63CB11E5DD54500607E39 /* FileThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileThumbnail.swift; sourceTree = "<group>"; };
 		6EA63CB21E5DD54500607E39 /* FileUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
 		6EA63CB51E5DD54500607E39 /* FileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -142,15 +151,6 @@
 		6EAA86FA1E5EEE1C00B6CC5C /* HUDFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDFunctions.swift; sourceTree = "<group>"; };
 		6EAA86FC1E5EF43400B6CC5C /* IndexPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPath.swift; sourceTree = "<group>"; };
 		6EAA86FE1E5EF8CA00B6CC5C /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		6EAAFBF91E569A4C00A36665 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
-		6EAAFBFB1E569A4C00A36665 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
-		6EAAFBFC1E569A4C00A36665 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
-		6EAAFBFE1E569A4C00A36665 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
-		6EAAFBFF1E569A4C00A36665 /* ImageEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEntity.swift; sourceTree = "<group>"; };
-		6EAAFC011E569A4C00A36665 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
-		6EAAFC021E569A4C00A36665 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
-		6EAAFC031E569A4C00A36665 /* MenuItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
-		6EAAFC051E569A4C00A36665 /* TextFieldAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldAlertView.swift; sourceTree = "<group>"; };
 		6EAAFC071E569A4C00A36665 /* Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Equatable.swift; sourceTree = "<group>"; };
 		6EAAFC081E569A4C00A36665 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		6EAAFC091E569A4C00A36665 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -219,14 +219,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		6E15F86A1E5CA096004B0F93 /* AsyncDisplayKit */ = {
-			isa = PBXGroup;
-			children = (
-				6E15F86B1E5CA0A7004B0F93 /* ASImageView.swift */,
-			);
-			path = AsyncDisplayKit;
-			sourceTree = "<group>";
-		};
 		6E2060761D93ACB000A0B5B2 = {
 			isa = PBXGroup;
 			children = (
@@ -259,11 +251,73 @@
 			path = file;
 			sourceTree = "<group>";
 		};
+		6E89AB271E681FC300C9505D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6E89AB281E681FC300C9505D /* ImageCache */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		6E89AB281E681FC300C9505D /* ImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				6E89AB291E681FC300C9505D /* ImageCache.swift */,
+				6E89AB2A1E681FC300C9505D /* ImageEntity.swift */,
+			);
+			path = ImageCache;
+			sourceTree = "<group>";
+		};
+		6E89AB2B1E681FC300C9505D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6E89AB2C1E681FC300C9505D /* AsyncDisplayKit */,
+				6E89AB2E1E681FC300C9505D /* ButtonCell */,
+				6E89AB301E681FC300C9505D /* Menu */,
+				6E89AB341E681FC300C9505D /* TextFieldAlertView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6E89AB2C1E681FC300C9505D /* AsyncDisplayKit */ = {
+			isa = PBXGroup;
+			children = (
+				6E89AB2D1E681FC300C9505D /* ASImageView.swift */,
+			);
+			path = AsyncDisplayKit;
+			sourceTree = "<group>";
+		};
+		6E89AB2E1E681FC300C9505D /* ButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				6E89AB2F1E681FC300C9505D /* ButtonTableViewCell.swift */,
+			);
+			path = ButtonCell;
+			sourceTree = "<group>";
+		};
+		6E89AB301E681FC300C9505D /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				6E89AB311E681FC300C9505D /* Menu.swift */,
+				6E89AB321E681FC300C9505D /* MenuItem.swift */,
+				6E89AB331E681FC300C9505D /* MenuItemView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		6E89AB341E681FC300C9505D /* TextFieldAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				6E89AB351E681FC300C9505D /* TextFieldAlertView.swift */,
+			);
+			path = TextFieldAlertView;
+			sourceTree = "<group>";
+		};
 		6EA63CA61E5DD54500607E39 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6EA63CA71E5DD54500607E39 /* FileSelectViewController.swift */,
 				6EA63CA81E5DD54500607E39 /* FileViewController.swift */,
+				6EA63CA71E5DD54500607E39 /* FileSelectViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -275,6 +329,7 @@
 				6EA63CAB1E5DD54500607E39 /* FileAttributes.swift */,
 				6EA63CAC1E5DD54500607E39 /* FileType.swift */,
 				6EAA86F71E5EE0BC00B6CC5C /* ListChange.swift */,
+				6E89AB251E68192700C9505D /* FileIconEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -290,7 +345,6 @@
 		6EA63CAF1E5DD54500607E39 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				6EA63CB01E5DD54500607E39 /* FileIconEntity.swift */,
 				6EA63CB11E5DD54500607E39 /* FileThumbnail.swift */,
 				6EA63CB21E5DD54500607E39 /* FileUtils.swift */,
 				6EA51DB71E5FC7D900DF88EC /* DirectoryWatcher.swift */,
@@ -331,13 +385,6 @@
 			path = FMDB;
 			sourceTree = "<group>";
 		};
-		6EAA86F91E5EEDF900B6CC5C /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
 		6EAAFBF61E569A4C00A36665 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,63 +399,17 @@
 		6EAAFBF71E569A4C00A36665 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6E15F86A1E5CA096004B0F93 /* AsyncDisplayKit */,
-				6EAAFBFA1E569A4C00A36665 /* Helper */,
-				6EAAFBF81E569A4C00A36665 /* ButtonCell */,
-				6EAAFBFD1E569A4C00A36665 /* ImageCache */,
-				6EAAFC001E569A4C00A36665 /* Menu */,
-				6EAAFC041E569A4C00A36665 /* TextFieldAlertView */,
+				6E89AB271E681FC300C9505D /* Utils */,
+				6E89AB2B1E681FC300C9505D /* Views */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		6EAAFBF81E569A4C00A36665 /* ButtonCell */ = {
-			isa = PBXGroup;
-			children = (
-				6EAAFBF91E569A4C00A36665 /* ButtonTableViewCell.swift */,
-			);
-			path = ButtonCell;
-			sourceTree = "<group>";
-		};
-		6EAAFBFA1E569A4C00A36665 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				6EAAFBFB1E569A4C00A36665 /* NSString+MD5.h */,
-				6EAAFBFC1E569A4C00A36665 /* NSString+MD5.m */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
-		6EAAFBFD1E569A4C00A36665 /* ImageCache */ = {
-			isa = PBXGroup;
-			children = (
-				6EAAFBFE1E569A4C00A36665 /* ImageCache.swift */,
-				6EAAFBFF1E569A4C00A36665 /* ImageEntity.swift */,
-			);
-			path = ImageCache;
-			sourceTree = "<group>";
-		};
-		6EAAFC001E569A4C00A36665 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				6EAAFC011E569A4C00A36665 /* Menu.swift */,
-				6EAAFC021E569A4C00A36665 /* MenuItem.swift */,
-				6EAAFC031E569A4C00A36665 /* MenuItemView.swift */,
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
-		6EAAFC041E569A4C00A36665 /* TextFieldAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				6EAAFC051E569A4C00A36665 /* TextFieldAlertView.swift */,
-			);
-			path = TextFieldAlertView;
 			sourceTree = "<group>";
 		};
 		6EAAFC061E569A4C00A36665 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6E89AB3E1E681FD100C9505D /* NSString+MD5.h */,
+				6E89AB3F1E681FD100C9505D /* NSString+MD5.m */,
 				6EAAFC071E569A4C00A36665 /* Equatable.swift */,
 				6EAAFC081E569A4C00A36665 /* String.swift */,
 				6EAAFC091E569A4C00A36665 /* UIImage.swift */,
@@ -492,7 +493,6 @@
 		6EAAFC921E569A6700A36665 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
-				6EAA86F91E5EEDF900B6CC5C /* MBProgressHUD */,
 				6EA8A0D31E5D304600C274DD /* FMDB */,
 				6EAAFC931E569A6700A36665 /* ESTMusicIndicator */,
 			);
@@ -664,9 +664,9 @@
 		6EB29B221E583E2F00B19406 /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				6EB29B251E583E2F00B19406 /* MusicPlayer.swift */,
 				6EB29B231E583E2F00B19406 /* MusicPlayer+NowPlayingInfo.swift */,
 				6EB29B241E583E2F00B19406 /* MusicPlayer+RemoteComtrol.swift */,
-				6EB29B251E583E2F00B19406 /* MusicPlayer.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -869,7 +869,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EAAFC591E569A4C00A36665 /* ImageCache.swift in Sources */,
+				6E89AB361E681FC300C9505D /* ImageCache.swift in Sources */,
 				6EB29B281E583E2F00B19406 /* MusicListNavigationTitleView.swift in Sources */,
 				6EB29B2F1E583E2F00B19406 /* MyMusicViewController.swift in Sources */,
 				6EB29B321E583E2F00B19406 /* MyMusicHeaderView.swift in Sources */,
@@ -881,21 +881,19 @@
 				6EA63CC41E5DD54500607E39 /* FileUtils.swift in Sources */,
 				6EA63CC91E5DD54500607E39 /* FileTableView.swift in Sources */,
 				6EAAFC601E569A4C00A36665 /* String.swift in Sources */,
-				6EAAFC5B1E569A4C00A36665 /* Menu.swift in Sources */,
 				6E9D23941E5AF9D1008C747E /* PhotoFlowLayout.swift in Sources */,
 				6EA63CC31E5DD54500607E39 /* FileThumbnail.swift in Sources */,
 				6EAAFC901E569A4C00A36665 /* LeftMenuViewController.swift in Sources */,
 				6EA8A0D61E5D306200C274DD /* FMDatabaseQueue+File.m in Sources */,
-				6EAAFC5A1E569A4C00A36665 /* ImageEntity.swift in Sources */,
 				6EB29B2C1E583E2F00B19406 /* MusicPlayerBackgroudView.swift in Sources */,
 				6EB29B301E583E2F00B19406 /* MyMusicGroupEntity.swift in Sources */,
 				6EB29B371E583E2F00B19406 /* Music.swift in Sources */,
-				6EAAFC5D1E569A4C00A36665 /* MenuItemView.swift in Sources */,
 				6EAA86FF1E5EF8CA00B6CC5C /* Array.swift in Sources */,
 				6EA63CC01E5DD54500607E39 /* FileType.swift in Sources */,
 				6EA63CC71E5DD54500607E39 /* FileCollectionView.swift in Sources */,
 				6EB29B351E583E2F00B19406 /* MusicSearchControl.swift in Sources */,
 				6EAA86FB1E5EEE1C00B6CC5C /* HUDFunctions.swift in Sources */,
+				6E89AB3D1E681FC300C9505D /* TextFieldAlertView.swift in Sources */,
 				6EB29B3A1E583E2F00B19406 /* MusicPlayer+RemoteComtrol.swift in Sources */,
 				6EA63CC51E5DD54500607E39 /* FileCollectionViewCell.swift in Sources */,
 				6EB29B291E583E2F00B19406 /* MusicListTableView.swift in Sources */,
@@ -908,29 +906,30 @@
 				6EB29B2D1E583E2F00B19406 /* MusicPlayerInfoView.swift in Sources */,
 				6EAAFC5F1E569A4C00A36665 /* Equatable.swift in Sources */,
 				6EFC04741E5C6B3800FF12C0 /* FileFunctions.swift in Sources */,
+				6E89AB261E68192700C9505D /* FileIconEntity.swift in Sources */,
 				6EA63CC81E5DD54500607E39 /* FileContentViewProtocol.swift in Sources */,
 				6EB29B4C1E5842D200B19406 /* PhotoListViewController.swift in Sources */,
 				6EB29B311E583E2F00B19406 /* MyMusicModel.swift in Sources */,
 				6EB29B271E583E2F00B19406 /* MusicGroupMenu.swift in Sources */,
 				6EB29B2E1E583E2F00B19406 /* MusicPlayerToolView.swift in Sources */,
+				6E89AB391E681FC300C9505D /* ButtonTableViewCell.swift in Sources */,
+				6E89AB381E681FC300C9505D /* ASImageView.swift in Sources */,
+				6E89AB3A1E681FC300C9505D /* Menu.swift in Sources */,
 				6EAAFC8F1E569A4C00A36665 /* SettingViewController.swift in Sources */,
 				6EB29B541E5845DF00B19406 /* PhotoCollectionViewCell.swift in Sources */,
-				6EAAFC581E569A4C00A36665 /* NSString+MD5.m in Sources */,
 				6EB29B361E583E2F00B19406 /* MusicSearchResultView.swift in Sources */,
-				6EAAFC5C1E569A4C00A36665 /* MenuItem.swift in Sources */,
 				6EAAFC621E569A4C00A36665 /* UIView+Frame.swift in Sources */,
+				6E89AB401E681FD100C9505D /* NSString+MD5.m in Sources */,
 				6EA63CBE1E5DD54500607E39 /* File.swift in Sources */,
-				6EAAFC5E1E569A4C00A36665 /* TextFieldAlertView.swift in Sources */,
+				6E89AB3B1E681FC300C9505D /* MenuItem.swift in Sources */,
 				6EB29B3B1E583E2F00B19406 /* MusicPlayer.swift in Sources */,
-				6EAAFC571E569A4C00A36665 /* ButtonTableViewCell.swift in Sources */,
+				6E89AB3C1E681FC300C9505D /* MenuItemView.swift in Sources */,
 				6EB29B591E584B3100B19406 /* Photo.swift in Sources */,
 				6EB29B2A1E583E2F00B19406 /* MusicTableViewCell.swift in Sources */,
-				6EA63CC21E5DD54500607E39 /* FileIconEntity.swift in Sources */,
 				6EB29B391E583E2F00B19406 /* MusicPlayer+NowPlayingInfo.swift in Sources */,
 				6EAAFC631E569A4C00A36665 /* UIViewController.swift in Sources */,
 				6EAAFC651E569A4C00A36665 /* Macro.swift in Sources */,
 				6EA63CCA1E5DD54500607E39 /* FileToolBar.swift in Sources */,
-				6E15F86C1E5CA0A7004B0F93 /* ASImageView.swift in Sources */,
 				6EA63CC61E5DD54500607E39 /* FileTableViewCell.swift in Sources */,
 				6EA63CC11E5DD54500607E39 /* FileModel.swift in Sources */,
 				6EA63CBC1E5DD54500607E39 /* FileSelectViewController.swift in Sources */,
@@ -942,6 +941,7 @@
 				6EA63CBD1E5DD54500607E39 /* FileViewController.swift in Sources */,
 				6EB29B561E5845DF00B19406 /* PhotoViewer.swift in Sources */,
 				6EB29B2B1E583E2F00B19406 /* MusicPlayerInfoViewController.swift in Sources */,
+				6E89AB371E681FC300C9505D /* ImageEntity.swift in Sources */,
 				6E9D23921E5ACD6E008C747E /* PhotoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

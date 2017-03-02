@@ -27,6 +27,14 @@ class MusicListTableView: UITableView, UITableViewDataSource, UITableViewDelegat
         fatalError("init(coder:) has not been implemented")
     }
     
+    func reloadVisible() {
+        for cell in visibleCells {
+            if let indexPath = indexPath(for: cell) {
+                tableView(self, willDisplay: cell, forRowAt: indexPath)
+            }
+        }
+    }
+    
     // MARK: - Number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
@@ -34,25 +42,27 @@ class MusicListTableView: UITableView, UITableViewDataSource, UITableViewDelegat
     
     // MARK: - Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Music") as! MusicTableViewCell
+        return tableView.dequeueReusableCell(withIdentifier: "Music") as! MusicTableViewCell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let musicCell = cell as? MusicTableViewCell else { return }
         let music = list[indexPath.row]
-        cell.setup(music)
-        cell.number = indexPath.row
-        
+        musicCell.setup(music)
+        musicCell.number = indexPath.row
         if MusicPlayer.shared.currentMusic?.id == music.id {
             if MusicPlayer.shared.isPlaying {
-                cell.state = .playing
+                musicCell.state = .playing
             }
             else {
-                cell.state = .paused
+                musicCell.state = .paused
             }
         }
         else {
-            cell.state = .stopped
+            musicCell.state = .stopped
         }
-        
-        return cell
     }
+    
     // MARK: - Select
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

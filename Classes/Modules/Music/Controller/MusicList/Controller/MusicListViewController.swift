@@ -44,10 +44,15 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
         
         
         // Do any additional setup after loading the view.
-        group.list { [weak self](list, error) in
-            self?.tableView.list = list
-            self?.tableView.reloadData()
+        
+        DispatchQueue.global().async {
+            let list = self.group.list()
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.list = list
+                self?.tableView.reloadData()
+            }
         }
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
@@ -74,6 +79,9 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
     }
     
     func tapMusicIndicator() {
+        guard MusicPlayer.shared.state != .stopped else {
+            return
+        }
         navigationController?.pushViewController(MusicPlayerInfoViewController(), animated: true)
     }
     
@@ -85,11 +93,7 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
         else {
             musicIndicator.state = .paused
         }
-        
-        group.list { [weak self](list, error) in
-//            self?.tableView.list = list
-            self?.tableView.reloadData()
-        }
+        tableView.reloadVisible()
     }
     
     
@@ -106,11 +110,7 @@ class MusicListViewController: UIViewController, MusicGroupDelegate, ButtonTable
     
     // MARK: - ButtonTableViewCellDelegate
     func buttonCell(_ buttonCell: ButtonTableViewCell, onClickRightButtonAt index: Int) {
-        group.delete(idx: index) { (error) in
-            if error != nil {
-                print(error.debugDescription)
-            }
-        }
+        group.delete(idx: index)
     }
     
     lazy var tableView: MusicListTableView = {

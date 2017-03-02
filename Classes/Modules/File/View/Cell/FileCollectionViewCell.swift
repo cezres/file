@@ -77,6 +77,7 @@ class FileCollectionViewCell: UICollectionViewCell {
         }
         
         iconImageView.image = nil
+        
         FileThumbnail.shared.thumbnail(file: file) { [weak self](file, image) in
             if file == self?.file {
                 self?.iconImageView.image = image

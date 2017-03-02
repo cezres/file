@@ -68,7 +68,12 @@ class MusicPlayer: NSObject {
     var currentMusic: Music? {
         didSet {
             NotificationCenter.default.post(name: MusicPlayerNotification.musicChanged, object: nil)
-            print("CurrentMusic: \(currentMusic)")
+            if currentMusic != nil {
+                debugPrint("CurrentMusic: \(currentMusic!)")
+            }
+            else {
+                print("CurrentMusic: NULL")
+            }
         }
     }
     

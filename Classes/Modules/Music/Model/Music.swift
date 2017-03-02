@@ -43,103 +43,77 @@ class Music {
     
     var date: Date? // 添加入歌单的日期
     
-    
     /// 初始化音乐对象
     ///
     /// - Parameters:
     ///   - url: 音频文件路径
-    ///   - complete: 完成后回调
-    class func music(url: URL, complete: @escaping MusicBlock) {
+    init?(url: URL) {
+        path = url.absoluteString.relativePath.urlDecode
+        id = Int64(path.hash)
+        var _song: String?
+        var _singer: String?
+        var _albumName: String?
+        var _duration: Double = 0
+        var _playCount: Int32 = 0
         
+        let _id = id
         MusicDB.inDatabase { (db) in
             guard let database = db else { return }
             do {
                 /// 从数据库中查找
-                let path = url.absoluteString.relativePath.urlDecode
-                let id = Int64(path.hash)
-                let result = try database.executeQuery("select * from Music where id=\(id)", values: nil)
+                let result = try database.executeQuery("select * from Music where id=\(_id)", values: nil)
                 if result.next() {
-                    DispatchQueue.main.async {
-                        complete(Music(url: url, result: result), nil)
-                    }
-                    return
+                    _song = result.string(forColumn: "song") ?? ""
+                    _singer = result.string(forColumn: "singer") ?? ""
+                    _albumName = result.string(forColumn: "albumName") ?? ""
+                    _duration = result.double(forColumn: "duration")
+                    _playCount = result.int(forColumn: "playCount")
                 }
+                result.close()
             }
             catch {
                 fatalError(database.lastErrorMessage())
             }
-            
-            /// 新建对象，添加至数据库
-            var error: Error?
-            guard let music = Music(url: url, error: &error) else {
-                DispatchQueue.main.async {
-                    complete(nil, error)
-                }
-                return
-            }
-            do {
-                let sql = "insert into Music (id, path, song, singer, albumName, duration) values (?, ?, ?, ?, ?, ?)"
-                let values = [music.id, music.path, music.song, music.singer, music.albumName, music.duration] as [Any]
-                try database.executeUpdate(sql, values: values)
-                DispatchQueue.main.async {
-                    complete(music, nil)
-                }
-            }
-            catch {
-                debugPrint(database.lastErrorMessage())
-                DispatchQueue.main.async {
-                    complete(nil, database.lastError())
-                }
-            }
-            
         }
-    }
-    
-    /// 根据数据库返回数据创建对象
-    private init(url: URL, result: FMResultSet) {
+        
         self.url = url
-        id = result.longLongInt(forColumn: "id")
-        path = result.string(forColumn: "path")
-        song = result.string(forColumn: "song") ?? ""
-        singer = result.string(forColumn: "singer") ?? ""
-        albumName = result.string(forColumn: "albumName") ?? ""
-        duration = result.double(forColumn: "duration")
-        playCount = result.int(forColumn: "playCount")
-        result.close()
-    }
-    /// 根据文件创建对象 可能返回nil
-    private init?(url: URL, error: inout Error?) {
-        let asset = AVURLAsset(url: url)
-        duration = TimeInterval(asset.duration.value) / TimeInterval(asset.duration.timescale)
-        guard duration > 0 else {
-            error = NSError(domain: "无法打开音频文件", code: -1, userInfo: nil)
-            return nil
+        
+        /// 根据数据库返回数据创建对象
+        if _song != nil {
+            song = _song ?? ""
+            singer = _singer ?? ""
+            albumName = _albumName ?? ""
+            duration = _duration
+            playCount = _playCount
         }
-        self.url = url
-        path = url.absoluteString.relativePath.urlDecode
-        id = Int64(path.hash)
-        /// 读取音频文件信息
-        var _song: String = path.lastPathComponent.deletingPathExtension
-        var _singer: String?
-        var _albumName: String?
-        for format in asset.availableMetadataFormats {
-            for metadataItem in asset.metadata(forFormat: format) {
-                if metadataItem.commonKey == "title" {
-                    if let string = metadataItem.value as? String {
-                        _song = string
+        else {
+            /// 根据文件创建对象
+            let asset = AVURLAsset(url: url)
+            duration = TimeInterval(asset.duration.value) / TimeInterval(asset.duration.timescale)
+            guard duration > 0 else {
+                return nil
+            }
+            /// 读取音频文件信息
+            _song = path.lastPathComponent.deletingPathExtension
+            for format in asset.availableMetadataFormats {
+                for metadataItem in asset.metadata(forFormat: format) {
+                    if metadataItem.commonKey == "title" {
+                        if let string = metadataItem.value as? String {
+                            _song = string
+                        }
+                    }
+                    else if metadataItem.commonKey == "artist" {
+                        _singer = metadataItem.value as? String
+                    }
+                    else if metadataItem.commonKey == "albumName" {
+                        _albumName = metadataItem.value as? String
                     }
                 }
-                else if metadataItem.commonKey == "artist" {
-                    _singer = metadataItem.value as? String
-                }
-                else if metadataItem.commonKey == "albumName" {
-                    _albumName = metadataItem.value as? String
-                }
             }
+            song = _song!
+            singer = _singer ?? "未知"
+            albumName = _albumName ?? "未知"
         }
-        song = _song
-        singer = _singer ?? "未知"
-        albumName = _albumName ?? "未知"
     }
     
     deinit {

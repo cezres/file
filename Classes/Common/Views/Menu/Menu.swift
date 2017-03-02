@@ -17,7 +17,13 @@ class Menu: NSObject {
     
     var navigationBarOffset: CGFloat = 0
     
-    var items = [MenuItem]()
+    var items = [MenuItem]() {
+        didSet {
+            if tableView != nil {
+                tableView.reloadData()
+            }
+        }
+    }
     
     weak var delegate: MenuDelegate?
     

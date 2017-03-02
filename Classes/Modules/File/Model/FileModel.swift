@@ -184,8 +184,12 @@ class FileModel {
     
     /// 获取当前文件列表中的照片
     func photos() -> [File] {
+        return files(for: .Photo)
+    }
+    
+    func files(for type: FileType) -> [File] {
         return _list.filter({ (file) -> Bool in
-            return file.type == .Photo
+            return file.type == type
         })
     }
     

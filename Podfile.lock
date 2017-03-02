@@ -31,6 +31,7 @@ PODS:
   - SABlurImageView (3.0.0)
   - SnapKit (3.0.2)
   - SWTableViewCell (0.3.7)
+  - Zip (0.6.0)
 
 DEPENDENCIES:
   - AsyncDisplayKit
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - SABlurImageView
   - SnapKit
   - SWTableViewCell
+  - Zip
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
@@ -58,7 +60,8 @@ SPEC CHECKSUMS:
   SABlurImageView: 7003ca28ded502c984846374a117f88a287d9faf
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  Zip: 805fc2fa9d2f05bbb7762d982d7a42ccdcc51f42
 
-PODFILE CHECKSUM: e43b9020a320f26d2e90c64e7f97d6b395c478eb
+PODFILE CHECKSUM: b3c36f761b547c0f400468439d68893e1a493d46
 
 COCOAPODS: 1.1.1

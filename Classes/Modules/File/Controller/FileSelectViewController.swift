@@ -70,7 +70,10 @@ class FileSelectViewController: UIViewController, FileContentViewDataSource, Fil
         
         
         model.changeSignal.observe { [weak self](event) in
-            self?.tableView.reload()
+            guard event.value != nil else {
+                return
+            }
+            self?.tableView.change(for: event.value!)
         }
         
         model.loadFileList()
@@ -122,9 +125,7 @@ class FileSelectViewController: UIViewController, FileContentViewDataSource, Fil
     }
     
     func close() {
-        navigationController?.dismiss(animated: true, completion: {
-            
-        })
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 
     // MARK: FileContentViewDataSource

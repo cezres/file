@@ -17,5 +17,7 @@ target 'file' do
     
     pod 'ReactiveSwift'
     
+    pod 'Zip'
+    
 end
 

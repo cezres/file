@@ -60,9 +60,11 @@ class MyMusicViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MusicGroup.groupNames { [weak self](names) in
-            self?.groups[1].contents = names
-            self?.tableView.reloadSections(IndexSet(integersIn: 1...1), with: .automatic)
+        DispatchQueue.global().async { [weak self] in
+            self?.groups[1].contents = MusicGroup.groupNames()
+            DispatchQueue.main.async {
+                self?.tableView.reloadSections(IndexSet(integersIn: 1...1), with: .automatic)
+            }
         }
     }
     
