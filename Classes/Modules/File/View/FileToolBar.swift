@@ -17,6 +17,8 @@ protocol FileToolBarDelegate: NSObjectProtocol {
     
     func copyItems()
     
+    func zipItems()
+    
 }
 
 class FileToolBar: UIToolbar {
@@ -30,7 +32,8 @@ class FileToolBar: UIToolbar {
         let deleteBarButton = UIBarButtonItem(title: "    删除    ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FileToolBar.deleteItems))
         let moveBarButton = UIBarButtonItem(title: "    移动    ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FileToolBar.moveItems))
         let copyBarButton = UIBarButtonItem(title: "    复制    ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FileToolBar.copyItems))
-        items = [deleteBarButton, moveBarButton, copyBarButton]
+        let zipBarButton = UIBarButtonItem(title: "    压缩    ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(FileToolBar.zipItems))
+        items = [deleteBarButton, moveBarButton, copyBarButton, zipBarButton]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,6 +53,11 @@ class FileToolBar: UIToolbar {
     func copyItems() {
         print(#function)
         fileDelegate?.copyItems()
+    }
+    
+    func zipItems() {
+        print(#function)
+        fileDelegate?.zipItems()
     }
     
 }

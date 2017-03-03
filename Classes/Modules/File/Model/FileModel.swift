@@ -189,10 +189,33 @@ class FileModel {
         let destination = createFilePath(targetPath: directoryPath + "/" + file.name.deletingPathExtension)
         try Zip.unzipFile(file.url, destination: URL(fileURLWithPath: destination), overwrite: true, password: nil, progress: nil)
         let newFile = File(path: destination)
-        let index = _list.index(of: file) ?? 0 + 1
+        let index = _list.index(of: file) ?? 0
         sendChange(change: ListChange.insert(indexs: [index]), changeBlock: {
             self._list.insert(newFile, at: index)
         })
+    }
+    
+    /// 压缩文件
+    ///
+    /// - Parameter files: 需要压缩的文件
+    /// - Throws: <#throws value description#>
+    func zipFiles(files: [File]) throws {
+        let urls = files.map { (file) -> URL in
+            return file.url
+        }
+        let zipFilePath: String
+        if files.count == 1 {
+            zipFilePath = createFilePath(targetPath: directoryPath + "/" + files[0].name.deletingPathExtension + ".zip")
+        }
+        else {
+            zipFilePath = createFilePath(targetPath: directoryPath + "/压缩文件.zip")
+        }
+        try Zip.zipFiles(paths: urls, zipFilePath: URL(fileURLWithPath: zipFilePath), password: nil, compression: .BestCompression, progress: nil)
+        let newFile = File(path: zipFilePath)
+        let index = (_list.index(of: files.last!) ?? 0) + 1
+        sendChange(change: ListChange.insert(indexs: [index])) {
+            self._list.insert(newFile, at: index)
+        }
     }
     
     

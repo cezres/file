@@ -60,11 +60,11 @@ func HUDLoadingHidden(for view: UIView? = nil) {
     MBProgressHUD.hide(for: inView, animated: true)
 }
 
-@discardableResult func HUDFailure(message: String, in view: UIView? = nil) -> MBProgressHUD? {
+@discardableResult func HUDMessage(message: String, in view: UIView? = nil) -> MBProgressHUD? {
     guard Thread.isMainThread else {
         var result: MBProgressHUD?
         DispatchQueue.main.sync {
-            result = HUDFailure(message: message, in: view)
+            result = HUDMessage(message: message, in: view)
         }
         return result
     }

@@ -54,7 +54,7 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
             guard event.value != nil else {
                 return
             }
-            HUDFailure(message: event.value!.domain)
+            HUDMessage(message: event.value!.domain)
         }
         
         model.loadFileList()
@@ -122,6 +122,31 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         }
     }
     
+    func zipItems() {
+        let indexs = fileView.selectedIndexs()
+        guard indexs.count > 0 else {
+            return
+        }
+        normalNavigationItem()
+        MBProgressHUD.showAdded(to: view, animated: true)
+        DispatchQueue.global().async {
+            do {
+                let files = self.model.files(for: indexs)
+                try self.model.zipFiles(files: files)
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    HUDMessage(message: "压缩完成", in: self.view)
+                }
+            }
+            catch {
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: false)
+                    HUDMessage(message: "压缩失败", in: self.view)
+                }
+            }
+        }
+    }
+    
     // MARK: - FileViewDelegate
     func fileView(fileView: FileView, didSelectedFile file: File) {
         if file.type == .Directory {
@@ -173,12 +198,13 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
                     try self.model.unzipFile(file: file)
                     DispatchQueue.main.async {
                         MBProgressHUD.hide(for: self.view, animated: true)
+                        HUDMessage(message: "解压缩完成", in: self.view)
                     }
                 }
                 catch {
                     DispatchQueue.main.async {
                         MBProgressHUD.hide(for: self.view, animated: false)
-                        HUDFailure(message: "解压缩失败", in: self.view)
+                        HUDMessage(message: "解压缩失败", in: self.view)
                     }
                 }
             }
