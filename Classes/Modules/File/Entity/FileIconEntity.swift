@@ -26,7 +26,7 @@ class FileIconEntity: NSObject, FICEntity {
     lazy var _uuid: String = {
         let imageName: String
         if self.file != nil {
-            imageName = self.file.name
+            imageName = self.file.relativePath
         }
         else {
             imageName = self.identifier

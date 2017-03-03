@@ -40,14 +40,14 @@ class File {
     }
     
     /// 相对路径
-    var relativePath: String {
-        return path.relativePath
-    }
+    lazy var relativePath: String = {
+        return self.path.relativePath
+    }()
     
     /// 路径后缀
-    var `extension`: String {
-        return path.pathExtension
-    }
+    lazy var `extension`: String = {
+        return self.path.pathExtension
+    }()
     
 }
 

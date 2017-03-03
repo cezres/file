@@ -7,10 +7,9 @@
 //
 
 import UIKit
-//import VideoPlayer
 import ESMediaPlayer
 import MBProgressHUD
-
+import Zip
 
 
 /// 文件管理
@@ -22,8 +21,6 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
     private var toolBar: FileToolBar!
     
     
-    
-
     init(directoryPath: String = DocumentDirectory) {
         super.init(nibName: nil, bundle: nil)
         if directoryPath == DocumentDirectory {
@@ -168,6 +165,23 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
             })
             let controller = PhotoViewer(urls: urls, idx: idx)
             navigationController?.pushViewController(controller, animated: true)
+        }
+        else if file.type == .Zip {
+            MBProgressHUD.showAdded(to: view, animated: true)
+            DispatchQueue.global().async {
+                do {
+                    try self.model.unzipFile(file: file)
+                    DispatchQueue.main.async {
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    }
+                }
+                catch {
+                    DispatchQueue.main.async {
+                        MBProgressHUD.hide(for: self.view, animated: false)
+                        HUDFailure(message: "解压缩失败", in: self.view)
+                    }
+                }
+            }
         }
     }
     

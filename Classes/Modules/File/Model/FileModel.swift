@@ -8,7 +8,7 @@
 
 import Foundation
 import ReactiveSwift
-
+import Zip
 
 private let FileModelQueue = DispatchQueue(label: "FileModel")
 
@@ -178,6 +178,22 @@ class FileModel {
         }
     }
     
+    
+    // MARK: Zip
+    
+    /// 解压缩
+    ///
+    /// - Parameter file: 压缩包文件
+    /// - Throws: <#throws value description#>
+    func unzipFile(file: File) throws {
+        let destination = createFilePath(targetPath: directoryPath + "/" + file.name.deletingPathExtension)
+        try Zip.unzipFile(file.url, destination: URL(fileURLWithPath: destination), overwrite: true, password: nil, progress: nil)
+        let newFile = File(path: destination)
+        let index = _list.index(of: file) ?? 0 + 1
+        sendChange(change: ListChange.insert(indexs: [index]), changeBlock: {
+            self._list.insert(newFile, at: index)
+        })
+    }
     
     
     // MARK: Utils
