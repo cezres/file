@@ -37,7 +37,7 @@
         _memoryCache = [[PINMemoryCache alloc] initWithOperationQueue:operationQueue];
         _memoryCache.costLimit = 40;
         _memoryCache.ageLimit = 60 * 60;
-        _memoryCache.removeAllObjectsOnMemoryWarning = NO;
+        _memoryCache.removeAllObjectsOnMemoryWarning = YES;
         _memoryCache.removeAllObjectsOnEnteringBackground = NO;
         [_memoryCache setDidReceiveMemoryWarningBlock:^(PINMemoryCache *cache) {
             [cache trimToCost:4];
@@ -57,6 +57,10 @@
 
 - (void)setObject:(id)object forKey:(NSString *)key {
     return [_memoryCache setObject:object forKey:key];
+}
+
+- (void)removeAllObjects {
+    [_memoryCache removeAllObjects];
 }
 
 

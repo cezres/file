@@ -188,7 +188,8 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
             let urls: [URL] = photos.map({ (file) -> URL in
                 return file.url
             })
-            let controller = PhotoViewer(urls: urls, idx: idx)
+//            let controller = PhotoViewer(urls: urls, idx: idx)
+            let controller = PhotoBrowser(urls: urls, index: idx)
             navigationController?.pushViewController(controller, animated: true)
         }
         else if file.type == .Zip {

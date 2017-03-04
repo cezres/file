@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sideMenuViewController.backgroundImage = UIImage(named: "SideMenuBackground")
         sideMenuViewController.menuPreferredStatusBarStyle = UIStatusBarStyle.lightContent
         sideMenuViewController.contentViewShadowColor = UIColor.black
-        sideMenuViewController.contentViewShadowOffset = CGSize(width: 0, height: 0)
+        sideMenuViewController.contentViewShadowOffset = CGSize.zero
         sideMenuViewController.contentViewShadowOpacity = 0.6
         sideMenuViewController.contentViewShadowRadius = 12
         sideMenuViewController.contentViewShadowEnabled = true

@@ -190,7 +190,7 @@ class Music {
                 try database.executeUpdate("CREATE TABLE Music (id INTEGER PRIMARY KEY, path STRING NOT NULL UNIQUE, song TEXT, singer STRING, artwork STRING, albumName STRING, duration DOUBLE DEFAULT (0), playCount INTEGER DEFAULT (0))", values: nil)
             }
             catch {
-//                debugPrint(database.lastErrorMessage())
+                debugPrint(database.lastErrorMessage())
             }
         }
     }

@@ -51,11 +51,23 @@ class FileCollectionViewCell: UICollectionViewCell {
         backgroundView?.backgroundColor = UIColor.white
         selectedBackgroundView = UIView()
         selectedBackgroundView?.backgroundColor = ColorWhite(220)
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(FileCollectionViewCell.handleLongPressGesture(longPressGesture:)))
+        contentView.addGestureRecognizer(longPressGesture)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func handleLongPressGesture(longPressGesture: UILongPressGestureRecognizer) {
+        longPressGesture.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: NSEC_PER_SEC * 3)) { 
+            longPressGesture.isEnabled = true
+        }
+        print("长按")
+    }
+    
     
     // MARK: - Data
     var file: File! {

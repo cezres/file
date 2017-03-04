@@ -19,4 +19,6 @@
 
 - (void)setObject:(nullable id)object forKey:(nullable NSString *)key;
 
+- (void)removeAllObjects;
+
 @end

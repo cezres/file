@@ -72,7 +72,6 @@ class FileIconEntity: NSObject, FICEntity {
     
     func drawingBlock(for image: UIImage!, withFormatName formatName: String!) -> FICEntityImageDrawingBlock! {
         return { (context: CGContext?, contextSize: CGSize) -> Void in
-            
             guard let context = context else {
                 return
             }
