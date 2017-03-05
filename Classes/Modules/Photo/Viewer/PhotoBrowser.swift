@@ -122,16 +122,25 @@ class PhotoBrowser: UIViewController, UIScrollViewDelegate {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         let topOffset = navigationController?.navigationBar.frame.maxY ?? 0
+        _scrollView.delegate = nil
         _scrollView.snp.updateConstraints { (make) in
             make.top.equalTo(view.snp.top).offset(topOffset)
         }
         _scrollView.layoutIfNeeded()
-        _scrollView.contentSize = CGSize(width: _scrollView.bounds.width * CGFloat(_urls.count), height: _scrollView.bounds.height)
-        _scrollView.contentOffset = CGPoint(x: _scrollView.bounds.width * CGFloat(_index), y: 0)
-        
-        for view in photoViews {
-            view.frame = CGRect(x: _scrollView.bounds.width * CGFloat(view.tag), y: 0, width: _scrollView.bounds.width, height: _scrollView.bounds.height)
+        if _scrollView.bounds.size != _scrollView.contentSize {
+            _scrollView.contentSize = CGSize(width: _scrollView.bounds.width * CGFloat(_urls.count), height: _scrollView.bounds.height)
+            _scrollView.contentOffset = CGPoint(x: _scrollView.bounds.width * CGFloat(_index), y: 0)
+            _scrollView.delegate = self
+            for view in photoViews {
+                view.frame = CGRect(x: _scrollView.bounds.width * CGFloat(view.tag), y: 0, width: _scrollView.bounds.width, height: _scrollView.bounds.height)
+            }
         }
+        print(#function)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print(#function)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -167,12 +176,14 @@ class PhotoBrowser: UIViewController, UIScrollViewDelegate {
         else if scrollView.contentOffset.x < CGFloat(_index-1) * scrollView.frame.width {
             _index -= 1
         }
+        print(#function)
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard _index != Int(scrollView.contentOffset.x / scrollView.frame.size.width) else {
             return
         }
         _index = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+        print(#function)
     }
 
 }

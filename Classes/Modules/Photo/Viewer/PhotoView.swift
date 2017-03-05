@@ -9,7 +9,6 @@
 import UIKit
 import AsyncDisplayKit
 
-
 class PhotoView: UIView {
     
     let imageNode = ASImageNode()
@@ -38,7 +37,6 @@ class PhotoView: UIView {
                 }
                 else {
                     if let image = loadImage(url: imageUrl) {
-                        
                         DispatchQueue.main.async {
                             guard imageUrl == self?.url else {
                                 return
@@ -58,9 +56,7 @@ class PhotoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         imageNode.backgroundColor = UIColor.white
-//        imageNode.contentMode = UIViewContentMode.scaleToFill
         addSubnode(imageNode)
-//        backgroundColor = UIColor(red: CGFloat(arc4random_uniform(255)) / 255.0, green: CGFloat(arc4random_uniform(255)) / 255.0, blue: CGFloat(arc4random_uniform(255)) / 255.0, alpha: 1)
         backgroundColor = UIColor.white
     }
     
