@@ -6,6 +6,7 @@
 build/
 DerivedData
 Frameworks/
+/save
 
 ## Various settings
 *.pbxuser

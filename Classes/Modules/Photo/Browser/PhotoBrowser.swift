@@ -90,6 +90,7 @@ class PhotoBrowser: UIViewController, UIScrollViewDelegate {
         _scrollView.isPagingEnabled = true
         _scrollView.delegate = self
         _scrollView.backgroundColor = UIColor.white
+        _scrollView.alwaysBounceHorizontal = true
         view.addSubview(_scrollView)
         _scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
@@ -116,7 +117,6 @@ class PhotoBrowser: UIViewController, UIScrollViewDelegate {
             rightPhoto.url = _urls[_index + 1]
             photoViews.append(rightPhoto)
         }
-        
     }
     
     override func viewWillLayoutSubviews() {

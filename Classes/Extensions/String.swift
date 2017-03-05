@@ -8,6 +8,10 @@
 
 import Foundation
 
+extension String: Error {
+    
+}
+
 extension String {
     
     // MARK: - Path
@@ -68,3 +72,5 @@ extension String {
     }
     
 }
+
+

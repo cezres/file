@@ -238,7 +238,8 @@ class FileViewController: UIViewController, FileViewDelegate, FileToolBarDelegat
         actionSheet.show(in: view)
     }
     func onClickSelAllItem() {
-        
+        fileView.isSelecteds = [Bool].init(repeating: true, count: model.list.count)
+        fileView.change(for: ListChange.reloadVisible)
     }
     /// 正常状态的导航栏
     func normalNavigationItem() {

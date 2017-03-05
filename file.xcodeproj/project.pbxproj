@@ -10,7 +10,6 @@
 		6E2060831D93ACB000A0B5B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2060821D93ACB000A0B5B2 /* AppDelegate.swift */; };
 		6E20608A1D93ACB000A0B5B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E2060891D93ACB000A0B5B2 /* Assets.xcassets */; };
 		6E20608D1D93ACB000A0B5B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E20608B1D93ACB000A0B5B2 /* LaunchScreen.storyboard */; };
-		6E363EFA1E6AAFA9009A5DAF /* PhotoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E363EF91E6AAFA9009A5DAF /* PhotoCache.swift */; };
 		6E89AB261E68192700C9505D /* FileIconEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB251E68192700C9505D /* FileIconEntity.swift */; };
 		6E89AB361E681FC300C9505D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB291E681FC300C9505D /* ImageCache.swift */; };
 		6E89AB371E681FC300C9505D /* ImageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E89AB2A1E681FC300C9505D /* ImageEntity.swift */; };
@@ -45,8 +44,6 @@
 		6EA63CCA1E5DD54500607E39 /* FileToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CBA1E5DD54500607E39 /* FileToolBar.swift */; };
 		6EA63CCB1E5DD54500607E39 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA63CBB1E5DD54500607E39 /* FileView.swift */; };
 		6EA8A0D61E5D306200C274DD /* FMDatabaseQueue+File.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8A0D51E5D306200C274DD /* FMDatabaseQueue+File.m */; };
-		6EA940F11E6A996500E30879 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA940F01E6A996500E30879 /* PhotoView.swift */; };
-		6EA940F31E6A9C2100E30879 /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA940F21E6A9C2100E30879 /* PhotoBrowser.swift */; };
 		6EAA86F81E5EE0BC00B6CC5C /* ListChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86F71E5EE0BC00B6CC5C /* ListChange.swift */; };
 		6EAA86FB1E5EEE1C00B6CC5C /* HUDFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86FA1E5EEE1C00B6CC5C /* HUDFunctions.swift */; };
 		6EAA86FD1E5EF43400B6CC5C /* IndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAA86FC1E5EF43400B6CC5C /* IndexPath.swift */; };
@@ -62,6 +59,9 @@
 		6EAAFC901E569A4C00A36665 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC551E569A4C00A36665 /* LeftMenuViewController.swift */; };
 		6EAAFC971E569A6700A36665 /* ESTMusicIndicatorContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC941E569A6700A36665 /* ESTMusicIndicatorContentView.swift */; };
 		6EAAFC981E569A6700A36665 /* ESTMusicIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFC951E569A6700A36665 /* ESTMusicIndicatorView.swift */; };
+		6EACB40F1E6C5EC4009E5B2B /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACB40B1E6C5EC4009E5B2B /* PhotoBrowser.swift */; };
+		6EACB4101E6C5EC4009E5B2B /* PhotoMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EACB40D1E6C5EC4009E5B2B /* PhotoMemoryCache.m */; };
+		6EACB4111E6C5EC4009E5B2B /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACB40E1E6C5EC4009E5B2B /* PhotoView.swift */; };
 		6EB29B261E583E2F00B19406 /* MusicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B011E583E2E00B19406 /* MusicListViewController.swift */; };
 		6EB29B271E583E2F00B19406 /* MusicGroupMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B031E583E2E00B19406 /* MusicGroupMenu.swift */; };
 		6EB29B281E583E2F00B19406 /* MusicListNavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B041E583E2E00B19406 /* MusicListNavigationTitleView.swift */; };
@@ -85,9 +85,6 @@
 		6EB29B3A1E583E2F00B19406 /* MusicPlayer+RemoteComtrol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B241E583E2F00B19406 /* MusicPlayer+RemoteComtrol.swift */; };
 		6EB29B3B1E583E2F00B19406 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B251E583E2F00B19406 /* MusicPlayer.swift */; };
 		6EB29B4C1E5842D200B19406 /* PhotoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B4B1E5842D200B19406 /* PhotoListViewController.swift */; };
-		6EB29B541E5845DF00B19406 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B4F1E5845DF00B19406 /* PhotoCollectionViewCell.swift */; };
-		6EB29B551E5845DF00B19406 /* PhotoMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B511E5845DF00B19406 /* PhotoMemoryCache.m */; };
-		6EB29B561E5845DF00B19406 /* PhotoViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B521E5845DF00B19406 /* PhotoViewer.swift */; };
 		6EB29B591E584B3100B19406 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB29B581E584B3100B19406 /* Photo.swift */; };
 		6EFC04741E5C6B3800FF12C0 /* FileFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC04731E5C6B3800FF12C0 /* FileFunctions.swift */; };
 		905FDC7FB2A83BA5A2FF1813 /* Pods_file.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24114A1717DF18A60E604F9 /* Pods_file.framework */; };
@@ -115,7 +112,6 @@
 		6E2060891D93ACB000A0B5B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E20608C1D93ACB000A0B5B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E20608E1D93ACB000A0B5B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6E363EF91E6AAFA9009A5DAF /* PhotoCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCache.swift; sourceTree = "<group>"; };
 		6E89AB251E68192700C9505D /* FileIconEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileIconEntity.swift; sourceTree = "<group>"; };
 		6E89AB291E681FC300C9505D /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6E89AB2A1E681FC300C9505D /* ImageEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEntity.swift; sourceTree = "<group>"; };
@@ -151,8 +147,6 @@
 		6EA63CBB1E5DD54500607E39 /* FileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
 		6EA8A0D41E5D306200C274DD /* FMDatabaseQueue+File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabaseQueue+File.h"; sourceTree = "<group>"; };
 		6EA8A0D51E5D306200C274DD /* FMDatabaseQueue+File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabaseQueue+File.m"; sourceTree = "<group>"; };
-		6EA940F01E6A996500E30879 /* PhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
-		6EA940F21E6A9C2100E30879 /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
 		6EAA86F71E5EE0BC00B6CC5C /* ListChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListChange.swift; sourceTree = "<group>"; };
 		6EAA86FA1E5EEE1C00B6CC5C /* HUDFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDFunctions.swift; sourceTree = "<group>"; };
 		6EAA86FC1E5EF43400B6CC5C /* IndexPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPath.swift; sourceTree = "<group>"; };
@@ -168,6 +162,10 @@
 		6EAAFC551E569A4C00A36665 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		6EAAFC941E569A6700A36665 /* ESTMusicIndicatorContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTMusicIndicatorContentView.swift; sourceTree = "<group>"; };
 		6EAAFC951E569A6700A36665 /* ESTMusicIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESTMusicIndicatorView.swift; sourceTree = "<group>"; };
+		6EACB40B1E6C5EC4009E5B2B /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
+		6EACB40C1E6C5EC4009E5B2B /* PhotoMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoMemoryCache.h; sourceTree = "<group>"; };
+		6EACB40D1E6C5EC4009E5B2B /* PhotoMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoMemoryCache.m; sourceTree = "<group>"; };
+		6EACB40E1E6C5EC4009E5B2B /* PhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		6EB29B011E583E2E00B19406 /* MusicListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListViewController.swift; sourceTree = "<group>"; };
 		6EB29B031E583E2E00B19406 /* MusicGroupMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicGroupMenu.swift; sourceTree = "<group>"; };
 		6EB29B041E583E2E00B19406 /* MusicListNavigationTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicListNavigationTitleView.swift; sourceTree = "<group>"; };
@@ -191,10 +189,6 @@
 		6EB29B241E583E2F00B19406 /* MusicPlayer+RemoteComtrol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MusicPlayer+RemoteComtrol.swift"; sourceTree = "<group>"; };
 		6EB29B251E583E2F00B19406 /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		6EB29B4B1E5842D200B19406 /* PhotoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListViewController.swift; sourceTree = "<group>"; };
-		6EB29B4F1E5845DF00B19406 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
-		6EB29B501E5845DF00B19406 /* PhotoMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoMemoryCache.h; sourceTree = "<group>"; };
-		6EB29B511E5845DF00B19406 /* PhotoMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoMemoryCache.m; sourceTree = "<group>"; };
-		6EB29B521E5845DF00B19406 /* PhotoViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewer.swift; sourceTree = "<group>"; };
 		6EB29B581E584B3100B19406 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		6EB9FBBE1DACDFA9003EAC98 /* file-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "file-Bridging-Header.h"; sourceTree = "<group>"; };
 		6EFC04731E5C6B3800FF12C0 /* FileFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileFunctions.swift; sourceTree = "<group>"; };
@@ -514,6 +508,17 @@
 			path = ESTMusicIndicator;
 			sourceTree = "<group>";
 		};
+		6EACB40A1E6C5EC4009E5B2B /* Browser */ = {
+			isa = PBXGroup;
+			children = (
+				6EACB40B1E6C5EC4009E5B2B /* PhotoBrowser.swift */,
+				6EACB40C1E6C5EC4009E5B2B /* PhotoMemoryCache.h */,
+				6EACB40D1E6C5EC4009E5B2B /* PhotoMemoryCache.m */,
+				6EACB40E1E6C5EC4009E5B2B /* PhotoView.swift */,
+			);
+			path = Browser;
+			sourceTree = "<group>";
+		};
 		6EB29AFE1E583E2E00B19406 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,8 +685,8 @@
 		6EB29B3C1E58416900B19406 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
+				6EACB40A1E6C5EC4009E5B2B /* Browser */,
 				6EB29B471E5842C600B19406 /* List */,
-				6EB29B4D1E5845DF00B19406 /* Viewer */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -690,8 +695,8 @@
 			isa = PBXGroup;
 			children = (
 				6EB29B481E5842C600B19406 /* Controller */,
-				6EB29B491E5842C600B19406 /* Model */,
 				6EB29B4A1E5842C600B19406 /* View */,
+				6EB29B491E5842C600B19406 /* Model */,
 				6EB29B571E584B2200B19406 /* Entity */,
 			);
 			path = List;
@@ -719,20 +724,6 @@
 				6E9D23911E5ACD6E008C747E /* PhotoCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		6EB29B4D1E5845DF00B19406 /* Viewer */ = {
-			isa = PBXGroup;
-			children = (
-				6EA940F21E6A9C2100E30879 /* PhotoBrowser.swift */,
-				6EA940F01E6A996500E30879 /* PhotoView.swift */,
-				6EB29B521E5845DF00B19406 /* PhotoViewer.swift */,
-				6EB29B4F1E5845DF00B19406 /* PhotoCollectionViewCell.swift */,
-				6EB29B501E5845DF00B19406 /* PhotoMemoryCache.h */,
-				6EB29B511E5845DF00B19406 /* PhotoMemoryCache.m */,
-				6E363EF91E6AAFA9009A5DAF /* PhotoCache.swift */,
-			);
-			path = Viewer;
 			sourceTree = "<group>";
 		};
 		6EB29B571E584B2200B19406 /* Entity */ = {
@@ -882,7 +873,6 @@
 				6EB29B281E583E2F00B19406 /* MusicListNavigationTitleView.swift in Sources */,
 				6EB29B2F1E583E2F00B19406 /* MyMusicViewController.swift in Sources */,
 				6EB29B321E583E2F00B19406 /* MyMusicHeaderView.swift in Sources */,
-				6EB29B551E5845DF00B19406 /* PhotoMemoryCache.m in Sources */,
 				6EB29B341E583E2F00B19406 /* MusicSearchHistoryView.swift in Sources */,
 				6EA63CCB1E5DD54500607E39 /* FileView.swift in Sources */,
 				6EAA86F81E5EE0BC00B6CC5C /* ListChange.swift in Sources */,
@@ -898,6 +888,7 @@
 				6EB29B301E583E2F00B19406 /* MyMusicGroupEntity.swift in Sources */,
 				6EB29B371E583E2F00B19406 /* Music.swift in Sources */,
 				6EAA86FF1E5EF8CA00B6CC5C /* Array.swift in Sources */,
+				6EACB4111E6C5EC4009E5B2B /* PhotoView.swift in Sources */,
 				6EA63CC01E5DD54500607E39 /* FileType.swift in Sources */,
 				6EA63CC71E5DD54500607E39 /* FileCollectionView.swift in Sources */,
 				6EB29B351E583E2F00B19406 /* MusicSearchControl.swift in Sources */,
@@ -908,10 +899,10 @@
 				6EB29B291E583E2F00B19406 /* MusicListTableView.swift in Sources */,
 				6EA63CBF1E5DD54500607E39 /* FileAttributes.swift in Sources */,
 				6E2060831D93ACB000A0B5B2 /* AppDelegate.swift in Sources */,
+				6EACB4101E6C5EC4009E5B2B /* PhotoMemoryCache.m in Sources */,
 				6EA51DBB1E5FE22E00DF88EC /* DirectoryWatcher.m in Sources */,
 				6EAA86FD1E5EF43400B6CC5C /* IndexPath.swift in Sources */,
 				6EAAFC641E569A4C00A36665 /* URL.swift in Sources */,
-				6EA940F11E6A996500E30879 /* PhotoView.swift in Sources */,
 				6EAAFC971E569A6700A36665 /* ESTMusicIndicatorContentView.swift in Sources */,
 				6EB29B2D1E583E2F00B19406 /* MusicPlayerInfoView.swift in Sources */,
 				6EAAFC5F1E569A4C00A36665 /* Equatable.swift in Sources */,
@@ -926,11 +917,9 @@
 				6E89AB381E681FC300C9505D /* ASImageView.swift in Sources */,
 				6E89AB3A1E681FC300C9505D /* Menu.swift in Sources */,
 				6EAAFC8F1E569A4C00A36665 /* SettingViewController.swift in Sources */,
-				6EB29B541E5845DF00B19406 /* PhotoCollectionViewCell.swift in Sources */,
 				6EB29B361E583E2F00B19406 /* MusicSearchResultView.swift in Sources */,
 				6EAAFC621E569A4C00A36665 /* UIView+Frame.swift in Sources */,
 				6E89AB401E681FD100C9505D /* NSString+MD5.m in Sources */,
-				6E363EFA1E6AAFA9009A5DAF /* PhotoCache.swift in Sources */,
 				6EA63CBE1E5DD54500607E39 /* File.swift in Sources */,
 				6E89AB3B1E681FC300C9505D /* MenuItem.swift in Sources */,
 				6EB29B3B1E583E2F00B19406 /* MusicPlayer.swift in Sources */,
@@ -941,8 +930,8 @@
 				6EAAFC631E569A4C00A36665 /* UIViewController.swift in Sources */,
 				6EAAFC651E569A4C00A36665 /* Macro.swift in Sources */,
 				6EA63CCA1E5DD54500607E39 /* FileToolBar.swift in Sources */,
+				6EACB40F1E6C5EC4009E5B2B /* PhotoBrowser.swift in Sources */,
 				6EA63CC61E5DD54500607E39 /* FileTableViewCell.swift in Sources */,
-				6EA940F31E6A9C2100E30879 /* PhotoBrowser.swift in Sources */,
 				6EA63CC11E5DD54500607E39 /* FileModel.swift in Sources */,
 				6EA63CBC1E5DD54500607E39 /* FileSelectViewController.swift in Sources */,
 				6EA51DB81E5FC7D900DF88EC /* DirectoryWatcher.swift in Sources */,
@@ -951,7 +940,6 @@
 				6EAAFC611E569A4C00A36665 /* UIImage.swift in Sources */,
 				6EB29B381E583E2F00B19406 /* MusicGroup.swift in Sources */,
 				6EA63CBD1E5DD54500607E39 /* FileViewController.swift in Sources */,
-				6EB29B561E5845DF00B19406 /* PhotoViewer.swift in Sources */,
 				6EB29B2B1E583E2F00B19406 /* MusicPlayerInfoViewController.swift in Sources */,
 				6E89AB371E681FC300C9505D /* ImageEntity.swift in Sources */,
 				6E9D23921E5ACD6E008C747E /* PhotoCell.swift in Sources */,

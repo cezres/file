@@ -33,7 +33,6 @@ class PhotoView: UIView {
                         self?.imageNode.image = image
                         self?.setupImageNodeFrame()
                     }
-                    print("缓存: \(imageUrl.lastPathComponent)")
                 }
                 else {
                     if let image = loadImage(url: imageUrl) {
@@ -45,7 +44,6 @@ class PhotoView: UIView {
                             self?.setupImageNodeFrame()
                         }
                         PhotoMemoryCache.shared().setObject(image, forKey: self!.url.path)
-                        print("硬盘: \(imageUrl.lastPathComponent)")
                     }
                 }
             }
