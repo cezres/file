@@ -19,7 +19,6 @@ class PhotoCell: UICollectionViewCell {
         contentView.addSubnode(self.imageNode)
         imageNode.contentMode = UIViewContentMode.scaleAspectFit
         backgroundColor = UIColor.white
-        print(#function)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,7 +26,7 @@ class PhotoCell: UICollectionViewCell {
     }
     
     deinit {
-        print(#function)
+        
     }
     
     override func layoutSubviews() {
@@ -37,6 +36,7 @@ class PhotoCell: UICollectionViewCell {
     
     var asset: PHAsset? {
         didSet {
+            /*
             imageNode.image = nil
             
             guard let asset = self.asset else {
@@ -57,6 +57,50 @@ class PhotoCell: UICollectionViewCell {
                 self?.imageNode.image = image
 //                print(asset.value(forKey: "filename") ?? "Null", "\t",  image!.size)
             }
+ */
+        }
+    }
+    
+    
+    /// 会加载低质量的图片
+    func fastFormat() {
+        imageNode.image = nil
+        guard let asset = self.asset else {
+            return
+        }
+        let option = PHImageRequestOptions()
+        option.resizeMode = .fast
+        option.isNetworkAccessAllowed = true
+        option.version = .current
+        option.deliveryMode = .fastFormat
+        let imageWidth: CGFloat = 150 * UIScreen.main.scale
+        let targetSize = CGSize(width: imageWidth, height: imageWidth / CGFloat(asset.pixelWidth) * CGFloat(asset.pixelHeight))
+        PHCachingImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: .default, options: option) { [weak self](image, _) in
+            guard self?.asset == asset else {
+                return
+            }
+            self?.imageNode.image = image
+        }
+    }
+    
+    /// 会先加载一次低质量的图片，然后再加载一次高质量的图片
+    func opportunistic() {
+        imageNode.image = nil
+        guard let asset = self.asset else {
+            return
+        }
+        let option = PHImageRequestOptions()
+        option.resizeMode = .fast
+        option.isNetworkAccessAllowed = true
+        option.version = .current
+        option.deliveryMode = .opportunistic
+        let imageWidth: CGFloat = 150 * UIScreen.main.scale
+        let targetSize = CGSize(width: imageWidth, height: imageWidth / CGFloat(asset.pixelWidth) * CGFloat(asset.pixelHeight))
+        PHCachingImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: .default, options: option) { [weak self](image, _) in
+            guard self?.asset == asset else {
+                return
+            }
+            self?.imageNode.image = image
         }
     }
     

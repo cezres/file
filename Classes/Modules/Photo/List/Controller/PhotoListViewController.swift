@@ -99,7 +99,36 @@ class PhotoListViewController: UIViewController {
             make.bottom.equalTo(0)
         }
     }
-
+    
+    fileprivate var targetRect = CGRect.zero
+    fileprivate var userDragging = false
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        debugPrint("将要开始拖动")
+        userDragging = true
+    }
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        debugPrint("将要结束拖动")
+        userDragging = false
+        targetRect = CGRect(origin: targetContentOffset.pointee, size: scrollView.bounds.size)
+//        debugPrint(targetContentOffset.pointee)
+    }
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        debugPrint("结束拖动", "\t拖动:\(scrollView.isDragging) 减速:\(scrollView.isDecelerating)")
+//        if !scrollView.isDragging {
+//            debugPrint("加载")
+//        }
+//    }
+    
+    
+//    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+//        debugPrint("将要开始减速")
+//    }
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        debugPrint("结束减速", "\t拖动:\(scrollView.isDragging) 减速:\(scrollView.isDecelerating)")
+//        debugPrint("加载")
+//    }
+    
 }
 
 
@@ -115,6 +144,26 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout, UICollect
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let photoCell = cell as? PhotoCell else { return }
+        if !collectionView.isDragging && !collectionView.isDecelerating {
+            debugPrint("原图-静止状态")
+            photoCell.opportunistic()
+        }
+        else if userDragging {
+            debugPrint("原图-用户正在拖动")
+            photoCell.opportunistic()
+        }
+        else if targetRect.intersects(cell.frame) {
+            debugPrint("原图-在滚动停止的范围内")
+            photoCell.opportunistic()
+        }
+        else {
+            debugPrint("缩略图-不在滚动停止的范围内")
+            photoCell.fastFormat()
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let layout = collectionView.collectionViewLayout as! PhotoFlowLayout
         let itemSize = layout._itemSizeAtIndexPath(indexPath: indexPath)
@@ -125,5 +174,10 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout, UICollect
         let asset = photoAssets[originalItemSizeAtIndexPath.row]
         return CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        print(collectionView.contentOffset)
+//    }
+    
     
 }
