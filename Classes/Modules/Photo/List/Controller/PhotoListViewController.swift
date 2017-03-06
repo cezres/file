@@ -104,30 +104,42 @@ class PhotoListViewController: UIViewController {
     fileprivate var userDragging = false
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        debugPrint("将要开始拖动")
+        debugPrint("将要开始拖动", "\t拖动:\(scrollView.isDragging) 减速:\(scrollView.isDecelerating)")
         userDragging = true
+        setupVisibleCells()
     }
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        debugPrint("将要结束拖动")
+        debugPrint("将要结束拖动")
         userDragging = false
         targetRect = CGRect(origin: targetContentOffset.pointee, size: scrollView.bounds.size)
-//        debugPrint(targetContentOffset.pointee)
-    }
-//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//        debugPrint("结束拖动", "\t拖动:\(scrollView.isDragging) 减速:\(scrollView.isDecelerating)")
-//        if !scrollView.isDragging {
-//            debugPrint("加载")
+//        if fabs(targetContentOffset.pointee.y - scrollView.contentOffset.y) <= scrollView.bounds.size.height {
+//            setupVisibleCells()
 //        }
-//    }
+        debugPrint(targetContentOffset.pointee)
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        debugPrint("结束拖动", "\t拖动:\(scrollView.isDragging) 减速:\(scrollView.isDecelerating)")
+        if !scrollView.isDragging {
+            debugPrint("加载")
+        }
+    }
     
     
-//    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-//        debugPrint("将要开始减速")
-//    }
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        debugPrint("结束减速", "\t拖动:\(scrollView.isDragging) 减速:\(scrollView.isDecelerating)")
-//        debugPrint("加载")
-//    }
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        debugPrint("将要开始减速")
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        debugPrint("结束减速", "\t拖动:\(scrollView.isDragging) 减速:\(scrollView.isDecelerating)")
+        debugPrint("加载")
+    }
+    
+    func setupVisibleCells() {
+        debugPrint("原图-当前可见cell")
+        for cell in collectionView.visibleCells {
+            guard let photo = cell as? PhotoCell else { return }
+            photo.opportunistic()
+        }
+    }
     
 }
 
@@ -175,9 +187,11 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout, UICollect
         return CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print(collectionView.contentOffset)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        debugPrint(collectionView.contentOffset)
+    }
+    
+    
     
     
 }
