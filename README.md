@@ -14,27 +14,16 @@ https://www.processon.com/view/link/58b7e685e4b0f4e77b313420
 
 ## 截图
 
-*文件*
+![](http://cezres.cn/wp-content/uploads/2018/09/93657813536B4CEC1CFEACFE059E3DA8-169x300.png)
 
-<img src="http://p1.bqimg.com/567571/50e8e36dd37a45be.jpg" width=250 />
-<img src="http://i1.piimg.com/567571/50ee1cc2022f450d.jpg" width=250 />
-<img src="http://p1.bqimg.com/567571/5b838e3b48286c4d.jpg" width=250 />
-<img src="http://p1.bqimg.com/567571/7257454fdc51bf45.jpg" width=250 />
-<img src="http://i1.piimg.com/567571/ba1fe1b97ce291bb.png" width=250 />
+![](http://cezres.cn/wp-content/uploads/2018/09/F14FC6DEA69BAB4D623E5247973A9062-169x300.jpg)
 
-*音乐*
+![](http://cezres.cn/wp-content/uploads/2018/09/471C7509E409644FE697238D6A8C830E-169x300.png)
 
-<img src="http://i1.piimg.com/567571/e586772e4ac40bac.jpg" width=250 />
-<img src="http://i1.piimg.com/567571/17dc7f944a264d67.jpg" width=250 />
-<img src="http://i1.piimg.com/567571/b9c82937b8fc9edf.jpg" width=250 />
 
-*视频*
+![](http://cezres.cn/wp-content/uploads/2018/09/F5C910DAFF1EF500E667B4FFC976FA91-169x300.jpg)
 
-<img src="http://p1.bqimg.com/567571/c8c5cfddd4d64269.jpg" width=500 />
+![](http://cezres.cn/wp-content/uploads/2018/09/0740701504B2A2114A2AF6C6DE2A16DE-300x169.jpg)
 
-*照片*
-
-<img src="http://i1.piimg.com/567571/577e14faa7409ea4.jpg" width=250 />
-<img src="http://i1.piimg.com/567571/a58c80a3de68f312.jpg" width=250 />
-<img src="http://p1.bqimg.com/567571/33685db869b5b522.jpg" width=250 />
+![](http://cezres.cn/wp-content/uploads/2018/09/FE81E25394F991201A015BA62F5FD81D-169x300.jpg)
 
